@@ -1,48 +1,203 @@
-﻿@page "/fetchdata"
+﻿@page "/members"
+@using MudBlazor
 
 <PageTitle>Weather forecast</PageTitle>
 
-@using MosqueLife.Data
-@inject WeatherForecastService ForecastService
+<MudTable Items="@Members" Hover="true" Dense="true" Breakpoint="Breakpoint.Sm">
+	<ToolBarContent>
+		<MudText Typo="Typo.h6">Membres</MudText>
+		<MudSpacer />
+		<MudTextField T="string" ValueChanged="@(s=>OnSearch(s))" Placeholder="Search" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+	</ToolBarContent>
+	<ColGroup>
+		<col style="width:200px;" />
+		<col style="width:100px;" />
+		<col style="width:200px;" />
+	</ColGroup>
+	<HeaderContent>
+		<MudTh></MudTh>
+		<MudTh>Id</MudTh>
+		<MudTh>Firstname</MudTh>
+		<MudTh>Lastname</MudTh>
+	</HeaderContent>
+	<RowTemplate>
+		<MudTd><MudButton Variant="Variant.Outlined" Size="Size.Small" OnClick="@(() => ShowBtnPress(context.Id))">@((context.ShowDetails == true)? "Hide" : "Show") Cotisations</MudButton></MudTd>
+		<MudTd DataLabel="Id">@context.Id</MudTd>
+		<MudTd DataLabel="Firstname">@context.Firstname</MudTd>
+		<MudTd DataLabel="Lastname">@context.Lastname</MudTd>
+	</RowTemplate>
+	<ChildRowContent>
+		@if (context.ShowDetails)
+		{
+			<MudTr>
+				<td colspan="4">
+					<MudCard Elevation="0">
+						<MudCardHeader>
+							<CardHeaderContent>
+								<MudText Typo="Typo.body1">Cotisations de <strong>@context.Firstname @context.Lastname</strong></MudText>
+							</CardHeaderContent>
+						</MudCardHeader>
+						<MudCardContent Class="pa-0">
+							<MudTable Items="@context.SubscriptionsPaid" Dense="true" Context="SubscriptionPaid" Hover="true" HorizontalScrollbar="true" Breakpoint="Breakpoint.Sm" Elevation="0">
+								<ColGroup>
+									<col style="width:14%;" />
+									<col style="width:7%;" />
+									<col style="width:7%;" />
+									<col style="width:7%;" />
+									<col style="width:7%;" />
+									<col style="width:7%;" />
+									<col style="width:7%;" />
+									<col style="width:7%;" />
+									<col style="width:7%;" />
+									<col style="width:7%;" />
+									<col style="width:7%;" />
+									<col style="width:7%;" />
+								</ColGroup>
+								<HeaderContent>
+									<MudTh>Year</MudTh>
+									<MudTh>January</MudTh>
+									<MudTh>February</MudTh>
+									<MudTh>March</MudTh>
+									<MudTh>April</MudTh>
+									<MudTh>May</MudTh>
+									<MudTh>June</MudTh>
+									<MudTh>July</MudTh>
+									<MudTh>August</MudTh>
+									<MudTh>September</MudTh>
+									<MudTh>October</MudTh>
+									<MudTh>November</MudTh>
+									<MudTh>December</MudTh>
+								</HeaderContent>
+								<RowTemplate>
+									<MudTd DataLabel="Year">@(SubscriptionPaid.Year)</MudTd>
+									<MudTd DataLabel="January">@(SubscriptionPaid.January == true ? "✅" : "⛔") </MudTd>
+									<MudTd DataLabel="February">@(SubscriptionPaid.February == true ? "✅" : "⛔") </MudTd>
+									<MudTd DataLabel="March">@(SubscriptionPaid.March == true ? "✅" : "⛔") </MudTd>
+									<MudTd DataLabel="April">@(SubscriptionPaid.April == true ? "✅" : "⛔") </MudTd>
+									<MudTd DataLabel="May">@(SubscriptionPaid.May == true ? "✅" : "⛔") </MudTd>
+									<MudTd DataLabel="June">@(SubscriptionPaid.June == true ? "✅" : "⛔") </MudTd>
+									<MudTd DataLabel="July">@(SubscriptionPaid.July == true ? "✅" : "⛔") </MudTd>
+									<MudTd DataLabel="August">@(SubscriptionPaid.August == true ? "✅" : "⛔") </MudTd>
+									<MudTd DataLabel="September">@(SubscriptionPaid.September == true ? "✅" : "⛔") </MudTd>
+									<MudTd DataLabel="October">@(SubscriptionPaid.October == true ? "✅" : "⛔") </MudTd>
+									<MudTd DataLabel="November">@(SubscriptionPaid.November == true ? "✅" : "⛔") </MudTd>
+									<MudTd DataLabel="December">@(SubscriptionPaid.December == true ? "✅" : "⛔") </MudTd>
+								</RowTemplate>
+							</MudTable>
+						</MudCardContent>
+					</MudCard>
+				</td>
+			</MudTr>
+		}
+	</ChildRowContent>
+	<PagerContent>
+		<MudTablePager PageSizeOptions="new int[]{50, 100}" />
+	</PagerContent>
+</MudTable>
 
-<h1>Weather forecast</h1>
-
-<p>This component demonstrates fetching data from a service.</p>
-
-@if (forecasts == null)
+@code
 {
-    <p><em>Loading...</em></p>
-}
-else
-{
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Date</th>
-                <th>Temp. (C)</th>
-                <th>Temp. (F)</th>
-                <th>Summary</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var forecast in forecasts)
-            {
-                <tr>
-                    <td>@forecast.Date.ToShortDateString()</td>
-                    <td>@forecast.TemperatureC</td>
-                    <td>@forecast.TemperatureF</td>
-                    <td>@forecast.Summary</td>
-                </tr>
-            }
-        </tbody>
-    </table>
+	private int totalItems;
+	private string searchString = null;
+
+	protected override void OnInitialized() => FillPeople();
+
+	public class SubscriptionPaid
+	{
+		public int Year { get; set; }
+		public bool January { get; set; }
+		public bool February { get; set; }
+		public bool March { get; set; }
+		public bool April { get; set; }
+		public bool May { get; set; }
+		public bool June { get; set; }
+		public bool July { get; set; }
+		public bool August { get; set; }
+		public bool September { get; set; }
+		public bool October { get; set; }
+		public bool November { get; set; }
+		public bool December { get; set; }
+	}
+
+	public class Member
+	{
+		public bool ShowDetails { get; set; }
+		public int Id { get; set; }
+		public string Firstname { get; set; }
+		public string Lastname { get; set; }
+		public IList<SubscriptionPaid> SubscriptionsPaid { get; set; }
+	}
+	private void FillPeople()
+	{
+		IList<Member> members = new List<Member>();
+		IList<SubscriptionPaid> paid = new List<SubscriptionPaid>();
+		paid.Add(new SubscriptionPaid { Year = 2020, January = true, February = true, March = true, April = true, May = true, June = true, July = true, August = true, September = true, October = true, November = true, December = true });
+		paid.Add(new SubscriptionPaid { Year = 2021, January = true, February = true, March = true, April = true, May = true, June = true, July = true, August = true, September = true, October = true, November = true, December = true });
+		members.Add(new Member
+			{
+				ShowDetails = false,
+				Id = 1,
+				Firstname = "Harry",
+				Lastname = "Potter",
+				SubscriptionsPaid = paid
+			});
+
+		paid = new List<SubscriptionPaid>();
+		paid.Add(new SubscriptionPaid { Year = 2020, April = true, May = true, June = true, July = true, August = true, September = true, October = true, November = true, December = true });
+		paid.Add(new SubscriptionPaid { Year = 2021, January = true, February = true, May = true, June = true, July = true, August = true, September = true, October = true, November = true, December = true });
+		members.Add(new Member
+			{
+				ShowDetails = false,
+				Id = 2,
+				Firstname = "Ejjub",
+				Lastname = "Tulic",
+				SubscriptionsPaid = paid
+			});
+		Members = members;
+
+		paid = new List<SubscriptionPaid>();
+
+		members.Add(new Member
+			{
+				ShowDetails = false,
+				Id = 3,
+				Firstname = "John",
+				Lastname = "Doe",
+				SubscriptionsPaid = paid
+			});
+
+		members.Add(new Member
+			{
+				ShowDetails = false,
+				Id = 4,
+				Firstname = "Yassine",
+				Lastname = "Badren",
+				SubscriptionsPaid = new List<SubscriptionPaid> { new SubscriptionPaid { Year = 2021, January = false, February = false, May = false, June = false, July = false, August = false, September = false, October = false, November = false, December = false } }
+			});
+
+		members.Add(new Member
+			{
+				ShowDetails = false,
+				Id = 5,
+				Firstname = "Yassine",
+				Lastname = "Bouderbala",
+				SubscriptionsPaid = paid
+			});
+		Members = members.Where(m => string.IsNullOrWhiteSpace(searchString) || (m.Firstname.Contains(searchString, StringComparison.OrdinalIgnoreCase) || m.Lastname.Contains(searchString, StringComparison.OrdinalIgnoreCase)));
+	}
+	private static IEnumerable<Member> Members { get; set; }
+
+	private void ShowBtnPress(int nr)
+	{
+		var tmpMember = Members.First(f => f.Id == nr);
+		tmpMember.ShowDetails = !tmpMember.ShowDetails;
+	}
+
+	private void OnSearch(string text)
+	{
+		searchString = text;
+		FillPeople();
+	}
 }
 
-@code {
-    private WeatherForecast[]? forecasts;
 
-    protected override async Task OnInitializedAsync()
-    {
-        forecasts = await ForecastService.GetForecastAsync(DateTime.Now);
-    }
-}
