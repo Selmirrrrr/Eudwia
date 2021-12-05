@@ -6,11 +6,12 @@ using MosqueLife.Data;
 using MudBlazor.Services;
 
 var builder = WebApplication.CreateBuilder(args);
-
+var pwd = Environment.GetEnvironmentVariable("PG_MOSQUE_LIFE_PASSWORD") ?? string.Empty;
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+connectionString = String.Format(connectionString, pwd);
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(connectionString));
+    options.UseNpgsql(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>();
