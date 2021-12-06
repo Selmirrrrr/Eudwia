@@ -1,6 +1,6 @@
 ﻿using MudBlazor;
 
-namespace MosqueLife.Shared
+namespace MosqueLife.Models
 {
     public class MudBlazorAdminDashboard : MudTheme
     {

@@ -5,41 +5,50 @@ namespace MosqueLife.Data
     public class Member
     {
         public Guid Id { get; set; }
+
+        [Required]
+        [MinLength(2)]
+        [MaxLength(100)]
         public string Firstname { get; set; } = string.Empty;
+
+        [Required]
+        [MinLength(2)]
+        [MaxLength(100)]
         public string Lastname { get; set; } = string.Empty;
 
+        public DateOnly BirthDate { get; set; }
 
-    }
+        public DateOnly? MemberSince { get; set; }
 
-    public class Address
-    {
-        public Guid Id { get; set; }
-
+        [Required]
         [MinLength(3)]
         [MaxLength(200)]
-        [Required]
-        public string StreetLine1 { get; set; } = string.Empty;
+        public string StreetLine1 { get; private init; } = string.Empty;
 
         [MaxLength(200)]
-        public string? StreetLine2 { get; set; }
+        public string? StreetLine2 { get; private init; }
 
         [Required]
-        public string HouseNumber { get; set; } = string.Empty;
+        [MinLength(1)]
+        [MaxLength(10)]
+        public string HouseNumber { get; private init; } = string.Empty;
 
         [Range(1000, 999999)]
-        public int ZipCode { get; set; }
+        public int ZipCode { get; private init; }
 
-        [MinLength(3)]
         [Required]
-        public string City { get; set; } = string.Empty;
-
         [MinLength(3)]
-        [Required]
-        public string State { get; set; } = string.Empty;
+        [MaxLength(100)]
+        public string City { get; private init; } = string.Empty;
 
-        [MinLength(3)]
-        [Required]
-        public string Country { get; set; } = string.Empty;
+        public Guid StateId { get; set; }
+        public State State { get; set; }
 
+        public virtual ICollection<SubscriptionPaid> Subscriptions { get; private set; }
+
+        public Member()
+        {
+            Subscriptions = new List<SubscriptionPaid>();
+        }
     }
 }
