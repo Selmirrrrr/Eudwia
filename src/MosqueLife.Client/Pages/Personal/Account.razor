@@ -1,0 +1,107 @@
+﻿@page "/personal/account"
+@using MosqueLife.Shared.Models.Personal
+@inject HttpClient HttpClient
+@inject ISnackbar Snackbar
+
+@inject AuthenticationStateProvider GetAuthenticationStateAsync
+@attribute [Authorize]
+
+<AuthorizeView>
+    <MudText Typo="Typo.h5" Color="Color.Primary" Class="mb-4">Account</MudText>
+    <MudTabs Elevation="1" Rounded="true" PanelClass="mt-6">
+        <MudTabPanel Text="General">
+            <MudGrid>
+                <MudItem xs="12" sm="4" md="3">
+                    <MudCard>
+                        <MudCardHeader>
+                            <CardHeaderContent>
+                                <MudText>Public Profile</MudText>
+                            </CardHeaderContent>
+                        </MudCardHeader>
+                        <MudCardContent>
+                            <div class="d-flex justify-center mb-4">
+                                <MudAvatar Style="height:100px; width:100px;">@userDetails.Lastname</MudAvatar>
+                            </div>
+                            <MudText Align="Align.Center">@userDetails.Firstname @userDetails.Lastname</MudText>
+                        </MudCardContent>
+                    </MudCard>
+                </MudItem>
+                <MudItem xs="12" sm="8" md="9">
+                    <MudCard>
+                        <MudCardHeader>
+                            <CardHeaderContent>
+                                <MudText>Profile Details</MudText>
+                            </CardHeaderContent>
+                        </MudCardHeader>
+                        <MudCardContent>
+                            <MudGrid>
+                                <MudItem xs="12" md="6">
+                                    <MudTextField @bind-Value="userDetails.Firstname" Label="First Name" Variant="Variant.Outlined" />
+                                </MudItem>
+                                <MudItem xs="12" md="6">
+                                    <MudTextField @bind-Value="userDetails.Lastname" Label="Last Name" Variant="Variant.Outlined" />
+                                </MudItem>
+                                <MudItem xs="12" md="6">
+                                    <MudTextField Value="context?.User?.Identity?.Name" Label="Email" Variant="Variant.Outlined" HelperText="Dont worry, we shall not spam!" Disabled="true" InputType="InputType.Email"/>
+                                </MudItem>
+                            </MudGrid>
+                        </MudCardContent>
+                        <MudCardActions Class="pb-4 pl-4">
+                            <MudButton Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto" @onclick="@(() => SaveChanges("Profile details saved", Severity.Success))">Save Changes</MudButton>
+                        </MudCardActions>
+                    </MudCard>
+                </MudItem>
+            </MudGrid>
+        </MudTabPanel>
+    </MudTabs>
+</AuthorizeView>
+
+@code {
+    public string Firstname { get; set; } = string.Empty;
+    public string Lastname { get; set; } = string.Empty;
+    public string JobTitle { get; set; } = string.Empty;
+    public string Email { get; set; } = string.Empty;
+
+    private UpdateUserModel model = new UpdateUserModel();
+
+    private UserDetails userDetails = new UserDetails();
+
+    protected async override Task OnInitializedAsync()
+    {
+
+        var authstate = await GetAuthenticationStateAsync.GetAuthenticationStateAsync();
+        var user = authstate.User;
+        var name = user?.Identity?.Name;
+
+        userDetails = (await HttpClient.GetFromJsonAsync<UserDetails>($"api/account/userdetails/{name}")) ?? new UserDetails();
+    }
+
+    async Task SaveChanges(string message, Severity severity)
+    {
+        model = new UpdateUserModel
+        {
+            Firstname = userDetails.Firstname,
+            Lastname = userDetails.Lastname,
+            Email = userDetails.Email
+
+        };
+
+        var json = System.Text.Json.JsonSerializer.Serialize(model);
+        StringContent content = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
+        var result = await HttpClient.PatchAsync("api/account/patch", content);
+        if (result.StatusCode == System.Net.HttpStatusCode.OK)
+        {
+            Snackbar.Add(message, severity, config =>
+            {
+                config.ShowCloseIcon = false;
+            });
+
+            StateHasChanged();
+        }
+
+        else
+        {
+            // TODO Log error something went wrong
+        }
+    }    
+}
