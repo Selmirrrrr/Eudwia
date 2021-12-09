@@ -37,6 +37,10 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
             Password = _configuration["DbPassword"]
         };
 
+        connectionStringBuilder.Host = string.IsNullOrWhiteSpace(_configuration["DbHost"])
+            ? connectionStringBuilder.Host
+            : _configuration["DbHost"];
+
         optionsBuilder
             .EnableDetailedErrors()
             .EnableSensitiveDataLogging()
