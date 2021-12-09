@@ -1,25 +1,28 @@
 using Microsoft.EntityFrameworkCore;
 using MosqueLife.Server.Data.Contexts;
+using System.Diagnostics;
 
 namespace MosqueLife.Server;
 
 public class Program
 {
-    public static void Main(string[] args)
+    public static async Task Main(string[] args)
     {
-        var host = CreateHostBuilder(args).Build();
+        var webHost = CreateHostBuilder(args).Build();
 
-        using var scope = host.Services.CreateScope();
-        var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-        try
+        // Create a new scope
+        using (var scope = webHost.Services.CreateScope())
         {
-            db.Database.Migrate();
+            // Get the DbContext instance
+            var myDbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+
+            //Do the migration asynchronously
+            await myDbContext.Database.MigrateAsync();
         }
-        catch (Exception ex)
-        {
-            Console.Error.WriteLine(ex.ToString());
-            throw;
-        }
+
+        // Run the WebHost, and start accepting requests
+        // There's an async overload, so we may as well use it
+        await webHost.RunAsync();
     }
 
     public static IHostBuilder CreateHostBuilder(string[] args) =>
