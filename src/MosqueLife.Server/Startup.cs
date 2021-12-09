@@ -64,7 +64,7 @@ public class Startup
 
         //configure appdbcontext
         services.AddScoped<DbContext, ApplicationDbContext>().AddDbContext<ApplicationDbContext>();
-
+        var lol = Configuration["JwtSecurityKey"];
         //configure identity
         services.AddIdentity<ApplicationUser, IdentityRole>()
             .AddEntityFrameworkStores<ApplicationDbContext>()
