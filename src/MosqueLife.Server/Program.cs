@@ -11,7 +11,15 @@ public class Program
 
         using var scope = host.Services.CreateScope();
         var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-        db.Database.Migrate();
+        try
+        {
+            db.Database.Migrate();
+        }
+        catch (Exception ex)
+        {
+            Console.Error.WriteLine(ex.ToString());
+            throw;
+        }
     }
 
     public static IHostBuilder CreateHostBuilder(string[] args) =>
