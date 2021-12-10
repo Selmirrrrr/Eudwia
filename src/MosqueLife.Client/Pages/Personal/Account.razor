@@ -71,9 +71,9 @@
 
         var authstate = await GetAuthenticationStateAsync.GetAuthenticationStateAsync();
         var user = authstate.User;
-        var name = user?.Identity?.Name;
+        var username = user?.Identity?.Name;
 
-        userDetails = (await HttpClient.GetFromJsonAsync<UserDetails>($"api/account/userdetails/{name}")) ?? new UserDetails();
+        userDetails = (await HttpClient.GetFromJsonAsync<UserDetails>($"api/account/{username}")) ?? new UserDetails();
     }
 
     async Task SaveChanges(string message, Severity severity)
@@ -82,13 +82,11 @@
         {
             Firstname = userDetails.Firstname,
             Lastname = userDetails.Lastname,
-            Email = userDetails.Email
-
         };
 
         var json = System.Text.Json.JsonSerializer.Serialize(model);
         StringContent content = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
-        var result = await HttpClient.PatchAsync("api/account/patch", content);
+        var result = await HttpClient.PostAsJsonAsync($"api/account/{userDetails.Email}", model);
         if (result.StatusCode == System.Net.HttpStatusCode.OK)
         {
             Snackbar.Add(message, severity, config =>

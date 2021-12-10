@@ -84,13 +84,13 @@ public class AccountController : ControllerBase
         return Ok(new LoginResult { Successful = true, Token = new JwtSecurityTokenHandler().WriteToken(token) });
     }
 
-    [HttpPatch("patch")]
+    [HttpPost("{email}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [Authorize]
-    public async Task<IActionResult> Patch([FromBody] UpdateUserModel update)
+    public async Task<IActionResult> Patch(string email, [FromBody] UpdateUserModel update)
     {
-        var user = await _userManager.FindByEmailAsync(update.Email);
+        var user = await _userManager.FindByEmailAsync(email);
         if (user is null)
         {
             return BadRequest("error");
@@ -106,7 +106,7 @@ public class AccountController : ControllerBase
 
 
     [Authorize]
-    [HttpGet("userdetails/{email}")]
+    [HttpGet("{email}")]
     [ProducesResponseType(typeof(UserDetails), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult<UserDetails>> UserDetails(string email)

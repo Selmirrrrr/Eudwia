@@ -333,7 +333,6 @@ public static class ModelBuilderExtensions
         modelBuilder.Entity<Member>().HasData(members);
         modelBuilder.Entity<Payment>().HasData(payments);
         modelBuilder.Entity<SubscriptionPaid>().HasData(subscriptions);
-
     }
 
     private static Member CreateMember()
