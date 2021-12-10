@@ -257,27 +257,112 @@ public static class ModelBuilderExtensions
         new Country { Id = Guid.Parse("50aa4ab0-3c14-4550-a87f-bdfca7d90638"), Name = "Zimbabwe", Alpha2Code = "ZW", Alpha3Code = "ZWE" },
         new Country { Id = Guid.Parse("bb38feee-4d81-4f56-a11b-673ca15a95a0"), Name = "Åland Islands", Alpha2Code = "AX", Alpha3Code = "ALA" },
     };
-    private const int Amount = 10;
-    private static readonly Faker Faker = new();
 
+    private static readonly List<State> _states = new()
+    {
+        new State { Id = Guid.Parse("cce40cc0-8e6d-41e2-9bbe-1127690bb70d"), Code = "ZH", Name = "Zürich", CountryId = Guid.Parse("9bc1f1a9-7696-42e4-89aa-c93800704582") },
+        new State { Id = Guid.Parse("561f6eee-921e-4638-8e35-51a8bc2b4b9b"), Code = "BE", Name = "Bern", CountryId = Guid.Parse("9bc1f1a9-7696-42e4-89aa-c93800704582") },
+        new State { Id = Guid.Parse("9baa5577-eca8-49b7-8ccb-0e9ade6fdc92"), Code = "LU", Name = "Luzern", CountryId = Guid.Parse("9bc1f1a9-7696-42e4-89aa-c93800704582") },
+        new State { Id = Guid.Parse("f7eeae1c-9aa9-4e91-b372-ed433a1cbcc7"), Code = "UR", Name = "Uri", CountryId = Guid.Parse("9bc1f1a9-7696-42e4-89aa-c93800704582") },
+        new State { Id = Guid.Parse("ca8e3cdf-1425-41d1-9493-aaab5ecad07f"), Code = "SZ", Name = "Schwyz", CountryId = Guid.Parse("9bc1f1a9-7696-42e4-89aa-c93800704582") },
+        new State { Id = Guid.Parse("849c8f78-501a-40ce-b374-73e0a7249790"), Code = "OW", Name = "Obwalden", CountryId = Guid.Parse("9bc1f1a9-7696-42e4-89aa-c93800704582") },
+        new State { Id = Guid.Parse("0b0404af-da77-4a5d-84c1-149fed6795e9"), Code = "NW", Name = "Nidwalden", CountryId = Guid.Parse("9bc1f1a9-7696-42e4-89aa-c93800704582") },
+        new State { Id = Guid.Parse("0aaf91b7-b1f9-4b82-9efd-8f9d7069ac7b"), Code = "GL", Name = "Glarus", CountryId = Guid.Parse("9bc1f1a9-7696-42e4-89aa-c93800704582") },
+        new State { Id = Guid.Parse("c653c92b-3d0a-4faa-b605-1fd2c9ec180d"), Code = "ZG", Name = "Zug", CountryId = Guid.Parse("9bc1f1a9-7696-42e4-89aa-c93800704582") },
+        new State { Id = Guid.Parse("ef15a7dd-6f56-47b6-8b1b-88e9424b5d41"), Code = "FR", Name = "Fribourg; Freiburg", CountryId = Guid.Parse("9bc1f1a9-7696-42e4-89aa-c93800704582") },
+        new State { Id = Guid.Parse("db02d941-c810-427c-9fe0-e3e93ab34094"), Code = "SO", Name = "Solothurn", CountryId = Guid.Parse("9bc1f1a9-7696-42e4-89aa-c93800704582") },
+        new State { Id = Guid.Parse("dab9e513-99c2-4d4f-91ad-6da85be3a317"), Code = "BS", Name = "Basel-Stadt", CountryId = Guid.Parse("9bc1f1a9-7696-42e4-89aa-c93800704582") },
+        new State { Id = Guid.Parse("58545b2b-bf38-47f2-a4e7-b78c68225d1f"), Code = "BL", Name = "Basel-Landschaft", CountryId = Guid.Parse("9bc1f1a9-7696-42e4-89aa-c93800704582") },
+        new State { Id = Guid.Parse("6a5165e9-d667-4984-82e3-5bcc12009da5"), Code = "SH", Name = "Schaffhausen", CountryId = Guid.Parse("9bc1f1a9-7696-42e4-89aa-c93800704582") },
+        new State { Id = Guid.Parse("09bbfd7a-2dd3-4ab8-86c1-1cf76a93bf5a"), Code = "AR", Name = "Appenzell Ausserrhoden", CountryId = Guid.Parse("9bc1f1a9-7696-42e4-89aa-c93800704582") },
+        new State { Id = Guid.Parse("e515b746-6c8b-4bd5-a6b0-2c5f35d258e9"), Code = "AI", Name = "Appenzell Innerrhoden", CountryId = Guid.Parse("9bc1f1a9-7696-42e4-89aa-c93800704582") },
+        new State { Id = Guid.Parse("4fc833b0-7bb6-45a7-8b57-40d77cde7927"), Code = "SG", Name = "St. Gallen", CountryId = Guid.Parse("9bc1f1a9-7696-42e4-89aa-c93800704582") },
+        new State { Id = Guid.Parse("9d7b864a-ee6f-46c6-ab2d-ad6a8e803cb7"), Code = "GR", Name = "Graubünden; Grisons; Grigioni", CountryId = Guid.Parse("9bc1f1a9-7696-42e4-89aa-c93800704582") },
+        new State { Id = Guid.Parse("f5a28e04-194b-442b-a590-f6a94d356ce9"), Code = "AG", Name = "Aargau", CountryId = Guid.Parse("9bc1f1a9-7696-42e4-89aa-c93800704582") },
+        new State { Id = Guid.Parse("a2be2120-bea1-462e-8ddc-0d218cb0628b"), Code = "TG", Name = "Thurgau", CountryId = Guid.Parse("9bc1f1a9-7696-42e4-89aa-c93800704582") },
+        new State { Id = Guid.Parse("6bd940fa-f1bf-437c-bb6b-993a2da33701"), Code = "TI", Name = "Ticino", CountryId = Guid.Parse("9bc1f1a9-7696-42e4-89aa-c93800704582") },
+        new State { Id = Guid.Parse("c646563e-0623-4dc3-aa3b-d87fa69e692f"), Code = "VD", Name = "Vaud", CountryId = Guid.Parse("9bc1f1a9-7696-42e4-89aa-c93800704582") },
+        new State { Id = Guid.Parse("c89f3cb9-a5ae-4b68-a0fc-807d7f4331a6"), Code = "VS", Name = "Valais; Wallis", CountryId = Guid.Parse("9bc1f1a9-7696-42e4-89aa-c93800704582") },
+        new State { Id = Guid.Parse("a82b7de4-969a-4c30-837d-fd90883d4901"), Code = "NE", Name = "Neuchâtel", CountryId = Guid.Parse("9bc1f1a9-7696-42e4-89aa-c93800704582") },
+        new State { Id = Guid.Parse("eb9afd42-0165-4074-99bf-e9e114e49a64"), Code = "GE", Name = "Genève", CountryId = Guid.Parse("9bc1f1a9-7696-42e4-89aa-c93800704582") },
+        new State { Id = Guid.Parse("9a71b829-fb15-42d4-b733-028d0ff5a387"), Code = "JU", Name = "Jura", CountryId = Guid.Parse("9bc1f1a9-7696-42e4-89aa-c93800704582") }
+    };
+
+    private static readonly (int Year, int Month)[] _subscriptions = new[]
+    { 
+        (2014, 1), (2014, 2), (2014, 3), (2014, 4), (2014, 5), (2014, 6), (2014, 7), (2014, 8), (2014, 9), (2014, 10), (2014, 11), (2014, 12),
+        (2015, 1), (2015, 2), (2015, 3), (2015, 4), (2015, 5), (2015, 6), (2015, 7), (2015, 8), (2015, 9), (2015, 10), (2015, 11), (2015, 12),
+        (2016, 1), (2016, 2), (2016, 3), (2016, 4), (2016, 5), (2016, 6), (2016, 7), (2016, 8), (2016, 9), (2016, 10), (2016, 11), (2016, 12),
+        (2017, 1), (2017, 2), (2017, 3), (2017, 4), (2017, 5), (2017, 6), (2017, 7), (2017, 8), (2017, 9), (2017, 10), (2017, 11), (2017, 12),
+        (2018, 1), (2018, 2), (2018, 3), (2018, 4), (2018, 5), (2018, 6), (2018, 7), (2018, 8), (2018, 9), (2018, 10), (2018, 11), (2018, 12),
+        (2019, 1), (2019, 2), (2019, 3), (2019, 4), (2019, 5), (2019, 6), (2019, 7), (2019, 8), (2019, 9), (2019, 10), (2019, 11), (2019, 12),
+        (2020, 1), (2020, 2), (2020, 3), (2020, 4), (2020, 5), (2020, 6), (2020, 7), (2020, 8), (2020, 9), (2020, 10), (2020, 11), (2020, 12),
+        (2021, 1), (2021, 2), (2021, 3), (2021, 4), (2021, 5), (2021, 6), (2021, 7), (2021, 8), (2021, 9), (2021, 10), (2021, 11), (2021, 12),
+        (2022, 1), (2022, 2), (2022, 3), (2022, 4), (2022, 5), (2022, 6), (2022, 7), (2022, 8), (2022, 9), (2022, 10), (2022, 11), (2022, 12)
+    };
+
+    private static Faker _faker;
     public static void Seed(this ModelBuilder modelBuilder)
     {
-        modelBuilder.SeedPersons();
         modelBuilder.SeedCountries();
+        modelBuilder.SeedStates();
+        modelBuilder.SeedPersons();
     }
 
-    private static void SeedPersons(this ModelBuilder modelBuilder) =>
-        modelBuilder
-            .Entity<Member>()
-            .HasData(Enumerable
-                .Range(0, 0)
-                .Select(_ => new Member
-                {
-                    Id = Guid.NewGuid(),
-                }));
+    private static void SeedPersons(this ModelBuilder modelBuilder)
+    {
+        _faker = new Faker("fr");
+        var members = new List<Member>();
+        var payments = new List<Payment>();
+        var subscriptions = new List<SubscriptionPaid>();
+
+        for (int i = 0; i < 20; i++)
+        {
+            var member = CreateMember();
+            payments.AddRange(Enumerable.Range(0, 10).Select(_ => new Payment
+            {
+                Id = Guid.NewGuid(),
+                Note = _faker.Random.String(20),
+                PaymentType = _faker.Random.Enum<PaymentType>(),
+                MemberId = member.Id
+            }).ToList());
+
+            subscriptions.AddRange(_faker.Random.ArrayElements(_subscriptions, 100).Select(s => new SubscriptionPaid { Year = s.Year, Month = s.Month, MemberId = member.Id }).ToList());
+            members.Add(member);
+        }
+        modelBuilder.Entity<Member>().HasData(members);
+        modelBuilder.Entity<Payment>().HasData(payments);
+        modelBuilder.Entity<SubscriptionPaid>().HasData(subscriptions);
+
+    }
+
+    private static Member CreateMember()
+    {
+        var guid = Guid.NewGuid();
+        return new Member
+        {
+            Id = guid,
+            Firstname ="das",
+            Lastname = _faker.Name.LastName(),
+            BirthDate = _faker.Date.PastDateOnly(50, new DateOnly(2000, 1, 1)),
+            MemberSince = _faker.Date.PastDateOnly(10),
+            StreetLine1 = _faker.Address.StreetAddress(),
+            StreetLine2 = _faker.Address.SecondaryAddress(),
+            HouseNumber = _faker.Address.BuildingNumber(),
+            City = _faker.Address.City(),
+            ZipCode = _faker.Address.ZipCode(),
+            StateId = Guid.Parse("c646563e-0623-4dc3-aa3b-d87fa69e692f"),
+            Language = _faker.Random.Enum<Language>(),
+        };
+    }
 
     private static void SeedCountries(this ModelBuilder modelBuilder) =>
         modelBuilder
             .Entity<Country>()
             .HasData(_countries);
+
+    private static void SeedStates(this ModelBuilder modelBuilder) =>
+    modelBuilder
+        .Entity<State>()
+        .HasData(_states);
 }
