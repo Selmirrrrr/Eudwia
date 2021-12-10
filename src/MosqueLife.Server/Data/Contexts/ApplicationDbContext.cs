@@ -27,7 +27,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
         modelBuilder.Seed();
 
-        modelBuilder.Entity<SubscriptionPaid>().HasKey(o => new { o.MemeberId, o.Year, o.Month });
+        modelBuilder.Entity<SubscriptionPaid>().HasKey(o => new { o.MemberId, o.Year, o.Month });
     }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

@@ -23,23 +23,25 @@ public class Member
     [Required]
     [MinLength(3)]
     [MaxLength(200)]
-    public string StreetLine1 { get; private init; } = string.Empty;
+    public string StreetLine1 { get; set; } = string.Empty;
 
     [MaxLength(200)]
-    public string? StreetLine2 { get; private init; }
+    public string? StreetLine2 { get; set; }
 
     [Required]
     [MinLength(1)]
     [MaxLength(10)]
-    public string HouseNumber { get; private init; } = string.Empty;
+    public string HouseNumber { get; set; } = string.Empty;
 
-    [Range(1000, 999999)]
-    public int ZipCode { get; private init; }
+    [Required]
+    [MinLength(3)]
+    [MaxLength(10)]
+    public string ZipCode { get; set; } = string.Empty;
 
     [Required]
     [MinLength(3)]
     [MaxLength(100)]
-    public string City { get; private init; } = string.Empty;
+    public string City { get; set; } = string.Empty;
 
     public Guid StateId { get; set; }
 
@@ -50,6 +52,12 @@ public class Member
     public virtual ICollection<Payment> Payments { get; private set; }
 
     public virtual ICollection<SubscriptionPaid> SubscriptionsPaid { get; private set; }
+
+    public Member(ICollection<Payment> payments, ICollection<SubscriptionPaid> subscriptionsPaid)
+    {
+        Payments = payments;
+        SubscriptionsPaid = subscriptionsPaid;
+    }
 
     public Member()
     {
