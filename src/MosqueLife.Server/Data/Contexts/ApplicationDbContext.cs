@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿#nullable disable
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using MosqueLife.Server.Data.Contexts.Extensions;
 using Npgsql;
@@ -17,6 +18,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     public virtual DbSet<Member> Members { get; set; }
     public virtual DbSet<State> States { get; set; }
     public virtual DbSet<Country> Countries { get; set; }
+    public virtual DbSet<Payment> Payments { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -25,7 +27,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
         modelBuilder.Seed();
 
-        modelBuilder.Entity<SubscriptionPaid>().HasKey(o => new { o.MemberId, o.Year, o.Month });
+        modelBuilder.Entity<SubscriptionPaid>().HasKey(o => new { o.MemeberId, o.Year, o.Month });
     }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

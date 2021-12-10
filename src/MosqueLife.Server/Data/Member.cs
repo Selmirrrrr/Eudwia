@@ -42,12 +42,18 @@ public class Member
     public string City { get; private init; } = string.Empty;
 
     public Guid StateId { get; set; }
-    public State State { get; set; }
 
-    public virtual ICollection<SubscriptionPaid> Subscriptions { get; private set; }
+    public State State { get; set; } = default!;
+
+    public Language Language { get; set; }
+
+    public virtual ICollection<Payment> Payments { get; private set; }
+
+    public virtual ICollection<SubscriptionPaid> SubscriptionsPaid { get; private set; }
 
     public Member()
     {
-        Subscriptions = new List<SubscriptionPaid>();
+        Payments = new List<Payment>();
+        SubscriptionsPaid = new List<SubscriptionPaid>();
     }
 }

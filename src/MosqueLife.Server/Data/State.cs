@@ -16,6 +16,5 @@ public class State
 
     public Guid CountryId { get; set; }
 
-    public Country Country { get; set; }
-
+    public Country Country { get; set; } = default!;
 }
