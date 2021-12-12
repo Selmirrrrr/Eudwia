@@ -23,7 +23,7 @@ public class AccountControllerTests : IClassFixture<WebApplicationFactoryWithInM
         var client = _factory.CreateClient();
 
         // Act
-        var result = await client.PostAsJsonAsync("api/account/login", new LoginModel { Email = "pauljean.ch", Password = "sdfsdsdfs", RememberMe = true });
+        var result = await client.PostAsJsonAsync("api/account/login", new LoginCommand { Email = "pauljean.ch", Password = "sdfsdsdfs", RememberMe = true });
 
         // Assert
         result.StatusCode.ShouldBe(System.Net.HttpStatusCode.BadRequest);
@@ -60,7 +60,7 @@ public class AccountControllerTests : IClassFixture<WebApplicationFactoryWithInM
             Lastname = "sdfsd" 
         });
 
-        var result = await client.PostAsJsonAsync("api/account/login", new LoginModel 
+        var result = await client.PostAsJsonAsync("api/account/login", new LoginCommand 
         { 
             Email = email, 
             Password = password,
@@ -89,7 +89,7 @@ public class AccountControllerTests : IClassFixture<WebApplicationFactoryWithInM
             Lastname = "sdfsd"
         });
 
-        var resultLogin = await client.PostAsJsonAsync("api/account/login", new LoginModel
+        var resultLogin = await client.PostAsJsonAsync("api/account/login", new LoginCommand
         {
             Email = email,
             Password = password,
@@ -103,13 +103,13 @@ public class AccountControllerTests : IClassFixture<WebApplicationFactoryWithInM
             ? null
             : new AuthenticationHeaderValue("bearer", token);
 
-        var result = await client.PostAsJsonAsync($"api/account/{email}", new UpdateUserModel
+        var result = await client.PostAsJsonAsync($"api/account/{email}", new UpdateAccountCommand
         {
             Firstname = "updated.firstname",
             Lastname = "updated.lastname"
         });
 
-        var getResult = await client.GetFromJsonAsync<UserDetails>($"api/account/{email}");
+        var getResult = await client.GetFromJsonAsync<GetAccountDetailsResult>($"api/account/{email}");
 
         // Assert
         getResult.ShouldNotBeNull();
@@ -127,7 +127,7 @@ public class AccountControllerTests : IClassFixture<WebApplicationFactoryWithInM
         // Act
         Func<Task> act = async () =>
         {
-            await client.GetFromJsonAsync<UserDetails>($"api/account/notexists@email.com");
+            await client.GetFromJsonAsync<GetAccountDetailsResult>($"api/account/notexists@email.com");
         };
 
         // Assert

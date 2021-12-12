@@ -301,7 +301,8 @@ public static class ModelBuilderExtensions
         (2022, 1), (2022, 2), (2022, 3), (2022, 4), (2022, 5), (2022, 6), (2022, 7), (2022, 8), (2022, 9), (2022, 10), (2022, 11), (2022, 12)
     };
 
-    private static Faker _faker;
+    private static Faker? _faker;
+
     public static void Seed(this ModelBuilder modelBuilder)
     {
         modelBuilder.SeedCountries();
@@ -337,6 +338,8 @@ public static class ModelBuilderExtensions
 
     private static Member CreateMember()
     {
+        _faker ??= new Faker("fr");
+
         var guid = Guid.NewGuid();
         return new Member
         {

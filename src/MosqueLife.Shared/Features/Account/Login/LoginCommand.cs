@@ -2,7 +2,7 @@
 
 namespace MosqueLife.Shared.Models.Authentication;
 
-public class LoginModel
+public class LoginCommand
 {
     [Required]
     [EmailAddress]

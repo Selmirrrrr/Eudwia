@@ -41,7 +41,7 @@
 
     private bool isBusy = default;
 
-    private LoginModel model = new LoginModel();
+    private LoginCommand model = new LoginCommand();
     private bool success;
 
     private string[] errors = { };
@@ -70,7 +70,7 @@
     {
         isBusy = false;
         success = false;
-        model = new LoginModel
+        model = new LoginCommand
         {
             Email = Email,
             Password = Password,

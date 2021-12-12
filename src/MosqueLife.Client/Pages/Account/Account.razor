@@ -62,9 +62,9 @@
     public string JobTitle { get; set; } = string.Empty;
     public string Email { get; set; } = string.Empty;
 
-    private UpdateUserModel model = new UpdateUserModel();
+    private UpdateAccountCommand model = new UpdateAccountCommand();
 
-    private UserDetails userDetails = new UserDetails();
+    private GetAccountDetailsResult userDetails = new GetAccountDetailsResult();
 
     protected async override Task OnInitializedAsync()
     {
@@ -73,12 +73,12 @@
         var user = authstate.User;
         var username = user?.Identity?.Name;
 
-        userDetails = (await HttpClient.GetFromJsonAsync<UserDetails>($"api/account/{username}")) ?? new UserDetails();
+        userDetails = (await HttpClient.GetFromJsonAsync<GetAccountDetailsResult>($"api/account/{username}")) ?? new GetAccountDetailsResult();
     }
 
     async Task SaveChanges(string message, Severity severity)
     {
-        model = new UpdateUserModel
+        model = new UpdateAccountCommand
         {
             Firstname = userDetails.Firstname,
             Lastname = userDetails.Lastname,
