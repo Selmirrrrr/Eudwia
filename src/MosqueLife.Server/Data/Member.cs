@@ -18,7 +18,7 @@ public class Member
 
     public DateOnly BirthDate { get; set; }
 
-    public DateOnly? MemberSince { get; set; }
+    public DateOnly MemberSince { get; set; }
 
     [Required]
     [MinLength(3)]
@@ -46,6 +46,10 @@ public class Member
     public Guid StateId { get; set; }
 
     public State State { get; set; } = default!;
+
+    public string? PhoneNumber { get; set; }
+
+    public string? Email { get; set; }
 
     public Language Language { get; set; }
 
