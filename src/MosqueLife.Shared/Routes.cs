@@ -9,4 +9,13 @@ public static class Routes
         public const string Update = "account/{email}";
         public const string Get = "account/{email}";
     }
+
+    public static class Members
+    {
+        public const string GetMembers = "members";
+        public const string GetMember = "members/{id}";
+        public const string UpdateMember = "members/{id}";
+        public const string DeleteMember = "members/{id}";
+        public const string CreateMember = "members/{id}";
+    }
 }
