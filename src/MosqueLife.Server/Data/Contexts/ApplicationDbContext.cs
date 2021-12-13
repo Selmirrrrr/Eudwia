@@ -11,9 +11,14 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
 {
     private readonly IConfiguration _configuration;
     private readonly ILoggerFactory _loggerFactory;
+    private readonly IContextConfiguration _config;
 
-    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options, ILoggerFactory loggerFactory, IConfiguration configuration)
-        : base(options) => (_loggerFactory, _configuration) = (loggerFactory, configuration);
+    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options, ILoggerFactory loggerFactory, IConfiguration configuration, IContextConfiguration config)
+        : base(options)
+    {
+        (_loggerFactory, _configuration) = (loggerFactory, configuration);
+        _config = config;
+    }
 
     public virtual DbSet<Member> Members { get; set; }
     public virtual DbSet<State> States { get; set; }
@@ -34,20 +39,11 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         if (optionsBuilder.IsConfigured) return;
 
-        var connectionStringBuilder = new NpgsqlConnectionStringBuilder(_configuration.GetConnectionString("PostgreSQL"))
-        {
-            Password = _configuration["DbPassword"]
-        };
-
-        connectionStringBuilder.Host = string.IsNullOrWhiteSpace(_configuration["DbHost"])
-            ? connectionStringBuilder.Host
-            : _configuration["DbHost"];
-
         optionsBuilder
             .EnableDetailedErrors()
             .EnableSensitiveDataLogging()
             .UseNpgsql(
-                connectionString: connectionStringBuilder.ConnectionString,
+                connectionString: _config.ConnectionString,
                 npgsqlOptionsAction: SqlServerOptionsAction)
             .UseLoggerFactory(_loggerFactory);
     }

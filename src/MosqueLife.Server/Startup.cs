@@ -65,6 +65,9 @@ public class Startup
         //configure appdbcontext
         services.AddScoped<DbContext, ApplicationDbContext>().AddDbContext<ApplicationDbContext>();
 
+        services.AddSingleton<IContextConfiguration, DataContextConfiguration>();
+
+
         //configure identity
         services.AddIdentity<ApplicationUser, IdentityRole>()
             .AddEntityFrameworkStores<ApplicationDbContext>()
