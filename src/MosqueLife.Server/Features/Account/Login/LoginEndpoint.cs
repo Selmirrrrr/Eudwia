@@ -1,9 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using MosqueLife.Server.Data;
-using MosqueLife.Server.Data.Contexts;
 using MosqueLife.Shared;
 using MosqueLife.Shared.Models.Authentication;
 using System.IdentityModel.Tokens.Jwt;
