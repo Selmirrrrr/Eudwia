@@ -6,9 +6,13 @@ public class Payment
 
     public string Note { get; set; } = string.Empty;
 
+    public decimal Amount { get; set; }
+
     public Guid MemberId { get; set; }
 
     public Member Member { get; set; } = default!;
 
     public PaymentType PaymentType { get; set; }
+
+    public DateTime PaymentDate { get; set; }
 }
