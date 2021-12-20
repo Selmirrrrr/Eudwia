@@ -24,11 +24,20 @@ public class TokenAuthenticationStateProvider : AuthenticationStateProvider
             ? new ClaimsIdentity()
             : new ClaimsIdentity(token.ParseClaimsFromJwt(), "jwt");
 
-        _httpClient.DefaultRequestHeaders.Authorization = string.IsNullOrWhiteSpace(token)
-            ? null
-            : new AuthenticationHeaderValue("bearer", token);
+        _ = long.TryParse(identity.Claims.FirstOrDefault(a => a.Type == "exp")?.Value, out long expiry);
+        var nowTicks = DateTime.Now;
+        if (DateTimeOffset.FromUnixTimeSeconds(expiry).ToLocalTime() > nowTicks)
+        {
+            _httpClient.DefaultRequestHeaders.Authorization = string.IsNullOrWhiteSpace(token)
+                ? null
+                : new AuthenticationHeaderValue("bearer", token);
 
-        return new AuthenticationState(new ClaimsPrincipal(identity));
+            return new AuthenticationState(new ClaimsPrincipal(identity));
+        } else
+        {
+            return new AuthenticationState(new ClaimsPrincipal());
+        }
+
     }
 
     public async Task Login(string token)
