@@ -1,9 +1,9 @@
 ﻿@page "/personal/account"
 @using MosqueLife.Shared.Models.Personal
-@inject HttpClient HttpClient
-@inject ISnackbar Snackbar
+@inject HttpClient _httpClient
+@inject ISnackbar _snackbar
 
-@inject AuthenticationStateProvider GetAuthenticationStateAsync
+@inject AuthenticationStateProvider _getAuthenticationStateAsync
 @attribute [Authorize]
 
 <AuthorizeView>
@@ -20,9 +20,9 @@
                         </MudCardHeader>
                         <MudCardContent>
                             <div class="d-flex justify-center mb-4">
-                                <MudAvatar Style="height:100px; width:100px;">@userDetails.Lastname</MudAvatar>
+                                <MudAvatar Style="height:100px; width:100px;">@_userDetails.Lastname</MudAvatar>
                             </div>
-                            <MudText Align="Align.Center">@userDetails.Firstname @userDetails.Lastname</MudText>
+                            <MudText Align="Align.Center">@_userDetails.Firstname @_userDetails.Lastname</MudText>
                         </MudCardContent>
                     </MudCard>
                 </MudItem>
@@ -36,10 +36,10 @@
                         <MudCardContent>
                             <MudGrid>
                                 <MudItem xs="12" md="6">
-                                    <MudTextField @bind-Value="userDetails.Firstname" Label="First Name" Variant="Variant.Outlined" />
+                                    <MudTextField @bind-Value="_userDetails.Firstname" Label="First Name" Variant="Variant.Outlined" />
                                 </MudItem>
                                 <MudItem xs="12" md="6">
-                                    <MudTextField @bind-Value="userDetails.Lastname" Label="Last Name" Variant="Variant.Outlined" />
+                                    <MudTextField @bind-Value="_userDetails.Lastname" Label="Last Name" Variant="Variant.Outlined" />
                                 </MudItem>
                                 <MudItem xs="12" md="6">
                                     <MudTextField Value="context?.User?.Identity?.Name" Label="Email" Variant="Variant.Outlined" HelperText="Dont worry, we shall not spam!" Disabled="true" InputType="InputType.Email"/>
@@ -62,34 +62,34 @@
     public string JobTitle { get; set; } = string.Empty;
     public string Email { get; set; } = string.Empty;
 
-    private UpdateAccountCommand model = new UpdateAccountCommand();
+    private UpdateAccountCommand _model = new UpdateAccountCommand();
 
-    private GetAccountDetailsResult userDetails = new GetAccountDetailsResult();
+    private GetAccountDetailsResult _userDetails = new GetAccountDetailsResult();
 
     protected async override Task OnInitializedAsync()
     {
 
-        var authstate = await GetAuthenticationStateAsync.GetAuthenticationStateAsync();
+        var authstate = await _getAuthenticationStateAsync.GetAuthenticationStateAsync();
         var user = authstate.User;
         var username = user?.Identity?.Name;
 
-        userDetails = (await HttpClient.GetFromJsonAsync<GetAccountDetailsResult>($"api/account/{username}")) ?? new GetAccountDetailsResult();
+        _userDetails = (await _httpClient.GetFromJsonAsync<GetAccountDetailsResult>($"api/account/{username}")) ?? new GetAccountDetailsResult();
     }
 
     async Task SaveChanges(string message, Severity severity)
     {
-        model = new UpdateAccountCommand
+        _model = new UpdateAccountCommand
         {
-            Firstname = userDetails.Firstname,
-            Lastname = userDetails.Lastname,
+            Firstname = _userDetails.Firstname,
+            Lastname = _userDetails.Lastname,
         };
 
-        var json = System.Text.Json.JsonSerializer.Serialize(model);
+        var json = System.Text.Json.JsonSerializer.Serialize(_model);
         StringContent content = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
-        var result = await HttpClient.PostAsJsonAsync($"api/account/{userDetails.Email}", model);
+        var result = await _httpClient.PostAsJsonAsync($"api/account/{_userDetails.Email}", _model);
         if (result.StatusCode == System.Net.HttpStatusCode.OK)
         {
-            Snackbar.Add(message, severity, config =>
+            _snackbar.Add(message, severity, config =>
             {
                 config.ShowCloseIcon = false;
             });

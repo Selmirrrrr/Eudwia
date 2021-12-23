@@ -19,21 +19,21 @@ public static class StringExtensions
         if (!string.IsNullOrWhiteSpace(roles?.ToString()))
         {
             var role = roles.ToString() ?? string.Empty;
-            if (role.ToString().Trim().StartsWith("["))
+            if (role.Trim().StartsWith("["))
             {
-                var parsedRoles = JsonSerializer.Deserialize<string[]>(role.ToString()) ?? Array.Empty<string>();
+                var parsedRoles = JsonSerializer.Deserialize<string[]>(role) ?? Array.Empty<string>();
                 claims.AddRange(parsedRoles.Select(pr => new Claim(ClaimTypes.Role, pr)).ToList());
             }
             else
             {
-                claims.Add(new Claim(ClaimTypes.Role, role.ToString()));
+                claims.Add(new Claim(ClaimTypes.Role, role));
             }
 
             keyValuePairs.Remove(ClaimTypes.Role);
         }
 
         claims.AddRange(keyValuePairs.Where(kvp => !string.IsNullOrWhiteSpace(kvp.Value.ToString()))
-                                     .Select(kvp => new Claim(kvp.Key, kvp!.Value!.ToString()!)));
+                                     .Select(kvp => new Claim(kvp.Key, kvp!.Value.ToString()!)));
 
         return claims;
     }

@@ -2,26 +2,25 @@
 
 @layout LoginLayout
 
-@inject Providers.TokenAuthenticationStateProvider TokenAuthenticationStateProvider
-@inject HttpClient HttpClient
-@inject NavigationManager NavigationManager
+@inject Providers.TokenAuthenticationStateProvider _tokenAuthenticationStateProvider
+@inject HttpClient _httpClient
+@inject NavigationManager _navigationManager
 
-@using System.ComponentModel.DataAnnotations
 @using MosqueLife.Shared.Models.Authentication
 
-@if (showErrorAlert)
+@if (_showErrorAlert)
 {
     <MudAlert Severity="Severity.Error" ContentAlignment="HorizontalAlignment.Center" ShowCloseIcon="true" CloseIconClicked="(() => CloseMe(true))" >Invalid username or password!</MudAlert>
 }
 
-<MudForm @ref="form" @bind-IsValid="@success" @bind-Errors="@errors">
+<MudForm @ref="_form" @bind-IsValid="@_success" @bind-Errors="@_errors">
     <MudText Typo="Typo.h4" GutterBottom="true" Class="mt-4">Sign In</MudText>
 
     <MudText>Don't have an account? <MudLink Href="/authentication/register">Sign Up</MudLink></MudText>
 
     <MudTextField T="string" @bind-Value="@Email" Required="true" Label="E-mail " Variant="Variant.Outlined" Class="my-6"></MudTextField>
 
-    <MudTextField @bind-Value="@Password" Label="Password " Required="true" Variant="Variant.Outlined" InputType="@PasswordInput" Adornment="Adornment.End" AdornmentIcon="@PasswordInputIcon" OnAdornmentClick="TogglePasswordVisibility" />
+    <MudTextField @bind-Value="@Password" Label="Password " Required="true" Variant="Variant.Outlined" InputType="@_passwordInput" Adornment="Adornment.End" AdornmentIcon="@_passwordInputIcon" OnAdornmentClick="TogglePasswordVisibility" />
 
     <div Class="d-flex justify-space-between align-center">
         <MudCheckBox T="bool" Label="Remember me?" @bind-Checked="RememberMe" Color="Color.Primary" Class="ml-n1 my-3"></MudCheckBox>
@@ -29,23 +28,23 @@
         <MudLink Href="/authentication/forgot-password">Forgot pwd?</MudLink>
     </div>
 
-    <MudButton Variant="Variant.Filled" Color="Color.Primary" Disabled="@(!success && !isBusy)" Size="Size.Large" FullWidth="true" OnClick="() => HandleSubmit()">Sign In</MudButton>
+    <MudButton Variant="Variant.Filled" Color="Color.Primary" Disabled="@(!_success && !_isBusy)" Size="Size.Large" FullWidth="true" OnClick="() => HandleSubmit()">Sign In</MudButton>
 </MudForm>
 
 @code {
-    private bool showErrorAlert;
+    private bool _showErrorAlert;
 
     private string Password { get; set; } = string.Empty;
     private string Email { get; set; } =  string.Empty;
-    private bool RememberMe { get; set; } = default;
+    private bool RememberMe { get; set; }
 
-    private bool isBusy = default;
+    private bool _isBusy;
 
-    private LoginCommand model = new LoginCommand();
-    private bool success;
+    private LoginCommand _model = new();
+    private bool _success;
 
-    private string[] errors = { };
-    private MudForm? form;
+    private string[] _errors = { };
+    private MudForm? _form;
 
     public class RegisterAccountForm
     {
@@ -68,25 +67,25 @@
 
     private async Task HandleSubmit()
     {
-        isBusy = false;
-        success = false;
-        model = new LoginCommand
+        _isBusy = false;
+        _success = false;
+        _model = new LoginCommand
         {
             Email = Email,
             Password = Password,
             RememberMe = RememberMe
         };
 
-        var response = await HttpClient.PostAsJsonAsync("api/account/login", model);
+        var response = await _httpClient.PostAsJsonAsync("api/account/login", _model);
         var loginResult = await response.Content.ReadFromJsonAsync<LoginResult>();
         if (loginResult?.Successful == true)
         {
-            await TokenAuthenticationStateProvider.Login(loginResult.Token);
-            NavigationManager.NavigateTo("/personal/dashboard");
+            await _tokenAuthenticationStateProvider.Login(loginResult.Token);
+            _navigationManager.NavigateTo("/personal/dashboard");
         }
         else
         {
-            showErrorAlert = true;
+            _showErrorAlert = true;
             Console.WriteLine("Invalid username or password");
         }
 
@@ -97,41 +96,41 @@
         //success = true;
         //StateHasChanged();
 
-        var response = await HttpClient.PostAsJsonAsync("api/account/login", model);
+        var response = await _httpClient.PostAsJsonAsync("api/account/login", _model);
         var loginResult = await response.Content.ReadFromJsonAsync<LoginResult>();
         if (loginResult?.Successful == true)
         {
-            await TokenAuthenticationStateProvider.Login(loginResult.Token);
-            NavigationManager.NavigateTo("/personal/dashboard");
+            await _tokenAuthenticationStateProvider.Login(loginResult.Token);
+            _navigationManager.NavigateTo("/personal/dashboard");
         }
         else
         {
-            showErrorAlert = true;
+            _showErrorAlert = true;
         }
     }
 
-    bool PasswordVisibility;
-    InputType PasswordInput = InputType.Password;
-    string PasswordInputIcon = Icons.Material.Filled.VisibilityOff;
+    bool _passwordVisibility;
+    InputType _passwordInput = InputType.Password;
+    string _passwordInputIcon = Icons.Material.Filled.VisibilityOff;
 
     void TogglePasswordVisibility()
     {
-        @if (PasswordVisibility)
+        @if (_passwordVisibility)
         {
-            PasswordVisibility = false;
-            PasswordInputIcon = Icons.Material.Filled.VisibilityOff;
-            PasswordInput = InputType.Password;
+            _passwordVisibility = false;
+            _passwordInputIcon = Icons.Material.Filled.VisibilityOff;
+            _passwordInput = InputType.Password;
         }
         else
         {
-            PasswordVisibility = true;
-            PasswordInputIcon = Icons.Material.Filled.Visibility;
-            PasswordInput = InputType.Text;
+            _passwordVisibility = true;
+            _passwordInputIcon = Icons.Material.Filled.Visibility;
+            _passwordInput = InputType.Text;
         }
     }
 
     private void CloseMe(bool value)
     {
-        showErrorAlert = !value;
+        _showErrorAlert = !value;
     }
 }

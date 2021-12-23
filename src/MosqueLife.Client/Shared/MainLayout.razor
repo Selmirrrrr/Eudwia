@@ -1,6 +1,6 @@
 ﻿@inherits LayoutComponentBase
-@inject Providers.TokenAuthenticationStateProvider TokenAuthenticationStateProvider
-@inject NavigationManager NavigationManager
+@inject Providers.TokenAuthenticationStateProvider _tokenAuthenticationStateProvider
+@inject NavigationManager _navigationManager
 <MudThemeProvider Theme="_themeManager.Theme" />
 <MudDialogProvider />
 <MudSnackbarProvider />
@@ -35,7 +35,7 @@
             </ChildContent>
         </MudMenu>
     </MudAppBar>
-    <MudDrawer @bind-Open="_drawerOpen" Elevation="_themeManager.DrawerElevation" ClipMode="_themeManager.DrawerClipMode">
+    <MudDrawer @bind-Open="DrawerOpen" Elevation="_themeManager.DrawerElevation" ClipMode="_themeManager.DrawerClipMode">
         <NavMenu />
     </MudDrawer>
     <MudMainContent>
@@ -50,7 +50,7 @@
         </MudContainer>
     </MudMainContent>
     <MudThemeManagerButton OnClick="@((e) => OpenThemeManager(true))" />
-    <MudThemeManager Open="_themeManagerOpen" OpenChanged="OpenThemeManager" Theme="_themeManager" ThemeChanged="UpdateTheme" />
+    <MudThemeManager Open="ThemeManagerOpen" OpenChanged="OpenThemeManager" Theme="_themeManager" ThemeChanged="UpdateTheme" />
 </MudLayout>
 
 
@@ -65,17 +65,17 @@
         DrawerElevation = 1
     };
 
-    public bool _drawerOpen = true;
-    public bool _themeManagerOpen = false;
+    public bool DrawerOpen = true;
+    public bool ThemeManagerOpen = false;
 
     void DrawerToggle()
     {
-        _drawerOpen = !_drawerOpen;
+        DrawerOpen = !DrawerOpen;
     }
 
     void OpenThemeManager(bool value)
     {
-        _themeManagerOpen = value;
+        ThemeManagerOpen = value;
     }
 
     void UpdateTheme(ThemeManagerTheme value)
@@ -92,8 +92,8 @@
 
     async Task Logout()
     {
-        await TokenAuthenticationStateProvider.Logout();
-        NavigationManager.NavigateTo("authentication/login");
+        await _tokenAuthenticationStateProvider.Logout();
+        _navigationManager.NavigateTo("authentication/login");
     }
 
     private List<BreadcrumbItem> _items = new List<BreadcrumbItem>

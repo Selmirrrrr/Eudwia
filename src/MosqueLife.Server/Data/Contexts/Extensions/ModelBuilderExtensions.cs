@@ -5,7 +5,7 @@ namespace MosqueLife.Server.Data.Contexts.Extensions;
 
 public static class ModelBuilderExtensions
 {
-    private static readonly List<Country> _countries = new()
+    private static readonly List<Country> Countries = new()
     {
         new Country { Id = Guid.Parse("3ecaafbc-af46-4a7c-a9dc-6bb7096f8929"), Name = "Afghanistan", Alpha2Code = "AF", Alpha3Code = "AFG" },
         new Country { Id = Guid.Parse("a33a5b08-d624-49b3-b451-8d371deef429"), Name = "Albania", Alpha2Code = "AL", Alpha3Code = "ALB" },
@@ -258,7 +258,7 @@ public static class ModelBuilderExtensions
         new Country { Id = Guid.Parse("bb38feee-4d81-4f56-a11b-673ca15a95a0"), Name = "Åland Islands", Alpha2Code = "AX", Alpha3Code = "ALA" },
     };
 
-    private static readonly List<State> _states = new()
+    private static readonly List<State> States = new()
     {
         new State { Id = Guid.Parse("cce40cc0-8e6d-41e2-9bbe-1127690bb70d"), Code = "ZH", Name = "Zürich", CountryId = Guid.Parse("9bc1f1a9-7696-42e4-89aa-c93800704582") },
         new State { Id = Guid.Parse("561f6eee-921e-4638-8e35-51a8bc2b4b9b"), Code = "BE", Name = "Bern", CountryId = Guid.Parse("9bc1f1a9-7696-42e4-89aa-c93800704582") },
@@ -288,7 +288,7 @@ public static class ModelBuilderExtensions
         new State { Id = Guid.Parse("9a71b829-fb15-42d4-b733-028d0ff5a387"), Code = "JU", Name = "Jura", CountryId = Guid.Parse("9bc1f1a9-7696-42e4-89aa-c93800704582") }
     };
 
-    private static readonly (int Year, int Month)[] _subscriptions = new[]
+    private static readonly (int Year, int Month)[] Subscriptions = new[]
     { 
         (2014, 1), (2014, 2), (2014, 3), (2014, 4), (2014, 5), (2014, 6), (2014, 7), (2014, 8), (2014, 9), (2014, 10), (2014, 11), (2014, 12),
         (2015, 1), (2015, 2), (2015, 3), (2015, 4), (2015, 5), (2015, 6), (2015, 7), (2015, 8), (2015, 9), (2015, 10), (2015, 11), (2015, 12),
@@ -328,7 +328,7 @@ public static class ModelBuilderExtensions
                 MemberId = member.Id
             }).ToList());
 
-            subscriptions.AddRange(_faker.Random.ArrayElements(_subscriptions, 100).Select(s => new SubscriptionPaid { Year = s.Year, Month = s.Month, MemberId = member.Id }).ToList());
+            subscriptions.AddRange(_faker.Random.ArrayElements(Subscriptions, 100).Select(s => new SubscriptionPaid { Year = s.Year, Month = s.Month, MemberId = member.Id }).ToList());
             members.Add(member);
         }
         modelBuilder.Entity<Member>().HasData(members);
@@ -361,10 +361,10 @@ public static class ModelBuilderExtensions
     private static void SeedCountries(this ModelBuilder modelBuilder) =>
         modelBuilder
             .Entity<Country>()
-            .HasData(_countries);
+            .HasData(Countries);
 
     private static void SeedStates(this ModelBuilder modelBuilder) =>
     modelBuilder
         .Entity<State>()
-        .HasData(_states);
+        .HasData(States);
 }

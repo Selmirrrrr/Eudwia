@@ -3,54 +3,54 @@
 @using MosqueLife.Shared.Models.Authentication
 @page "/authentication/register"
 @layout LoginLayout
-@inject Providers.TokenAuthenticationStateProvider TokenAuthenticationStateProvider
-@inject HttpClient HttpClient
-@inject NavigationManager NavigationManager
+@inject Providers.TokenAuthenticationStateProvider _tokenAuthenticationStateProvider
+@inject HttpClient _httpClient
+@inject NavigationManager _navigationManager
 
 <br />
-@if (showErrorAlert)
+@if (_showErrorAlert)
 {
     <MudAlert Severity="Severity.Error" ContentAlignment="HorizontalAlignment.Center" ShowCloseIcon="true" CloseIconClicked="(() => CloseMe(true))">
-        @foreach (var item in apiErrors)
+        @foreach (var item in _apiErrors)
         {
             <span>@item</span>
         }
     </MudAlert>
 }
 
-<MudForm @ref="form" @bind-IsValid="@success" @bind-Errors="@errors">
+<MudForm @ref="_form" @bind-IsValid="@_success" @bind-Errors="@_errors">
 
     <MudText Typo="Typo.h4" GutterBottom="true">Sign Up</MudText>
     <MudText>Already have an account? <MudLink Href="/authentication/login">Sign In</MudLink></MudText>
 
-    <MudTextField T="string" @bind-Value="model.Firstname" Required="true" RequiredError="First name is required!" Label="First Name " Variant=" Variant.Outlined" Class="mt-4"></MudTextField>
-    <MudTextField T="string" @bind-Value="model.Lastname" Required="true" RequiredError="Last name is required!" Label="Last Name " Variant=" Variant.Outlined" Class="mt-4"></MudTextField>
+    <MudTextField T="string" @bind-Value="_model.Firstname" Required="true" RequiredError="First name is required!" Label="First Name " Variant=" Variant.Outlined" Class="mt-4"></MudTextField>
+    <MudTextField T="string" @bind-Value="_model.Lastname" Required="true" RequiredError="Last name is required!" Label="Last Name " Variant=" Variant.Outlined" Class="mt-4"></MudTextField>
 
-    <MudTextField T="string" @bind-Value="model.Email" Required="true" RequiredError="Email is required!" Label="E-mail " Validation="@(new EmailAddressAttribute() {ErrorMessage = "The email address is invalid"})" Variant=" Variant.Outlined" Class="mt-4" Fo></MudTextField>
+    <MudTextField T="string" @bind-Value="_model.Email" Required="true" RequiredError="Email is required!" Label="E-mail " Validation="@(new EmailAddressAttribute() {ErrorMessage = "The email address is invalid"})" Variant=" Variant.Outlined" Class="mt-4" Fo></MudTextField>
 
-    <MudTextField T="string" Label="Password " @bind-Value="model.Password" Variant="Variant.Outlined"
+    <MudTextField T="string" Label="Password " @bind-Value="_model.Password" Variant="Variant.Outlined"
                   InputType="InputType.Password"
                   Validation="@(new Func<string, IEnumerable<string>>(PasswordStrength))" Required="true"
                   RequiredError="Password is required!" Class="mt-4" />
     <MudTextField T="string"
-                  Label="Enter password again " @bind-Value="model.ConfirmPassword" Variant="Variant.Outlined" InputType="InputType.Password"
+                  Label="Enter password again " @bind-Value="_model.ConfirmPassword" Variant="Variant.Outlined" InputType="InputType.Password"
                   Class="mt-4" />
 
-    <MudButton Variant="Variant.Filled" Color="Color.Primary" Disabled="@(!success && !isBusy)" OnClick="() => HandleSubmit()" Size="Size.Large" FullWidth="true" Class="mt-4">Register</MudButton>
+    <MudButton Variant="Variant.Filled" Color="Color.Primary" Disabled="@(!_success && !_isBusy)" OnClick="() => HandleSubmit()" Size="Size.Large" FullWidth="true" Class="mt-4">Register</MudButton>
 </MudForm>
 
 @code {
-    private bool success = default;
-    private bool isBusy = default;
+    private bool _success = default;
+    private bool _isBusy = default;
 
 
-    private bool showErrorAlert = false;
-    private RegisterModel model = new RegisterModel();
+    private bool _showErrorAlert = false;
+    private RegisterModel _model = new RegisterModel();
 
-    private string[] errors = { };
-    private MudForm? form;
+    private string[] _errors = { };
+    private MudForm? _form;
 
-    List<string> apiErrors = new List<string>{ };
+    List<string> _apiErrors = new List<string>{ };
 
     private IEnumerable<string> PasswordStrength(string pw)
     {
@@ -71,27 +71,27 @@
 
     async Task HandleSubmit()
     {
-        isBusy = false;
-        success = false;
+        _isBusy = false;
+        _success = false;
 
-        var response = await HttpClient.PostAsJsonAsync("api/account/register/", model);
+        var response = await _httpClient.PostAsJsonAsync("api/account/register/", _model);
 
         var registerResult = await response.Content.ReadFromJsonAsync<RegisterResult>();
 
         if (registerResult?.Successful == true)
-            NavigationManager.NavigateTo("authentication/login");
+            _navigationManager.NavigateTo("authentication/login");
         else
         {
-            showErrorAlert = true;
+            _showErrorAlert = true;
             if (registerResult?.Errors.Any() == true)
-                apiErrors.AddRange(registerResult.Errors);
+                _apiErrors.AddRange(registerResult.Errors);
             
         }
     }
 
     private void CloseMe(bool value)
     {
-        showErrorAlert = !value;
+        _showErrorAlert = !value;
     }
 }
 
