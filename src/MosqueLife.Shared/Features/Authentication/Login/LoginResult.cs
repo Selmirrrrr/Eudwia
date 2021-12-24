@@ -1,4 +1,4 @@
-﻿namespace MosqueLife.Shared.Models.Authentication;
+﻿namespace MosqueLife.Shared.Features.Account.Login;
 
 public class LoginResult : LoginCommand
 {

@@ -1,10 +1,10 @@
-﻿using Blazored.LocalStorage;
-using Microsoft.AspNetCore.Components.Authorization;
-using MosqueLife.Client.Extensions;
-using System.Net.Http.Headers;
+﻿using System.Net.Http.Headers;
 using System.Security.Claims;
+using Blazored.LocalStorage;
+using Microsoft.AspNetCore.Components.Authorization;
+using MosqueLife.Shared.Extensions;
 
-namespace MosqueLife.Client.Providers;
+namespace MosqueLife.Shared.Providers;
 
 public class TokenAuthenticationStateProvider : AuthenticationStateProvider
 {
@@ -24,7 +24,7 @@ public class TokenAuthenticationStateProvider : AuthenticationStateProvider
             ? new ClaimsIdentity()
             : new ClaimsIdentity(token.ParseClaimsFromJwt(), "jwt");
 
-        _ = long.TryParse(identity.Claims.FirstOrDefault(a => a.Type == "exp")?.Value, out long expiry);
+        _ = long.TryParse(identity.Claims.FirstOrDefault(a => a.Type == "exp")?.Value, out var expiry);
         var nowTicks = DateTime.Now;
         if (DateTimeOffset.FromUnixTimeSeconds(expiry).ToLocalTime() > nowTicks)
         {
@@ -33,24 +33,21 @@ public class TokenAuthenticationStateProvider : AuthenticationStateProvider
                 : new AuthenticationHeaderValue("bearer", token);
 
             return new AuthenticationState(new ClaimsPrincipal(identity));
-        } else
-        {
-            return new AuthenticationState(new ClaimsPrincipal());
         }
+
+        return new AuthenticationState(new ClaimsPrincipal());
 
     }
 
     public async Task Login(string token)
     {
         await _localStorage.SetItemAsync("token", token);
-
         NotifyAuthenticationStateChanged(GetAuthenticationStateAsync());
     }
 
     public async Task Logout()
     {
         await _localStorage.RemoveItemAsync("token");
-
         NotifyAuthenticationStateChanged(GetAuthenticationStateAsync());
     }
 }

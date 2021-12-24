@@ -1,6 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-
-namespace MosqueLife.Server;
+﻿namespace MosqueLife.Server.Data.Contexts;
 
 public class DataContextConfiguration : IContextConfiguration
 {

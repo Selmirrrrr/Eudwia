@@ -1,11 +1,11 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using System.Net.Mime;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using MosqueLife.Server.Data;
 using MosqueLife.Shared;
-using MosqueLife.Shared.Models.Authentication;
-using System.Net.Mime;
+using MosqueLife.Shared.Features.Account.Register;
 
-namespace MosqueLife.Server.Endpoints.Account;
+namespace MosqueLife.Server.Features.Account.Register;
 
 [Route("api")]
 [ApiController]

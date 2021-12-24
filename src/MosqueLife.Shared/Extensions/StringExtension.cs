@@ -1,7 +1,7 @@
 ﻿using System.Security.Claims;
 using System.Text.Json;
 
-namespace MosqueLife.Client.Extensions;
+namespace MosqueLife.Shared.Extensions;
 
 public static class StringExtensions
 {

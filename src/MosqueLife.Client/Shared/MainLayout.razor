@@ -1,5 +1,7 @@
-﻿@inherits LayoutComponentBase
-@inject Providers.TokenAuthenticationStateProvider _tokenAuthenticationStateProvider
+﻿@using MosqueLife.Shared.Providers
+@using MosqueLife.Client.Theme
+@inherits LayoutComponentBase
+@inject TokenAuthenticationStateProvider _tokenAuthenticationStateProvider
 @inject NavigationManager _navigationManager
 <MudThemeProvider Theme="_themeManager.Theme" />
 <MudDialogProvider />
@@ -11,7 +13,7 @@
             <MudIcon Icon="@Icons.Custom.Brands.MudBlazor" Size="Size.Large" />
         </MudHidden>
         <MudHidden Breakpoint="Breakpoint.MdAndUp">
-            <MudIconButton Icon="@Icons.Material.Outlined.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
+            <MudIconButton Icon="@Icons.Material.Outlined.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@(_ => DrawerToggle())" />
         </MudHidden>
         <MudHidden Breakpoint="Breakpoint.Xs">
             <MudText Typo="Typo.h6" Class="ml-4">MosqueLife</MudText>
@@ -35,13 +37,13 @@
             </ChildContent>
         </MudMenu>
     </MudAppBar>
-    <MudDrawer @bind-Open="DrawerOpen" Elevation="_themeManager.DrawerElevation" ClipMode="_themeManager.DrawerClipMode">
+    <MudDrawer @bind-Open="_drawerOpen" Elevation="_themeManager.DrawerElevation" ClipMode="_themeManager.DrawerClipMode">
         <NavMenu />
     </MudDrawer>
     <MudMainContent>
         <MudHidden Breakpoint="Breakpoint.SmAndDown">
             <MudToolBar DisableGutters="true">
-                <MudIconButton Icon="@Icons.Material.Outlined.Menu" Color="Color.Inherit" OnClick="@((e) => DrawerToggle())" Class="ml-3" />
+                <MudIconButton Icon="@Icons.Material.Outlined.Menu" Color="Color.Inherit" OnClick="@(_ => DrawerToggle())" Class="ml-3" />
                 <MudBreadcrumbs Items="_items"></MudBreadcrumbs>
             </MudToolBar>
         </MudHidden>
@@ -49,13 +51,10 @@
             @Body
         </MudContainer>
     </MudMainContent>
-    <MudThemeManagerButton OnClick="@((e) => OpenThemeManager(true))" />
-    <MudThemeManager Open="ThemeManagerOpen" OpenChanged="OpenThemeManager" Theme="_themeManager" ThemeChanged="UpdateTheme" />
 </MudLayout>
 
-
 @code {
-    private ThemeManagerTheme _themeManager = new ThemeManagerTheme
+    private readonly ThemeManagerTheme _themeManager = new()
     {
         Theme = new MudBlazorAdminDashboard(),
         DrawerClipMode = DrawerClipMode.Always,
@@ -65,23 +64,10 @@
         DrawerElevation = 1
     };
 
-    public bool DrawerOpen = true;
-    public bool ThemeManagerOpen = false;
-
+    private bool _drawerOpen = true;
     void DrawerToggle()
     {
-        DrawerOpen = !DrawerOpen;
-    }
-
-    void OpenThemeManager(bool value)
-    {
-        ThemeManagerOpen = value;
-    }
-
-    void UpdateTheme(ThemeManagerTheme value)
-    {
-        _themeManager = value;
-        StateHasChanged();
+        _drawerOpen = !_drawerOpen;
     }
 
     protected override void OnInitialized()
@@ -89,16 +75,15 @@
         StateHasChanged();
     }
 
-
-    async Task Logout()
+    private async Task Logout()
     {
         await _tokenAuthenticationStateProvider.Logout();
         _navigationManager.NavigateTo("authentication/login");
     }
 
-    private List<BreadcrumbItem> _items = new List<BreadcrumbItem>
-{
-        new BreadcrumbItem("Personal", href: "#"),
-        new BreadcrumbItem("Dashboard", href: "#"),
+    private List<BreadcrumbItem> _items = new()
+    {
+        new BreadcrumbItem("Personal", "#"),
+        new BreadcrumbItem("Dashboard", "#")
     };
 }

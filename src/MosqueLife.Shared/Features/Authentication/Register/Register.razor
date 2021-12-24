@@ -1,16 +1,18 @@
-﻿@using System.Text.RegularExpressions
+﻿@page "/authentication/register"
 @using System.ComponentModel.DataAnnotations
-@using MosqueLife.Shared.Models.Authentication
-@page "/authentication/register"
-@layout LoginLayout
-@inject Providers.TokenAuthenticationStateProvider _tokenAuthenticationStateProvider
+@using System.Net.Http.Json
+@using System.Text.RegularExpressions
+@using Microsoft.AspNetCore.Components
+@using MosqueLife.Shared.Features.Account.Register
+@using MudBlazor
+@layout AuthenticationLayout
 @inject HttpClient _httpClient
 @inject NavigationManager _navigationManager
 
 <br />
 @if (_showErrorAlert)
 {
-    <MudAlert Severity="Severity.Error" ContentAlignment="HorizontalAlignment.Center" ShowCloseIcon="true" CloseIconClicked="(() => CloseMe(true))">
+    <MudAlert Severity="Severity.Error" ContentAlignment="HorizontalAlignment.Center" ShowCloseIcon="true" CloseIconClicked="() => CloseMe(true)">
         @foreach (var item in _apiErrors)
         {
             <span>@item</span>
@@ -26,7 +28,7 @@
     <MudTextField T="string" @bind-Value="_model.Firstname" Required="true" RequiredError="First name is required!" Label="First Name " Variant=" Variant.Outlined" Class="mt-4"></MudTextField>
     <MudTextField T="string" @bind-Value="_model.Lastname" Required="true" RequiredError="Last name is required!" Label="Last Name " Variant=" Variant.Outlined" Class="mt-4"></MudTextField>
 
-    <MudTextField T="string" @bind-Value="_model.Email" Required="true" RequiredError="Email is required!" Label="E-mail " Validation="@(new EmailAddressAttribute() {ErrorMessage = "The email address is invalid"})" Variant=" Variant.Outlined" Class="mt-4" Fo></MudTextField>
+    <MudTextField T="string" @bind-Value="_model.Email" Required="true" RequiredError="Email is required!" Label="E-mail " Validation="@(new EmailAddressAttribute {ErrorMessage = "The email address is invalid"})" Variant=" Variant.Outlined" Class="mt-4" Fo></MudTextField>
 
     <MudTextField T="string" Label="Password " @bind-Value="_model.Password" Variant="Variant.Outlined"
                   InputType="InputType.Password"
@@ -40,19 +42,17 @@
 </MudForm>
 
 @code {
-    private bool _success = default;
-    private bool _isBusy = default;
-
-
-    private bool _showErrorAlert = false;
-    private RegisterModel _model = new RegisterModel();
+    private bool _success;
+    private bool _isBusy;
+    private bool _showErrorAlert;
+    private readonly RegisterModel _model = new();
 
     private string[] _errors = { };
     private MudForm? _form;
 
-    List<string> _apiErrors = new List<string>{ };
+    readonly List<string> _apiErrors = new();
 
-    private IEnumerable<string> PasswordStrength(string pw)
+    private static IEnumerable<string> PasswordStrength(string pw)
     {
         if (string.IsNullOrWhiteSpace(pw))
         {
@@ -69,7 +69,7 @@
             yield return "Password must contain at least one digit";
     }
 
-    async Task HandleSubmit()
+    private async Task HandleSubmit()
     {
         _isBusy = false;
         _success = false;

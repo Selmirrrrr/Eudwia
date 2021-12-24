@@ -1,6 +1,6 @@
-﻿using MosqueLife.Server;
+﻿using MosqueLife.Server.Data.Contexts;
 
-namespace MosqueLife.Server;
+namespace MosqueLife.Server.IntegrationTests.Fixtures;
 
 public class TestContextConfiguration : IContextConfiguration
 {

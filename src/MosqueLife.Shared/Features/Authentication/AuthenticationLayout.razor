@@ -1,6 +1,8 @@
-﻿@inherits LayoutComponentBase
+﻿@using MudBlazor
+@inherits LayoutComponentBase
+@inject MudTheme _mudTheme;
 
-<MudThemeProvider Theme="_currentTheme" />
+<MudThemeProvider Theme="_mudTheme"/>
 <MudSnackbarProvider />
 
 <MudContainer MaxWidth="MaxWidth.Small" Class="d-flex align-center" Style="height: 100vh;">
@@ -11,7 +13,3 @@
         </MudPaper>
     </div>
 </MudContainer>
-
-@code {
-    private MudTheme _currentTheme = new MudBlazorAdminDashboard();
-}

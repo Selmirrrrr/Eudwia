@@ -1,5 +1,6 @@
 ﻿using Bogus;
 using Microsoft.EntityFrameworkCore;
+using MosqueLife.Shared.Enums;
 
 namespace MosqueLife.Server.Data.Contexts.Extensions;
 
@@ -317,7 +318,7 @@ public static class ModelBuilderExtensions
         var payments = new List<Payment>();
         var subscriptions = new List<SubscriptionPaid>();
 
-        for (int i = 0; i < 20; i++)
+        for (var i = 0; i < 20; i++)
         {
             var member = CreateMember();
             payments.AddRange(Enumerable.Range(0, 10).Select(_ => new Payment

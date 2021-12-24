@@ -1,8 +1,10 @@
 using Blazored.LocalStorage;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
+using MosqueLife.Client.Theme;
+using MosqueLife.Shared.Providers;
+using MudBlazor;
 using MudBlazor.Services;
-using MosqueLife.Client.Providers;
 
 namespace MosqueLife.Client;
 
@@ -24,6 +26,7 @@ public class Program
         builder.Services.AddBlazoredLocalStorage();
         builder.Services.AddScoped<TokenAuthenticationStateProvider>();
         builder.Services.AddScoped<AuthenticationStateProvider>(provider => provider.GetRequiredService<TokenAuthenticationStateProvider>());
+        builder.Services.AddSingleton<MudTheme, MudBlazorAdminDashboard>();
 
         await builder.Build().RunAsync();
     }

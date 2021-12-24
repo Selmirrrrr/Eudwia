@@ -1,4 +1,4 @@
-﻿namespace MosqueLife.Shared.Models.Personal;
+﻿namespace MosqueLife.Shared.Features.Account.UpdateAccount;
 
 public class UpdateAccountCommand
 {

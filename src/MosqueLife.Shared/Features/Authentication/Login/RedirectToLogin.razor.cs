@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 
-namespace MosqueLife.Client.Pages.Authentication;
+namespace MosqueLife.Shared.Features.Account.Login;
 
 public partial class RedirectToLogin : ComponentBase 
 {
