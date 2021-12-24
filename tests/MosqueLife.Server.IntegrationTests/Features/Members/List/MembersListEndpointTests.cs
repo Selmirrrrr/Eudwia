@@ -1,12 +1,12 @@
-﻿using MosqueLife.Server.IntegrationTests.Fixtures;
-using MosqueLife.Shared.Features.Members;
-using Shouldly;
-using System.Net.Http.Headers;
+﻿using System.Net.Http.Headers;
 using System.Net.Http.Json;
-using MosqueLife.Shared.Features.Account.Login;
+using MosqueLife.Server.IntegrationTests.Fixtures;
+using MosqueLife.Shared.Features.Authentication.Login;
+using MosqueLife.Shared.Features.Members.List;
+using Shouldly;
 using Xunit;
 
-namespace MosqueLife.Server.IntegrationTests.Features.Members;
+namespace MosqueLife.Server.IntegrationTests.Features.Members.List;
 
 [Collection(DatabaseTestsCollection.CollectionName)]
 public class MembersListEndpointTests 
@@ -22,20 +22,7 @@ public class MembersListEndpointTests
     public async Task GetOneSimpleMember()
     {
         // Arrange
-        var client = _databaseFixture.CreateClient();
-
-        var resultLogin = await client.PostAsJsonAsync("api/account/login", new LoginCommand
-        {
-            Email = "test@example.com",
-            Password = "Pass$w0rd"
-        });
-
-        var content = await resultLogin.Content.ReadFromJsonAsync<LoginResult>();
-        var token = content?.Token;
-
-        client.DefaultRequestHeaders.Authorization = string.IsNullOrWhiteSpace(token)
-            ? null
-            : new AuthenticationHeaderValue("bearer", token);
+        var client = await _databaseFixture.CreateAuthorizedClient();
 
         // Act
         var result = await client.GetFromJsonAsync<MembersListViewModel[]>("api/members");

@@ -1,11 +1,11 @@
-﻿using MosqueLife.Server.IntegrationTests.Fixtures;
+﻿using System.Net.Http.Json;
+using MosqueLife.Server.IntegrationTests.Fixtures;
+using MosqueLife.Shared.Features.Authentication.Login;
+using MosqueLife.Shared.Features.Authentication.Register;
 using Shouldly;
-using System.Net.Http.Json;
-using MosqueLife.Shared.Features.Account.Login;
-using MosqueLife.Shared.Features.Account.Register;
 using Xunit;
 
-namespace MosqueLife.Server.IntegrationTests.Features.Account.Register;
+namespace MosqueLife.Server.IntegrationTests.Features.Authentication.Register;
 
 [Collection(DatabaseTestsCollection.CollectionName)]
 public class RegisterEndpointTests 

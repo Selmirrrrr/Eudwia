@@ -1,10 +1,10 @@
-﻿using MosqueLife.Server.IntegrationTests.Fixtures;
+﻿using System.Net.Http.Json;
+using MosqueLife.Server.IntegrationTests.Fixtures;
+using MosqueLife.Shared.Features.Authentication.Login;
 using Shouldly;
-using System.Net.Http.Json;
-using MosqueLife.Shared.Features.Account.Login;
 using Xunit;
 
-namespace MosqueLife.Server.IntegrationTests.Features.Account.Login;
+namespace MosqueLife.Server.IntegrationTests.Features.Authentication.Login;
 
 [Collection(DatabaseTestsCollection.CollectionName)]
 public class LoginEndpointTests 

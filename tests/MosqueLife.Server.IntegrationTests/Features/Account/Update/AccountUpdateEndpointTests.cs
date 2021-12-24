@@ -1,14 +1,17 @@
-﻿using MosqueLife.Server.IntegrationTests.Fixtures;
-using Shouldly;
-using System.Net.Http.Headers;
+﻿using System.Net.Http.Headers;
 using System.Net.Http.Json;
-using MosqueLife.Shared.Features.Account.GetAccountDetails;
-using MosqueLife.Shared.Features.Account.Login;
-using MosqueLife.Shared.Features.Account.Register;
-using MosqueLife.Shared.Features.Account.UpdateAccount;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.DependencyInjection;
+using MosqueLife.Server.Data;
+using MosqueLife.Server.IntegrationTests.Fixtures;
+using MosqueLife.Shared.Features.Account.Details;
+using MosqueLife.Shared.Features.Account.Update;
+using MosqueLife.Shared.Features.Authentication.Login;
+using MosqueLife.Shared.Features.Authentication.Register;
+using Shouldly;
 using Xunit;
 
-namespace MosqueLife.Server.IntegrationTests.Features.Account.UpdateAccount;
+namespace MosqueLife.Server.IntegrationTests.Features.Account.Update;
 
 [Collection(DatabaseTestsCollection.CollectionName)]
 public class AccountUpdateEndpointTests 
@@ -24,41 +27,19 @@ public class AccountUpdateEndpointTests
     public async Task UpdateAccountDetails()
     {
         // Arrange
-        var client = _databaseFixture.CreateClient();
-        const string email = "mirsel.doe@exemple.com";
-        const string password = "Passw0rd!";
+        var client = await _databaseFixture.CreateAuthorizedClient();
 
+        using var userManager = _databaseFixture.Services.CreateScope().ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+        var userId = (await userManager.FindByEmailAsync(DatabaseFixture.TestEmail)).Id;
+        
         // Act
-        await client.PostAsJsonAsync("api/account/register", new RegisterModel
-        {
-            Email = email,
-            Password = password,
-            ConfirmPassword = password,
-            Firstname = "sdfs",
-            Lastname = "sdfsd"
-        });
-
-        var resultLogin = await client.PostAsJsonAsync("api/account/login", new LoginCommand
-        {
-            Email = email,
-            Password = password,
-            RememberMe = true
-        });
-
-        var content = await resultLogin.Content.ReadFromJsonAsync<LoginResult>();
-        var token = content?.Token;
-
-        client.DefaultRequestHeaders.Authorization = string.IsNullOrWhiteSpace(token)
-            ? null
-            : new AuthenticationHeaderValue("bearer", token);
-
-        var updateResult = await client.PostAsJsonAsync($"api/account/{email}", new AccountUpdateCommand
+        var updateResult = await client.PostAsJsonAsync($"api/account/{userId}", new AccountUpdateCommand
         {
             Firstname = "updated.firstname",
             Lastname = "updated.lastname"
         });
 
-        var result = await client.GetFromJsonAsync<AccountDetailsViewModel>($"api/account/{email}");
+        var result = await client.GetFromJsonAsync<AccountDetailsViewModel>($"api/account/{userId}");
 
         // Assert
         result.ShouldNotBeNull();

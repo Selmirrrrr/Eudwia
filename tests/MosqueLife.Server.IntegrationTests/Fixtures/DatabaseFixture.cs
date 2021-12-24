@@ -1,3 +1,5 @@
+using System.Net.Http.Headers;
+using System.Net.Http.Json;
 using DotNet.Testcontainers.Containers.Builders;
 using DotNet.Testcontainers.Containers.Configurations.Databases;
 using DotNet.Testcontainers.Containers.Modules.Databases;
@@ -10,13 +12,16 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using MosqueLife.Server.Data;
 using MosqueLife.Server.Data.Contexts;
+using MosqueLife.Shared.Features.Authentication.Login;
 using Xunit;
 
 namespace MosqueLife.Server.IntegrationTests.Fixtures
 {
     public class DatabaseFixture : WebApplicationFactory<Startup>, IAsyncLifetime
     {
-        public PostgreSqlTestcontainer ContainerFixture { get; }
+        public const string TestEmail = "test@example.com";
+        public const string TestPassword = "Pass$w0rd";
+        private PostgreSqlTestcontainer ContainerFixture { get; }
 
         public DatabaseFixture()
         {
@@ -48,10 +53,29 @@ namespace MosqueLife.Server.IntegrationTests.Fixtures
 
                 var userManager = scopedServices.GetRequiredService<UserManager<ApplicationUser>>();
 
-                var newUser = new ApplicationUser { UserName = "test@example.com", Email = "test@example.com", Firstname = "Test", Lastname = "Example" };
+                var newUser = new ApplicationUser { UserName = TestEmail, Email = TestEmail, Firstname = "Test", Lastname = "Example" };
 
-                await userManager.CreateAsync(newUser, "Pass$w0rd");
+                await userManager.CreateAsync(newUser, TestPassword);
             });
+        }
+
+        public async Task<HttpClient> CreateAuthorizedClient()
+        {
+            var client = CreateClient();
+            var resultLogin = await client.PostAsJsonAsync("api/account/login", new LoginCommand
+            {
+                Email = TestEmail,
+                Password = TestPassword
+            });
+
+            var content = await resultLogin.Content.ReadFromJsonAsync<LoginResult>();
+            var token = content?.Token;
+
+            client.DefaultRequestHeaders.Authorization = string.IsNullOrWhiteSpace(token)
+                ? null
+                : new AuthenticationHeaderValue("bearer", token);
+
+            return client;
         }
 
         public async Task InitializeAsync()
