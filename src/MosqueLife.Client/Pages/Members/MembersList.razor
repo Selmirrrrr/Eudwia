@@ -1,7 +1,5 @@
 ﻿@page "/members"
-@using System.Net.Http.Json
-@using Microsoft.AspNetCore.Authorization
-@using MudBlazor
+@using MosqueLife.Shared.Features.Members
 
 @inject HttpClient _httpClient
 @attribute [Authorize]
@@ -13,7 +11,7 @@
 }
 else
 {
-    <MudTable Items="@_members" Hover="true" Striped="true" Filter="new Func<GetMembersResult,bool>(FilterFunc)"  T="GetMembersResult">
+    <MudTable Items="@_members" Hover="true" Striped="true" Filter="new Func<GetMembersResult,bool>(FilterFunc)" OnRowClick="RowClickEvent" T="GetMembersResult">
         <ToolBarContent>
             <MudText Typo="Typo.h6">Liste des membres</MudText>
             <MudSpacer />
@@ -56,14 +54,12 @@ else
         _members = await _httpClient.GetFromJsonAsync<List<GetMembersResult>>("api/members") ?? new List<GetMembersResult>();
         _loaded = true;
     }
-    
+
     private bool FilterFunc(GetMembersResult member) => Filter(member, _searchString);
-    
+
     private static bool Filter(GetMembersResult member, string searchString)
     {
-        return string.IsNullOrWhiteSpace(searchString) 
-               || member.LastName.Contains(searchString, StringComparison.OrdinalIgnoreCase) 
-               || member.Firstname.Contains(searchString, StringComparison.OrdinalIgnoreCase);
+        return string.IsNullOrWhiteSpace(searchString) || member.LastName.Contains(searchString, StringComparison.OrdinalIgnoreCase) || member.Firstname.Contains(searchString, StringComparison.OrdinalIgnoreCase);
     }
 
     private void RowClickEvent(TableRowClickEventArgs<GetMembersResult> tableRowClickEventArgs)

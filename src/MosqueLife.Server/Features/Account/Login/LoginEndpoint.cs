@@ -1,15 +1,15 @@
-﻿using System.IdentityModel.Tokens.Jwt;
-using System.Net.Mime;
-using System.Security.Claims;
-using System.Text;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using MosqueLife.Server.Data;
 using MosqueLife.Shared;
-using MosqueLife.Shared.Features.Account.Login;
+using MosqueLife.Shared.Models.Authentication;
+using System.IdentityModel.Tokens.Jwt;
+using System.Net.Mime;
+using System.Security.Claims;
+using System.Text;
 
-namespace MosqueLife.Server.Features.Account.Login;
+namespace MosqueLife.Server.Endpoints.Account;
 
 [Route("api")]
 [ApiController]

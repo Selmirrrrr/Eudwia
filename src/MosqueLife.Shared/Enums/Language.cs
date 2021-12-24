@@ -1,4 +1,4 @@
-﻿namespace MosqueLife.Shared.Enums;
+﻿namespace MosqueLife.Server.Data;
 
 public enum Language
 {

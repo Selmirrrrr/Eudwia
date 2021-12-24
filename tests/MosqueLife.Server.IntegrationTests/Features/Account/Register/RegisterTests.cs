@@ -1,8 +1,7 @@
 ﻿using MosqueLife.Server.IntegrationTests.Fixtures;
+using MosqueLife.Shared.Models.Authentication;
 using Shouldly;
 using System.Net.Http.Json;
-using MosqueLife.Shared.Features.Account.Login;
-using MosqueLife.Shared.Features.Account.Register;
 using Xunit;
 
 namespace MosqueLife.Server.IntegrationTests.Features.Account.Register;

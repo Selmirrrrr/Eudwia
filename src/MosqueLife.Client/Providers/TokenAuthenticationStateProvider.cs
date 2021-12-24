@@ -1,10 +1,10 @@
-﻿using System.Net.Http.Headers;
-using System.Security.Claims;
-using Blazored.LocalStorage;
+﻿using Blazored.LocalStorage;
 using Microsoft.AspNetCore.Components.Authorization;
-using MosqueLife.Shared.Extensions;
+using MosqueLife.Client.Extensions;
+using System.Net.Http.Headers;
+using System.Security.Claims;
 
-namespace MosqueLife.Shared.Providers;
+namespace MosqueLife.Client.Providers;
 
 public class TokenAuthenticationStateProvider : AuthenticationStateProvider
 {
@@ -42,12 +42,14 @@ public class TokenAuthenticationStateProvider : AuthenticationStateProvider
     public async Task Login(string token)
     {
         await _localStorage.SetItemAsync("token", token);
+
         NotifyAuthenticationStateChanged(GetAuthenticationStateAsync());
     }
 
     public async Task Logout()
     {
         await _localStorage.RemoveItemAsync("token");
+
         NotifyAuthenticationStateChanged(GetAuthenticationStateAsync());
     }
 }

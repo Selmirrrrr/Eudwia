@@ -1,4 +1,4 @@
-﻿namespace MosqueLife.Shared.Features.Account.GetAccountDetails;
+﻿namespace MosqueLife.Shared.Models.Personal;
 
 public class GetAccountDetailsResult
 {

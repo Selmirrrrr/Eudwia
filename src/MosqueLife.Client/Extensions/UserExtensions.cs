@@ -1,6 +1,6 @@
 ﻿using System.Security.Claims;
 
-namespace MosqueLife.Shared.Extensions;
+namespace MosqueLife.Client.Extensions;
 
 public static class UserExtensions
 {

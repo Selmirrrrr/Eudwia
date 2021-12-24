@@ -1,10 +1,10 @@
 using Blazored.LocalStorage;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
-using MosqueLife.Client.Theme;
-using MosqueLife.Shared.Providers;
-using MudBlazor;
 using MudBlazor.Services;
+using MosqueLife.Client.Providers;
+using MosqueLife.Client.Theme;
+using MudBlazor;
 
 namespace MosqueLife.Client;
 

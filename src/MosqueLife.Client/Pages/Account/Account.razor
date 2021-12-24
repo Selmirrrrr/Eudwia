@@ -1,13 +1,9 @@
 ﻿@page "/personal/account"
-@using System.Net.Http.Json
-@using Microsoft.AspNetCore.Authorization
-@using Microsoft.AspNetCore.Components.Authorization
-@using MudBlazor
-
+@using MosqueLife.Shared.Models.Personal
 @inject HttpClient _httpClient
 @inject ISnackbar _snackbar
-@inject AuthenticationStateProvider _getAuthenticationStateAsync
 
+@inject AuthenticationStateProvider _getAuthenticationStateAsync
 @attribute [Authorize]
 
 <AuthorizeView>
@@ -58,10 +54,12 @@
 </AuthorizeView>
 
 @code {
+    private UpdateAccountCommand _model = new();
     private GetAccountDetailsResult _userDetails = new();
 
     protected override async Task OnInitializedAsync()
     {
+
         var authstate = await _getAuthenticationStateAsync.GetAuthenticationStateAsync();
         var user = authstate.User;
         var username = user.Identity?.Name;

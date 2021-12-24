@@ -1,12 +1,12 @@
-﻿using System.Net.Mime;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using MosqueLife.Server.Data;
 using MosqueLife.Shared;
-using MosqueLife.Shared.Features.Account.UpdateAccount;
+using MosqueLife.Shared.Models.Personal;
+using System.Net.Mime;
 
-namespace MosqueLife.Server.Features.Account.UpdateAccount;
+namespace MosqueLife.Server.Features.Account.GetAccountDetails;
 
 [Route("api")]
 [ApiController]

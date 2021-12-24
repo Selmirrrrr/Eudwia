@@ -1,6 +1,5 @@
 ﻿using Bogus;
 using Microsoft.EntityFrameworkCore;
-using MosqueLife.Shared.Enums;
 
 namespace MosqueLife.Server.Data.Contexts.Extensions;
 
@@ -345,7 +344,7 @@ public static class ModelBuilderExtensions
         return new Member
         {
             Id = guid,
-            Firstname ="das",
+            Firstname = _faker.Name.FirstName(),
             Lastname = _faker.Name.LastName(),
             BirthDate = _faker.Date.PastDateOnly(50, new DateOnly(2000, 1, 1)),
             MemberSince = _faker.Date.PastDateOnly(10),

@@ -1,7 +1,7 @@
 ﻿using MosqueLife.Server.IntegrationTests.Fixtures;
+using MosqueLife.Shared.Models.Personal;
 using Shouldly;
 using System.Net.Http.Json;
-using MosqueLife.Shared.Features.Account.GetAccountDetails;
 using Xunit;
 
 namespace MosqueLife.Server.IntegrationTests.Features.Account.GetAccountDetailsEndpoint;

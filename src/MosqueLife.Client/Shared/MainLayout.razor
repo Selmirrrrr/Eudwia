@@ -1,19 +1,19 @@
-﻿@using MosqueLife.Shared.Providers
-@using MosqueLife.Client.Theme
-@inherits LayoutComponentBase
-@inject TokenAuthenticationStateProvider _tokenAuthenticationStateProvider
+﻿@inherits LayoutComponentBase
+@inject Providers.TokenAuthenticationStateProvider _tokenAuthenticationStateProvider
 @inject NavigationManager _navigationManager
-<MudThemeProvider Theme="_themeManager.Theme" />
+@inject MudTheme _theme;
+
+<MudThemeProvider Theme="_theme" />
 <MudDialogProvider />
 <MudSnackbarProvider />
 
 <MudLayout>
-    <MudAppBar Elevation="_themeManager.AppBarElevation">
+    <MudAppBar Elevation="1">
         <MudHidden Breakpoint="Breakpoint.SmAndDown">
             <MudIcon Icon="@Icons.Custom.Brands.MudBlazor" Size="Size.Large" />
         </MudHidden>
         <MudHidden Breakpoint="Breakpoint.MdAndUp">
-            <MudIconButton Icon="@Icons.Material.Outlined.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@(_ => DrawerToggle())" />
+            <MudIconButton Icon="@Icons.Material.Outlined.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
         </MudHidden>
         <MudHidden Breakpoint="Breakpoint.Xs">
             <MudText Typo="Typo.h6" Class="ml-4">MosqueLife</MudText>
@@ -37,7 +37,7 @@
             </ChildContent>
         </MudMenu>
     </MudAppBar>
-    <MudDrawer @bind-Open="_drawerOpen" Elevation="_themeManager.DrawerElevation" ClipMode="_themeManager.DrawerClipMode">
+    <MudDrawer @bind-Open="_drawerOpen" Elevation="1" ClipMode="DrawerClipMode.Always">
         <NavMenu />
     </MudDrawer>
     <MudMainContent>
@@ -53,18 +53,11 @@
     </MudMainContent>
 </MudLayout>
 
+
 @code {
-    private readonly ThemeManagerTheme _themeManager = new()
-    {
-        Theme = new MudBlazorAdminDashboard(),
-        DrawerClipMode = DrawerClipMode.Always,
-        FontFamily = "Montserrat",
-        DefaultBorderRadius = 6,
-        AppBarElevation = 1,
-        DrawerElevation = 1
-    };
 
     private bool _drawerOpen = true;
+
     void DrawerToggle()
     {
         _drawerOpen = !_drawerOpen;
@@ -75,7 +68,7 @@
         StateHasChanged();
     }
 
-    private async Task Logout()
+    async Task Logout()
     {
         await _tokenAuthenticationStateProvider.Logout();
         _navigationManager.NavigateTo("authentication/login");

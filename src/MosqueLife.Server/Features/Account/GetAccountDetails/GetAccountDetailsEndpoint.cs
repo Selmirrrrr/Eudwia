@@ -3,8 +3,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using MosqueLife.Server.Data;
 using MosqueLife.Shared;
+using MosqueLife.Shared.Models.Personal;
 using System.Net.Mime;
-using MosqueLife.Shared.Features.Account.GetAccountDetails;
 
 namespace MosqueLife.Server.Features.Account.GetAccountDetails;
 
