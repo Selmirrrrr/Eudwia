@@ -337,7 +337,7 @@ public static class ModelBuilderExtensions
         modelBuilder.Entity<SubscriptionPaid>().HasData(subscriptions);
     }
 
-    private static Member CreateMember()
+    public static Member CreateMember()
     {
         _faker ??= new Faker("fr");
 

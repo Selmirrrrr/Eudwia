@@ -1,0 +1,80 @@
+﻿using System.Net.Mime;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using MosqueLife.Server.Data.Contexts;
+using MosqueLife.Shared;
+using MosqueLife.Shared.Features.Members;
+using MosqueLife.Shared.Features.Members.Details;
+using MosqueLife.Shared.Features.Members.List;
+
+namespace MosqueLife.Server.Features.Members.Details;
+
+[Route("api")]
+[ApiController]
+[Produces(MediaTypeNames.Application.Json)]
+public class MembersDetailsEndpoint : ControllerBase
+{
+    private readonly ApplicationDbContext _applicationDbContext;
+
+    public MembersDetailsEndpoint(ApplicationDbContext applicationDbContext)
+    {
+        _applicationDbContext = applicationDbContext;
+    }
+
+    [Authorize]
+    [HttpGet(Routes.Members.GetMember)]
+    [ProducesResponseType(typeof(MembersDetailsViewModel), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<ActionResult<MembersDetailsViewModel>> Handle([FromRoute] Guid memberId)
+    {
+        if (!_applicationDbContext.Members.Any(m => m.Id == memberId)) return NotFound(memberId);
+        
+        var member = await _applicationDbContext.Members.Select(m => new MembersDetailsViewModel
+        {
+            Id = m.Id,
+            Firstname = m.Firstname,
+            Lastname = m.Lastname,
+            StreetLine1 = m.StreetLine1,
+            StreetLine2 = m.StreetLine2,
+            HouseNumber = m.HouseNumber,
+            City = m.City,
+            ZipCode = m.ZipCode,
+            Language = m.Language,
+            BirthDate = m.BirthDate.ToDateTime(new TimeOnly(0, 0)),
+            StateId = m.StateId,
+            State = m.State.Name,
+            CountryId = m.State.CountryId,
+            Country = m.State.Country.Name,
+            Email = m.Email ?? string.Empty,
+            PhoneNumber = m.PhoneNumber,
+            MemberSince = m.MemberSince.ToDateTime(new TimeOnly(0, 0)),
+            MonthsPaidByYears = m.SubscriptionsPaid.GroupBy(sp => sp.Year)
+                                                   .Select(spg => new MembersDetailsViewModel.MonthsPaidByYear
+                                                   {
+                                                       Year = spg.Key,
+                                                       MonthsPaid = spg.Select(spgm => spgm.Month).ToArray(),
+                                                       January = spg.Any(spgm => spgm.Month == 1),
+                                                       February = spg.Any(spgm => spgm.Month == 2),
+                                                       March = spg.Any(spgm => spgm.Month == 3),
+                                                       April = spg.Any(spgm => spgm.Month == 4),
+                                                       May = spg.Any(spgm => spgm.Month == 5),
+                                                       June = spg.Any(spgm => spgm.Month == 6),
+                                                       July = spg.Any(spgm => spgm.Month == 7),
+                                                       August = spg.Any(spgm => spgm.Month == 8),
+                                                       September = spg.Any(spgm => spgm.Month == 9),
+                                                       October = spg.Any(spgm => spgm.Month == 10),
+                                                       November = spg.Any(spgm => spgm.Month == 11),
+                                                       December = spg.Any(spgm => spgm.Month == 12)
+                                                   }).ToArray(),
+            Payments = m.Payments.Select(p => new MembersDetailsViewModel.PaymentOverview
+            {
+                Id = p.Id,
+                Amount = p.Amount,
+                PaymentDate = p.PaymentDate
+            }).ToArray()
+        }).FirstAsync(m => m.Id == memberId);
+
+        return Ok(member);
+    }
+}
