@@ -29,4 +29,8 @@
     <ProjectReference Include="..\..\src\MosqueLife.Server\MosqueLife.Server.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Features\Authentication" />
+  </ItemGroup>
+
 </Project>

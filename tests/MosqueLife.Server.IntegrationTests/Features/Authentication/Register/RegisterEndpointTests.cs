@@ -8,11 +8,11 @@ using Xunit;
 namespace MosqueLife.Server.IntegrationTests.Features.Account.Register;
 
 [Collection(DatabaseTestsCollection.CollectionName)]
-public class RegisterTests 
+public class RegisterEndpointTests 
 {
     private readonly DatabaseFixture _databaseFixture;
 
-    public RegisterTests(DatabaseFixture  databaseFixture)
+    public RegisterEndpointTests(DatabaseFixture  databaseFixture)
     {
         _databaseFixture = databaseFixture;
     }
@@ -22,7 +22,8 @@ public class RegisterTests
     {
         // Arrange
         var client = _databaseFixture.CreateClient();
-        var password = "Passw0rd!";
+        const string password = "Passw0rd!";
+        
         // Act
         var result = await client.PostAsJsonAsync("api/account/register", new RegisterModel { Email = "dfsdf@lol.ch", Password = password, ConfirmPassword = password, Firstname = "sdfs", Lastname = "sdfsd" });
 
@@ -35,8 +36,8 @@ public class RegisterTests
     {
         // Arrange
         var client = _databaseFixture.CreateClient();
-        var email = "john.doe@exemple.com";
-        var password = "Passw0rd!";
+        const string email = "john.doe@exemple.com";
+        const string password = "Passw0rd!";
 
         // Act
         await client.PostAsJsonAsync("api/account/register", new RegisterModel

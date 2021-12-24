@@ -7,11 +7,11 @@ using Xunit;
 namespace MosqueLife.Server.IntegrationTests.Features.Account.Login;
 
 [Collection(DatabaseTestsCollection.CollectionName)]
-public class LoginTests 
+public class LoginEndpointTests 
 {
     private readonly DatabaseFixture _databaseFixture;
 
-    public LoginTests(DatabaseFixture  databaseFixture)
+    public LoginEndpointTests(DatabaseFixture  databaseFixture)
     {
         _databaseFixture = databaseFixture;
     }

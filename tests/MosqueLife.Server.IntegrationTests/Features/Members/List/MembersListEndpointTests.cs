@@ -9,11 +9,11 @@ using Xunit;
 namespace MosqueLife.Server.IntegrationTests.Features.Members;
 
 [Collection(DatabaseTestsCollection.CollectionName)]
-public class GetMembersTests 
+public class MembersListEndpointTests 
 {
     private readonly DatabaseFixture _databaseFixture;
 
-    public GetMembersTests(DatabaseFixture databaseFixture)
+    public MembersListEndpointTests(DatabaseFixture databaseFixture)
     {
         _databaseFixture = databaseFixture;
     }
@@ -27,7 +27,7 @@ public class GetMembersTests
         var resultLogin = await client.PostAsJsonAsync("api/account/login", new LoginCommand
         {
             Email = "test@example.com",
-            Password = "Pass$w0rd",
+            Password = "Pass$w0rd"
         });
 
         var content = await resultLogin.Content.ReadFromJsonAsync<LoginResult>();

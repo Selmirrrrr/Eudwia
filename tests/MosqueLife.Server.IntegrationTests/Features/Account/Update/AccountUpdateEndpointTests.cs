@@ -11,11 +11,11 @@ using Xunit;
 namespace MosqueLife.Server.IntegrationTests.Features.Account.UpdateAccount;
 
 [Collection(DatabaseTestsCollection.CollectionName)]
-public class UpdateAccountTests 
+public class AccountUpdateEndpointTests 
 {
     private readonly DatabaseFixture _databaseFixture;
 
-    public UpdateAccountTests(DatabaseFixture  databaseFixture)
+    public AccountUpdateEndpointTests(DatabaseFixture  databaseFixture)
     {
         _databaseFixture = databaseFixture;
     }
@@ -25,8 +25,8 @@ public class UpdateAccountTests
     {
         // Arrange
         var client = _databaseFixture.CreateClient();
-        var email = "mirsel.doe@exemple.com";
-        var password = "Passw0rd!";
+        const string email = "mirsel.doe@exemple.com";
+        const string password = "Passw0rd!";
 
         // Act
         await client.PostAsJsonAsync("api/account/register", new RegisterModel

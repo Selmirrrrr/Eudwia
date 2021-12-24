@@ -25,7 +25,7 @@ namespace MosqueLife.Server.IntegrationTests.Fixtures
                 {
                     Database = "db",
                     Username = "postgres",
-                    Password = "postgres",
+                    Password = "postgres"
                 });
 
             ContainerFixture = testcontainersBuilder.Build();
@@ -35,7 +35,7 @@ namespace MosqueLife.Server.IntegrationTests.Fixtures
         {
             builder.ConfigureTestServices(async services =>
             {
-                var serviceProvider = services.BuildServiceProvider();
+                services.BuildServiceProvider();
                 services.Replace(new ServiceDescriptor(typeof(IContextConfiguration), new TestContextConfiguration(ContainerFixture.ConnectionString)));
 
                 var sp = services.BuildServiceProvider();

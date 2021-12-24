@@ -7,11 +7,11 @@ using Xunit;
 namespace MosqueLife.Server.IntegrationTests.Features.Account.GetAccountDetailsEndpoint;
 
 [Collection(DatabaseTestsCollection.CollectionName)]
-public class GetAccountDetailsEndpointTests
+public class AccountDetailsEndpointTests
 {
     private readonly DatabaseFixture _databaseFixture;
 
-    public GetAccountDetailsEndpointTests(DatabaseFixture databaseFixture)
+    public AccountDetailsEndpointTests(DatabaseFixture databaseFixture)
     {
         _databaseFixture = databaseFixture;
     }
@@ -23,12 +23,12 @@ public class GetAccountDetailsEndpointTests
         var client = _databaseFixture.CreateClient();
 
         // Act
-        Func<Task> act = async () =>
+        async Task Act()
         {
-            await client.GetFromJsonAsync<AccountDetailsViewModel>($"api/account/notexists@email.com");
-        };
+            await client.GetFromJsonAsync<AccountDetailsViewModel>("api/account/notexists@email.com");
+        }
 
         // Assert
-        await Should.ThrowAsync<HttpRequestException>(() => act());
+        await Should.ThrowAsync<HttpRequestException>(Act);
     }
 }
