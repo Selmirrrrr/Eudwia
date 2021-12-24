@@ -24,9 +24,9 @@ public class AccountDetailsEndpoint : ControllerBase
     [HttpGet(Routes.Account.Get)]
     [ProducesResponseType(typeof(AccountDetailsViewModel), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<ActionResult<AccountDetailsViewModel>> Handle(string email)
+    public async Task<ActionResult<AccountDetailsViewModel>> Handle(Guid id)
     {
-        var user = await _userManager.FindByEmailAsync(email);
+        var user = await _userManager.FindByIdAsync(id.ToString());
 
         if (user is null)
         {

@@ -63,7 +63,7 @@
 
         var authstate = await _getAuthenticationStateAsync.GetAuthenticationStateAsync();
         var user = authstate.User;
-        var username = user.Identity?.Name;
+        var username = user.Id();
 
         _userDetails = await _httpClient.GetFromJsonAsync<AccountDetailsViewModel>($"api/account/{username}") ?? new AccountDetailsViewModel();
     }

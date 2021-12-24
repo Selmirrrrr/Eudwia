@@ -24,9 +24,9 @@ public class AccountUpdateEndpoint : ControllerBase
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [Authorize]
-    public async Task<IActionResult> Handle(string email, [FromBody] AccountUpdateCommand accountUpdate)
+    public async Task<IActionResult> Handle(Guid id, [FromBody] AccountUpdateCommand accountUpdate)
     {
-        var user = await _userManager.FindByEmailAsync(email);
+        var user = await _userManager.FindByIdAsync(id.ToString());
         if (user is null)
         {
             return BadRequest("error");
