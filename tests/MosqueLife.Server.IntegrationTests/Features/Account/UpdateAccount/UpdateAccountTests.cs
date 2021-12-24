@@ -1,9 +1,11 @@
 ﻿using MosqueLife.Server.IntegrationTests.Fixtures;
-using MosqueLife.Shared.Models.Authentication;
-using MosqueLife.Shared.Models.Personal;
 using Shouldly;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
+using MosqueLife.Shared.Features.Account.GetAccountDetails;
+using MosqueLife.Shared.Features.Account.Login;
+using MosqueLife.Shared.Features.Account.Register;
+using MosqueLife.Shared.Features.Account.UpdateAccount;
 using Xunit;
 
 namespace MosqueLife.Server.IntegrationTests.Features.Account.UpdateAccount;
@@ -50,13 +52,13 @@ public class UpdateAccountTests
             ? null
             : new AuthenticationHeaderValue("bearer", token);
 
-        var updateResult = await client.PostAsJsonAsync($"api/account/{email}", new UpdateAccountCommand
+        var updateResult = await client.PostAsJsonAsync($"api/account/{email}", new AccountUpdateCommand
         {
             Firstname = "updated.firstname",
             Lastname = "updated.lastname"
         });
 
-        var result = await client.GetFromJsonAsync<GetAccountDetailsResult>($"api/account/{email}");
+        var result = await client.GetFromJsonAsync<AccountDetailsViewModel>($"api/account/{email}");
 
         // Assert
         result.ShouldNotBeNull();

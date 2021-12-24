@@ -1,0 +1,82 @@
+﻿@page "/members"
+@using MosqueLife.Shared.Features.Members
+
+@inject HttpClient _httpClient
+@attribute [Authorize]
+
+<MudText Typo="Typo.h5" Color="Color.Primary" Class="mb-4">Membres</MudText>
+@if (!_loaded)
+{
+    <MudProgressLinear Color="Color.Primary" Indeterminate="true" Class="my-7" />
+}
+else
+{
+    <MudTable Items="@_members" Hover="true" Striped="true" Filter="new Func<MembersListViewModel,bool>(FilterFunc)" OnRowClick="RowClickEvent" T="MembersListViewModel">
+        <ToolBarContent>
+            <MudText Typo="Typo.h6">Liste des membres</MudText>
+            <MudSpacer />
+            <MudTextField @bind-Value="_searchString" Placeholder="Recherche" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+        </ToolBarContent>
+        <HeaderContent>
+            <MudTh>Prénom</MudTh>
+            <MudTh>Nom</MudTh>
+            <MudTh>Email</MudTh>
+            <MudTh>Tél.</MudTh>
+            <MudTh>Depuis</MudTh>
+            <MudTh>Cotisations année en cours</MudTh>
+        </HeaderContent>
+        <RowTemplate>
+            <MudTd DataLabel="Prénom">@context.Firstname</MudTd>
+            <MudTd DataLabel="Nom">@context.LastName</MudTd>
+            <MudTd DataLabel="Email">@context.Email</MudTd>
+            <MudTd DataLabel="Tél.">@context.Phone</MudTd>
+            <MudTd DataLabel="Depuis">@context.MemberSince.ToShortDateString()</MudTd>
+            <MudTh>
+                <MudChip Variant="Variant.Text" Color="@GetColorMonthsPaid(context.MonthsPaidThisYear, GetMonthsToPay(context.MemberSince))">
+                    @context.MonthsPaidThisYear/@GetMonthsToPay(context.MemberSince) mois.
+                </MudChip>
+            </MudTh>
+        </RowTemplate>
+        <PagerContent>
+            <MudTablePager />
+        </PagerContent>
+    </MudTable>
+}
+
+@code
+{
+    private List<MembersListViewModel> _members = new();
+    private string _searchString = string.Empty;
+    private bool _loaded;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _members = await _httpClient.GetFromJsonAsync<List<MembersListViewModel>>("api/members") ?? new List<MembersListViewModel>();
+        _loaded = true;
+    }
+
+    private bool FilterFunc(MembersListViewModel member) => Filter(member, _searchString);
+
+    private static bool Filter(MembersListViewModel member, string searchString)
+    {
+        return string.IsNullOrWhiteSpace(searchString) || member.LastName.Contains(searchString, StringComparison.OrdinalIgnoreCase) || member.Firstname.Contains(searchString, StringComparison.OrdinalIgnoreCase);
+    }
+
+    private void RowClickEvent(TableRowClickEventArgs<MembersListViewModel> tableRowClickEventArgs)
+    {
+    }
+
+    private static int GetMonthsToPay(DateTime memberSince)
+    {
+        if (memberSince.Year < DateTime.Now.Year) return 12;
+        if (memberSince.Year == DateTime.Now.Year) return DateTime.Now.Month - 1;
+        return 0;
+    }
+
+    private static Color GetColorMonthsPaid(int monthsPaid, int monthsTopay)
+    {
+        if (monthsPaid > monthsTopay) return Color.Success;
+        if (monthsPaid == monthsTopay) return Color.Info;
+        return monthsPaid - monthsTopay == -1 ? Color.Warning : Color.Error;
+    }
+}

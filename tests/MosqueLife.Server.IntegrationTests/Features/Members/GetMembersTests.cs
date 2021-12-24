@@ -1,9 +1,9 @@
 ﻿using MosqueLife.Server.IntegrationTests.Fixtures;
 using MosqueLife.Shared.Features.Members;
-using MosqueLife.Shared.Models.Authentication;
 using Shouldly;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
+using MosqueLife.Shared.Features.Account.Login;
 using Xunit;
 
 namespace MosqueLife.Server.IntegrationTests.Features.Members;
@@ -38,7 +38,7 @@ public class GetMembersTests
             : new AuthenticationHeaderValue("bearer", token);
 
         // Act
-        var result = await client.GetFromJsonAsync<GetMembersResult[]>("api/members");
+        var result = await client.GetFromJsonAsync<MembersListViewModel[]>("api/members");
 
         // Assert
         result.ShouldNotBeNull();

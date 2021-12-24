@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using MosqueLife.Shared.Enums;
 
 namespace MosqueLife.Server.Data;
 

@@ -1,7 +1,7 @@
 ﻿using MosqueLife.Server.IntegrationTests.Fixtures;
-using MosqueLife.Shared.Models.Personal;
 using Shouldly;
 using System.Net.Http.Json;
+using MosqueLife.Shared.Features.Account.GetAccountDetails;
 using Xunit;
 
 namespace MosqueLife.Server.IntegrationTests.Features.Account.GetAccountDetailsEndpoint;
@@ -25,7 +25,7 @@ public class GetAccountDetailsEndpointTests
         // Act
         Func<Task> act = async () =>
         {
-            await client.GetFromJsonAsync<GetAccountDetailsResult>($"api/account/notexists@email.com");
+            await client.GetFromJsonAsync<AccountDetailsViewModel>($"api/account/notexists@email.com");
         };
 
         // Assert

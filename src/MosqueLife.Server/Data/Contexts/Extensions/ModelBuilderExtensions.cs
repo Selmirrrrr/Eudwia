@@ -1,5 +1,6 @@
 ﻿using Bogus;
 using Microsoft.EntityFrameworkCore;
+using MosqueLife.Shared.Enums;
 
 namespace MosqueLife.Server.Data.Contexts.Extensions;
 
