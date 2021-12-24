@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using MosqueLife.Server.Data;
 using MosqueLife.Shared;
-using MosqueLife.Shared.Features.Account.GetAccountDetails;
+using MosqueLife.Shared.Features.Account.Details;
 
 namespace MosqueLife.Server.Features.Account.Details;
 

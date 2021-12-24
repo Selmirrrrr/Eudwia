@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using MosqueLife.Server.Data.Contexts;
 using MosqueLife.Shared;
 using MosqueLife.Shared.Features.Members;
+using MosqueLife.Shared.Features.Members.List;
 
 namespace MosqueLife.Server.Features.Members.List;
 

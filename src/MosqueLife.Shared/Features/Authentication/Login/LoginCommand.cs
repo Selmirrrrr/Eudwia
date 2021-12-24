@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace MosqueLife.Shared.Features.Account.Login;
+namespace MosqueLife.Shared.Features.Authentication.Login;
 
 public record LoginCommand
 {

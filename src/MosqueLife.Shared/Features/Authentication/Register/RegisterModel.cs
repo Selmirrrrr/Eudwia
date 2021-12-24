@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace MosqueLife.Shared.Features.Account.Register;
+namespace MosqueLife.Shared.Features.Authentication.Register;
 
 public record RegisterModel
 {

@@ -1,4 +1,4 @@
-﻿namespace MosqueLife.Shared.Features.Members;
+﻿namespace MosqueLife.Shared.Features.Members.List;
 
 public record MembersListViewModel
 {

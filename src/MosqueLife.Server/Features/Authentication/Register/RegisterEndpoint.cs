@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using MosqueLife.Server.Data;
 using MosqueLife.Shared;
-using MosqueLife.Shared.Features.Account.Register;
+using MosqueLife.Shared.Features.Authentication.Register;
 
 namespace MosqueLife.Server.Features.Authentication.Register;
 
