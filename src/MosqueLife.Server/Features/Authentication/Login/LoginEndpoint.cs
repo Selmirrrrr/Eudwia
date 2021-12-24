@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using MosqueLife.Server.Data;
 using MosqueLife.Shared;
-using MosqueLife.Shared.Features.Account.Login;
+using MosqueLife.Shared.Features.Authentication.Login;
 
 namespace MosqueLife.Server.Features.Authentication.Login;
 
@@ -42,8 +42,9 @@ public class LoginEndpoint : ControllerBase
         var claims = new[]
         {
             new Claim(ClaimTypes.Name, request.Email),
-            new Claim("Firstname", user.Firstname?? ""),
-            new Claim("Lastname", user.Lastname?? "")
+            new Claim("Firstname", user.Firstname),
+            new Claim("Lastname", user.Lastname),
+            new Claim("Id", user.Id.ToString())
         };
 
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JwtSecurityKey"]));

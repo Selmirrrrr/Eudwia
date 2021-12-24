@@ -1,4 +1,5 @@
 ﻿#nullable disable
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using MosqueLife.Server.Data.Contexts.Extensions;
@@ -7,7 +8,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Infrastructure;
 
 namespace MosqueLife.Server.Data.Contexts;
 
-public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+public class ApplicationDbContext : IdentityDbContext<ApplicationUser, IdentityRole<Guid>, Guid>
 {
     private readonly IConfiguration _configuration;
     private readonly ILoggerFactory _loggerFactory;
@@ -42,12 +43,10 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
         optionsBuilder
             .EnableDetailedErrors()
             .EnableSensitiveDataLogging()
-            .UseNpgsql(
-                connectionString: _config.ConnectionString,
-                npgsqlOptionsAction: SqlServerOptionsAction)
+            .UseNpgsql(_config.ConnectionString, SqlServerOptionsAction)
             .UseLoggerFactory(_loggerFactory);
     }
 
     private void SqlServerOptionsAction(NpgsqlDbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.MigrationsAssembly(assemblyName: typeof(ApplicationDbContext).Assembly.GetName().Name);
+        => optionsBuilder.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.GetName().Name);
 }
