@@ -10,16 +10,13 @@
 <MudLayout>
     <MudAppBar Elevation="1">
         <MudHidden Breakpoint="Breakpoint.SmAndDown">
-            <MudIcon Icon="@Icons.Custom.Brands.MudBlazor" Size="Size.Large" />
+            <MudText Typo="Typo.h5" Class="mudblazor-appbar-brand-text d-none d-md-flex">Eudwia</MudText>
         </MudHidden>
         <MudHidden Breakpoint="Breakpoint.MdAndUp">
             <MudIconButton Icon="@Icons.Material.Outlined.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
         </MudHidden>
-        <MudHidden Breakpoint="Breakpoint.Xs">
-            <MudText Typo="Typo.h6" Class="ml-4">MosqueLife</MudText>
-        </MudHidden>
         <MudHidden Breakpoint="Breakpoint.Xs" Invert="true">
-            <MudText Typo="Typo.subtitle2">MosqueLife</MudText>
+            <MudText Typo="Typo.subtitle2">Eudwia</MudText>
         </MudHidden>
         <MudSpacer />
         <MudMenu Icon="@Icons.Material.Outlined.Translate" Color="Color.Inherit" Direction="Direction.Bottom" OffsetY="true" Dense="true">
