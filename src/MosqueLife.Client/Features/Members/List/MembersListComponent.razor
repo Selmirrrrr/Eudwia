@@ -1,5 +1,4 @@
 ﻿@page "/members"
-@using MosqueLife.Shared.Features.Members
 @using MosqueLife.Shared.Features.Members.List
 
 @inject HttpClient _httpClient
@@ -12,7 +11,7 @@
 }
 else
 {
-    <MudTable Items="@_members" Hover="true" Striped="true" Filter="new Func<MembersListViewModel,bool>(FilterFunc)" OnRowClick="RowClickEvent" T="MembersListViewModel">
+    <MudTable Items="@_members" Style="" Hover="true" Dense="true" Striped="true" Filter="new Func<MembersListViewModel,bool>(FilterFunc)" OnRowClick="RowClickEvent" T="MembersListViewModel">
         <ToolBarContent>
             <MudText Typo="Typo.h6">Liste des membres</MudText>
             <MudSpacer />
@@ -23,20 +22,18 @@ else
             <MudTh>Nom</MudTh>
             <MudTh>Email</MudTh>
             <MudTh>Tél.</MudTh>
-            <MudTh>Depuis</MudTh>
-            <MudTh>Cotisations année en cours</MudTh>
+            <MudTh>Membre depuis</MudTh>
+            <MudTh>Mois payés cette année</MudTh>
         </HeaderContent>
         <RowTemplate>
             <MudTd DataLabel="Prénom">@context.Firstname</MudTd>
             <MudTd DataLabel="Nom">@context.LastName</MudTd>
             <MudTd DataLabel="Email">@context.Email</MudTd>
             <MudTd DataLabel="Tél.">@context.Phone</MudTd>
-            <MudTd DataLabel="Depuis">@context.MemberSince.ToShortDateString()</MudTd>
-            <MudTh>
-                <MudChip Variant="Variant.Text" Color="@GetColorMonthsPaid(context.MonthsPaidThisYear, GetMonthsToPay(context.MemberSince))">
-                    @context.MonthsPaidThisYear/@GetMonthsToPay(context.MemberSince) mois.
-                </MudChip>
-            </MudTh>
+            <MudTd DataLabel="Membre depuis">@context.MemberSince.ToShortDateString()</MudTd>
+            <MudTd DataLabel="Mois payés cette année">
+                <MudRating ReadOnly="true" SelectedValue="@context.MonthsPaid" MaxValue="12" FullIcon="@Icons.Material.Rounded.Star" EmptyIcon="@Icons.Material.Rounded.StarBorder" Color="Color.Primary" />
+            </MudTd>
         </RowTemplate>
         <PagerContent>
             <MudTablePager />
@@ -49,6 +46,7 @@ else
     private List<MembersListViewModel> _members = new();
     private string _searchString = string.Empty;
     private bool _loaded;
+    private int _year = DateTime.Now.Year;
 
     protected override async Task OnInitializedAsync()
     {
@@ -65,19 +63,5 @@ else
 
     private void RowClickEvent(TableRowClickEventArgs<MembersListViewModel> tableRowClickEventArgs)
     {
-    }
-
-    private static int GetMonthsToPay(DateTime memberSince)
-    {
-        if (memberSince.Year < DateTime.Now.Year) return 12;
-        if (memberSince.Year == DateTime.Now.Year) return DateTime.Now.Month - 1;
-        return 0;
-    }
-
-    private static Color GetColorMonthsPaid(int monthsPaid, int monthsTopay)
-    {
-        if (monthsPaid > monthsTopay) return Color.Success;
-        if (monthsPaid == monthsTopay) return Color.Info;
-        return monthsPaid - monthsTopay == -1 ? Color.Warning : Color.Error;
     }
 }

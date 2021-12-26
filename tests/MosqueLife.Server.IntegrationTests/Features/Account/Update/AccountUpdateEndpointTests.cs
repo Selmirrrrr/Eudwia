@@ -1,13 +1,10 @@
-﻿using System.Net.Http.Headers;
-using System.Net.Http.Json;
+﻿using System.Net.Http.Json;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using MosqueLife.Server.Data;
 using MosqueLife.Server.IntegrationTests.Fixtures;
 using MosqueLife.Shared.Features.Account.Details;
 using MosqueLife.Shared.Features.Account.Update;
-using MosqueLife.Shared.Features.Authentication.Login;
-using MosqueLife.Shared.Features.Authentication.Register;
 using Shouldly;
 using Xunit;
 

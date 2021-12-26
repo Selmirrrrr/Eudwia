@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using MosqueLife.Server.Data.Contexts.Extensions;
-using Npgsql;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Infrastructure;
 
 namespace MosqueLife.Server.Data.Contexts;
@@ -33,7 +32,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser, IdentityR
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
         modelBuilder.Seed();
 
-        modelBuilder.Entity<SubscriptionPaid>().HasKey(o => new { o.MemberId, o.Year, o.Month });
+        modelBuilder.Entity<SubscriptionPaid>().HasKey(o => new { o.MemberId, o.Year });
     }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

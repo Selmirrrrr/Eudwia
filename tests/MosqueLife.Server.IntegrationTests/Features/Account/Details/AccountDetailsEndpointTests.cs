@@ -3,8 +3,6 @@ using System.Net.Http.Json;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using MosqueLife.Server.Data;
-using MosqueLife.Server.Data.Contexts;
-using MosqueLife.Server.Data.Contexts.Extensions;
 using MosqueLife.Server.IntegrationTests.Fixtures;
 using MosqueLife.Shared.Features.Account.Details;
 using MosqueLife.Shared.Features.Authentication.Register;

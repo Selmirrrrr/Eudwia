@@ -1,6 +1,5 @@
 using Microsoft.EntityFrameworkCore;
 using MosqueLife.Server.Data.Contexts;
-using System.Diagnostics;
 
 namespace MosqueLife.Server;
 

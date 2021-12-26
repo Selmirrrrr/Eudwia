@@ -4,9 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MosqueLife.Server.Data.Contexts;
 using MosqueLife.Shared;
-using MosqueLife.Shared.Features.Members;
 using MosqueLife.Shared.Features.Members.Details;
-using MosqueLife.Shared.Features.Members.List;
 
 namespace MosqueLife.Server.Features.Members.Details;
 
@@ -49,23 +47,21 @@ public class MembersDetailsEndpoint : ControllerBase
             Email = m.Email ?? string.Empty,
             PhoneNumber = m.PhoneNumber,
             MemberSince = m.MemberSince.ToDateTime(new TimeOnly(0, 0)),
-            MonthsPaidByYears = m.SubscriptionsPaid.GroupBy(sp => sp.Year)
-                                                   .Select(spg => new MembersDetailsViewModel.MonthsPaidByYear
+            MonthsPaidByYears = m.SubscriptionsPaid.Select(spg => new MembersDetailsViewModel.MonthsPaidByYear
                                                    {
-                                                       Year = spg.Key,
-                                                       MonthsPaid = spg.Select(spgm => spgm.Month).ToArray(),
-                                                       January = spg.Any(spgm => spgm.Month == 1),
-                                                       February = spg.Any(spgm => spgm.Month == 2),
-                                                       March = spg.Any(spgm => spgm.Month == 3),
-                                                       April = spg.Any(spgm => spgm.Month == 4),
-                                                       May = spg.Any(spgm => spgm.Month == 5),
-                                                       June = spg.Any(spgm => spgm.Month == 6),
-                                                       July = spg.Any(spgm => spgm.Month == 7),
-                                                       August = spg.Any(spgm => spgm.Month == 8),
-                                                       September = spg.Any(spgm => spgm.Month == 9),
-                                                       October = spg.Any(spgm => spgm.Month == 10),
-                                                       November = spg.Any(spgm => spgm.Month == 11),
-                                                       December = spg.Any(spgm => spgm.Month == 12)
+                                                       Year = spg.Year,
+                                                       January = spg.January,
+                                                       February = spg.February,
+                                                       March = spg.March,
+                                                       April = spg.April,
+                                                       May = spg.May,
+                                                       June = spg.June,
+                                                       July = spg.July,
+                                                       August = spg.August,
+                                                       September = spg.September,
+                                                       October = spg.October,
+                                                       November = spg.November,
+                                                       December = spg.December
                                                    }).ToArray(),
             Payments = m.Payments.Select(p => new MembersDetailsViewModel.PaymentOverview
             {

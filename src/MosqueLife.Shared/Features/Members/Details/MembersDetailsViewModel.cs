@@ -56,8 +56,6 @@ public record MembersDetailsViewModel
         public bool October { get; set; }
         public bool November { get; set; }
         public bool December { get; set; }
-
-        public int[] MonthsPaid { get; set; } = Array.Empty<int>();
     }
 
     public record PaymentOverview
