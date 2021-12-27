@@ -21,7 +21,6 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser, IdentityR
     }
 
     public virtual DbSet<Member> Members { get; set; }
-    public virtual DbSet<State> States { get; set; }
     public virtual DbSet<Country> Countries { get; set; }
     public virtual DbSet<Payment> Payments { get; set; }
 

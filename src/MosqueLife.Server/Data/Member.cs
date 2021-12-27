@@ -44,9 +44,12 @@ public class Member
     [MaxLength(100)]
     public string City { get; set; } = string.Empty;
 
-    public Guid StateId { get; set; }
+    [MaxLength(100)]
+    public string State { get; set; } = string.Empty;
 
-    public State State { get; set; } = default!;
+    public Guid CountryId { get; set; }
+
+    public Country Country { get; set; } = default!;
 
     public string? PhoneNumber { get; set; }
 

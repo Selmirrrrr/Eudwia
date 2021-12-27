@@ -24,7 +24,6 @@ public record MembersDetailsViewModel
 
     public string City { get; set; } = string.Empty;
 
-    public Guid StateId { get; set; }
     public string State { get; set; } = string.Empty;
 
     public Guid CountryId { get; set; }
