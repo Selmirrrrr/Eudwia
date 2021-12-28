@@ -10,9 +10,9 @@ public record MembersDetailsViewModel
 
     public string Lastname { get; set; } = string.Empty;
 
-    public DateTime BirthDate { get; set; }
+    public DateTime? BirthDate { get; set; }
 
-    public DateTime MemberSince { get; set; }
+    public DateTime? MemberSince { get; set; }
 
     public string StreetLine1 { get; set; } = string.Empty;
 
