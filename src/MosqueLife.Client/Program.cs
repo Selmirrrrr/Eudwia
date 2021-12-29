@@ -1,6 +1,8 @@
+using System.Globalization;
 using Blazored.LocalStorage;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
+using Microsoft.Extensions.DependencyInjection;
 using MudBlazor.Services;
 using MosqueLife.Client.Providers;
 using MosqueLife.Client.Theme;
@@ -27,6 +29,9 @@ public class Program
         builder.Services.AddScoped<TokenAuthenticationStateProvider>();
         builder.Services.AddScoped<AuthenticationStateProvider>(provider => provider.GetRequiredService<TokenAuthenticationStateProvider>());
         builder.Services.AddSingleton<MudTheme, MudBlazorAdminDashboard>();
+        
+        CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("fr-CH");
+        CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo("fr-CH");
 
         await builder.Build().RunAsync();
     }
