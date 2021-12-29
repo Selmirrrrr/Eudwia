@@ -8,6 +8,8 @@ using MosqueLife.Server.Data.Contexts;
 using Swashbuckle.AspNetCore.Filters;
 using System.Reflection;
 using System.Text;
+using FluentValidation.AspNetCore;
+using MosqueLife.Shared.Enums;
 
 namespace MosqueLife.Server;
 
@@ -23,7 +25,11 @@ public class Startup
     // This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices(IServiceCollection services)
     {
-        services.AddControllers();
+        services.AddControllers().AddFluentValidation(s => 
+        { 
+            s.RegisterValidatorsFromAssemblyContaining<Language>(); 
+            s.DisableDataAnnotationsValidation = true; 
+        });
         services.AddSwaggerGen(c =>
         {
             c.SwaggerDoc("v1", new OpenApiInfo
@@ -35,7 +41,7 @@ public class Startup
             c.EnableAnnotations();
             c.OperationFilter<AddResponseHeadersFilter>();
             c.OperationFilter<AppendAuthorizeToSummaryOperationFilter>(); // Adds "(Auth)" to the summary so that you can see which endpoints have Authorization
-            c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
+            c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
             {
                 Name = "Authorization",
                 Type = SecuritySchemeType.Http,

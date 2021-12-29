@@ -1,0 +1,44 @@
+﻿@page "/members/{MemberId:guid}"
+@using MosqueLife.Client.Extensions
+@using MosqueLife.Shared.Features.Account.Update
+@using MosqueLife.Shared.Features.Account.Details
+@using MosqueLife.Shared.Features.Countries.List;
+@using MosqueLife.Shared.Features.Members.Details
+@using System.Globalization
+@using MosqueLife.Shared.Enums
+@using MosqueLife.Client.Features.Members.UpdatePersonnal
+@inject HttpClient _httpClient
+@inject ISnackbar _snackbar
+@inject AuthenticationStateProvider _getAuthenticationStateAsync
+
+@attribute [Authorize]
+
+<AuthorizeView>
+    <MudText Typo="Typo.h5" Color="Color.Primary" Class="mb-4">Membre</MudText>
+    <MudTabs Elevation="1" Rounded="true" PanelClass="mt-6">
+        <MudTabPanel Text="Général">
+            <MembersUpdatePersonnalComponent ViewModel="@_model" />
+        </MudTabPanel>
+        <MudTabPanel Text="Cotisations">
+            <MudText>Content Three</MudText>
+        </MudTabPanel>
+        <MudTabPanel Text="Payments">
+            <MudText>Content Three</MudText>
+        </MudTabPanel>
+        <MudTabPanel Text="Compte">
+            <MudText>Content Three</MudText>
+        </MudTabPanel>
+    </MudTabs>
+</AuthorizeView>
+
+@code {
+
+    [Parameter]
+    public Guid MemberId { get; set; }
+    private MembersDetailsViewModel _model = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        _model = await _httpClient.GetFromJsonAsync<MembersDetailsViewModel>($"api/members/{MemberId}") ?? new MembersDetailsViewModel();
+    }
+}
