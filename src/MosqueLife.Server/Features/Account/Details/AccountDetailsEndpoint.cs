@@ -37,8 +37,8 @@ public class AccountDetailsEndpoint : ControllerBase
         {
             Id = user.Id,
             Email = user.Email,
-            Firstname = user.Firstname,
-            Lastname = user.Lastname,
+            FirstName = user.FirstName,
+            LastName = user.LastName,
         };
 
         return Ok(details);

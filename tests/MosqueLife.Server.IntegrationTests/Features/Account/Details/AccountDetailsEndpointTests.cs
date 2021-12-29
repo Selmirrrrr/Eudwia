@@ -68,8 +68,8 @@ public class AccountDetailsEndpointTests
             Email = email,
             Password = password,
             ConfirmPassword = password,
-            Firstname = "sdfs",
-            Lastname = "sdfsd"
+            FirstName = "sdfs",
+            LastName = "sdfsd"
         });
 
         using var userManager = _databaseFixture.Services.CreateScope().ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();

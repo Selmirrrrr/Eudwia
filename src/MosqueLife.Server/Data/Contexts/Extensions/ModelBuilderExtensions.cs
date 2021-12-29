@@ -317,8 +317,8 @@ public static class ModelBuilderExtensions
         return new Member
         {
             Id = guid,
-            Firstname = _faker.Name.FirstName(),
-            Lastname = _faker.Name.LastName(),
+            FirstName = _faker.Name.FirstName(),
+            LastName = _faker.Name.LastName(),
             BirthDate = _faker.Date.PastDateOnly(50, new DateOnly(2000, 1, 1)),
             MemberSince = _faker.Date.PastDateOnly(10),
             StreetLine1 = _faker.Address.StreetAddress(),

@@ -42,8 +42,8 @@ public class LoginEndpoint : ControllerBase
         var claims = new[]
         {
             new Claim(ClaimTypes.Name, request.Email),
-            new Claim("Firstname", user.Firstname),
-            new Claim("Lastname", user.Lastname),
+            new Claim("FirstName", user.FirstName),
+            new Claim("LastName", user.LastName),
             new Claim("Id", user.Id.ToString())
         };
 

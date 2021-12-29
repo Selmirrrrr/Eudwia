@@ -6,9 +6,9 @@ public record MembersDetailsViewModel
 {
     public Guid Id { get; set; }
 
-    public string Firstname { get; set; } = string.Empty;
+    public string FirstName { get; set; } = string.Empty;
 
-    public string Lastname { get; set; } = string.Empty;
+    public string LastName { get; set; } = string.Empty;
 
     public DateTime? BirthDate { get; set; }
 
@@ -24,7 +24,7 @@ public record MembersDetailsViewModel
 
     public string City { get; set; } = string.Empty;
 
-    public string State { get; set; } = string.Empty;
+    public string? State { get; set; } = string.Empty;
 
     public Guid CountryId { get; set; }
     public string Country { get; set; } = string.Empty;

@@ -25,7 +25,7 @@ public class RegisterEndpointTests
         const string password = "Passw0rd!";
         
         // Act
-        var result = await client.PostAsJsonAsync("api/account/register", new RegisterModel { Email = "dfsdf@lol.ch", Password = password, ConfirmPassword = password, Firstname = "sdfs", Lastname = "sdfsd" });
+        var result = await client.PostAsJsonAsync("api/account/register", new RegisterModel { Email = "dfsdf@lol.ch", Password = password, ConfirmPassword = password, FirstName = "sdfs", LastName = "sdfsd" });
 
         // Assert
         result.StatusCode.ShouldBe(System.Net.HttpStatusCode.OK);
@@ -45,8 +45,8 @@ public class RegisterEndpointTests
             Email = email,
             Password = password,
             ConfirmPassword = password,
-            Firstname = "sdfs",
-            Lastname = "sdfsd"
+            FirstName = "sdfs",
+            LastName = "sdfsd"
         });
 
         var result = await client.PostAsJsonAsync("api/account/login", new LoginCommand

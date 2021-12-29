@@ -25,7 +25,7 @@ public class RegisterEndpoint : ControllerBase
     [ProducesResponseType(typeof(RegisterResult), StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<RegisterResult>> HandleAsync([FromBody] RegisterModel model)
     {
-        var newUser = new ApplicationUser { UserName = model.Email, Email = model.Email, Firstname = model.Firstname, Lastname = model.Lastname };
+        var newUser = new ApplicationUser { UserName = model.Email, Email = model.Email, FirstName = model.FirstName, LastName = model.LastName };
 
         var result = await _userManager.CreateAsync(newUser, model.Password);
 

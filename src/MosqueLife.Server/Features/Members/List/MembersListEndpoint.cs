@@ -28,8 +28,8 @@ public class MembersListEndpoint : ControllerBase
         var members = await _applicationDbContext.Members.Select(m => new MembersListViewModel
         {
             Id = m.Id,
-            Firstname = m.Firstname,
-            LastName = m.Lastname,
+            FirstName = m.FirstName,
+            LastName = m.LastName,
             Email = m.Email ?? string.Empty,
             Phone = m.PhoneNumber ?? string.Empty,
             MemberSince = m.MemberSince.ToDateTime(new TimeOnly(0,0)),

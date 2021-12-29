@@ -10,12 +10,12 @@ public class Member
     [Required]
     [MinLength(2)]
     [MaxLength(100)]
-    public string Firstname { get; set; } = string.Empty;
+    public string FirstName { get; set; } = string.Empty;
 
     [Required]
     [MinLength(2)]
     [MaxLength(100)]
-    public string Lastname { get; set; } = string.Empty;
+    public string LastName { get; set; } = string.Empty;
 
     public DateOnly BirthDate { get; set; }
 
@@ -45,7 +45,7 @@ public class Member
     public string City { get; set; } = string.Empty;
 
     [MaxLength(100)]
-    public string State { get; set; } = string.Empty;
+    public string? State { get; set; } = string.Empty;
 
     public Guid CountryId { get; set; }
 

@@ -32,16 +32,16 @@ public class AccountUpdateEndpointTests
         // Act
         var updateResult = await client.PostAsJsonAsync($"api/account/{userId}", new AccountUpdateCommand
         {
-            Firstname = "updated.firstname",
-            Lastname = "updated.lastname"
+            FirstName = "updated.firstname",
+            LastName = "updated.lastname"
         });
 
         var result = await client.GetFromJsonAsync<AccountDetailsViewModel>($"api/account/{userId}");
 
         // Assert
         result.ShouldNotBeNull();
-        result.Firstname.ShouldBe("updated.firstname");
-        result.Lastname.ShouldBe("updated.lastname");
+        result.FirstName.ShouldBe("updated.firstname");
+        result.LastName.ShouldBe("updated.lastname");
         updateResult.StatusCode.ShouldBe(System.Net.HttpStatusCode.OK);
     }
 }

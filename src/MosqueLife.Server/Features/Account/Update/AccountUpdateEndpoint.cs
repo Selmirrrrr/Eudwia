@@ -32,8 +32,8 @@ public class AccountUpdateEndpoint : ControllerBase
             return BadRequest("error");
         }
 
-        user.Firstname = accountUpdate.Firstname;
-        user.Lastname = accountUpdate.Lastname;
+        user.FirstName = accountUpdate.FirstName;
+        user.LastName = accountUpdate.LastName;
 
         await _userManager.UpdateAsync(user);
         return Ok();

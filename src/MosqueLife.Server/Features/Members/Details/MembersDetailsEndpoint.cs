@@ -31,8 +31,8 @@ public class MembersDetailsEndpoint : ControllerBase
         var member = await _applicationDbContext.Members.Select(m => new MembersDetailsViewModel
         {
             Id = m.Id,
-            Firstname = m.Firstname,
-            Lastname = m.Lastname,
+            FirstName = m.FirstName,
+            LastName = m.LastName,
             StreetLine1 = m.StreetLine1,
             StreetLine2 = m.StreetLine2,
             HouseNumber = m.HouseNumber,
@@ -68,7 +68,7 @@ public class MembersDetailsEndpoint : ControllerBase
                 Amount = p.Amount,
                 PaymentDate = p.PaymentDate
             }).ToArray()
-        }).FirstAsync(m => m.Id == memberId);
+        }).AsSplitQuery().FirstAsync(m => m.Id == memberId);
 
         return Ok(member);
     }

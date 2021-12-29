@@ -22,9 +22,9 @@
                         </MudCardHeader>
                         <MudCardContent>
                             <div class="d-flex justify-center mb-4">
-                                <MudAvatar Style="height:100px; width:100px;">@_userDetails.Lastname</MudAvatar>
+                                <MudAvatar Style="height:100px; width:100px;">@_userDetails.LastName</MudAvatar>
                             </div>
-                            <MudText Align="Align.Center">@_userDetails.Firstname @_userDetails.Lastname</MudText>
+                            <MudText Align="Align.Center">@_userDetails.FirstName @_userDetails.LastName</MudText>
                         </MudCardContent>
                     </MudCard>
                 </MudItem>
@@ -38,10 +38,10 @@
                         <MudCardContent>
                             <MudGrid>
                                 <MudItem xs="12" md="6">
-                                    <MudTextField @bind-Value="_userDetails.Firstname" Label="First Name" Variant="Variant.Outlined" />
+                                    <MudTextField @bind-Value="_userDetails.FirstName" Label="First Name" Variant="Variant.Outlined" />
                                 </MudItem>
                                 <MudItem xs="12" md="6">
-                                    <MudTextField @bind-Value="_userDetails.Lastname" Label="Last Name" Variant="Variant.Outlined" />
+                                    <MudTextField @bind-Value="_userDetails.LastName" Label="Last Name" Variant="Variant.Outlined" />
                                 </MudItem>
                                 <MudItem xs="12" md="6">
                                     <MudTextField Value="context?.User?.Identity?.Name" Label="Email" Variant="Variant.Outlined" HelperText="Dont worry, we shall not spam!" Disabled="true" InputType="InputType.Email"/>

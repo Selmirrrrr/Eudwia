@@ -53,7 +53,7 @@ namespace MosqueLife.Server.IntegrationTests.Fixtures
 
                 var userManager = scopedServices.GetRequiredService<UserManager<ApplicationUser>>();
 
-                var newUser = new ApplicationUser { UserName = TestEmail, Email = TestEmail, Firstname = "Test", Lastname = "Example" };
+                var newUser = new ApplicationUser { UserName = TestEmail, Email = TestEmail, FirstName = "Test", LastName = "Example" };
 
                 await userManager.CreateAsync(newUser, TestPassword);
             });
