@@ -1,0 +1,178 @@
+@using MosqueLife.Shared.Features.Members.Contributions
+@using System.ComponentModel.Design.Serialization
+@using System.Diagnostics
+@inject HttpClient _httpClient
+@inject ISnackbar _snackbar
+
+<MudGrid>
+    <MudItem xs="12" md="12">
+        <MudTable Items="@_memebersContributions" Style="" Hover="true" Dense="false" Striped="true" T="MemebersContributionsViewModel">
+            <ToolBarContent>
+                <MudText Typo="Typo.h6">Cotisations</MudText>
+            </ToolBarContent>
+            <HeaderContent>
+                <MudTh>Année</MudTh>
+                <MudTh>01</MudTh>
+                <MudTh>02</MudTh>
+                <MudTh>03</MudTh>
+                <MudTh>04</MudTh>
+                <MudTh>05</MudTh>
+                <MudTh>06</MudTh>
+                <MudTh>07</MudTh>
+                <MudTh>08</MudTh>
+                <MudTh>09</MudTh>
+                <MudTh>10</MudTh>
+                <MudTh>11</MudTh>
+                <MudTh>12</MudTh>
+            </HeaderContent>
+            <RowTemplate>
+                <MudTd DataLabel="Année">@context.Year</MudTd>
+                <MudTd DataLabel="Janvier">
+                    <MudCheckBox Checked="@context.January" Color="Color.Primary" CheckedChanged="(bool value) => CheckChanged(context, 1, value)"/>
+                </MudTd>
+                <MudTd DataLabel="Février">
+                    <MudCheckBox Checked="@context.February" Color="Color.Primary" CheckedChanged="(bool value) => CheckChanged(context, 2, value)"/>
+                </MudTd>
+                <MudTd DataLabel="Mars">
+                    <MudCheckBox Checked="@context.March" Color="Color.Primary" CheckedChanged="(bool value) => CheckChanged(context, 3, value)"/>
+                </MudTd>
+                <MudTd DataLabel="Avril">
+                    <MudCheckBox Checked="@context.April" Color="Color.Primary" CheckedChanged="(bool value) => CheckChanged(context, 4, value)"/>
+                </MudTd>
+                <MudTd DataLabel="Mai">
+                    <MudCheckBox Checked="@context.May" Color="Color.Primary" CheckedChanged="(bool value) => CheckChanged(context, 5, value)"/>
+                </MudTd>
+                <MudTd DataLabel="Juin">
+                    <MudCheckBox Checked="@context.June" Color="Color.Primary" CheckedChanged="(bool value) => CheckChanged(context, 6, value)"/>
+                </MudTd>
+                <MudTd DataLabel="Juillet">
+                    <MudCheckBox Checked="@context.July" Color="Color.Primary" CheckedChanged="(bool value) => CheckChanged(context, 7, value)"/>
+                </MudTd>
+                <MudTd DataLabel="Août">
+                    <MudCheckBox Checked="@context.August" Color="Color.Primary" CheckedChanged="(bool value) => CheckChanged(context, 8, value)"/>
+                </MudTd>
+                <MudTd DataLabel="Septembre">
+                    <MudCheckBox Checked="@context.September" Color="Color.Primary" CheckedChanged="(bool value) => CheckChanged(context, 9, value)"/>
+                </MudTd>
+                <MudTd DataLabel="Octobre">
+                    <MudCheckBox Checked="@context.October" Color="Color.Primary" CheckedChanged="(bool value) => CheckChanged(context, 10, value)"/>
+                </MudTd>
+                <MudTd DataLabel="Novembre">
+                    <MudCheckBox Checked="@context.November" Color="Color.Primary" CheckedChanged="(bool value) => CheckChanged(context, 11, value)"/>
+                </MudTd>
+                <MudTd DataLabel="Décembre">
+                    <MudCheckBox Checked="@context.December" Color="Color.Primary" CheckedChanged="(bool value) => CheckChanged(context, 12, value)"/>
+                </MudTd>
+            </RowTemplate>
+        </MudTable>
+    </MudItem>
+    <MudItem xs="12" md="12">
+        <MudPaper Class="d-flex flex-row-reverse py-2 px-1">
+            <MudNumericField @bind-Value="@YearToAdd" Required="true" Label="Année" Variant="Variant.Outlined"></MudNumericField>
+            <MudIconButton Icon="@Icons.Material.Outlined.Add" OnClick="() => AddYear()"/>
+        </MudPaper>
+    </MudItem>
+</MudGrid>
+
+@code {
+
+    [Parameter]
+    public Guid MemberId { get; set; }
+
+    private int YearToAdd { get; set; } = DateTime.Now.Year;
+
+    private List<MemebersContributionsViewModel> _memebersContributions = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+        _memebersContributions = await _httpClient.GetFromJsonAsync<List<MemebersContributionsViewModel>>($"api/members/{MemberId}/contributions") ?? new List<MemebersContributionsViewModel>();
+    }
+
+    private async Task CheckChanged(MemebersContributionsViewModel model, int month, bool value)
+    {
+        switch (month)
+        {
+            case 1:
+                model.January = !model.January;
+                break;
+            case 2:
+                model.February = !model.February;
+                break;
+            case 3:
+                model.March = !model.March;
+                break;
+            case 4:
+                model.April = !model.April;
+                break;
+            case 5:
+                model.May = !model.May;
+                break;
+            case 6:
+                model.June = !model.June;
+                break;
+            case 7:
+                model.July = !model.July;
+                break;
+            case 8:
+                model.August = !model.August;
+                break;
+            case 9:
+                model.September = !model.September;
+                break;
+            case 10:
+                model.October = !model.October;
+                break;
+            case 11:
+                model.November = !model.November;
+                break;
+            case 12:
+                model.December = !model.December;
+                break;
+        }
+        
+        try
+        {
+            var result = await _httpClient.PostAsJsonAsync($"api/members/{MemberId}/contributions/{model.Year}/{month}", value);
+
+            if (result.IsSuccessStatusCode)
+                _snackbar.Add("Les cotisations ont bien été mises à jour.", Severity.Success);
+            else
+            {
+                var errors = await result.Content.ReadAsStringAsync();
+                _snackbar.Add(errors, Severity.Warning);
+            }
+        }
+        catch (Exception ex)
+        {
+            _snackbar.Add(ex.Message, Severity.Error);
+        }
+    }
+
+    private void AddYear()
+    {
+        if (_memebersContributions.Any(mc => mc.Year == YearToAdd))
+        {
+            _snackbar.Add("Année déjà existante", Severity.Warning);
+            return;
+        }
+        
+        _memebersContributions.Add(new MemebersContributionsViewModel
+        {
+            Year = YearToAdd,
+            January = false,
+            February = false,
+            March = false,
+            April = false,
+            May = false,
+            June = false,
+            July = false,
+            August = false,
+            September = false,
+            October = false,
+            November = false,
+            December = false
+        });
+    }
+
+}

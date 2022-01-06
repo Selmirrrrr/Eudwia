@@ -27,6 +27,6 @@ public class MembersListEndpointTests
 
         // Assert
         result.ShouldNotBeNull();
-        result.Length.ShouldBe(20);
+        result.Length.ShouldBeGreaterThan(20);
     }
 }

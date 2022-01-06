@@ -18,16 +18,16 @@
                 <MudCardContent>
                     <MudGrid>
                         <MudItem xs="12" md="6">
-                            <MudTextField @bind-Value="_model.FirstName" Validation="@(_validator.ValidateValue)" For="@(() => _model.FirstName)" Immediate="true" Label="Prénom"/>
+                            <MudTextField Variant="Variant.Outlined" @bind-Value="_model.FirstName" Validation="@(_validator.ValidateValue)" For="@(() => _model.FirstName)" Immediate="true" Label="Prénom"/>
                         </MudItem>
                         <MudItem xs="12" md="6">
-                            <MudTextField @bind-Value="_model.LastName" Validation="@(_validator.ValidateValue)" For="@(() => _model.LastName)" Immediate="true" Label="Nom"/>
+                            <MudTextField Variant="Variant.Outlined" @bind-Value="_model.LastName" Validation="@(_validator.ValidateValue)" For="@(() => _model.LastName)" Immediate="true" Label="Nom"/>
                         </MudItem>
                         <MudItem xs="12" md="6">
-                            <MudDatePicker Label="Date de naissance" @bind-Date="_model.BirthDate" Validation="@(_validator.ValidateValue)" For="@(() => _model.BirthDate)"/>
+                            <MudDatePicker Variant="Variant.Outlined" Label="Date de naissance" @bind-Date="_model.BirthDate" Validation="@(_validator.ValidateValue)" For="@(() => _model.BirthDate)"/>
                         </MudItem>
                         <MudItem xs="12" md="6">
-                            <MudDatePicker Label="Membre depuis" @bind-Date="_model.MemberSince" Validation="@(_validator.ValidateValue)" For="@(() => _model.MemberSince)"/>
+                            <MudDatePicker Variant="Variant.Outlined" Label="Membre depuis" @bind-Date="_model.MemberSince" Validation="@(_validator.ValidateValue)" For="@(() => _model.MemberSince)"/>
                         </MudItem>
                     </MudGrid>
                 </MudCardContent>
@@ -43,25 +43,25 @@
                 <MudCardContent>
                     <MudGrid>
                         <MudItem xs="12" md="5">
-                            <MudTextField @bind-Value="_model.StreetLine1" Validation="@(_validator.ValidateValue)" For="@(() => _model.StreetLine1)" Immediate="true" Label="Rue 1"/>
+                            <MudTextField Variant="Variant.Outlined" @bind-Value="_model.StreetLine1" Validation="@(_validator.ValidateValue)" For="@(() => _model.StreetLine1)" Immediate="true" Label="Rue 1"/>
                         </MudItem>
                         <MudItem xs="12" md="1">
-                            <MudTextField @bind-Value="_model.HouseNumber" Validation="@(_validator.ValidateValue)" For="@(() => _model.HouseNumber)" Immediate="true" Label="N°"/>
+                            <MudTextField Variant="Variant.Outlined" @bind-Value="_model.HouseNumber" Validation="@(_validator.ValidateValue)" For="@(() => _model.HouseNumber)" Immediate="true" Label="N°"/>
                         </MudItem>
                         <MudItem xs="12" md="6">
-                            <MudTextField @bind-Value="_model.StreetLine2" Validation="@(_validator.ValidateValue)" For="@(() => _model.StreetLine2)" Immediate="true" Label="Rue 2"/>
+                            <MudTextField Variant="Variant.Outlined" @bind-Value="_model.StreetLine2" Validation="@(_validator.ValidateValue)" For="@(() => _model.StreetLine2)" Immediate="true" Label="Rue 2"/>
                         </MudItem>
                         <MudItem xs="12" md="6">
-                            <MudTextField @bind-Value="_model.ZipCode" Validation="@(_validator.ValidateValue)" For="@(() => _model.ZipCode)" Immediate="true" Label="NPA"/>
+                            <MudTextField Variant="Variant.Outlined" @bind-Value="_model.ZipCode" Validation="@(_validator.ValidateValue)" For="@(() => _model.ZipCode)" Immediate="true" Label="NPA"/>
                         </MudItem>
                         <MudItem xs="12" md="6">
-                            <MudTextField @bind-Value="_model.City" Validation="@(_validator.ValidateValue)" For="@(() => _model.City)" Immediate="true" Label="Ville"/>
+                            <MudTextField Variant="Variant.Outlined" @bind-Value="_model.City" Validation="@(_validator.ValidateValue)" For="@(() => _model.City)" Immediate="true" Label="Ville"/>
                         </MudItem>
                         <MudItem xs="12" md="6">
-                            <MudTextField @bind-Value="_model.State" Validation="@(_validator.ValidateValue)" For="@(() => _model.State)" Immediate="true" Label="Canton"/>
+                            <MudTextField Variant="Variant.Outlined" @bind-Value="_model.State" Validation="@(_validator.ValidateValue)" For="@(() => _model.State)" Immediate="true" Label="Canton"/>
                         </MudItem>
                         <MudItem xs="12" md="6">
-                            <MudSelect T="Guid" @bind-Value="@_model.CountryId" Label="Pays" AnchorOrigin="Origin.BottomCenter">
+                            <MudSelect Variant="Variant.Outlined" T="Guid" @bind-Value="@_model.CountryId" Label="Pays" AnchorOrigin="Origin.BottomCenter">
                                 @foreach (var country in _countries)
                                 {
                                     <MudSelectItem T="Guid" Value="@country.Id">@country.Name</MudSelectItem>
@@ -82,13 +82,13 @@
                 <MudCardContent>
                     <MudGrid>
                         <MudItem xs="12" md="5">
-                            <MudTextField @bind-Value="_model.Email" Validation="@(_validator.ValidateValue)" For="@(() => _model.Email)" Immediate="true" Label="Email" Adornment="Adornment.End" AdornmentIcon="@Icons.Filled.Email"/>
+                            <MudTextField Variant="Variant.Outlined" @bind-Value="_model.Email" Validation="@(_validator.ValidateValue)" For="@(() => _model.Email)" Immediate="true" Label="Email" Adornment="Adornment.End" AdornmentIcon="@Icons.Filled.Email"/>
                         </MudItem>
                         <MudItem xs="12" md="5">
-                            <MudTextField @bind-Value="_model.PhoneNumber" Validation="@(_validator.ValidateValue)" For="@(() => _model.PhoneNumber)" Immediate="true" Label="Téléphone" Adornment="Adornment.End" AdornmentIcon="@Icons.Filled.Phone"/>
+                            <MudTextField Variant="Variant.Outlined" @bind-Value="_model.PhoneNumber" Validation="@(_validator.ValidateValue)" For="@(() => _model.PhoneNumber)" Immediate="true" Label="Téléphone" Adornment="Adornment.End" AdornmentIcon="@Icons.Filled.Phone"/>
                         </MudItem>
                         <MudItem xs="12" md="2">
-                            <MudSelect T="Language" @bind-Value="@_model.Language" Validation="@(_validator.ValidateValue)" For="@(() => _model.Language)" Immediate="true" Label="Langue" AnchorOrigin="Origin.BottomCenter">
+                            <MudSelect Variant="Variant.Outlined" T="Language" @bind-Value="@_model.Language" Validation="@(_validator.ValidateValue)" For="@(() => _model.Language)" Immediate="true" Label="Langue" AnchorOrigin="Origin.BottomCenter">
                                 @foreach (var language in Enum.GetValues<Language>())
                                 {
                                     <MudSelectItem T="Language" Value="@language">@language.ToString()</MudSelectItem>
@@ -171,5 +171,4 @@
         Form.ResetValidation();
         return Task.CompletedTask;
     }
-
 }

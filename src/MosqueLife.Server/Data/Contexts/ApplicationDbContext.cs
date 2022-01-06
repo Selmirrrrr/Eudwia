@@ -23,6 +23,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser, IdentityR
     public virtual DbSet<Member> Members { get; set; }
     public virtual DbSet<Country> Countries { get; set; }
     public virtual DbSet<Payment> Payments { get; set; }
+    public virtual DbSet<SubscriptionPaid> SubscriptionsPaid { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

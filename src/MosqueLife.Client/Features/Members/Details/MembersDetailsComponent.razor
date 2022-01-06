@@ -1,12 +1,7 @@
 ﻿@page "/members/{MemberId:guid}"
-@using MosqueLife.Client.Extensions
-@using MosqueLife.Shared.Features.Account.Update
-@using MosqueLife.Shared.Features.Account.Details
-@using MosqueLife.Shared.Features.Countries.List;
 @using MosqueLife.Shared.Features.Members.Details
-@using System.Globalization
-@using MosqueLife.Shared.Enums
 @using MosqueLife.Client.Features.Members.UpdatePersonnal
+@using MosqueLife.Client.Features.Members.Contributions
 @inject HttpClient _httpClient
 @inject ISnackbar _snackbar
 @inject AuthenticationStateProvider _getAuthenticationStateAsync
@@ -20,7 +15,7 @@
             <MembersUpdatePersonnalComponent ViewModel="@_model" />
         </MudTabPanel>
         <MudTabPanel Text="Cotisations">
-            <MudText>Content Three</MudText>
+            <MembersContributionsComponent MemberId="@MemberId" />
         </MudTabPanel>
         <MudTabPanel Text="Payments">
             <MudText>Content Three</MudText>
