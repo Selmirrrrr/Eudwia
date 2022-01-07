@@ -282,12 +282,14 @@ public static class ModelBuilderExtensions
                 Id = Guid.NewGuid(),
                 Note = _faker.Lorem.Paragraph(1),
                 PaymentType = _faker.Random.Enum<PaymentType>(),
-                MemberId = member.Id
+                MemberId = member.Id,
+                Amount = _faker.Random.Decimal(0, 1000),
+                PaymentDate = _faker.Date.Past(10)
             }).ToList());
 
             subscriptions.AddRange(Enumerable.Range(2015, _faker.Random.Int(0, 7)).Select(s => new SubscriptionPaid
             {
-                Year = s, 
+                Year = s,
                 January = true,
                 February = true,
                 March = true,
@@ -319,6 +321,8 @@ public static class ModelBuilderExtensions
             Id = guid,
             FirstName = _faker.Name.FirstName(),
             LastName = _faker.Name.LastName(),
+            Email = _faker.Person.Email,
+            PhoneNumber = _faker.Person.Phone,
             BirthDate = _faker.Date.PastDateOnly(50, new DateOnly(2000, 1, 1)),
             MemberSince = _faker.Date.PastDateOnly(10),
             StreetLine1 = _faker.Address.StreetAddress(),
@@ -328,7 +332,7 @@ public static class ModelBuilderExtensions
             ZipCode = _faker.Address.ZipCode(),
             State = "VD",
             CountryId = Guid.Parse("9bc1f1a9-7696-42e4-89aa-c93800704582"),
-            Language = _faker.Random.Enum<Language>(),
+            Language = _faker.Random.Enum<Language>()
         };
     }
 

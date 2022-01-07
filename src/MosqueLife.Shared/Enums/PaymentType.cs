@@ -1,4 +1,4 @@
-﻿namespace MosqueLife.Server.Data;
+﻿namespace MosqueLife.Shared.Enums;
 
 public enum PaymentType
 {

@@ -2,6 +2,7 @@
 @using MosqueLife.Shared.Features.Members.Details
 @using MosqueLife.Client.Features.Members.UpdatePersonnal
 @using MosqueLife.Client.Features.Members.Contributions
+@using MosqueLife.Client.Features.Members.Payments
 @inject HttpClient _httpClient
 @inject ISnackbar _snackbar
 @inject AuthenticationStateProvider _getAuthenticationStateAsync
@@ -12,13 +13,13 @@
     <MudText Typo="Typo.h5" Color="Color.Primary" Class="mb-4">Membre</MudText>
     <MudTabs Elevation="1" Rounded="true" PanelClass="mt-6">
         <MudTabPanel Text="Général">
-            <MembersUpdatePersonnalComponent ViewModel="@_model" />
+            <MembersUpdatePersonnalComponent ViewModel="@_model"/>
         </MudTabPanel>
         <MudTabPanel Text="Cotisations">
-            <MembersContributionsComponent MemberId="@MemberId" />
+            <MembersContributionsComponent MemberId="@MemberId"/>
         </MudTabPanel>
         <MudTabPanel Text="Payments">
-            <MudText>Content Three</MudText>
+            <MembersPaymentsComponent MemberId="@MemberId"/>
         </MudTabPanel>
         <MudTabPanel Text="Compte">
             <MudText>Content Three</MudText>
@@ -30,10 +31,12 @@
 
     [Parameter]
     public Guid MemberId { get; set; }
+
     private MembersDetailsViewModel _model = new();
 
     protected override async Task OnInitializedAsync()
     {
         _model = await _httpClient.GetFromJsonAsync<MembersDetailsViewModel>($"api/members/{MemberId}") ?? new MembersDetailsViewModel();
     }
+
 }

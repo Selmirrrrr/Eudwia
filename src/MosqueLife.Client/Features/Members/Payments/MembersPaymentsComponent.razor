@@ -1,0 +1,58 @@
+@using MosqueLife.Shared.Features.Members.Contributions
+@using MosqueLife.Shared.Features.Members.Payments
+@using MosqueLife.Shared.Enums
+@inject HttpClient _httpClient
+@inject ISnackbar _snackbar
+
+<MudGrid>
+    <MudItem xs="12" md="12">
+        <MudPaper Class="">
+            <MudTimeline TimelinePosition="TimelinePosition.Start" TimelineAlign="TimelineAlign.Default">
+                @foreach (var payment in _memebersPayments)
+                {
+                    <MudTimelineItem Size="Size.Medium" Color="@ConvertPaymentTypeToColor(payment)" Elevation="25">
+                        <MudCard Elevation="25">
+                            <MudCardContent>
+                                <MudText Typo="Typo.h5">@($"{payment.Amount:C}")</MudText>
+                                <MudText Typo="Typo.body1">@payment.Note</MudText>
+                                <MudText Typo="Typo.caption">@payment.PaymentDate.ToLongDateString()</MudText>
+                            </MudCardContent>
+                        </MudCard>
+                    </MudTimelineItem>
+                }
+            </MudTimeline>
+        </MudPaper>
+    </MudItem>
+    <MudItem xs="12" md="12">
+        <MudPaper Class="d-flex flex-row py-2 px-1">
+            <MudChip Color="Color.Transparent">Légende : </MudChip>
+            <MudChip Color="Color.Info">Don</MudChip>
+            <MudChip Color="Color.Success">Cotisation</MudChip>
+            <MudChip Color="Color.Dark">Autre</MudChip>
+        </MudPaper>
+    </MudItem>
+</MudGrid>
+
+@code {
+
+    [Parameter]
+    public Guid MemberId { get; set; }
+
+    private List<MembersPaymentViewModel> _memebersPayments = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+        _memebersPayments = await _httpClient.GetFromJsonAsync<List<MembersPaymentViewModel>>($"api/members/{MemberId}/payments") ?? new List<MembersPaymentViewModel>();
+    }
+    
+    public Color ConvertPaymentTypeToColor(MembersPaymentViewModel payment)
+    {
+        return payment.PaymentType switch
+        {
+            PaymentType.Donation => Color.Info,
+            PaymentType.Membership => Color.Success,
+            _ => Color.Dark
+        };
+    }
+}

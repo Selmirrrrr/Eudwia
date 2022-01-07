@@ -1,4 +1,6 @@
-﻿namespace MosqueLife.Server.Data;
+﻿using MosqueLife.Shared.Enums;
+
+namespace MosqueLife.Server.Data;
 
 public class Payment
 {
