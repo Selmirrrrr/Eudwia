@@ -1,12 +1,21 @@
+@using MosqueLife.Client.Features.Members.Payments
 @using MosqueLife.Shared.Features.Members.Contributions
 @using MosqueLife.Shared.Features.Members.Payments
 @using MosqueLife.Shared.Enums
+@using MosqueLife.Shared.Features.Members.UpdatePersonnal
+@using Microsoft.AspNetCore.Components
 @inject HttpClient _httpClient
 @inject ISnackbar _snackbar
+@inject IDialogService _dialogService
 
 <MudGrid>
     <MudItem xs="12" md="12">
-        <MudPaper Class="">
+        <MudPaper Class="d-flex flex-row py-2 px-1">
+            <MudButton OnClick="AddPayment" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Add" Color="Color.Primary">Nouveau paiement</MudButton>
+        </MudPaper>
+    </MudItem>
+    <MudItem xs="12" md="12">
+        <MudPaper>
             <MudTimeline TimelinePosition="TimelinePosition.Start" TimelineAlign="TimelineAlign.Default">
                 @foreach (var payment in _memebersPayments)
                 {
@@ -14,8 +23,8 @@
                         <MudCard Elevation="25">
                             <MudCardContent>
                                 <MudText Typo="Typo.h5">@($"{payment.Amount:C}")</MudText>
-                                <MudText Typo="Typo.body1">@payment.Note</MudText>
                                 <MudText Typo="Typo.caption">@payment.PaymentDate.ToLongDateString()</MudText>
+                                <MudText Typo="Typo.body1">@payment.Note</MudText>
                             </MudCardContent>
                         </MudCard>
                     </MudTimelineItem>
@@ -25,6 +34,7 @@
     </MudItem>
     <MudItem xs="12" md="12">
         <MudPaper Class="d-flex flex-row py-2 px-1">
+            <MudSpacer/>
             <MudChip Color="Color.Transparent">Légende : </MudChip>
             <MudChip Color="Color.Info">Don</MudChip>
             <MudChip Color="Color.Success">Cotisation</MudChip>
@@ -39,20 +49,32 @@
     public Guid MemberId { get; set; }
 
     private List<MembersPaymentViewModel> _memebersPayments = new();
+    private MembersAddPaymentCommand _model = new();
+    private MudForm _form = new();
+    private readonly MembersAddPaymentCommandValidator _validator = new();
 
     protected override async Task OnInitializedAsync()
     {
         await base.OnInitializedAsync();
         _memebersPayments = await _httpClient.GetFromJsonAsync<List<MembersPaymentViewModel>>($"api/members/{MemberId}/payments") ?? new List<MembersPaymentViewModel>();
     }
-    
-    public Color ConvertPaymentTypeToColor(MembersPaymentViewModel payment)
+
+    private Color ConvertPaymentTypeToColor(MembersPaymentViewModel payment)
     {
         return payment.PaymentType switch
         {
             PaymentType.Donation => Color.Info,
             PaymentType.Membership => Color.Success,
             _ => Color.Dark
-        };
+            };
+    }
+
+    private async Task AddPayment()
+    {
+        var parameters = new DialogParameters {{"MemberId", MemberId}};
+        var dialog = _dialogService.Show<MembersPaymentsAddComponent>("Confirm", parameters);
+        var result = await dialog.Result;
+        if (result.Cancelled) return;
+        _memebersPayments = await _httpClient.GetFromJsonAsync<List<MembersPaymentViewModel>>($"api/members/{MemberId}/payments") ?? new List<MembersPaymentViewModel>();
     }
 }

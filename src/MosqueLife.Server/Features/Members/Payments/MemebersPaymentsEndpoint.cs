@@ -22,7 +22,7 @@ public class MemebersPaymentsEndpoint : ControllerBase
 
     [Authorize]
     [HttpGet("members/{memberId:guid}/payments")]
-    [ProducesResponseType(typeof(MembersDetailsViewModel), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(IEnumerable<MembersPaymentViewModel>), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult<IEnumerable<MembersPaymentViewModel>>> Handle([FromRoute] Guid memberId)
     {
