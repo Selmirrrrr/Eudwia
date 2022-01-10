@@ -5,18 +5,18 @@ using Microsoft.EntityFrameworkCore;
 using MosqueLife.Server.Data.Contexts;
 using MosqueLife.Shared;
 using MosqueLife.Shared.Features.Members.Details;
-using MosqueLife.Shared.Features.Members.UpdatePersonnal;
+using MosqueLife.Shared.Features.Members.Update;
 
-namespace MosqueLife.Server.Features.Members.UpdatePersonnal;
+namespace MosqueLife.Server.Features.Members.Update;
 
 [Route("api")]
 [ApiController]
 [Produces(MediaTypeNames.Application.Json)]
-public class MembersEditDetailsEndpoint : ControllerBase
+public class MembersUpdateEndpoint : ControllerBase
 {
     private readonly ApplicationDbContext _applicationDbContext;
 
-    public MembersEditDetailsEndpoint(ApplicationDbContext applicationDbContext)
+    public MembersUpdateEndpoint(ApplicationDbContext applicationDbContext)
     {
         _applicationDbContext = applicationDbContext;
     }
@@ -25,7 +25,7 @@ public class MembersEditDetailsEndpoint : ControllerBase
     [HttpPost(Routes.Members.UpdateMember)]
     [ProducesResponseType(typeof(MembersDetailsViewModel), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult> Handle([FromRoute] Guid memberId, [FromBody] MembersUpdatePersonnalCommand command)
+    public async Task<ActionResult> Handle([FromRoute] Guid memberId, [FromBody] MembersUpdateCommand command)
     {
         var member = await _applicationDbContext.Members.SingleOrDefaultAsync(x => x.Id == memberId);
 

@@ -3,7 +3,6 @@
 @using MosqueLife.Shared.Enums
 @using MosqueLife.Shared.Features.Countries.List
 @using MosqueLife.Shared.Features.Members.Create
-@using MosqueLife.Shared.Features.Members.Details
 @inject HttpClient _httpClient
 @inject ISnackbar _snackbar
 @inject NavigationManager _navigationManager
@@ -67,12 +66,11 @@
                             <MudTextField Variant="Variant.Outlined" @bind-Value="_model.State" Validation="@(_validator.ValidateValue)" For="@(() => _model.State)" Immediate="true" Label="Canton"/>
                         </MudItem>
                         <MudItem xs="12" md="6">
-                            <MudSelect Variant="Variant.Outlined" T="Guid" @bind-Value="@_model.CountryId" Label="Pays" AnchorOrigin="Origin.BottomCenter">
-                                @foreach (var country in _countries)
-                                {
-                                    <MudSelectItem T="Guid" Value="@country.Id">@country.Name</MudSelectItem>
-                                }
-                            </MudSelect>
+                            <MudAutocomplete T="CountriesListViewModel" Label="Pays" @bind-Value="@_selectedCountry" SearchFunc="@SearchCountries"
+                                             ResetValueOnEmptyText="true"
+                                             Variant="Variant.Outlined"
+                                             CoerceText="true" CoerceValue="true"
+                                             AdornmentIcon="@Icons.Material.Filled.Search" AdornmentColor="Color.Primary"/>
                         </MudItem>
                     </MudGrid>
                 </MudCardContent>
@@ -115,13 +113,10 @@
 </MudForm>
 
 @code {
-
-    [Parameter]
-    public MembersDetailsViewModel ViewModel { get; set; } = new();
-
     private MudForm Form { get; set; } = default!;
-    private MembersCreateCommand _model = new();
+    private MembersCreateCommand _model = new MembersCreateCommand {CountryId = Guid.Parse("9bc1f1a9-7696-42e4-89aa-c93800704582")};
     private IEnumerable<CountriesListViewModel> _countries = new List<CountriesListViewModel>();
+    private CountriesListViewModel _selectedCountry = new();
     private readonly MembersCreateCommandValidator _validator = new();
 
     protected override async void OnParametersSet()
@@ -139,12 +134,13 @@
     {
         try
         {
+            _model.CountryId = _selectedCountry.Id;
             var result = await _httpClient.PostAsJsonAsync($"api/members/", _model);
 
             if (result.IsSuccessStatusCode)
             {
-                _snackbar.Add("Les informations personnelles ont été mises à jour.", Severity.Success);
-                _navigationManager.NavigateTo($"/members/{(await result.Content.ReadAsStringAsync()).Trim('\"')}");                
+                _snackbar.Add("Le membre a bien été ajouté à la base données.", Severity.Success);
+                _navigationManager.NavigateTo($"/members/{(await result.Content.ReadAsStringAsync()).Trim('\"')}");
             }
             else
             {
@@ -162,22 +158,30 @@
     {
         _model = new MembersCreateCommand
         {
-            FirstName = ViewModel.FirstName,
-            LastName = ViewModel.LastName,
-            StreetLine1 = ViewModel.StreetLine1,
-            StreetLine2 = ViewModel.StreetLine2,
-            HouseNumber = ViewModel.HouseNumber,
-            City = ViewModel.City,
-            ZipCode = ViewModel.ZipCode,
-            State = ViewModel.State ?? string.Empty,
-            CountryId = ViewModel.CountryId,
-            Email = ViewModel.Email,
-            PhoneNumber = ViewModel.PhoneNumber,
-            BirthDate = ViewModel.BirthDate,
-            MemberSince = ViewModel.MemberSince,
-            Language = ViewModel.Language
+            FirstName = string.Empty,
+            LastName = string.Empty,
+            StreetLine1 = string.Empty,
+            StreetLine2 = string.Empty,
+            HouseNumber = string.Empty,
+            City = string.Empty,
+            ZipCode = string.Empty,
+            State = string.Empty,
+            CountryId = Guid.Parse("9bc1f1a9-7696-42e4-89aa-c93800704582"),
+            Email = string.Empty,
+            PhoneNumber = string.Empty,
+            BirthDate = DateTime.Now.AddYears(-20),
+            MemberSince = DateTime.Now,
+            Language = Language.French
         };
+        _selectedCountry = new CountriesListViewModel();
         Form.ResetValidation();
+        _navigationManager.NavigateTo($"/members");
         return Task.CompletedTask;
     }
+
+    private Task<IEnumerable<CountriesListViewModel>> SearchCountries(string arg)
+    {
+        return Task.FromResult(_countries.Where(c => c.Name.StartsWith(arg, StringComparison.OrdinalIgnoreCase)));
+    }
+
 }

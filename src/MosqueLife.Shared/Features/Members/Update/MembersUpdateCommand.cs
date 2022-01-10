@@ -1,9 +1,9 @@
 using FluentValidation;
 using MosqueLife.Shared.Enums;
 
-namespace MosqueLife.Shared.Features.Members.UpdatePersonnal;
+namespace MosqueLife.Shared.Features.Members.Update;
 
-public record MembersUpdatePersonnalCommand
+public record MembersUpdateCommand
 {
     public string FirstName { get; set; } = string.Empty;
 
@@ -34,16 +34,16 @@ public record MembersUpdatePersonnalCommand
     public Language Language { get; set; }
 }
 
-public class MembersUpdatePersonnalCommandValidator : AbstractValidator<MembersUpdatePersonnalCommand> 
+public class MembersUpdateCommandValidator : AbstractValidator<MembersUpdateCommand> 
 {
-    public MembersUpdatePersonnalCommandValidator()
+    public MembersUpdateCommandValidator()
     {
         RuleFor(x => x.FirstName).NotEmpty().MinimumLength(2).MaximumLength(100);
         RuleFor(x => x.LastName).NotEmpty().MinimumLength(2).MaximumLength(100);
         RuleFor(x => x.BirthDate).NotEmpty();
         RuleFor(x => x.MemberSince).NotEmpty();
         RuleFor(x => x.StreetLine1).NotEmpty().MinimumLength(3).MaximumLength(200);
-        RuleFor(x => x.StreetLine2).Length(3, 200);
+        RuleFor(x => x.StreetLine2).Length(3, 200).When(x => !string.IsNullOrWhiteSpace(x.StreetLine2));
         RuleFor(x => x.HouseNumber).NotEmpty().MinimumLength(1).MaximumLength(10);
         RuleFor(x => x.ZipCode).NotEmpty().MinimumLength(3).MaximumLength(10);
         RuleFor(x => x.City).MinimumLength(3).MaximumLength(100);
@@ -56,7 +56,7 @@ public class MembersUpdatePersonnalCommandValidator : AbstractValidator<MembersU
     
     public Func<object, string, Task<IEnumerable<string>>> ValidateValue => async (model, propertyName) =>
     {
-        var result = await ValidateAsync(ValidationContext<MembersUpdatePersonnalCommand>.CreateWithOptions((MembersUpdatePersonnalCommand)model, x => x.IncludeProperties(propertyName)));
+        var result = await ValidateAsync(ValidationContext<MembersUpdateCommand>.CreateWithOptions((MembersUpdateCommand)model, x => x.IncludeProperties(propertyName)));
         return result.IsValid ? Array.Empty<string>() : result.Errors.Select(e => e.ErrorMessage);
     };
 }

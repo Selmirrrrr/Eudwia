@@ -2,7 +2,7 @@
 @using MosqueLife.Shared.Enums
 @using MosqueLife.Shared.Features.Countries.List
 @using MosqueLife.Shared.Features.Members.Details
-@using MosqueLife.Shared.Features.Members.UpdatePersonnal
+@using MosqueLife.Shared.Features.Members.Update
 @inject HttpClient _httpClient
 @inject ISnackbar _snackbar
 
@@ -114,9 +114,9 @@
     public MembersDetailsViewModel ViewModel { get; set; } = new();
 
     private MudForm Form { get; set; } = default!;
-    private MembersUpdatePersonnalCommand _model = new();
+    private MembersUpdateCommand _model = new();
     private IEnumerable<CountriesListViewModel> _countries = new List<CountriesListViewModel>();
-    private readonly MembersUpdatePersonnalCommandValidator _validator = new();
+    private readonly MembersUpdateCommandValidator _validator = new();
 
     protected override async void OnParametersSet()
     {
@@ -151,7 +151,7 @@
 
     private Task Reset()
     {
-        _model = new MembersUpdatePersonnalCommand
+        _model = new MembersUpdateCommand
         {
             FirstName = ViewModel.FirstName,
             LastName = ViewModel.LastName,

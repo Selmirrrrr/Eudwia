@@ -18,7 +18,7 @@ public class MembersAddPaymentCommandValidator : AbstractValidator<MembersAddPay
 {
     public MembersAddPaymentCommandValidator()
     {
-        RuleFor(x => x.Note).NotEmpty().MinimumLength(3).MaximumLength(200);
+        RuleFor(x => x.Note).MaximumLength(200);
         RuleFor(x => x.Amount).GreaterThan(0);
         RuleFor(x => x.PaymentType).IsInEnum();
         RuleFor(x => x.PaymentDate).NotNull().LessThanOrEqualTo(DateTime.Now).GreaterThan(new DateTime(2000, 1, 1));

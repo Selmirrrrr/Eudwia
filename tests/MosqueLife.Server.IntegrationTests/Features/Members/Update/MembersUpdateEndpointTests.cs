@@ -7,18 +7,18 @@ using MosqueLife.Server.Data.Contexts.Extensions;
 using MosqueLife.Server.IntegrationTests.Fixtures;
 using MosqueLife.Shared.Enums;
 using MosqueLife.Shared.Features.Members.Details;
-using MosqueLife.Shared.Features.Members.UpdatePersonnal;
+using MosqueLife.Shared.Features.Members.Update;
 using Shouldly;
 using Xunit;
 
-namespace MosqueLife.Server.IntegrationTests.Features.Members.UpdatePersonnal;
+namespace MosqueLife.Server.IntegrationTests.Features.Members.Update;
 
 [Collection(DatabaseTestsCollection.CollectionName)]
-public class MembersUpdatePersonnalEndpointTests 
+public class MembersUpdateEndpointTests 
 {
     private readonly DatabaseFixture _databaseFixture;
 
-    public MembersUpdatePersonnalEndpointTests(DatabaseFixture databaseFixture)
+    public MembersUpdateEndpointTests(DatabaseFixture databaseFixture)
     {
         _databaseFixture = databaseFixture;
     }
@@ -30,7 +30,7 @@ public class MembersUpdatePersonnalEndpointTests
         var client = _databaseFixture.CreateClient();
 
         // Act
-        var result = await client.PostAsJsonAsync($"api/members/{Guid.Empty}", new MembersUpdatePersonnalCommand());
+        var result = await client.PostAsJsonAsync($"api/members/{Guid.Empty}", new MembersUpdateCommand());
         
         // Assert
         result.StatusCode.ShouldBe(HttpStatusCode.Unauthorized);
@@ -46,7 +46,7 @@ public class MembersUpdatePersonnalEndpointTests
         await context.SaveChangesAsync();
 
         // Act
-        var memberUpdateCommand = new MembersUpdatePersonnalCommand
+        var memberUpdateCommand = new MembersUpdateCommand
         {
             FirstName = "NewFirstName",
             LastName = "NewLastName",
@@ -96,7 +96,7 @@ public class MembersUpdatePersonnalEndpointTests
         await context.SaveChangesAsync();
 
         // Act
-        var memberUpdateCommand = new MembersUpdatePersonnalCommand
+        var memberUpdateCommand = new MembersUpdateCommand
         {
             FirstName = "NewFirstName",
             LastName = "NewLastName",
@@ -136,7 +136,7 @@ public class MembersUpdatePersonnalEndpointTests
         await context.SaveChangesAsync();
 
         // Act
-        var memberUpdateCommand = new MembersUpdatePersonnalCommand
+        var memberUpdateCommand = new MembersUpdateCommand
         {
             FirstName = "NewFirstName",
             LastName = "NewLastName",
@@ -170,7 +170,7 @@ public class MembersUpdatePersonnalEndpointTests
         await context.SaveChangesAsync();
 
         // Act
-        var memberUpdateCommand = new MembersUpdatePersonnalCommand
+        var memberUpdateCommand = new MembersUpdateCommand
         {
             FirstName = "NewFirstName",
             LastName = "NewLastName",
@@ -206,7 +206,7 @@ public class MembersUpdatePersonnalEndpointTests
         await context.SaveChangesAsync();
 
         // Act
-        var memberUpdateCommand = new MembersUpdatePersonnalCommand
+        var memberUpdateCommand = new MembersUpdateCommand
         {
             FirstName = "NewFirstName",
             LastName = "NewLastName",
@@ -243,7 +243,7 @@ public class MembersUpdatePersonnalEndpointTests
         await context.SaveChangesAsync();
 
         // Act
-        var memberUpdateCommand = new MembersUpdatePersonnalCommand
+        var memberUpdateCommand = new MembersUpdateCommand
         {
             FirstName = "NewFirstName",
             LastName = "NewLastName",
@@ -271,40 +271,5 @@ public class MembersUpdatePersonnalEndpointTests
         problemDetails.ShouldNotBeNull();
         problemDetails.Extensions["errors"]!.ToString().ShouldBe("{\"StreetLine2\":[\"'Street Line2' must be between 3 and 200 characters. You entered 201 characters.\"]}");
         member.StreetLine2.ShouldBe(baseMember.StreetLine2); // StreetLine2 is not updated
-    }
-    
-    [Fact]
-    public async Task UpdateShouldFailWhenMemberSinceIsLowerThanBirthDate()
-    {
-        // Arrange
-        var client = await _databaseFixture.CreateAuthorizedClient();
-        await using var context = _databaseFixture.Services.CreateScope().ServiceProvider.GetRequiredService<ApplicationDbContext>();
-        var baseMember = context.Members.Add(ModelBuilderExtensions.CreateMember()).Entity;
-        await context.SaveChangesAsync();
-
-        // Act
-        var memberUpdateCommand = new MembersUpdatePersonnalCommand
-        {
-            FirstName = "NewFirstName",
-            LastName = "NewLastName",
-            StreetLine1 = "NewStreetLine1",
-            HouseNumber = "New10",
-            City = "NewCity",
-            ZipCode = "New1004",
-            CountryId = Guid.Parse("50aa4ab0-3c14-4550-a87f-bdfca7d90638"), // Zimbabwe
-            MemberSince = new DateTime(2010, 1, 1).Date,
-            BirthDate = DateTime.Now.Date,
-            Language = Language.French
-        };
-        
-        var result = await client.PostAsJsonAsync($"api/members/{baseMember.Id}", memberUpdateCommand);
-        var member = await client.GetFromJsonAsync<MembersDetailsViewModel>($"api/members/{baseMember.Id}");
-
-        // Assert
-        result.StatusCode.ShouldBe(HttpStatusCode.BadRequest);
-        member.ShouldNotBeNull();
-        var problemDetails = await result.Content.ReadFromJsonAsync<ProblemDetails>();
-        problemDetails.ShouldNotBeNull();
-        problemDetails.Extensions["errors"]!.ToString().ShouldBe("{\"BirthDate\":[\"'Birth Date' must be less than or equal to '01/01/2010 00:00:00'.\"]}");
     }
 }

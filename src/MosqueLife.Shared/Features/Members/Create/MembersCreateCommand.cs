@@ -25,7 +25,7 @@ public record MembersCreateCommand
 
     public string State { get; set; } = string.Empty;
 
-    public Guid CountryId { get; set; }
+    public Guid CountryId { get; set; } = Guid.Parse("9bc1f1a9-7696-42e4-89aa-c93800704582"); // CH
 
     public string? PhoneNumber { get; set; }
 
@@ -43,7 +43,7 @@ public class MembersCreateCommandValidator : AbstractValidator<MembersCreateComm
         RuleFor(x => x.BirthDate).NotEmpty();
         RuleFor(x => x.MemberSince).NotEmpty();
         RuleFor(x => x.StreetLine1).NotEmpty().MinimumLength(3).MaximumLength(200);
-        RuleFor(x => x.StreetLine2).Length(3, 200);
+        RuleFor(x => x.StreetLine2).Length(3, 200).When(x => !string.IsNullOrWhiteSpace(x.StreetLine2));
         RuleFor(x => x.HouseNumber).NotEmpty().MinimumLength(1).MaximumLength(10);
         RuleFor(x => x.ZipCode).NotEmpty().MinimumLength(3).MaximumLength(10);
         RuleFor(x => x.City).MinimumLength(3).MaximumLength(100);
