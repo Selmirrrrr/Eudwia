@@ -7,15 +7,15 @@
 <MudText Typo="Typo.h5" Color="Color.Primary" Class="mb-4">Membres</MudText>
 @if (!_loaded)
 {
-    <MudProgressLinear Color="Color.Primary" Indeterminate="true" Class="my-7" />
+    <MudProgressLinear Color="Color.Primary" Indeterminate="true" Class="my-7"/>
 }
 else
 {
-    <MudTable Items="@_members" Style="" Hover="true" Dense="true" Striped="true" Filter="new Func<MembersListViewModel,bool>(FilterFunc)" OnRowClick="RowClickEvent" T="MembersListViewModel">
+    <MudTable Items="@_members" Style="" Hover="true" Dense="true" Striped="true" Filter="new Func<MembersListViewModel, bool>(FilterFunc)" OnRowClick="RowClickEvent" T="MembersListViewModel">
         <ToolBarContent>
-            <MudText Typo="Typo.h6">Liste des membres</MudText>
-            <MudSpacer />
             <MudTextField @bind-Value="_searchString" Placeholder="Recherche" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+            <MudSpacer/>
+            <MudButton OnClick="CreateMember" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Add" Color="Color.Primary">Nouveau membre</MudButton>
         </ToolBarContent>
         <HeaderContent>
             <MudTh>Prénom</MudTh>
@@ -32,11 +32,11 @@ else
             <MudTd DataLabel="Tél.">@context.Phone</MudTd>
             <MudTd DataLabel="Membre depuis">@context.MemberSince.ToShortDateString()</MudTd>
             <MudTd DataLabel="Mois payés cette année">
-                <MudRating ReadOnly="true" SelectedValue="@context.MonthsPaid" MaxValue="12" FullIcon="@Icons.Material.Rounded.Star" EmptyIcon="@Icons.Material.Rounded.StarBorder" Color="Color.Primary" />
+                <MudRating ReadOnly="true" SelectedValue="@context.MonthsPaid" MaxValue="12" FullIcon="@Icons.Material.Rounded.Star" EmptyIcon="@Icons.Material.Rounded.StarBorder" Color="Color.Primary"/>
             </MudTd>
         </RowTemplate>
         <PagerContent>
-            <MudTablePager />
+            <MudTablePager/>
         </PagerContent>
     </MudTable>
 }
@@ -45,6 +45,7 @@ else
 {
     [Inject]
     public NavigationManager NavigationManager { get; set; } = default!;
+
     private List<MembersListViewModel> _members = new();
     private string _searchString = string.Empty;
     private bool _loaded;
@@ -65,5 +66,10 @@ else
     private void RowClickEvent(TableRowClickEventArgs<MembersListViewModel> tableRowClickEventArgs)
     {
         NavigationManager.NavigateTo($"members/{tableRowClickEventArgs.Item.Id}");
+    }
+
+    private void CreateMember()
+    {
+        NavigationManager.NavigateTo($"members/create");
     }
 }

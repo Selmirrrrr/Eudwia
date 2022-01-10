@@ -1,9 +1,9 @@
 using FluentValidation;
 using MosqueLife.Shared.Enums;
 
-namespace MosqueLife.Shared.Features.Members.UpdatePersonnal;
+namespace MosqueLife.Shared.Features.Members.Create;
 
-public record MembersUpdatePersonnalCommand
+public record MembersCreateCommand
 {
     public string FirstName { get; set; } = string.Empty;
 
@@ -34,9 +34,9 @@ public record MembersUpdatePersonnalCommand
     public Language Language { get; set; }
 }
 
-public class MembersUpdatePersonnalCommandValidator : AbstractValidator<MembersUpdatePersonnalCommand> 
+public class MembersCreateCommandValidator : AbstractValidator<MembersCreateCommand> 
 {
-    public MembersUpdatePersonnalCommandValidator()
+    public MembersCreateCommandValidator()
     {
         RuleFor(x => x.FirstName).NotEmpty().MinimumLength(2).MaximumLength(100);
         RuleFor(x => x.LastName).NotEmpty().MinimumLength(2).MaximumLength(100);
@@ -56,7 +56,7 @@ public class MembersUpdatePersonnalCommandValidator : AbstractValidator<MembersU
     
     public Func<object, string, Task<IEnumerable<string>>> ValidateValue => async (model, propertyName) =>
     {
-        var result = await ValidateAsync(ValidationContext<MembersUpdatePersonnalCommand>.CreateWithOptions((MembersUpdatePersonnalCommand)model, x => x.IncludeProperties(propertyName)));
+        var result = await ValidateAsync(ValidationContext<MembersCreateCommand>.CreateWithOptions((MembersCreateCommand)model, x => x.IncludeProperties(propertyName)));
         return result.IsValid ? Array.Empty<string>() : result.Errors.Select(e => e.ErrorMessage);
     };
 }

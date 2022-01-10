@@ -16,6 +16,6 @@ public static class Routes
         public const string GetMember = "members/{memberId}";
         public const string UpdateMember = "members/{memberId}";
         public const string DeleteMember = "members/{memberId}";
-        public const string CreateMember = "members/{memberId}";
+        public const string CreateMember = "members";
     }
 }

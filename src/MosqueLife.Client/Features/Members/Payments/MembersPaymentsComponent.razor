@@ -16,25 +16,32 @@
     </MudItem>
     <MudItem xs="12" md="12">
         <MudPaper>
-            <MudTimeline TimelinePosition="TimelinePosition.Start" TimelineAlign="TimelineAlign.Default">
-                @foreach (var payment in _memebersPayments)
-                {
-                    <MudTimelineItem Size="Size.Medium" Color="@ConvertPaymentTypeToColor(payment)" Elevation="25">
-                        <MudCard Elevation="25">
-                            <MudCardHeader>
-                                <CardHeaderContent>
-                                    <MudText Typo="Typo.h5">@($"{payment.Amount:C}")</MudText>
-                                    <MudText Typo="Typo.caption">@payment.PaymentDate.ToLongDateString()</MudText>
-                                    <MudText Typo="Typo.body1">@payment.Note</MudText>
-                                </CardHeaderContent>
-                                <CardHeaderActions>
-                                    <MudIconButton OnClick="() => DeletePayment(payment.Id)" Icon="@Icons.Material.Filled.Remove" Color="Color.Default"/>
-                                </CardHeaderActions>
-                            </MudCardHeader>
-                        </MudCard>
-                    </MudTimelineItem>
-                }
-            </MudTimeline>
+            @if (!_loaded)
+            {
+                <MudProgressLinear Color="Color.Primary" Indeterminate="true" Class="my-7"/>
+            }
+            else
+            {
+                <MudTimeline TimelinePosition="TimelinePosition.Start" TimelineAlign="TimelineAlign.Default">
+                    @foreach (var payment in _memebersPayments)
+                    {
+                        <MudTimelineItem Size="Size.Medium" Color="@ConvertPaymentTypeToColor(payment)" Elevation="25">
+                            <MudCard Elevation="25">
+                                <MudCardHeader>
+                                    <CardHeaderContent>
+                                        <MudText Typo="Typo.h5">@($"{payment.Amount:C}")</MudText>
+                                        <MudText Typo="Typo.caption">@payment.PaymentDate.ToLongDateString()</MudText>
+                                        <MudText Typo="Typo.body1">@payment.Note</MudText>
+                                    </CardHeaderContent>
+                                    <CardHeaderActions>
+                                        <MudIconButton OnClick="() => DeletePayment(payment.Id)" Icon="@Icons.Material.Outlined.Delete" Color="Color.Default"/>
+                                    </CardHeaderActions>
+                                </MudCardHeader>
+                            </MudCard>
+                        </MudTimelineItem>
+                    }
+                </MudTimeline>
+            }
         </MudPaper>
     </MudItem>
     <MudItem xs="12" md="12">
@@ -57,11 +64,13 @@
     private MembersAddPaymentCommand _model = new();
     private MudForm _form = new();
     private readonly MembersAddPaymentCommandValidator _validator = new();
+    private bool _loaded;
 
     protected override async Task OnInitializedAsync()
     {
         await base.OnInitializedAsync();
         await RelaodData();
+        _loaded = true;
     }
 
     private Color ConvertPaymentTypeToColor(MembersPaymentViewModel payment)
@@ -98,7 +107,7 @@
             _snackbar.Add(errors, Severity.Warning);
         }
     }
-    
+
     private async Task RelaodData() => _memebersPayments = await _httpClient.GetFromJsonAsync<List<MembersPaymentViewModel>>($"api/members/{MemberId}/payments") ?? new List<MembersPaymentViewModel>();
 
 }

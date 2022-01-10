@@ -1,10 +1,16 @@
+@page "/members/create"
 @using Microsoft.AspNetCore.Components
 @using MosqueLife.Shared.Enums
 @using MosqueLife.Shared.Features.Countries.List
+@using MosqueLife.Shared.Features.Members.Create
 @using MosqueLife.Shared.Features.Members.Details
-@using MosqueLife.Shared.Features.Members.UpdatePersonnal
 @inject HttpClient _httpClient
 @inject ISnackbar _snackbar
+@inject NavigationManager _navigationManager
+
+@attribute [Authorize]
+
+<MudText Typo="Typo.h5" Color="Color.Primary" Class="mb-4">Ajouter un membre</MudText>
 
 <MudForm Model="@_model" @ref="@Form">
     <MudGrid>
@@ -101,8 +107,8 @@
         </MudItem>
         <MudItem xs="12" md="12">
             <MudPaper Class="d-flex flex-row-reverse py-2 px-1">
-                <MudButton Class="pa-2 mx-2" Variant="Variant.Filled" Color="Color.Primary" StartIcon="@Icons.Material.Filled.SaveAlt" OnClick="@(async () => await Submit())">Enregistrer</MudButton>
-                <MudButton Class="pa-2 mx-2" Variant="Variant.Filled" Color="Color.Dark" OnClick="@(async () => await Reset())">Reset</MudButton>
+                <MudButton Class="pa-2 mx-2" Variant="Variant.Filled" Color="Color.Primary" StartIcon="@Icons.Material.Filled.Add" OnClick="@(async () => await Submit())">Ajouter</MudButton>
+                <MudButton Class="pa-2 mx-2" Variant="Variant.Filled" Color="Color.Dark" OnClick="@(async () => await Reset())">Annuler</MudButton>
             </MudPaper>
         </MudItem>
     </MudGrid>
@@ -114,9 +120,9 @@
     public MembersDetailsViewModel ViewModel { get; set; } = new();
 
     private MudForm Form { get; set; } = default!;
-    private MembersUpdatePersonnalCommand _model = new();
+    private MembersCreateCommand _model = new();
     private IEnumerable<CountriesListViewModel> _countries = new List<CountriesListViewModel>();
-    private readonly MembersUpdatePersonnalCommandValidator _validator = new();
+    private readonly MembersCreateCommandValidator _validator = new();
 
     protected override async void OnParametersSet()
     {
@@ -133,10 +139,13 @@
     {
         try
         {
-            var result = await _httpClient.PostAsJsonAsync($"api/members/{ViewModel.Id}", _model);
+            var result = await _httpClient.PostAsJsonAsync($"api/members/", _model);
 
             if (result.IsSuccessStatusCode)
+            {
                 _snackbar.Add("Les informations personnelles ont été mises à jour.", Severity.Success);
+                _navigationManager.NavigateTo($"/members/{(await result.Content.ReadAsStringAsync()).Trim('\"')}");                
+            }
             else
             {
                 var errors = await result.Content.ReadAsStringAsync();
@@ -151,7 +160,7 @@
 
     private Task Reset()
     {
-        _model = new MembersUpdatePersonnalCommand
+        _model = new MembersCreateCommand
         {
             FirstName = ViewModel.FirstName,
             LastName = ViewModel.LastName,
