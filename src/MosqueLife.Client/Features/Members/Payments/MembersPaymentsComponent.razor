@@ -21,11 +21,16 @@
                 {
                     <MudTimelineItem Size="Size.Medium" Color="@ConvertPaymentTypeToColor(payment)" Elevation="25">
                         <MudCard Elevation="25">
-                            <MudCardContent>
-                                <MudText Typo="Typo.h5">@($"{payment.Amount:C}")</MudText>
-                                <MudText Typo="Typo.caption">@payment.PaymentDate.ToLongDateString()</MudText>
-                                <MudText Typo="Typo.body1">@payment.Note</MudText>
-                            </MudCardContent>
+                            <MudCardHeader>
+                                <CardHeaderContent>
+                                    <MudText Typo="Typo.h5">@($"{payment.Amount:C}")</MudText>
+                                    <MudText Typo="Typo.caption">@payment.PaymentDate.ToLongDateString()</MudText>
+                                    <MudText Typo="Typo.body1">@payment.Note</MudText>
+                                </CardHeaderContent>
+                                <CardHeaderActions>
+                                    <MudIconButton OnClick="() => DeletePayment(payment.Id)" Icon="@Icons.Material.Filled.Remove" Color="Color.Default"/>
+                                </CardHeaderActions>
+                            </MudCardHeader>
                         </MudCard>
                     </MudTimelineItem>
                 }
@@ -56,7 +61,7 @@
     protected override async Task OnInitializedAsync()
     {
         await base.OnInitializedAsync();
-        _memebersPayments = await _httpClient.GetFromJsonAsync<List<MembersPaymentViewModel>>($"api/members/{MemberId}/payments") ?? new List<MembersPaymentViewModel>();
+        await RelaodData();
     }
 
     private Color ConvertPaymentTypeToColor(MembersPaymentViewModel payment)
@@ -75,6 +80,25 @@
         var dialog = _dialogService.Show<MembersPaymentsAddComponent>("Confirm", parameters);
         var result = await dialog.Result;
         if (result.Cancelled) return;
-        _memebersPayments = await _httpClient.GetFromJsonAsync<List<MembersPaymentViewModel>>($"api/members/{MemberId}/payments") ?? new List<MembersPaymentViewModel>();
+        await RelaodData();
     }
+
+    private async Task DeletePayment(Guid paymentId)
+    {
+        var result = await _httpClient.DeleteAsync($"/api/members/{MemberId}/payments/{paymentId}");
+
+        if (result.IsSuccessStatusCode)
+        {
+            _snackbar.Add("Le paiment a bien étà supprimé.", Severity.Success);
+            await RelaodData();
+        }
+        else
+        {
+            var errors = await result.Content.ReadAsStringAsync();
+            _snackbar.Add(errors, Severity.Warning);
+        }
+    }
+    
+    private async Task RelaodData() => _memebersPayments = await _httpClient.GetFromJsonAsync<List<MembersPaymentViewModel>>($"api/members/{MemberId}/payments") ?? new List<MembersPaymentViewModel>();
+
 }

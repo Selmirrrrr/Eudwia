@@ -30,8 +30,10 @@ public class MemebersPaymentsEndpoint : ControllerBase
 
         var payments = await _applicationDbContext.Payments
             .Where(c => c.MemberId == memberId)
+            .Where(c => !c.IsDeleted)
             .Select(c => new MembersPaymentViewModel
             {
+                Id = c.Id,
                 Amount = c.Amount,
                 PaymentDate = c.PaymentDate,
                 PaymentType = c.PaymentType,

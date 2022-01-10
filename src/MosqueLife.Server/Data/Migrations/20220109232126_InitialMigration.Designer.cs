@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MosqueLife.Server.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220101134953_InitialMigration")]
+    [Migration("20220109232126_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -2069,323 +2069,363 @@ namespace MosqueLife.Server.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("7ec9e58a-4558-4a74-b5bc-964d3ee34f12"),
-                            BirthDate = new DateOnly(1976, 3, 8),
-                            City = "Aix-en-Provence",
+                            Id = new Guid("48fd525f-4966-41e8-968d-3f7149e389ae"),
+                            BirthDate = new DateOnly(1957, 9, 25),
+                            City = "Tours",
                             CountryId = new Guid("9bc1f1a9-7696-42e4-89aa-c93800704582"),
-                            FirstName = "Victor",
-                            HouseNumber = "861",
-                            Language = 0,
-                            LastName = "Renaud",
-                            MemberSince = new DateOnly(2021, 4, 7),
-                            State = "VD",
-                            StreetLine1 = "219 Allée d'Argenteuil",
-                            StreetLine2 = "2 étage",
-                            ZipCode = "88499"
-                        },
-                        new
-                        {
-                            Id = new Guid("c390632f-04e2-4bda-9d3e-f8bf13c27f00"),
-                            BirthDate = new DateOnly(1960, 10, 20),
-                            City = "Villeurbanne",
-                            CountryId = new Guid("9bc1f1a9-7696-42e4-89aa-c93800704582"),
-                            FirstName = "Hilaire",
-                            HouseNumber = "34",
-                            Language = 1,
-                            LastName = "Schneider",
-                            MemberSince = new DateOnly(2012, 2, 2),
-                            State = "VD",
-                            StreetLine1 = "8 Allée Pierre Charron",
-                            StreetLine2 = "Apt. 921",
-                            ZipCode = "82907"
-                        },
-                        new
-                        {
-                            Id = new Guid("fc9ea8ee-18c0-463e-b208-5b82657999c5"),
-                            BirthDate = new DateOnly(1991, 3, 27),
-                            City = "Toulon",
-                            CountryId = new Guid("9bc1f1a9-7696-42e4-89aa-c93800704582"),
-                            FirstName = "Edmée",
-                            HouseNumber = "9",
+                            Email = "Adelie_Bertrand@gmail.com",
+                            FirstName = "Élisabeth",
+                            HouseNumber = "77",
                             Language = 2,
-                            LastName = "Marchand",
-                            MemberSince = new DateOnly(2013, 3, 18),
-                            State = "VD",
-                            StreetLine1 = "6 Impasse Du Sommerard",
-                            StreetLine2 = "4 étage",
-                            ZipCode = "00699"
-                        },
-                        new
-                        {
-                            Id = new Guid("0a54a9bf-901f-49a5-a249-17c711bb6621"),
-                            BirthDate = new DateOnly(1985, 8, 17),
-                            City = "Rennes",
-                            CountryId = new Guid("9bc1f1a9-7696-42e4-89aa-c93800704582"),
-                            FirstName = "Annabelle",
-                            HouseNumber = "556",
-                            Language = 2,
-                            LastName = "Nicolas",
-                            MemberSince = new DateOnly(2019, 2, 27),
-                            State = "VD",
-                            StreetLine1 = "567 Passage Royale",
-                            StreetLine2 = "8 étage",
-                            ZipCode = "70433"
-                        },
-                        new
-                        {
-                            Id = new Guid("ffbc275f-ea62-4f58-a600-cd8a0ea8c3ed"),
-                            BirthDate = new DateOnly(1979, 10, 22),
-                            City = "Chambéry",
-                            CountryId = new Guid("9bc1f1a9-7696-42e4-89aa-c93800704582"),
-                            FirstName = "Aleth",
-                            HouseNumber = "3",
-                            Language = 0,
-                            LastName = "Martin",
-                            MemberSince = new DateOnly(2018, 4, 23),
-                            State = "VD",
-                            StreetLine1 = "544 Impasse de Rivoli",
-                            StreetLine2 = "Apt. 080",
-                            ZipCode = "54638"
-                        },
-                        new
-                        {
-                            Id = new Guid("6a817924-9c58-4dfd-8737-0c3c2a5d009d"),
-                            BirthDate = new DateOnly(1955, 10, 27),
-                            City = "Bourges",
-                            CountryId = new Guid("9bc1f1a9-7696-42e4-89aa-c93800704582"),
-                            FirstName = "Aube",
-                            HouseNumber = "9586",
-                            Language = 2,
-                            LastName = "Carre",
-                            MemberSince = new DateOnly(2016, 3, 21),
-                            State = "VD",
-                            StreetLine1 = "916 Boulevard des Saussaies",
-                            StreetLine2 = "Apt. 381",
-                            ZipCode = "93983"
-                        },
-                        new
-                        {
-                            Id = new Guid("9bb3b604-164b-40d4-9d8c-80446606f855"),
-                            BirthDate = new DateOnly(1992, 12, 25),
-                            City = "Noisy-le-Grand",
-                            CountryId = new Guid("9bc1f1a9-7696-42e4-89aa-c93800704582"),
-                            FirstName = "Scholastique",
-                            HouseNumber = "7425",
-                            Language = 0,
-                            LastName = "Remy",
-                            MemberSince = new DateOnly(2019, 5, 29),
-                            State = "VD",
-                            StreetLine1 = "0197 Boulevard de Paris",
-                            StreetLine2 = "Apt. 889",
-                            ZipCode = "74699"
-                        },
-                        new
-                        {
-                            Id = new Guid("743e47d8-d927-4999-ac3f-87ca70e37025"),
-                            BirthDate = new DateOnly(1970, 6, 8),
-                            City = "Amiens",
-                            CountryId = new Guid("9bc1f1a9-7696-42e4-89aa-c93800704582"),
-                            FirstName = "Chrysole",
-                            HouseNumber = "61",
-                            Language = 0,
-                            LastName = "Vasseur",
-                            MemberSince = new DateOnly(2020, 3, 7),
-                            State = "VD",
-                            StreetLine1 = "715 Impasse de Tilsitt",
-                            StreetLine2 = "6 étage",
-                            ZipCode = "79143"
-                        },
-                        new
-                        {
-                            Id = new Guid("c40325b2-00dc-424c-bdb2-826cb64bc22a"),
-                            BirthDate = new DateOnly(1999, 9, 9),
-                            City = "Troyes",
-                            CountryId = new Guid("9bc1f1a9-7696-42e4-89aa-c93800704582"),
-                            FirstName = "Aurélie",
-                            HouseNumber = "8",
-                            Language = 2,
-                            LastName = "Faure",
-                            MemberSince = new DateOnly(2020, 2, 19),
-                            State = "VD",
-                            StreetLine1 = "05 Rue du Faubourg Saint-Honoré",
-                            StreetLine2 = "3 étage",
-                            ZipCode = "81995"
-                        },
-                        new
-                        {
-                            Id = new Guid("1986cf92-661b-4935-8549-b47c80bc9455"),
-                            BirthDate = new DateOnly(1996, 1, 21),
-                            City = "Le Tampon",
-                            CountryId = new Guid("9bc1f1a9-7696-42e4-89aa-c93800704582"),
-                            FirstName = "Eulalie",
-                            HouseNumber = "698",
-                            Language = 2,
-                            LastName = "Deschamps",
-                            MemberSince = new DateOnly(2021, 10, 8),
-                            State = "VD",
-                            StreetLine1 = "11 Allée Saint-Honoré",
-                            StreetLine2 = "Apt. 096",
-                            ZipCode = "60411"
-                        },
-                        new
-                        {
-                            Id = new Guid("e4863da0-3e5c-4431-9dfa-551c4ef94c56"),
-                            BirthDate = new DateOnly(1987, 12, 26),
-                            City = "Clermont-Ferrand",
-                            CountryId = new Guid("9bc1f1a9-7696-42e4-89aa-c93800704582"),
-                            FirstName = "Apolline",
-                            HouseNumber = "3",
-                            Language = 0,
-                            LastName = "Dupuis",
-                            MemberSince = new DateOnly(2012, 10, 31),
-                            State = "VD",
-                            StreetLine1 = "04 Quai des Francs-Bourgeois",
-                            StreetLine2 = "1 étage",
-                            ZipCode = "80530"
-                        },
-                        new
-                        {
-                            Id = new Guid("4333d245-b59c-47df-b304-0504151cd170"),
-                            BirthDate = new DateOnly(1950, 4, 15),
-                            City = "Roubaix",
-                            CountryId = new Guid("9bc1f1a9-7696-42e4-89aa-c93800704582"),
-                            FirstName = "Axelle",
-                            HouseNumber = "1535",
-                            Language = 0,
-                            LastName = "Morel",
-                            MemberSince = new DateOnly(2016, 1, 14),
-                            State = "VD",
-                            StreetLine1 = "2 Boulevard de Vaugirard",
-                            StreetLine2 = "Apt. 987",
-                            ZipCode = "57327"
-                        },
-                        new
-                        {
-                            Id = new Guid("2a94a07d-ba5d-4c1d-a884-18757698c355"),
-                            BirthDate = new DateOnly(1959, 3, 4),
-                            City = "Aulnay-sous-Bois",
-                            CountryId = new Guid("9bc1f1a9-7696-42e4-89aa-c93800704582"),
-                            FirstName = "Auxane",
-                            HouseNumber = "8",
-                            Language = 0,
-                            LastName = "Berger",
-                            MemberSince = new DateOnly(2015, 3, 25),
-                            State = "VD",
-                            StreetLine1 = "2176 Avenue Marcadet",
-                            StreetLine2 = "Apt. 970",
-                            ZipCode = "43833"
-                        },
-                        new
-                        {
-                            Id = new Guid("bfdab30f-4fba-4ff9-b315-49387b7a6372"),
-                            BirthDate = new DateOnly(1968, 4, 6),
-                            City = "Levallois-Perret",
-                            CountryId = new Guid("9bc1f1a9-7696-42e4-89aa-c93800704582"),
-                            FirstName = "Aldric",
-                            HouseNumber = "50",
-                            Language = 0,
-                            LastName = "Vidal",
-                            MemberSince = new DateOnly(2016, 12, 8),
-                            State = "VD",
-                            StreetLine1 = "8 Voie Saint-Dominique",
-                            StreetLine2 = "5 étage",
-                            ZipCode = "66669"
-                        },
-                        new
-                        {
-                            Id = new Guid("fb467bd5-82b5-4ead-91c0-9eb4170a49d4"),
-                            BirthDate = new DateOnly(1993, 10, 27),
-                            City = "Mulhouse",
-                            CountryId = new Guid("9bc1f1a9-7696-42e4-89aa-c93800704582"),
-                            FirstName = "Adolphie",
-                            HouseNumber = "6085",
-                            Language = 0,
                             LastName = "Le roux",
-                            MemberSince = new DateOnly(2015, 9, 26),
+                            MemberSince = new DateOnly(2021, 4, 15),
+                            PhoneNumber = "0526436068",
                             State = "VD",
-                            StreetLine1 = "060 Impasse Marcadet",
-                            StreetLine2 = "Apt. 824",
-                            ZipCode = "74038"
+                            StreetLine1 = "2246 Avenue de la Harpe",
+                            StreetLine2 = "Apt. 828",
+                            ZipCode = "22630"
                         },
                         new
                         {
-                            Id = new Guid("4341e472-ce11-4bb5-9627-a8b78fac99f7"),
-                            BirthDate = new DateOnly(1985, 12, 16),
-                            City = "Nantes",
+                            Id = new Guid("f6cde8a2-e554-41d3-ae69-9589170b99c9"),
+                            BirthDate = new DateOnly(1977, 1, 24),
+                            City = "Versailles",
                             CountryId = new Guid("9bc1f1a9-7696-42e4-89aa-c93800704582"),
-                            FirstName = "Hardouin",
-                            HouseNumber = "742",
-                            Language = 1,
-                            LastName = "Rousseau",
-                            MemberSince = new DateOnly(2021, 9, 16),
+                            Email = "Adelie_Bertrand@gmail.com",
+                            FirstName = "Loïc",
+                            HouseNumber = "040",
+                            Language = 2,
+                            LastName = "Carpentier",
+                            MemberSince = new DateOnly(2014, 7, 15),
+                            PhoneNumber = "0526436068",
                             State = "VD",
-                            StreetLine1 = "341 Rue d'Abbeville",
-                            StreetLine2 = "6 étage",
-                            ZipCode = "59090"
+                            StreetLine1 = "8012 Place de Caumartin",
+                            StreetLine2 = "Apt. 758",
+                            ZipCode = "27663"
                         },
                         new
                         {
-                            Id = new Guid("6bb109f5-75b5-4c06-ab9f-3be75d2ee8cb"),
-                            BirthDate = new DateOnly(1960, 5, 12),
+                            Id = new Guid("5ec1fd6b-5237-4f3d-94c1-fc36c7744b1d"),
+                            BirthDate = new DateOnly(1999, 9, 16),
                             City = "Paris",
                             CountryId = new Guid("9bc1f1a9-7696-42e4-89aa-c93800704582"),
-                            FirstName = "Azeline",
-                            HouseNumber = "2960",
-                            Language = 0,
-                            LastName = "Jean",
-                            MemberSince = new DateOnly(2019, 6, 23),
+                            Email = "Adelie_Bertrand@gmail.com",
+                            FirstName = "Madeleine",
+                            HouseNumber = "07",
+                            Language = 1,
+                            LastName = "Adam",
+                            MemberSince = new DateOnly(2020, 6, 7),
+                            PhoneNumber = "0526436068",
                             State = "VD",
-                            StreetLine1 = "4 Voie Saint-Honoré",
-                            StreetLine2 = "Apt. 360",
-                            ZipCode = "91920"
+                            StreetLine1 = "25 Impasse Saint-Bernard",
+                            StreetLine2 = "Apt. 604",
+                            ZipCode = "68194"
                         },
                         new
                         {
-                            Id = new Guid("a577cef9-574f-4b4b-a550-d73ee538cf8e"),
-                            BirthDate = new DateOnly(1987, 12, 2),
+                            Id = new Guid("fdaf0699-a28e-403c-8775-54a475a1cf0a"),
+                            BirthDate = new DateOnly(1985, 4, 9),
+                            City = "Aix-en-Provence",
+                            CountryId = new Guid("9bc1f1a9-7696-42e4-89aa-c93800704582"),
+                            Email = "Adelie_Bertrand@gmail.com",
+                            FirstName = "Sauveur",
+                            HouseNumber = "691",
+                            Language = 1,
+                            LastName = "Durand",
+                            MemberSince = new DateOnly(2015, 6, 10),
+                            PhoneNumber = "0526436068",
+                            State = "VD",
+                            StreetLine1 = "168 Boulevard Saint-Dominique",
+                            StreetLine2 = "3 étage",
+                            ZipCode = "65475"
+                        },
+                        new
+                        {
+                            Id = new Guid("7e3ec143-3e22-48ca-8dd5-4fb8965cbebe"),
+                            BirthDate = new DateOnly(1964, 5, 3),
+                            City = "Nanterre",
+                            CountryId = new Guid("9bc1f1a9-7696-42e4-89aa-c93800704582"),
+                            Email = "Adelie_Bertrand@gmail.com",
+                            FirstName = "Camille",
+                            HouseNumber = "73",
+                            Language = 0,
+                            LastName = "Schneider",
+                            MemberSince = new DateOnly(2012, 8, 27),
+                            PhoneNumber = "0526436068",
+                            State = "VD",
+                            StreetLine1 = "7664 Voie de la Chaussée-d'Antin",
+                            StreetLine2 = "Apt. 085",
+                            ZipCode = "13449"
+                        },
+                        new
+                        {
+                            Id = new Guid("abe7de98-bd86-4c20-9918-d0e3d8867123"),
+                            BirthDate = new DateOnly(1970, 12, 25),
+                            City = "Villeneuve-d'Ascq",
+                            CountryId = new Guid("9bc1f1a9-7696-42e4-89aa-c93800704582"),
+                            Email = "Adelie_Bertrand@gmail.com",
+                            FirstName = "Éléonore",
+                            HouseNumber = "14",
+                            Language = 0,
+                            LastName = "Paul",
+                            MemberSince = new DateOnly(2018, 6, 10),
+                            PhoneNumber = "0526436068",
+                            State = "VD",
+                            StreetLine1 = "60 Place du Dahomey",
+                            StreetLine2 = "8 étage",
+                            ZipCode = "01226"
+                        },
+                        new
+                        {
+                            Id = new Guid("793a0118-98ec-4b18-83ca-6d5f77fda5a0"),
+                            BirthDate = new DateOnly(1971, 4, 23),
                             City = "Saint-Denis",
                             CountryId = new Guid("9bc1f1a9-7696-42e4-89aa-c93800704582"),
-                            FirstName = "Maxime",
-                            HouseNumber = "9354",
+                            Email = "Adelie_Bertrand@gmail.com",
+                            FirstName = "Aymardine",
+                            HouseNumber = "5659",
                             Language = 0,
+                            LastName = "Guillaume",
+                            MemberSince = new DateOnly(2013, 11, 4),
+                            PhoneNumber = "0526436068",
+                            State = "VD",
+                            StreetLine1 = "142 Voie de Tilsitt",
+                            StreetLine2 = "0 étage",
+                            ZipCode = "93656"
+                        },
+                        new
+                        {
+                            Id = new Guid("12d76e6f-a966-4235-8f43-991d88418b1f"),
+                            BirthDate = new DateOnly(1980, 9, 30),
+                            City = "Toulouse",
+                            CountryId = new Guid("9bc1f1a9-7696-42e4-89aa-c93800704582"),
+                            Email = "Adelie_Bertrand@gmail.com",
+                            FirstName = "Eusébie",
+                            HouseNumber = "6",
+                            Language = 1,
+                            LastName = "Cousin",
+                            MemberSince = new DateOnly(2012, 12, 12),
+                            PhoneNumber = "0526436068",
+                            State = "VD",
+                            StreetLine1 = "5 Impasse Montorgueil",
+                            StreetLine2 = "Apt. 007",
+                            ZipCode = "84883"
+                        },
+                        new
+                        {
+                            Id = new Guid("b2724ea1-4cce-450f-8bab-67988a9f865e"),
+                            BirthDate = new DateOnly(1979, 11, 4),
+                            City = "Clichy",
+                            CountryId = new Guid("9bc1f1a9-7696-42e4-89aa-c93800704582"),
+                            Email = "Adelie_Bertrand@gmail.com",
+                            FirstName = "Fiacre",
+                            HouseNumber = "8",
+                            Language = 1,
+                            LastName = "Guyot",
+                            MemberSince = new DateOnly(2013, 12, 26),
+                            PhoneNumber = "0526436068",
+                            State = "VD",
+                            StreetLine1 = "3 Avenue de Paris",
+                            StreetLine2 = "5 étage",
+                            ZipCode = "61960"
+                        },
+                        new
+                        {
+                            Id = new Guid("15358ab3-4b57-4e5e-877a-7e4762f018d4"),
+                            BirthDate = new DateOnly(1977, 5, 22),
+                            City = "Bourges",
+                            CountryId = new Guid("9bc1f1a9-7696-42e4-89aa-c93800704582"),
+                            Email = "Adelie_Bertrand@gmail.com",
+                            FirstName = "Réjeanne",
+                            HouseNumber = "4",
+                            Language = 2,
+                            LastName = "Rousseau",
+                            MemberSince = new DateOnly(2018, 5, 28),
+                            PhoneNumber = "0526436068",
+                            State = "VD",
+                            StreetLine1 = "4242 Place de Paris",
+                            StreetLine2 = "4 étage",
+                            ZipCode = "16186"
+                        },
+                        new
+                        {
+                            Id = new Guid("ed8f84dd-7f9d-4317-80fa-419913dc23fb"),
+                            BirthDate = new DateOnly(1956, 4, 4),
+                            City = "Sarcelles",
+                            CountryId = new Guid("9bc1f1a9-7696-42e4-89aa-c93800704582"),
+                            Email = "Adelie_Bertrand@gmail.com",
+                            FirstName = "Sigismond",
+                            HouseNumber = "075",
+                            Language = 1,
+                            LastName = "Barre",
+                            MemberSince = new DateOnly(2012, 3, 4),
+                            PhoneNumber = "0526436068",
+                            State = "VD",
+                            StreetLine1 = "7969 Allée de Tilsitt",
+                            StreetLine2 = "Apt. 264",
+                            ZipCode = "06091"
+                        },
+                        new
+                        {
+                            Id = new Guid("1f75aa88-935c-4eb2-9891-d39332949ed6"),
+                            BirthDate = new DateOnly(1969, 6, 3),
+                            City = "Aubervilliers",
+                            CountryId = new Guid("9bc1f1a9-7696-42e4-89aa-c93800704582"),
+                            Email = "Adelie_Bertrand@gmail.com",
+                            FirstName = "Yvonne",
+                            HouseNumber = "02",
+                            Language = 0,
+                            LastName = "Lucas",
+                            MemberSince = new DateOnly(2015, 3, 24),
+                            PhoneNumber = "0526436068",
+                            State = "VD",
+                            StreetLine1 = "8653 Rue Joubert",
+                            StreetLine2 = "Apt. 705",
+                            ZipCode = "75568"
+                        },
+                        new
+                        {
+                            Id = new Guid("3ee5aab2-ccc1-45d2-89c0-341336f72a9a"),
+                            BirthDate = new DateOnly(1974, 8, 6),
+                            City = "Saint-Denis",
+                            CountryId = new Guid("9bc1f1a9-7696-42e4-89aa-c93800704582"),
+                            Email = "Adelie_Bertrand@gmail.com",
+                            FirstName = "Léon",
+                            HouseNumber = "8",
+                            Language = 1,
+                            LastName = "Bonnet",
+                            MemberSince = new DateOnly(2015, 4, 16),
+                            PhoneNumber = "0526436068",
+                            State = "VD",
+                            StreetLine1 = "9952 Quai Monsieur-le-Prince",
+                            StreetLine2 = "9 étage",
+                            ZipCode = "61572"
+                        },
+                        new
+                        {
+                            Id = new Guid("39ef24e4-1de6-423d-b64d-c7057cd571cc"),
+                            BirthDate = new DateOnly(1985, 5, 8),
+                            City = "Boulogne-Billancourt",
+                            CountryId = new Guid("9bc1f1a9-7696-42e4-89aa-c93800704582"),
+                            Email = "Adelie_Bertrand@gmail.com",
+                            FirstName = "Berthe",
+                            HouseNumber = "7721",
+                            Language = 1,
                             LastName = "Garnier",
-                            MemberSince = new DateOnly(2012, 1, 25),
+                            MemberSince = new DateOnly(2020, 10, 25),
+                            PhoneNumber = "0526436068",
                             State = "VD",
-                            StreetLine1 = "3702 Place de Rivoli",
-                            StreetLine2 = "Apt. 023",
-                            ZipCode = "41245"
+                            StreetLine1 = "097 Boulevard d'Argenteuil",
+                            StreetLine2 = "9 étage",
+                            ZipCode = "45589"
                         },
                         new
                         {
-                            Id = new Guid("f434642d-c01d-4cdd-85c5-4fdf5df07c0e"),
-                            BirthDate = new DateOnly(1965, 11, 22),
-                            City = "Amiens",
+                            Id = new Guid("c93cf7ba-5301-4a59-8238-b7a2e73b924f"),
+                            BirthDate = new DateOnly(1996, 9, 20),
+                            City = "Beauvais",
                             CountryId = new Guid("9bc1f1a9-7696-42e4-89aa-c93800704582"),
-                            FirstName = "Damien",
-                            HouseNumber = "6017",
-                            Language = 2,
-                            LastName = "Marchand",
-                            MemberSince = new DateOnly(2019, 6, 1),
+                            Email = "Adelie_Bertrand@gmail.com",
+                            FirstName = "Argine",
+                            HouseNumber = "31",
+                            Language = 0,
+                            LastName = "Muller",
+                            MemberSince = new DateOnly(2019, 1, 18),
+                            PhoneNumber = "0526436068",
                             State = "VD",
-                            StreetLine1 = "04 Impasse Zadkine",
-                            StreetLine2 = "Apt. 853",
-                            ZipCode = "09381"
+                            StreetLine1 = "2731 Quai des Lombards",
+                            StreetLine2 = "Apt. 671",
+                            ZipCode = "74965"
                         },
                         new
                         {
-                            Id = new Guid("66176f28-d002-454d-b567-38f41464878f"),
-                            BirthDate = new DateOnly(1971, 12, 3),
-                            City = "Limoges",
+                            Id = new Guid("83f91037-a88d-4711-9911-ff86488bc237"),
+                            BirthDate = new DateOnly(1992, 6, 15),
+                            City = "Saint-Denis",
                             CountryId = new Guid("9bc1f1a9-7696-42e4-89aa-c93800704582"),
-                            FirstName = "Armelle",
-                            HouseNumber = "04",
+                            Email = "Adelie_Bertrand@gmail.com",
+                            FirstName = "Anselme",
+                            HouseNumber = "2454",
                             Language = 2,
-                            LastName = "Roussel",
-                            MemberSince = new DateOnly(2017, 1, 10),
+                            LastName = "Legrand",
+                            MemberSince = new DateOnly(2018, 1, 12),
+                            PhoneNumber = "0526436068",
                             State = "VD",
-                            StreetLine1 = "885 Avenue Saint-Jacques",
-                            StreetLine2 = "Apt. 617",
-                            ZipCode = "87379"
+                            StreetLine1 = "9764 Passage Laffitte",
+                            StreetLine2 = "Apt. 089",
+                            ZipCode = "97606"
+                        },
+                        new
+                        {
+                            Id = new Guid("09f419d2-09d8-4182-ac95-695055e5e634"),
+                            BirthDate = new DateOnly(1992, 5, 6),
+                            City = "Roubaix",
+                            CountryId = new Guid("9bc1f1a9-7696-42e4-89aa-c93800704582"),
+                            Email = "Adelie_Bertrand@gmail.com",
+                            FirstName = "Amaliane",
+                            HouseNumber = "349",
+                            Language = 2,
+                            LastName = "Lemaire",
+                            MemberSince = new DateOnly(2013, 2, 12),
+                            PhoneNumber = "0526436068",
+                            State = "VD",
+                            StreetLine1 = "2 Quai du Dahomey",
+                            StreetLine2 = "Apt. 036",
+                            ZipCode = "35412"
+                        },
+                        new
+                        {
+                            Id = new Guid("8c59bd75-b7f6-43d5-87c5-c44061095f9c"),
+                            BirthDate = new DateOnly(1975, 7, 30),
+                            City = "Nice",
+                            CountryId = new Guid("9bc1f1a9-7696-42e4-89aa-c93800704582"),
+                            Email = "Adelie_Bertrand@gmail.com",
+                            FirstName = "François",
+                            HouseNumber = "543",
+                            Language = 0,
+                            LastName = "Simon",
+                            MemberSince = new DateOnly(2014, 8, 6),
+                            PhoneNumber = "0526436068",
+                            State = "VD",
+                            StreetLine1 = "566 Boulevard Joubert",
+                            StreetLine2 = "2 étage",
+                            ZipCode = "92790"
+                        },
+                        new
+                        {
+                            Id = new Guid("4385ff43-6e8d-444f-a265-cf8d478744f6"),
+                            BirthDate = new DateOnly(1973, 10, 6),
+                            City = "Avignon",
+                            CountryId = new Guid("9bc1f1a9-7696-42e4-89aa-c93800704582"),
+                            Email = "Adelie_Bertrand@gmail.com",
+                            FirstName = "Alcide",
+                            HouseNumber = "4792",
+                            Language = 0,
+                            LastName = "Robert",
+                            MemberSince = new DateOnly(2014, 10, 18),
+                            PhoneNumber = "0526436068",
+                            State = "VD",
+                            StreetLine1 = "203 Passage de Provence",
+                            StreetLine2 = "Apt. 759",
+                            ZipCode = "54594"
+                        },
+                        new
+                        {
+                            Id = new Guid("cbf11d4f-3fe4-4ec9-ba79-fc5ff2ee2f4b"),
+                            BirthDate = new DateOnly(1998, 10, 14),
+                            City = "Colombes",
+                            CountryId = new Guid("9bc1f1a9-7696-42e4-89aa-c93800704582"),
+                            Email = "Adelie_Bertrand@gmail.com",
+                            FirstName = "Ludovic",
+                            HouseNumber = "9223",
+                            Language = 0,
+                            LastName = "Berger",
+                            MemberSince = new DateOnly(2013, 6, 18),
+                            PhoneNumber = "0526436068",
+                            State = "VD",
+                            StreetLine1 = "9 Rue de Seine",
+                            StreetLine2 = "4 étage",
+                            ZipCode = "80261"
                         });
                 });
 
@@ -2397,6 +2437,9 @@ namespace MosqueLife.Server.Data.Migrations
 
                     b.Property<decimal>("Amount")
                         .HasColumnType("numeric");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("boolean");
 
                     b.Property<Guid>("MemberId")
                         .HasColumnType("uuid");
@@ -2420,1803 +2463,2003 @@ namespace MosqueLife.Server.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("96e9be94-3a63-483e-8aa0-12ea57180e74"),
-                            Amount = 0m,
-                            MemberId = new Guid("7ec9e58a-4558-4a74-b5bc-964d3ee34f12"),
-                            Note = "Natus et eveniet asperiores blanditiis placeat at et sit ut. Voluptas veritatis ut non.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PaymentType = 1
-                        },
-                        new
-                        {
-                            Id = new Guid("122732c2-9964-48b3-adc2-d722523419ee"),
-                            Amount = 0m,
-                            MemberId = new Guid("7ec9e58a-4558-4a74-b5bc-964d3ee34f12"),
-                            Note = "Soluta eum commodi dolores aut ut occaecati enim distinctio. Laborum qui eveniet in. Molestiae in modi dolorem perferendis. Maxime deserunt omnis deserunt nulla sit ut consectetur.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PaymentType = 0
-                        },
-                        new
-                        {
-                            Id = new Guid("66500b3f-8ba0-4517-ac87-69191f146ec3"),
-                            Amount = 0m,
-                            MemberId = new Guid("7ec9e58a-4558-4a74-b5bc-964d3ee34f12"),
-                            Note = "Non neque quia aut quos expedita numquam aut. Vero et laborum est beatae maiores et sunt recusandae. Occaecati inventore libero voluptatem quasi commodi placeat.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PaymentType = 0
-                        },
-                        new
-                        {
-                            Id = new Guid("6bfb5312-b364-48e6-88fd-4197f17ae650"),
-                            Amount = 0m,
-                            MemberId = new Guid("7ec9e58a-4558-4a74-b5bc-964d3ee34f12"),
-                            Note = "Tempore ipsum dicta et repudiandae illum saepe labore. Et voluptas ad voluptatem.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PaymentType = 1
-                        },
-                        new
-                        {
-                            Id = new Guid("93fde85b-f47f-4b91-9bae-d7d09888e883"),
-                            Amount = 0m,
-                            MemberId = new Guid("7ec9e58a-4558-4a74-b5bc-964d3ee34f12"),
-                            Note = "Perferendis ut vel optio et. Consequatur sit quia deserunt.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = new Guid("9b1e0220-90c2-4fe0-a49f-a602e2549c66"),
+                            Amount = 140.345968931287000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("48fd525f-4966-41e8-968d-3f7149e389ae"),
+                            Note = "Eos rerum enim est commodi qui voluptatem nulla dolor praesentium. Repellendus et occaecati et ab ducimus eius sequi unde dolore. Quo ut dolorem repudiandae delectus et laborum. Quidem commodi asperiores.",
+                            PaymentDate = new DateTime(2018, 7, 19, 3, 41, 37, 42, DateTimeKind.Utc).AddTicks(8608),
                             PaymentType = 99
                         },
                         new
                         {
-                            Id = new Guid("402cce7f-b309-4054-9002-a296b25bde36"),
-                            Amount = 0m,
-                            MemberId = new Guid("7ec9e58a-4558-4a74-b5bc-964d3ee34f12"),
-                            Note = "Provident tempore et voluptates in qui.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = new Guid("f62c3422-9b72-4fd3-8ccb-7949124265a7"),
+                            Amount = 767.487229793799000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("48fd525f-4966-41e8-968d-3f7149e389ae"),
+                            Note = "Laborum voluptate culpa non hic maiores aperiam facere. Unde aspernatur magni eum provident. Corporis laborum vero accusantium molestias hic nihil et et.",
+                            PaymentDate = new DateTime(2016, 1, 27, 1, 39, 32, 566, DateTimeKind.Utc).AddTicks(37),
+                            PaymentType = 1
+                        },
+                        new
+                        {
+                            Id = new Guid("8902a6be-f343-4f3c-ad36-0ad9c1033aee"),
+                            Amount = 820.393377647853000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("48fd525f-4966-41e8-968d-3f7149e389ae"),
+                            Note = "Adipisci quas consequatur nam id autem. Id quasi sunt quas eligendi harum. Dolorum similique voluptatum voluptatum in quos ipsum mollitia eius.",
+                            PaymentDate = new DateTime(2021, 11, 14, 14, 49, 30, 31, DateTimeKind.Utc).AddTicks(9305),
+                            PaymentType = 0
+                        },
+                        new
+                        {
+                            Id = new Guid("aa67f672-c529-4d0d-87ed-3d7186575a40"),
+                            Amount = 759.645711773828000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("48fd525f-4966-41e8-968d-3f7149e389ae"),
+                            Note = "Esse maxime repellat consequatur quis ullam. Inventore illo vero sequi eaque non voluptas.",
+                            PaymentDate = new DateTime(2012, 9, 21, 2, 25, 24, 262, DateTimeKind.Utc).AddTicks(2536),
+                            PaymentType = 0
+                        },
+                        new
+                        {
+                            Id = new Guid("5dea34ba-a344-4f62-a409-89eb57f699ed"),
+                            Amount = 532.217648991226000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("48fd525f-4966-41e8-968d-3f7149e389ae"),
+                            Note = "Tempore ea ipsa assumenda aliquam aut animi est voluptate consequatur.",
+                            PaymentDate = new DateTime(2012, 8, 30, 22, 0, 29, 583, DateTimeKind.Utc).AddTicks(3061),
+                            PaymentType = 0
+                        },
+                        new
+                        {
+                            Id = new Guid("f0f35294-4269-4e18-b3bb-9a1d7051d563"),
+                            Amount = 963.100326259378000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("48fd525f-4966-41e8-968d-3f7149e389ae"),
+                            Note = "Corrupti quia tempora natus. Commodi ut quod non voluptatibus ex cum quo. Quos expedita fuga ipsam enim et rerum qui qui. Praesentium ea est voluptatibus accusamus iure.",
+                            PaymentDate = new DateTime(2018, 3, 29, 12, 2, 23, 783, DateTimeKind.Utc).AddTicks(8405),
+                            PaymentType = 0
+                        },
+                        new
+                        {
+                            Id = new Guid("d71abb84-0971-4a36-a36c-35be0d676774"),
+                            Amount = 260.949375631493000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("48fd525f-4966-41e8-968d-3f7149e389ae"),
+                            Note = "Quas debitis est velit. Quia dolores vel maxime eius doloremque eveniet non qui.",
+                            PaymentDate = new DateTime(2014, 10, 13, 20, 11, 25, 584, DateTimeKind.Utc).AddTicks(8198),
+                            PaymentType = 1
+                        },
+                        new
+                        {
+                            Id = new Guid("d3baf705-bf91-40ea-a12e-cc9c7975ca75"),
+                            Amount = 325.89009491702000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("48fd525f-4966-41e8-968d-3f7149e389ae"),
+                            Note = "Exercitationem qui iste tempora aut. Aut tempora officiis qui ea ullam enim cum amet voluptatem. Est architecto adipisci quia ut recusandae tenetur unde rerum. Aspernatur magnam nobis quos.",
+                            PaymentDate = new DateTime(2014, 3, 10, 12, 17, 50, 168, DateTimeKind.Utc).AddTicks(8142),
+                            PaymentType = 0
+                        },
+                        new
+                        {
+                            Id = new Guid("065421a0-63f9-434f-80bb-f8b0ec63322d"),
+                            Amount = 90.2286971445073000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("48fd525f-4966-41e8-968d-3f7149e389ae"),
+                            Note = "Natus vel temporibus amet earum deleniti necessitatibus sunt sint eos.",
+                            PaymentDate = new DateTime(2017, 5, 3, 16, 12, 45, 837, DateTimeKind.Utc).AddTicks(528),
                             PaymentType = 99
                         },
                         new
                         {
-                            Id = new Guid("5b2f7de7-88d6-4aa2-ac3e-90d9ed18af6d"),
-                            Amount = 0m,
-                            MemberId = new Guid("7ec9e58a-4558-4a74-b5bc-964d3ee34f12"),
-                            Note = "Ratione neque maxime enim sit aperiam ea. Et magnam aliquid. Rem nihil qui. Possimus sed earum iure.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PaymentType = 0
+                            Id = new Guid("c6c6fc2f-48d5-490a-8238-0807f3837db4"),
+                            Amount = 615.385291010788000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("48fd525f-4966-41e8-968d-3f7149e389ae"),
+                            Note = "Libero est ducimus qui non voluptatibus.",
+                            PaymentDate = new DateTime(2014, 4, 23, 20, 28, 24, 569, DateTimeKind.Utc).AddTicks(7171),
+                            PaymentType = 1
                         },
                         new
                         {
-                            Id = new Guid("f3d117a7-475b-425f-a6e8-88b35f99d564"),
-                            Amount = 0m,
-                            MemberId = new Guid("7ec9e58a-4558-4a74-b5bc-964d3ee34f12"),
-                            Note = "Ducimus ea molestiae eum distinctio aut. Itaque nulla consectetur qui rem. Suscipit numquam eius praesentium saepe voluptates quod dolore.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = new Guid("760f59cf-a786-4e35-b703-f0042135cfb7"),
+                            Amount = 744.930883254588000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("f6cde8a2-e554-41d3-ae69-9589170b99c9"),
+                            Note = "Consequatur neque sit iste esse facere in. Delectus voluptatem sit molestiae quia vitae molestiae et maiores. Eum quod ad est amet.",
+                            PaymentDate = new DateTime(2013, 6, 13, 5, 32, 0, 8, DateTimeKind.Utc).AddTicks(282),
                             PaymentType = 99
                         },
                         new
                         {
-                            Id = new Guid("e0e7a244-0e7e-4bae-be04-923fbe99a312"),
-                            Amount = 0m,
-                            MemberId = new Guid("7ec9e58a-4558-4a74-b5bc-964d3ee34f12"),
-                            Note = "Amet consectetur aspernatur vel reiciendis accusantium voluptates omnis eligendi. Sit quia minus assumenda expedita sit deserunt. Odit ut est veritatis exercitationem corporis voluptatibus nihil.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PaymentType = 0
-                        },
-                        new
-                        {
-                            Id = new Guid("df095dab-96ae-4d90-97aa-a3da93de68a1"),
-                            Amount = 0m,
-                            MemberId = new Guid("7ec9e58a-4558-4a74-b5bc-964d3ee34f12"),
-                            Note = "Cum quasi voluptatem laborum quas. Et dolor dolores rem eum non facilis. Ad in maiores fugit.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PaymentType = 0
-                        },
-                        new
-                        {
-                            Id = new Guid("ad4a8d15-e802-4911-9908-beca973832b8"),
-                            Amount = 0m,
-                            MemberId = new Guid("c390632f-04e2-4bda-9d3e-f8bf13c27f00"),
-                            Note = "Ut et quo veniam veritatis itaque at.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PaymentType = 0
-                        },
-                        new
-                        {
-                            Id = new Guid("65aa1619-0746-4184-a5cb-d8ffe9362c1f"),
-                            Amount = 0m,
-                            MemberId = new Guid("c390632f-04e2-4bda-9d3e-f8bf13c27f00"),
-                            Note = "Vel et perspiciatis consectetur porro quia reprehenderit ea pariatur. Reprehenderit alias eaque explicabo ipsa et id magni nulla. Dolore repudiandae quam itaque cumque exercitationem est veniam nobis nobis.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PaymentType = 0
-                        },
-                        new
-                        {
-                            Id = new Guid("a2481f84-aaa5-4ef9-91b3-ed00352df28e"),
-                            Amount = 0m,
-                            MemberId = new Guid("c390632f-04e2-4bda-9d3e-f8bf13c27f00"),
-                            Note = "Sed velit perferendis dolor voluptas nisi voluptatum. Optio iste delectus eos sit expedita quis ipsa eius amet. Et esse nemo vel ut dolores sed et alias aliquid. Consequuntur quam maxime ex qui rerum alias voluptates.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = new Guid("8a1775e1-b39c-4ed3-b320-4fc8994fee59"),
+                            Amount = 415.236918359222000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("f6cde8a2-e554-41d3-ae69-9589170b99c9"),
+                            Note = "Voluptates saepe quae nam hic et a. Vitae occaecati error dolores.",
+                            PaymentDate = new DateTime(2012, 6, 19, 15, 21, 34, 0, DateTimeKind.Utc).AddTicks(4740),
                             PaymentType = 99
                         },
                         new
                         {
-                            Id = new Guid("b8ef0e86-774a-42c3-82b5-d7c0a2192529"),
-                            Amount = 0m,
-                            MemberId = new Guid("c390632f-04e2-4bda-9d3e-f8bf13c27f00"),
-                            Note = "Fugit nihil aut dolor sint nulla nesciunt nihil in ipsam. Rerum fugit magnam qui aut.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PaymentType = 0
+                            Id = new Guid("82803c5c-e9f2-49c9-bc9f-e5d574b2f729"),
+                            Amount = 799.005192865994000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("f6cde8a2-e554-41d3-ae69-9589170b99c9"),
+                            Note = "Rem quaerat harum est. Sit ab in earum qui est. Perspiciatis facere non consequuntur voluptatem porro eos corrupti.",
+                            PaymentDate = new DateTime(2021, 8, 25, 3, 39, 53, 697, DateTimeKind.Utc).AddTicks(5166),
+                            PaymentType = 1
                         },
                         new
                         {
-                            Id = new Guid("8fb1597a-c161-4596-aa12-b6e595e9a564"),
-                            Amount = 0m,
-                            MemberId = new Guid("c390632f-04e2-4bda-9d3e-f8bf13c27f00"),
-                            Note = "Sit vero repellat at numquam. Non molestias id eos delectus. Saepe ipsum id quis impedit laborum.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = new Guid("138936a2-d8d4-46e2-933c-2d4b1a31ba7e"),
+                            Amount = 431.97579690472000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("f6cde8a2-e554-41d3-ae69-9589170b99c9"),
+                            Note = "Aut adipisci voluptatibus unde vero molestiae.",
+                            PaymentDate = new DateTime(2019, 1, 14, 21, 29, 53, 888, DateTimeKind.Utc).AddTicks(9108),
                             PaymentType = 99
                         },
                         new
                         {
-                            Id = new Guid("49bb412d-8869-48f3-882e-d7b1e6c6caa0"),
-                            Amount = 0m,
-                            MemberId = new Guid("c390632f-04e2-4bda-9d3e-f8bf13c27f00"),
-                            Note = "Voluptatem adipisci tempore sed. Est autem corrupti quis quidem maxime. Incidunt optio repudiandae voluptas aperiam et excepturi est autem.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = new Guid("0e371d68-e70e-4dce-85fe-25dbb228d27f"),
+                            Amount = 388.81583358695000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("f6cde8a2-e554-41d3-ae69-9589170b99c9"),
+                            Note = "Similique perferendis impedit vero facere aut.",
+                            PaymentDate = new DateTime(2020, 1, 3, 22, 32, 3, 421, DateTimeKind.Utc).AddTicks(8914),
                             PaymentType = 0
                         },
                         new
                         {
-                            Id = new Guid("88239eeb-6056-48f1-b247-ad4a9f2314fe"),
-                            Amount = 0m,
-                            MemberId = new Guid("c390632f-04e2-4bda-9d3e-f8bf13c27f00"),
-                            Note = "Architecto nihil debitis et voluptatem voluptas et. Qui quia corporis. Voluptatem est qui quia ut nihil unde sunt tempore molestias.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PaymentType = 1
-                        },
-                        new
-                        {
-                            Id = new Guid("8d532a0c-1df8-4189-ae28-809531303ad0"),
-                            Amount = 0m,
-                            MemberId = new Guid("c390632f-04e2-4bda-9d3e-f8bf13c27f00"),
-                            Note = "Laboriosam soluta et qui minima velit voluptatum quibusdam. Maiores in omnis sed neque et. Ratione a et autem qui ducimus eveniet explicabo et. Porro quibusdam adipisci hic facere consequatur voluptatem et ullam deserunt.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = new Guid("b7083359-9d21-4832-8d1d-df42872a3861"),
+                            Amount = 578.012810404577000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("f6cde8a2-e554-41d3-ae69-9589170b99c9"),
+                            Note = "Earum perspiciatis occaecati in qui et possimus et quo molestiae.",
+                            PaymentDate = new DateTime(2015, 12, 25, 13, 0, 59, 848, DateTimeKind.Utc).AddTicks(7907),
                             PaymentType = 99
                         },
                         new
                         {
-                            Id = new Guid("3bdddded-c8df-411c-bc03-ccc31895ff2d"),
-                            Amount = 0m,
-                            MemberId = new Guid("c390632f-04e2-4bda-9d3e-f8bf13c27f00"),
-                            Note = "Et consequatur libero quaerat rerum neque. Nemo excepturi rerum adipisci occaecati voluptatem nobis animi laborum.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PaymentType = 1
-                        },
-                        new
-                        {
-                            Id = new Guid("925c2759-cd33-46ba-8485-8378e06913b8"),
-                            Amount = 0m,
-                            MemberId = new Guid("c390632f-04e2-4bda-9d3e-f8bf13c27f00"),
-                            Note = "Vel voluptas ullam rerum ratione sed et. Qui sunt perspiciatis quis rerum voluptatem omnis quia. Qui consequuntur veritatis.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = new Guid("a6c730a2-434c-4175-bf1d-dcc3350d639c"),
+                            Amount = 662.414493177188000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("f6cde8a2-e554-41d3-ae69-9589170b99c9"),
+                            Note = "Veniam nihil qui. Tenetur eos in et sequi dolor non vel cum consectetur. Et asperiores quam ipsa. Quo molestias incidunt est.",
+                            PaymentDate = new DateTime(2019, 5, 1, 0, 43, 7, 3, DateTimeKind.Utc).AddTicks(8289),
                             PaymentType = 99
                         },
                         new
                         {
-                            Id = new Guid("80f05416-3755-4fc6-908d-5be9fcb32562"),
-                            Amount = 0m,
-                            MemberId = new Guid("fc9ea8ee-18c0-463e-b208-5b82657999c5"),
-                            Note = "Quidem officiis consequatur totam reiciendis nostrum.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = new Guid("9704caa0-67d2-4d39-bc78-c374d452c9b4"),
+                            Amount = 391.049784735402000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("f6cde8a2-e554-41d3-ae69-9589170b99c9"),
+                            Note = "Consequuntur amet cupiditate in non quibusdam. Dolorem quidem cumque. In occaecati et fugiat repellendus aut.",
+                            PaymentDate = new DateTime(2013, 7, 4, 14, 44, 6, 956, DateTimeKind.Utc).AddTicks(6401),
+                            PaymentType = 0
+                        },
+                        new
+                        {
+                            Id = new Guid("0c14d375-cf00-4c3d-989f-fb83bfc98f33"),
+                            Amount = 456.623800817528000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("f6cde8a2-e554-41d3-ae69-9589170b99c9"),
+                            Note = "Natus eveniet dolorem harum cumque rem vel iure. Sit harum itaque iste est. Labore voluptatem voluptate occaecati architecto necessitatibus earum. Quo quos beatae sit deleniti voluptatem.",
+                            PaymentDate = new DateTime(2015, 4, 27, 13, 23, 4, 187, DateTimeKind.Utc).AddTicks(8852),
                             PaymentType = 1
                         },
                         new
                         {
-                            Id = new Guid("e4fa7e1c-c8b1-46bf-a7ce-a6e2b1ef4244"),
-                            Amount = 0m,
-                            MemberId = new Guid("fc9ea8ee-18c0-463e-b208-5b82657999c5"),
-                            Note = "Ipsam eum modi aliquid.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = new Guid("09c35a46-0477-4148-851d-b8359cfcbb4b"),
+                            Amount = 403.200468767293000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("f6cde8a2-e554-41d3-ae69-9589170b99c9"),
+                            Note = "Officiis earum commodi quaerat ratione nihil. Dolor qui et et fugit voluptatibus placeat qui enim fuga.",
+                            PaymentDate = new DateTime(2015, 11, 28, 12, 28, 7, 921, DateTimeKind.Utc).AddTicks(2976),
+                            PaymentType = 0
+                        },
+                        new
+                        {
+                            Id = new Guid("fa3cc8da-7cee-4bf8-add2-8685b7e66122"),
+                            Amount = 861.892647455486000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("5ec1fd6b-5237-4f3d-94c1-fc36c7744b1d"),
+                            Note = "Ut adipisci facere exercitationem earum recusandae odio voluptates id et. Et non consequuntur natus alias.",
+                            PaymentDate = new DateTime(2017, 5, 17, 21, 9, 47, 879, DateTimeKind.Utc).AddTicks(4364),
+                            PaymentType = 1
+                        },
+                        new
+                        {
+                            Id = new Guid("359044fd-3289-4bd7-9c51-a5d6b68b4af8"),
+                            Amount = 304.344977254961000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("5ec1fd6b-5237-4f3d-94c1-fc36c7744b1d"),
+                            Note = "Molestiae ex labore expedita dolorum rerum exercitationem et.",
+                            PaymentDate = new DateTime(2013, 3, 17, 3, 30, 33, 909, DateTimeKind.Utc).AddTicks(3737),
+                            PaymentType = 1
+                        },
+                        new
+                        {
+                            Id = new Guid("24c05442-7a5b-4e35-8128-c72a0363e2fb"),
+                            Amount = 418.256226767532000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("5ec1fd6b-5237-4f3d-94c1-fc36c7744b1d"),
+                            Note = "Asperiores iste omnis autem repellat non quibusdam eveniet. Nihil ea et praesentium dolor autem dicta cum. Et aut aut et. Quidem pariatur nam nulla distinctio autem maxime sapiente ut.",
+                            PaymentDate = new DateTime(2014, 9, 11, 2, 36, 14, 303, DateTimeKind.Utc).AddTicks(4086),
+                            PaymentType = 1
+                        },
+                        new
+                        {
+                            Id = new Guid("3bcb0da2-c3f5-4e62-a813-c7fcfea26258"),
+                            Amount = 627.577133400655000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("5ec1fd6b-5237-4f3d-94c1-fc36c7744b1d"),
+                            Note = "Rem placeat magnam debitis soluta eos deserunt. Voluptatibus illum minus odit quod sed minus qui quas omnis. Reprehenderit eveniet vel deserunt perspiciatis non inventore eum rerum ea.",
+                            PaymentDate = new DateTime(2013, 11, 24, 18, 20, 37, 269, DateTimeKind.Utc).AddTicks(6336),
+                            PaymentType = 0
+                        },
+                        new
+                        {
+                            Id = new Guid("77d71fb0-0715-4662-b47c-9a66c19f2c33"),
+                            Amount = 495.871943306762000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("5ec1fd6b-5237-4f3d-94c1-fc36c7744b1d"),
+                            Note = "Excepturi et eligendi in sapiente odio asperiores animi. Tempore beatae magnam perspiciatis aut. Nemo non atque voluptatem quaerat laudantium accusantium magnam.",
+                            PaymentDate = new DateTime(2021, 3, 23, 2, 46, 39, 90, DateTimeKind.Utc).AddTicks(6093),
+                            PaymentType = 0
+                        },
+                        new
+                        {
+                            Id = new Guid("12bdbee1-960c-4b66-afa1-f83091fa0f85"),
+                            Amount = 307.183384842941000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("5ec1fd6b-5237-4f3d-94c1-fc36c7744b1d"),
+                            Note = "Voluptate et sit neque. Aspernatur accusantium dolor et consequatur. Deserunt est qui quasi quas dolorem. Laudantium culpa libero in ad.",
+                            PaymentDate = new DateTime(2012, 12, 11, 4, 48, 9, 136, DateTimeKind.Utc).AddTicks(9452),
                             PaymentType = 99
                         },
                         new
                         {
-                            Id = new Guid("e8716ff2-07c5-48f4-b2b5-af6b666815ee"),
-                            Amount = 0m,
-                            MemberId = new Guid("fc9ea8ee-18c0-463e-b208-5b82657999c5"),
-                            Note = "Modi consequatur voluptatem sit. Quae accusantium odio ut ut qui blanditiis.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PaymentType = 1
-                        },
-                        new
-                        {
-                            Id = new Guid("f50d5771-79fd-4fa8-b338-973e1fdd8f63"),
-                            Amount = 0m,
-                            MemberId = new Guid("fc9ea8ee-18c0-463e-b208-5b82657999c5"),
-                            Note = "Est sed autem possimus ullam molestiae atque. Modi atque quia ipsam doloribus nihil dolores vel sed adipisci. Aut molestiae qui quas libero.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = new Guid("9a84af47-1f42-41da-9153-f1fb1520d9d5"),
+                            Amount = 626.457143885609000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("5ec1fd6b-5237-4f3d-94c1-fc36c7744b1d"),
+                            Note = "Consequuntur totam consequatur esse numquam impedit iure odit quasi ut. Adipisci ut illo consequatur doloremque ad ut iusto. Hic non perferendis est magni. Recusandae error illum alias aspernatur voluptatibus provident laboriosam.",
+                            PaymentDate = new DateTime(2015, 11, 27, 19, 54, 14, 885, DateTimeKind.Utc).AddTicks(8517),
                             PaymentType = 99
                         },
                         new
                         {
-                            Id = new Guid("d1a434b8-7300-4733-8342-812fa35aa2aa"),
-                            Amount = 0m,
-                            MemberId = new Guid("fc9ea8ee-18c0-463e-b208-5b82657999c5"),
-                            Note = "Recusandae eum autem aperiam repudiandae similique enim autem.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PaymentType = 0
+                            Id = new Guid("643bd985-a7aa-4b85-a35d-090cd46a08c0"),
+                            Amount = 712.830277382744000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("5ec1fd6b-5237-4f3d-94c1-fc36c7744b1d"),
+                            Note = "Est praesentium culpa iste et quidem in itaque. Voluptatum omnis eaque nulla omnis vel.",
+                            PaymentDate = new DateTime(2019, 9, 7, 10, 56, 26, 447, DateTimeKind.Utc).AddTicks(6099),
+                            PaymentType = 1
                         },
                         new
                         {
-                            Id = new Guid("3423ba1a-6c14-46b8-8802-7e3c5a71f456"),
-                            Amount = 0m,
-                            MemberId = new Guid("fc9ea8ee-18c0-463e-b208-5b82657999c5"),
-                            Note = "Nam et praesentium est. Incidunt mollitia eos quis optio illo.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = new Guid("af806915-2c41-45d3-bff6-9bc4caf68a46"),
+                            Amount = 85.9500780988002000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("5ec1fd6b-5237-4f3d-94c1-fc36c7744b1d"),
+                            Note = "Nihil rerum et aliquam asperiores eaque sequi.",
+                            PaymentDate = new DateTime(2020, 10, 22, 14, 24, 21, 672, DateTimeKind.Utc).AddTicks(2160),
                             PaymentType = 99
                         },
                         new
                         {
-                            Id = new Guid("c60b7c62-5c34-4355-95ff-33a146cc5b9b"),
-                            Amount = 0m,
-                            MemberId = new Guid("fc9ea8ee-18c0-463e-b208-5b82657999c5"),
-                            Note = "Consequuntur praesentium architecto et error hic est iste dolor.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = new Guid("91782f48-8ffb-418b-a807-43de1c1a9d34"),
+                            Amount = 934.730614327646000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("5ec1fd6b-5237-4f3d-94c1-fc36c7744b1d"),
+                            Note = "Quod aut voluptas est. Ut iusto facere. Tempora magni voluptas dolor qui sint at aperiam. Architecto eos sed.",
+                            PaymentDate = new DateTime(2018, 4, 12, 0, 50, 45, 724, DateTimeKind.Utc).AddTicks(4415),
                             PaymentType = 0
                         },
                         new
                         {
-                            Id = new Guid("ab0436d9-d921-47e4-8c46-04c5621f296d"),
-                            Amount = 0m,
-                            MemberId = new Guid("fc9ea8ee-18c0-463e-b208-5b82657999c5"),
-                            Note = "Ipsum ut et veritatis. Omnis quasi aliquid eaque architecto hic odit. Pariatur aperiam atque vitae et sed rerum repellendus.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PaymentType = 1
-                        },
-                        new
-                        {
-                            Id = new Guid("791d0ab4-5eae-4d6a-b703-1a41ca9e3b74"),
-                            Amount = 0m,
-                            MemberId = new Guid("fc9ea8ee-18c0-463e-b208-5b82657999c5"),
-                            Note = "Dolor ex vel sint quis aspernatur temporibus aliquam ratione. Porro atque nobis qui iste eveniet qui excepturi cupiditate atque. Porro nostrum omnis. Illo harum et minima non.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = new Guid("318d82b9-62b2-4071-bad7-1198787986b1"),
+                            Amount = 478.59641986868000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("fdaf0699-a28e-403c-8775-54a475a1cf0a"),
+                            Note = "Nobis nam itaque recusandae qui animi suscipit molestias natus ex. Quia soluta rerum molestias. Autem facilis sit consequatur sint dolores impedit quam et dolores. Commodi voluptas dolor dolor recusandae ab provident.",
+                            PaymentDate = new DateTime(2017, 2, 22, 2, 36, 9, 843, DateTimeKind.Utc).AddTicks(3079),
                             PaymentType = 99
                         },
                         new
                         {
-                            Id = new Guid("3d74f862-63b2-472e-850e-fc7bbc2129a7"),
-                            Amount = 0m,
-                            MemberId = new Guid("fc9ea8ee-18c0-463e-b208-5b82657999c5"),
-                            Note = "Consequatur et illo perspiciatis repellat quo pariatur est quam eos. Commodi dolor eius cumque voluptas.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = new Guid("9651da68-20ca-4817-9046-653e62bb577c"),
+                            Amount = 923.240708721893000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("fdaf0699-a28e-403c-8775-54a475a1cf0a"),
+                            Note = "Voluptate odio temporibus totam et ut ab. Ab perferendis accusamus est ipsa velit dolorem.",
+                            PaymentDate = new DateTime(2021, 11, 30, 17, 12, 56, 50, DateTimeKind.Utc).AddTicks(2810),
                             PaymentType = 99
                         },
                         new
                         {
-                            Id = new Guid("90cee2c6-0650-4659-8503-115d0b59b662"),
-                            Amount = 0m,
-                            MemberId = new Guid("0a54a9bf-901f-49a5-a249-17c711bb6621"),
-                            Note = "Numquam quidem quo aspernatur eaque repellendus. Voluptas dolorem sed doloribus dolores tenetur. Sapiente delectus amet.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = new Guid("05e7493a-e7da-401f-84b5-ca5e454cb71f"),
+                            Amount = 957.441302492632000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("fdaf0699-a28e-403c-8775-54a475a1cf0a"),
+                            Note = "Cumque totam dolores voluptates accusantium voluptatum qui repudiandae. Sit quas et perferendis numquam voluptatem et quis adipisci sunt. Amet dolorem cumque voluptas delectus quia molestias omnis consequatur quis. Dolorem nemo et magnam animi tempora dolorum.",
+                            PaymentDate = new DateTime(2015, 4, 20, 7, 40, 35, 981, DateTimeKind.Utc).AddTicks(7025),
                             PaymentType = 99
                         },
                         new
                         {
-                            Id = new Guid("94bab127-3fdf-4a15-bf23-b98cda5ee14f"),
-                            Amount = 0m,
-                            MemberId = new Guid("0a54a9bf-901f-49a5-a249-17c711bb6621"),
-                            Note = "Ut totam sint explicabo. Enim voluptatum asperiores velit qui autem. Officia quaerat quisquam.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = new Guid("42731554-f9e5-4d8a-a6ee-8a28123b4103"),
+                            Amount = 17.302794984778000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("fdaf0699-a28e-403c-8775-54a475a1cf0a"),
+                            Note = "Autem consectetur iure ratione non doloremque. Incidunt cumque et.",
+                            PaymentDate = new DateTime(2021, 2, 28, 15, 9, 13, 952, DateTimeKind.Utc).AddTicks(6334),
                             PaymentType = 0
                         },
                         new
                         {
-                            Id = new Guid("7ef829cf-8d04-49f7-9bbe-136727aa10cd"),
-                            Amount = 0m,
-                            MemberId = new Guid("0a54a9bf-901f-49a5-a249-17c711bb6621"),
-                            Note = "Qui mollitia sed et labore molestiae ipsum sed laudantium corporis. Doloribus et quam velit sint omnis laboriosam.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = new Guid("b1c0b243-ebd1-40da-a1e6-7e7c07a3222c"),
+                            Amount = 991.421937547208000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("fdaf0699-a28e-403c-8775-54a475a1cf0a"),
+                            Note = "Qui atque aperiam debitis incidunt sequi nihil voluptatem recusandae qui. Sint ut esse quia placeat.",
+                            PaymentDate = new DateTime(2018, 4, 17, 5, 35, 14, 611, DateTimeKind.Utc).AddTicks(7577),
+                            PaymentType = 0
+                        },
+                        new
+                        {
+                            Id = new Guid("1fa58569-71fb-4e9a-8a78-7563251c13f6"),
+                            Amount = 275.674660330491000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("fdaf0699-a28e-403c-8775-54a475a1cf0a"),
+                            Note = "Laborum et ut consequatur.",
+                            PaymentDate = new DateTime(2016, 5, 29, 2, 45, 51, 591, DateTimeKind.Utc).AddTicks(6992),
+                            PaymentType = 0
+                        },
+                        new
+                        {
+                            Id = new Guid("b901802d-e4d4-4b28-8785-7faa88097bba"),
+                            Amount = 811.106168680236000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("fdaf0699-a28e-403c-8775-54a475a1cf0a"),
+                            Note = "Repellat suscipit doloremque qui explicabo. Officia nihil fuga ex dolor laborum quia.",
+                            PaymentDate = new DateTime(2015, 4, 16, 3, 19, 20, 146, DateTimeKind.Utc).AddTicks(9467),
+                            PaymentType = 0
+                        },
+                        new
+                        {
+                            Id = new Guid("c94220a0-a166-430f-84ad-bae26eed2b3a"),
+                            Amount = 246.55319845181000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("fdaf0699-a28e-403c-8775-54a475a1cf0a"),
+                            Note = "Possimus aliquam voluptates asperiores. Est fuga architecto quam. Voluptate omnis cupiditate ab veniam nulla ex adipisci est cumque. Impedit ut assumenda libero sunt voluptatem cupiditate fuga culpa.",
+                            PaymentDate = new DateTime(2014, 11, 2, 7, 35, 51, 299, DateTimeKind.Utc).AddTicks(1953),
+                            PaymentType = 1
+                        },
+                        new
+                        {
+                            Id = new Guid("cf424e3f-8d59-4927-a072-8b3faa434877"),
+                            Amount = 777.53170966803000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("fdaf0699-a28e-403c-8775-54a475a1cf0a"),
+                            Note = "Adipisci possimus nobis ut a sint nesciunt totam eveniet ratione.",
+                            PaymentDate = new DateTime(2020, 12, 2, 4, 38, 29, 337, DateTimeKind.Utc).AddTicks(6357),
                             PaymentType = 99
                         },
                         new
                         {
-                            Id = new Guid("b3c41541-b727-485b-9996-19689399cb7d"),
-                            Amount = 0m,
-                            MemberId = new Guid("0a54a9bf-901f-49a5-a249-17c711bb6621"),
-                            Note = "Vitae rerum temporibus aliquid maxime illum culpa eum ut. Deserunt dignissimos atque sit. Assumenda aliquid quam natus quasi accusamus inventore dolores.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = new Guid("bcdc28f4-b2ce-4259-9476-2ce82a1b2561"),
+                            Amount = 373.41959922448000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("fdaf0699-a28e-403c-8775-54a475a1cf0a"),
+                            Note = "Necessitatibus vel voluptatibus esse est ut veniam placeat. Ea autem sit alias laudantium qui aut.",
+                            PaymentDate = new DateTime(2017, 5, 29, 21, 16, 33, 518, DateTimeKind.Utc).AddTicks(8273),
+                            PaymentType = 1
+                        },
+                        new
+                        {
+                            Id = new Guid("7f8eda52-6fed-43b8-be96-bc68db7be00f"),
+                            Amount = 740.189580158799000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("7e3ec143-3e22-48ca-8dd5-4fb8965cbebe"),
+                            Note = "Quis dolorem sed non aut corporis voluptatem.",
+                            PaymentDate = new DateTime(2013, 8, 23, 6, 32, 18, 305, DateTimeKind.Utc).AddTicks(2672),
+                            PaymentType = 1
+                        },
+                        new
+                        {
+                            Id = new Guid("14b6c762-cf90-4e69-b79c-f72c7b9c507c"),
+                            Amount = 484.717790227219000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("7e3ec143-3e22-48ca-8dd5-4fb8965cbebe"),
+                            Note = "Velit voluptatem error eum quaerat quas. Commodi pariatur facere tempora.",
+                            PaymentDate = new DateTime(2017, 4, 23, 20, 44, 58, 614, DateTimeKind.Utc).AddTicks(4429),
+                            PaymentType = 0
+                        },
+                        new
+                        {
+                            Id = new Guid("c999a18f-bd80-4dee-a958-0aa13516d266"),
+                            Amount = 779.036083048038000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("7e3ec143-3e22-48ca-8dd5-4fb8965cbebe"),
+                            Note = "Reiciendis voluptatum dolores eos recusandae et voluptatem voluptates eum. Deleniti nam rem voluptas. Non et praesentium voluptatem et voluptate molestiae. Ipsa impedit non earum repellat et est.",
+                            PaymentDate = new DateTime(2020, 11, 1, 6, 6, 58, 819, DateTimeKind.Utc).AddTicks(2737),
                             PaymentType = 99
                         },
                         new
                         {
-                            Id = new Guid("1a0d383f-7d34-41dd-bc04-4e2ea4da9e4d"),
-                            Amount = 0m,
-                            MemberId = new Guid("0a54a9bf-901f-49a5-a249-17c711bb6621"),
-                            Note = "Sequi sequi illum blanditiis nihil. Qui eius voluptatum eveniet animi adipisci id dolores magnam. Dolor non error amet alias quisquam corporis magnam nostrum itaque. Corporis et autem.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = new Guid("882842a6-4656-4311-9a98-d9d55efdf6cc"),
+                            Amount = 379.44999507144000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("7e3ec143-3e22-48ca-8dd5-4fb8965cbebe"),
+                            Note = "Architecto corrupti aut fugiat non nam est ex ab vel. Odio eveniet necessitatibus at. Eos ut assumenda quibusdam.",
+                            PaymentDate = new DateTime(2020, 3, 7, 19, 8, 25, 477, DateTimeKind.Utc).AddTicks(5777),
+                            PaymentType = 0
+                        },
+                        new
+                        {
+                            Id = new Guid("997bca01-27fa-4f1e-9330-aec07ef9343c"),
+                            Amount = 937.657830519209000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("7e3ec143-3e22-48ca-8dd5-4fb8965cbebe"),
+                            Note = "Nulla sint maiores dignissimos esse et modi optio impedit. Ipsum sed quidem voluptatum.",
+                            PaymentDate = new DateTime(2020, 12, 1, 17, 37, 2, 900, DateTimeKind.Utc).AddTicks(7026),
+                            PaymentType = 1
+                        },
+                        new
+                        {
+                            Id = new Guid("dc178e18-06b8-4c60-a21f-8a810bfc9171"),
+                            Amount = 177.052338520737000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("7e3ec143-3e22-48ca-8dd5-4fb8965cbebe"),
+                            Note = "Dignissimos rerum est voluptatum neque.",
+                            PaymentDate = new DateTime(2019, 4, 1, 11, 44, 45, 727, DateTimeKind.Utc).AddTicks(3041),
                             PaymentType = 99
                         },
                         new
                         {
-                            Id = new Guid("2d0f451d-7b75-4096-bd4d-89dbd5d7bc34"),
-                            Amount = 0m,
-                            MemberId = new Guid("0a54a9bf-901f-49a5-a249-17c711bb6621"),
-                            Note = "Laborum sunt qui.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = new Guid("7afaf2e6-7710-433e-b3ba-bb3a208cd71c"),
+                            Amount = 116.368959040927000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("7e3ec143-3e22-48ca-8dd5-4fb8965cbebe"),
+                            Note = "Explicabo asperiores excepturi delectus ut. Sapiente et repellat et non et consequatur.",
+                            PaymentDate = new DateTime(2021, 1, 27, 13, 18, 39, 209, DateTimeKind.Utc).AddTicks(4495),
                             PaymentType = 99
                         },
                         new
                         {
-                            Id = new Guid("daff5b85-9e9a-4d7e-8292-2afb9bf4d35d"),
-                            Amount = 0m,
-                            MemberId = new Guid("0a54a9bf-901f-49a5-a249-17c711bb6621"),
-                            Note = "Qui asperiores incidunt. Vel sed velit perferendis nulla eligendi ratione consequatur. Voluptates voluptatem soluta voluptas accusantium animi iste quia perspiciatis. Adipisci commodi repudiandae autem voluptatum consectetur consequuntur.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PaymentType = 1
-                        },
-                        new
-                        {
-                            Id = new Guid("90e56e93-283f-4dfe-81c9-4bec05da70b0"),
-                            Amount = 0m,
-                            MemberId = new Guid("0a54a9bf-901f-49a5-a249-17c711bb6621"),
-                            Note = "Quod atque placeat dicta commodi veritatis sed in sed. Rerum unde sit nobis autem. Qui autem minima quo vel. Aut quia dolor.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = new Guid("075e1940-1984-4e96-b10f-883c3db67c03"),
+                            Amount = 672.173485226849000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("7e3ec143-3e22-48ca-8dd5-4fb8965cbebe"),
+                            Note = "Repellat atque ut voluptas est at sint. Non voluptatibus esse placeat. Sit fuga et rerum ipsa esse est quaerat.",
+                            PaymentDate = new DateTime(2014, 2, 10, 18, 19, 15, 663, DateTimeKind.Utc).AddTicks(8651),
                             PaymentType = 0
                         },
                         new
                         {
-                            Id = new Guid("66af7bd9-a886-4f48-8471-80887d67ee03"),
-                            Amount = 0m,
-                            MemberId = new Guid("0a54a9bf-901f-49a5-a249-17c711bb6621"),
-                            Note = "In deserunt eligendi fuga assumenda magni temporibus eligendi.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PaymentType = 0
-                        },
-                        new
-                        {
-                            Id = new Guid("657efeac-2b15-4509-b1cc-fc4ec4354c55"),
-                            Amount = 0m,
-                            MemberId = new Guid("0a54a9bf-901f-49a5-a249-17c711bb6621"),
-                            Note = "Ad quis beatae ea optio qui distinctio ab molestiae inventore. Quam ut aliquid. Consequuntur quia consectetur amet ipsam inventore est velit quia.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = new Guid("470de421-62b1-4e3d-b398-d1ac7aa4bdd5"),
+                            Amount = 910.140036793451000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("7e3ec143-3e22-48ca-8dd5-4fb8965cbebe"),
+                            Note = "Cupiditate labore incidunt. Reiciendis nesciunt qui qui nihil voluptas. Error perspiciatis praesentium adipisci exercitationem optio ipsam expedita cum. Quidem odit et est aut.",
+                            PaymentDate = new DateTime(2015, 3, 12, 20, 13, 16, 301, DateTimeKind.Utc).AddTicks(366),
                             PaymentType = 1
                         },
                         new
                         {
-                            Id = new Guid("b3100c4c-6a4b-4b7c-a929-ac6a5a0e2f69"),
-                            Amount = 0m,
-                            MemberId = new Guid("ffbc275f-ea62-4f58-a600-cd8a0ea8c3ed"),
-                            Note = "Qui similique quasi minima. Dicta ea quod natus ipsam qui.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = new Guid("4b60246d-db43-4595-99e4-14ef321ab3b9"),
+                            Amount = 382.509100050139000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("7e3ec143-3e22-48ca-8dd5-4fb8965cbebe"),
+                            Note = "Nihil sit ratione. Ut dignissimos consequatur quos dolorum rem qui.",
+                            PaymentDate = new DateTime(2013, 5, 19, 23, 10, 58, 724, DateTimeKind.Utc).AddTicks(7231),
                             PaymentType = 0
                         },
                         new
                         {
-                            Id = new Guid("bf64dc73-2a38-4bed-bd52-87aaf06787bd"),
-                            Amount = 0m,
-                            MemberId = new Guid("ffbc275f-ea62-4f58-a600-cd8a0ea8c3ed"),
-                            Note = "Ea et voluptas ut sit repellat. Aut officia dolorem amet. Veniam id temporibus est. Sunt similique hic dolor rerum in eaque necessitatibus maxime.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PaymentType = 1
-                        },
-                        new
-                        {
-                            Id = new Guid("80ca67c2-1ca2-4f20-a9cb-566d9c01383b"),
-                            Amount = 0m,
-                            MemberId = new Guid("ffbc275f-ea62-4f58-a600-cd8a0ea8c3ed"),
-                            Note = "Modi omnis rem consequuntur delectus quas voluptatem odit harum distinctio. Sint ducimus nemo exercitationem beatae laborum laudantium molestias velit et. Voluptas repellat impedit similique.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PaymentType = 1
-                        },
-                        new
-                        {
-                            Id = new Guid("90742856-2fbb-45fd-aee4-e1b80842ddd3"),
-                            Amount = 0m,
-                            MemberId = new Guid("ffbc275f-ea62-4f58-a600-cd8a0ea8c3ed"),
-                            Note = "Soluta dolor occaecati est mollitia rerum non ipsam. Tempore officiis incidunt blanditiis et est magnam.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = new Guid("0e47874e-18e2-4764-ae1e-c688c6d4ef05"),
+                            Amount = 167.113965734773000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("abe7de98-bd86-4c20-9918-d0e3d8867123"),
+                            Note = "Earum velit impedit iusto perferendis quisquam esse.",
+                            PaymentDate = new DateTime(2018, 3, 7, 15, 46, 32, 291, DateTimeKind.Utc).AddTicks(8673),
                             PaymentType = 0
                         },
                         new
                         {
-                            Id = new Guid("1f3872c3-368c-4395-8edc-53429aad329b"),
-                            Amount = 0m,
-                            MemberId = new Guid("ffbc275f-ea62-4f58-a600-cd8a0ea8c3ed"),
-                            Note = "Est alias dolorum quaerat accusamus aspernatur porro ea provident.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = new Guid("ca818e5e-061e-4955-b616-fb056a0fd174"),
+                            Amount = 906.203672045656000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("abe7de98-bd86-4c20-9918-d0e3d8867123"),
+                            Note = "Distinctio saepe impedit consequuntur architecto officiis quia aspernatur dolor in. Autem incidunt quas quia velit quas consequatur dolorem. Deleniti quaerat doloribus. Neque placeat voluptas assumenda est.",
+                            PaymentDate = new DateTime(2016, 2, 21, 20, 35, 32, 627, DateTimeKind.Utc).AddTicks(1299),
                             PaymentType = 99
                         },
                         new
                         {
-                            Id = new Guid("ba36402c-8655-4a70-9339-537b9b4c92eb"),
-                            Amount = 0m,
-                            MemberId = new Guid("ffbc275f-ea62-4f58-a600-cd8a0ea8c3ed"),
-                            Note = "Exercitationem a excepturi deserunt beatae sit nihil. Rem nihil est id eius cumque nesciunt sed.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PaymentType = 1
-                        },
-                        new
-                        {
-                            Id = new Guid("38726810-f8c2-4bf9-a520-ddf11e9f087f"),
-                            Amount = 0m,
-                            MemberId = new Guid("ffbc275f-ea62-4f58-a600-cd8a0ea8c3ed"),
-                            Note = "Qui rerum molestiae magnam aperiam similique sunt commodi quia.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = new Guid("fc358a55-e97c-44df-8362-d11d5630b51d"),
+                            Amount = 933.830202962398000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("abe7de98-bd86-4c20-9918-d0e3d8867123"),
+                            Note = "Aut dicta autem expedita recusandae quod. Porro animi atque fuga dolores qui alias accusamus. Officia facilis modi dolor laboriosam harum inventore.",
+                            PaymentDate = new DateTime(2012, 10, 21, 23, 45, 3, 77, DateTimeKind.Utc).AddTicks(5766),
                             PaymentType = 0
                         },
                         new
                         {
-                            Id = new Guid("081895d8-0a48-4d1d-adfb-43b1e7b13eb4"),
-                            Amount = 0m,
-                            MemberId = new Guid("ffbc275f-ea62-4f58-a600-cd8a0ea8c3ed"),
-                            Note = "Earum consequuntur quo quod vel. In nihil odio hic.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = new Guid("1638e778-6ad7-4e46-973e-8aa7085fb461"),
+                            Amount = 73.2493468775304000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("abe7de98-bd86-4c20-9918-d0e3d8867123"),
+                            Note = "Vel consequatur et. Sed qui sunt deleniti cupiditate veniam necessitatibus velit. Ut fugit iusto incidunt tenetur natus dolore. Officiis harum ab ipsum deleniti nihil.",
+                            PaymentDate = new DateTime(2017, 9, 17, 23, 16, 4, 906, DateTimeKind.Utc).AddTicks(7298),
                             PaymentType = 0
                         },
                         new
                         {
-                            Id = new Guid("3b15b870-7c2f-481e-a403-b2758d36dd38"),
-                            Amount = 0m,
-                            MemberId = new Guid("ffbc275f-ea62-4f58-a600-cd8a0ea8c3ed"),
-                            Note = "Aut consectetur blanditiis aut ut nemo ad rem. Cum quibusdam quibusdam libero qui voluptatem nostrum illum.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PaymentType = 0
-                        },
-                        new
-                        {
-                            Id = new Guid("d674b903-a789-4528-b344-a79f5f0c31e9"),
-                            Amount = 0m,
-                            MemberId = new Guid("ffbc275f-ea62-4f58-a600-cd8a0ea8c3ed"),
-                            Note = "Dignissimos quibusdam magni ratione dolores laudantium amet. Deleniti rerum omnis sapiente ipsa et officiis rerum.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PaymentType = 0
-                        },
-                        new
-                        {
-                            Id = new Guid("da81d3f4-4285-429c-b1c0-b27ef37444d2"),
-                            Amount = 0m,
-                            MemberId = new Guid("6a817924-9c58-4dfd-8737-0c3c2a5d009d"),
-                            Note = "Omnis sequi ut pariatur possimus quia vel. Omnis est qui id tempora totam. Est eos asperiores.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = new Guid("59b3d8db-6982-4eb8-ae8b-0d8a505d2aef"),
+                            Amount = 911.199865463867000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("abe7de98-bd86-4c20-9918-d0e3d8867123"),
+                            Note = "Impedit perspiciatis vel ipsum. Ut aliquam iusto.",
+                            PaymentDate = new DateTime(2012, 5, 19, 13, 13, 40, 989, DateTimeKind.Utc).AddTicks(9476),
                             PaymentType = 99
                         },
                         new
                         {
-                            Id = new Guid("27ba3efe-fe30-4233-a2f0-1df673e6f145"),
-                            Amount = 0m,
-                            MemberId = new Guid("6a817924-9c58-4dfd-8737-0c3c2a5d009d"),
-                            Note = "Dolor sed dolores. Voluptatibus ea tempore harum reiciendis amet amet fugit magni perferendis. Praesentium incidunt asperiores consequatur ducimus accusantium aut sit nisi sequi. Atque laudantium distinctio.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PaymentType = 0
-                        },
-                        new
-                        {
-                            Id = new Guid("ba3e9e84-8c75-4380-8d70-50a2b141a5bd"),
-                            Amount = 0m,
-                            MemberId = new Guid("6a817924-9c58-4dfd-8737-0c3c2a5d009d"),
-                            Note = "Sit laudantium dicta quae delectus tempora qui. Distinctio reiciendis repellendus fugiat suscipit rem reprehenderit aut ex tempore. Velit magnam saepe omnis. Exercitationem magni nobis dolor.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = new Guid("0010c42c-6643-44bb-a8ad-7beb9670c90e"),
+                            Amount = 195.159071737537000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("abe7de98-bd86-4c20-9918-d0e3d8867123"),
+                            Note = "Aliquam non est. Sint ut alias magnam nesciunt corporis.",
+                            PaymentDate = new DateTime(2013, 12, 6, 5, 16, 25, 906, DateTimeKind.Utc).AddTicks(789),
                             PaymentType = 99
                         },
                         new
                         {
-                            Id = new Guid("012b84cd-ff6e-4466-9083-b4af510d99c7"),
-                            Amount = 0m,
-                            MemberId = new Guid("6a817924-9c58-4dfd-8737-0c3c2a5d009d"),
-                            Note = "Labore sit illo optio eum et itaque. Odit amet aliquid sed dolorem modi laboriosam. Cum praesentium fugiat facilis odit rerum autem accusantium sed necessitatibus. Illum eos et et.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = new Guid("b3372a04-8447-4da5-a154-681190ac21ed"),
+                            Amount = 862.588481832766000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("abe7de98-bd86-4c20-9918-d0e3d8867123"),
+                            Note = "Ipsam quisquam totam. Et vel numquam vel. Minus maiores ratione et enim. Molestias animi quisquam saepe iusto quo voluptates.",
+                            PaymentDate = new DateTime(2014, 4, 2, 4, 45, 0, 402, DateTimeKind.Utc).AddTicks(7534),
+                            PaymentType = 0
+                        },
+                        new
+                        {
+                            Id = new Guid("a0b03845-1280-4709-800e-c82a338278c4"),
+                            Amount = 820.887306290636000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("abe7de98-bd86-4c20-9918-d0e3d8867123"),
+                            Note = "Officia vel blanditiis quasi ex. Voluptatem occaecati consequuntur est voluptas id sit omnis ut. Accusantium ut quis dolor fugit a commodi quaerat accusantium. Voluptates ea omnis.",
+                            PaymentDate = new DateTime(2017, 9, 8, 10, 44, 33, 254, DateTimeKind.Utc).AddTicks(9114),
                             PaymentType = 1
                         },
                         new
                         {
-                            Id = new Guid("321f5f15-d37c-41fc-abe5-989568a1c9bd"),
-                            Amount = 0m,
-                            MemberId = new Guid("6a817924-9c58-4dfd-8737-0c3c2a5d009d"),
-                            Note = "Et sapiente nostrum. Rerum inventore incidunt suscipit tenetur eos id. Ducimus sint omnis. Esse reiciendis quia quaerat et.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = new Guid("f2e0e92b-4ea2-4f1a-a304-4ea89d6ee45b"),
+                            Amount = 775.824084162982000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("abe7de98-bd86-4c20-9918-d0e3d8867123"),
+                            Note = "Incidunt suscipit ea optio aut illum id sit officiis reiciendis. Est consectetur sint voluptas error.",
+                            PaymentDate = new DateTime(2018, 3, 26, 2, 28, 59, 967, DateTimeKind.Utc).AddTicks(2862),
                             PaymentType = 1
                         },
                         new
                         {
-                            Id = new Guid("21e55ab8-2479-4785-9770-cedfa5ae8243"),
-                            Amount = 0m,
-                            MemberId = new Guid("6a817924-9c58-4dfd-8737-0c3c2a5d009d"),
-                            Note = "Occaecati assumenda ex autem est ea facere dicta et. Aut consectetur mollitia animi nihil eaque amet sed omnis enim. Quia consequatur illo sint consequatur quis. Sed minus et deserunt eligendi sunt aliquid omnis.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = new Guid("a12872f8-26ba-4db2-9a00-0318600d1dde"),
+                            Amount = 577.501625559136000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("abe7de98-bd86-4c20-9918-d0e3d8867123"),
+                            Note = "Velit minus magni reiciendis voluptatibus sed. Et dolore in officia ipsum eius. Quis facilis dolore ut blanditiis ratione maxime quis consequatur reprehenderit.",
+                            PaymentDate = new DateTime(2019, 2, 24, 10, 22, 18, 736, DateTimeKind.Utc).AddTicks(7017),
+                            PaymentType = 1
+                        },
+                        new
+                        {
+                            Id = new Guid("33251f77-bcc9-46c4-b71e-a6f299fea6c6"),
+                            Amount = 863.865326794046000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("793a0118-98ec-4b18-83ca-6d5f77fda5a0"),
+                            Note = "Doloribus itaque error.",
+                            PaymentDate = new DateTime(2014, 5, 31, 1, 24, 4, 696, DateTimeKind.Utc).AddTicks(9175),
+                            PaymentType = 0
+                        },
+                        new
+                        {
+                            Id = new Guid("cc811a30-8a96-4d2f-a6cb-80c5c9037191"),
+                            Amount = 456.332591714538000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("793a0118-98ec-4b18-83ca-6d5f77fda5a0"),
+                            Note = "Nulla qui sunt odio est dignissimos quia tenetur est est. Voluptatem voluptatem omnis maxime quia explicabo.",
+                            PaymentDate = new DateTime(2016, 2, 20, 13, 53, 12, 598, DateTimeKind.Utc).AddTicks(4618),
                             PaymentType = 99
                         },
                         new
                         {
-                            Id = new Guid("d5a20477-3310-4495-816f-9771ff1be7b2"),
-                            Amount = 0m,
-                            MemberId = new Guid("6a817924-9c58-4dfd-8737-0c3c2a5d009d"),
-                            Note = "Eveniet harum voluptate eveniet consequatur itaque magni et saepe. Id nobis excepturi in accusantium praesentium repellendus minima aliquid tempora.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = new Guid("deee08dd-47ef-40dc-9b74-0e024f0a20cd"),
+                            Amount = 925.107866847705000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("793a0118-98ec-4b18-83ca-6d5f77fda5a0"),
+                            Note = "Expedita deserunt et quam eveniet sit voluptatum saepe vitae aperiam. Cum dolore et sint aut voluptas quod. A aut autem est ut aspernatur distinctio.",
+                            PaymentDate = new DateTime(2016, 7, 20, 2, 13, 28, 470, DateTimeKind.Utc).AddTicks(7784),
                             PaymentType = 1
                         },
                         new
                         {
-                            Id = new Guid("647570bb-c508-4764-8f84-8570ec5329d9"),
-                            Amount = 0m,
-                            MemberId = new Guid("6a817924-9c58-4dfd-8737-0c3c2a5d009d"),
-                            Note = "Modi et nemo voluptatem et asperiores non.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = new Guid("937bd1b3-a19a-4538-89a9-e0dc577bc60a"),
+                            Amount = 224.404788471023000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("793a0118-98ec-4b18-83ca-6d5f77fda5a0"),
+                            Note = "Fugit architecto rem velit incidunt beatae. Autem sit laborum animi debitis provident. Aspernatur excepturi explicabo porro doloribus repudiandae. Quia quibusdam sint unde recusandae distinctio suscipit dolor ipsam.",
+                            PaymentDate = new DateTime(2018, 5, 14, 1, 58, 17, 647, DateTimeKind.Utc).AddTicks(2316),
                             PaymentType = 99
                         },
                         new
                         {
-                            Id = new Guid("d4e4f620-1c38-41cd-bde8-fd1ef80fba05"),
-                            Amount = 0m,
-                            MemberId = new Guid("6a817924-9c58-4dfd-8737-0c3c2a5d009d"),
-                            Note = "Non eos praesentium sed et quis voluptate excepturi vel ut.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PaymentType = 0
-                        },
-                        new
-                        {
-                            Id = new Guid("5e2ddb90-ac9e-4d94-aba3-dd9bab4abbff"),
-                            Amount = 0m,
-                            MemberId = new Guid("6a817924-9c58-4dfd-8737-0c3c2a5d009d"),
-                            Note = "Et repellat dolorum dolore quo in velit eveniet incidunt ab. Ex qui voluptate nihil asperiores quia doloribus vel ut. Minus possimus quis sint vitae animi molestias totam totam cupiditate.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = new Guid("01611c6f-d1fb-4874-90d1-1abb9c99a579"),
+                            Amount = 692.386913524535000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("793a0118-98ec-4b18-83ca-6d5f77fda5a0"),
+                            Note = "In est laudantium exercitationem quo illo. Rem dolores velit eos non sequi distinctio necessitatibus ea eius. Distinctio et ut quia voluptas quo in non rerum. Nobis quod mollitia molestias aliquam ut molestiae.",
+                            PaymentDate = new DateTime(2018, 2, 10, 6, 55, 33, 855, DateTimeKind.Utc).AddTicks(136),
                             PaymentType = 1
                         },
                         new
                         {
-                            Id = new Guid("41540d41-869d-4f30-a32b-882ad65f88e3"),
-                            Amount = 0m,
-                            MemberId = new Guid("9bb3b604-164b-40d4-9d8c-80446606f855"),
-                            Note = "Consectetur rem ut illo. Ipsam dolorem quas ut. Eaque quibusdam voluptatem sint non rerum autem qui ipsam.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = new Guid("03207876-5262-4734-9e9d-d8efbb17b4b7"),
+                            Amount = 973.483859437349000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("793a0118-98ec-4b18-83ca-6d5f77fda5a0"),
+                            Note = "Doloribus debitis eum voluptas est et ut fugit accusantium. Beatae voluptatem est qui adipisci optio non quia.",
+                            PaymentDate = new DateTime(2014, 3, 26, 18, 8, 28, 201, DateTimeKind.Utc).AddTicks(8969),
+                            PaymentType = 1
+                        },
+                        new
+                        {
+                            Id = new Guid("0c96230c-eefa-42fd-a8c9-365c282f6df4"),
+                            Amount = 2.53621368921408000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("793a0118-98ec-4b18-83ca-6d5f77fda5a0"),
+                            Note = "Consectetur placeat fugiat et aut minima ad autem.",
+                            PaymentDate = new DateTime(2015, 12, 13, 15, 11, 11, 288, DateTimeKind.Utc).AddTicks(4413),
+                            PaymentType = 1
+                        },
+                        new
+                        {
+                            Id = new Guid("ae94083b-c363-4fbf-9a28-436e0f28841a"),
+                            Amount = 288.374486161506000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("793a0118-98ec-4b18-83ca-6d5f77fda5a0"),
+                            Note = "Dolore maxime ut tempore et dolorum numquam aspernatur. Similique nostrum sit eveniet cumque asperiores cum blanditiis dolor. Esse magnam voluptatibus laudantium dolorem.",
+                            PaymentDate = new DateTime(2016, 2, 19, 13, 31, 52, 41, DateTimeKind.Utc).AddTicks(6264),
                             PaymentType = 0
                         },
                         new
                         {
-                            Id = new Guid("4e939f1e-875f-4461-b653-8209ed3c63b7"),
-                            Amount = 0m,
-                            MemberId = new Guid("9bb3b604-164b-40d4-9d8c-80446606f855"),
-                            Note = "Explicabo consequatur architecto aut. Non at fugiat labore qui cupiditate voluptas quia.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = new Guid("bef62ccf-f8dc-442b-9282-5e8d82e0f9c9"),
+                            Amount = 156.712543354958000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("793a0118-98ec-4b18-83ca-6d5f77fda5a0"),
+                            Note = "Et iste iusto at et optio voluptatum aut porro. Delectus et et nam ut sit. Quaerat asperiores deserunt quis fuga facere doloribus esse aliquam occaecati. Optio accusamus quod sit quibusdam sint dolorem ut.",
+                            PaymentDate = new DateTime(2014, 1, 31, 21, 38, 23, 586, DateTimeKind.Utc).AddTicks(2681),
+                            PaymentType = 1
+                        },
+                        new
+                        {
+                            Id = new Guid("884b81dc-2027-4fdc-94a3-1e4c7efd02ec"),
+                            Amount = 544.751296505939000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("793a0118-98ec-4b18-83ca-6d5f77fda5a0"),
+                            Note = "Ea vel quis et quia at impedit sunt nostrum non. Error odio labore quidem voluptatum repellat ut quasi necessitatibus. Tempora voluptas numquam consequatur unde voluptas. Aut unde cupiditate esse commodi repellendus iure ullam similique.",
+                            PaymentDate = new DateTime(2016, 10, 28, 1, 51, 13, 571, DateTimeKind.Utc).AddTicks(3804),
+                            PaymentType = 0
+                        },
+                        new
+                        {
+                            Id = new Guid("4b97f928-0dda-4bf8-ac26-46ac312edc20"),
+                            Amount = 524.564125150884000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("12d76e6f-a966-4235-8f43-991d88418b1f"),
+                            Note = "Omnis quam aliquam. Minus deleniti rerum quaerat fugiat veritatis eos. Quo error ut ut quia non ut. Unde minima eius nulla quis unde.",
+                            PaymentDate = new DateTime(2020, 3, 5, 16, 25, 16, 308, DateTimeKind.Utc).AddTicks(4941),
+                            PaymentType = 0
+                        },
+                        new
+                        {
+                            Id = new Guid("71cc0d69-a010-44f5-89ab-fb18a641c28c"),
+                            Amount = 544.565545637386000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("12d76e6f-a966-4235-8f43-991d88418b1f"),
+                            Note = "Fugit eos exercitationem voluptatem. Fuga animi blanditiis corporis ea voluptate alias quia pariatur.",
+                            PaymentDate = new DateTime(2012, 8, 27, 1, 57, 23, 946, DateTimeKind.Utc).AddTicks(8301),
+                            PaymentType = 0
+                        },
+                        new
+                        {
+                            Id = new Guid("e40f60ca-4f9e-4114-a5d4-7f4f61fabda1"),
+                            Amount = 555.872584152244000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("12d76e6f-a966-4235-8f43-991d88418b1f"),
+                            Note = "Dignissimos nulla vitae voluptatem aliquam sed quas error. Ipsum nostrum deleniti et delectus hic delectus assumenda quos et. Similique nostrum qui qui suscipit.",
+                            PaymentDate = new DateTime(2015, 4, 18, 12, 10, 52, 421, DateTimeKind.Utc).AddTicks(9461),
                             PaymentType = 99
                         },
                         new
                         {
-                            Id = new Guid("a9b30a5b-9875-40cd-8454-be01e3582fc2"),
-                            Amount = 0m,
-                            MemberId = new Guid("9bb3b604-164b-40d4-9d8c-80446606f855"),
-                            Note = "Et autem voluptas aut sit eos veniam nihil.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = new Guid("3051cac0-0965-4ccf-a7c9-789f5bf5b24f"),
+                            Amount = 977.072821612152000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("12d76e6f-a966-4235-8f43-991d88418b1f"),
+                            Note = "Atque consequatur occaecati aut pariatur et qui tempore dicta. Modi omnis at repellendus expedita assumenda. Aut recusandae iusto neque sed et atque ut. Qui autem esse est voluptatem in omnis.",
+                            PaymentDate = new DateTime(2019, 2, 11, 1, 56, 17, 233, DateTimeKind.Utc).AddTicks(1120),
+                            PaymentType = 1
+                        },
+                        new
+                        {
+                            Id = new Guid("b4096ca3-4b8e-4e83-aeae-cefc6af42303"),
+                            Amount = 487.287613036638000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("12d76e6f-a966-4235-8f43-991d88418b1f"),
+                            Note = "Ipsam ea sunt voluptas quod sed. Sed adipisci nihil. Quo est necessitatibus natus iure mollitia. Sed reprehenderit fuga.",
+                            PaymentDate = new DateTime(2013, 9, 23, 12, 57, 41, 458, DateTimeKind.Utc).AddTicks(1853),
+                            PaymentType = 0
+                        },
+                        new
+                        {
+                            Id = new Guid("7f6b8251-39db-4c8f-9d9b-e4935871b197"),
+                            Amount = 569.982939387026000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("12d76e6f-a966-4235-8f43-991d88418b1f"),
+                            Note = "Qui deleniti velit quam qui aut fugit maiores quae quia. Voluptatibus dolorem est. Quidem quo atque quod. Qui et praesentium laborum aut sed.",
+                            PaymentDate = new DateTime(2021, 12, 16, 3, 53, 1, 691, DateTimeKind.Utc).AddTicks(4414),
                             PaymentType = 99
                         },
                         new
                         {
-                            Id = new Guid("393f98e2-e6a3-4fdf-aa5d-1c5d7316e47f"),
-                            Amount = 0m,
-                            MemberId = new Guid("9bb3b604-164b-40d4-9d8c-80446606f855"),
-                            Note = "Laborum eaque assumenda. Et deleniti nesciunt unde.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = new Guid("b335be96-b66a-4ad9-b7d7-34b483723907"),
+                            Amount = 509.86016030558000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("12d76e6f-a966-4235-8f43-991d88418b1f"),
+                            Note = "Adipisci saepe reiciendis est praesentium deleniti non id est. Ducimus nisi tempore occaecati iste eveniet. Ut voluptatem ut ea blanditiis voluptas nulla eos. Et nihil voluptas.",
+                            PaymentDate = new DateTime(2014, 6, 24, 1, 25, 53, 517, DateTimeKind.Utc).AddTicks(6862),
+                            PaymentType = 1
+                        },
+                        new
+                        {
+                            Id = new Guid("3bad7d47-d825-434b-babe-d4eead184edc"),
+                            Amount = 392.770817220411000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("12d76e6f-a966-4235-8f43-991d88418b1f"),
+                            Note = "Aliquam est dolor labore reprehenderit.",
+                            PaymentDate = new DateTime(2012, 8, 26, 9, 34, 23, 352, DateTimeKind.Utc).AddTicks(8290),
+                            PaymentType = 0
+                        },
+                        new
+                        {
+                            Id = new Guid("3853fa9d-63ed-44f6-9316-702068e0aa76"),
+                            Amount = 203.410511041871000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("12d76e6f-a966-4235-8f43-991d88418b1f"),
+                            Note = "Eligendi dolore et in aliquam fugit cum necessitatibus. Non est aut delectus sed. Voluptatem corporis tenetur praesentium qui at excepturi aut in. Est dolorem nobis esse ea.",
+                            PaymentDate = new DateTime(2018, 4, 29, 23, 16, 27, 919, DateTimeKind.Utc).AddTicks(5082),
                             PaymentType = 99
                         },
                         new
                         {
-                            Id = new Guid("e3f15a34-aa9e-4914-9390-cc2709801a99"),
-                            Amount = 0m,
-                            MemberId = new Guid("9bb3b604-164b-40d4-9d8c-80446606f855"),
-                            Note = "Suscipit laudantium qui repellat eveniet rerum suscipit quaerat.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PaymentType = 0
-                        },
-                        new
-                        {
-                            Id = new Guid("651bf9af-01da-4ef4-8ff7-f243cb631304"),
-                            Amount = 0m,
-                            MemberId = new Guid("9bb3b604-164b-40d4-9d8c-80446606f855"),
-                            Note = "Aut saepe et. Sint rem dolor eum et rerum ipsa omnis rerum. Quo aut eius maxime.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PaymentType = 0
-                        },
-                        new
-                        {
-                            Id = new Guid("8bdfe5d1-6e84-4f86-8283-a65d2c302cfe"),
-                            Amount = 0m,
-                            MemberId = new Guid("9bb3b604-164b-40d4-9d8c-80446606f855"),
-                            Note = "Aut cum repellendus eaque nulla qui rerum laborum.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = new Guid("c8c74b38-6088-4613-abe2-62705db0811a"),
+                            Amount = 268.45423302516000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("12d76e6f-a966-4235-8f43-991d88418b1f"),
+                            Note = "Itaque voluptas odit. Qui qui eum sit quas molestias ea tenetur voluptates aut. Iusto quis enim inventore quibusdam amet.",
+                            PaymentDate = new DateTime(2015, 1, 29, 5, 11, 56, 955, DateTimeKind.Utc).AddTicks(6019),
                             PaymentType = 99
                         },
                         new
                         {
-                            Id = new Guid("c6b0b2b4-a984-4dc6-a6cb-e775c17d9b8a"),
-                            Amount = 0m,
-                            MemberId = new Guid("9bb3b604-164b-40d4-9d8c-80446606f855"),
-                            Note = "Modi nemo explicabo quas ut perspiciatis sint sunt. Eos aut neque fuga nesciunt quisquam vero fuga atque ut.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PaymentType = 0
-                        },
-                        new
-                        {
-                            Id = new Guid("8ca5e5f0-024e-4789-a2ac-076d7e85412d"),
-                            Amount = 0m,
-                            MemberId = new Guid("9bb3b604-164b-40d4-9d8c-80446606f855"),
-                            Note = "Ipsam enim ipsum vero neque unde dolor esse et omnis. Sint quas corporis quam unde explicabo.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PaymentType = 0
-                        },
-                        new
-                        {
-                            Id = new Guid("05c51e34-f370-4202-b195-e55a2f244d6c"),
-                            Amount = 0m,
-                            MemberId = new Guid("9bb3b604-164b-40d4-9d8c-80446606f855"),
-                            Note = "Et illo quaerat officia. Nostrum error molestiae consectetur quia iusto quis et consequatur. Rerum ut sint nihil qui. At et sunt illo accusantium ut neque optio fugiat iure.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PaymentType = 0
-                        },
-                        new
-                        {
-                            Id = new Guid("c890fef3-2a79-4e62-86e6-6573efb34099"),
-                            Amount = 0m,
-                            MemberId = new Guid("743e47d8-d927-4999-ac3f-87ca70e37025"),
-                            Note = "Eligendi et ut dignissimos sint blanditiis voluptatem dolorem repellendus. Et odit similique velit sunt cupiditate eius corporis repudiandae quae. Consequuntur quis libero earum.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PaymentType = 0
-                        },
-                        new
-                        {
-                            Id = new Guid("88dd7aaf-1cba-4e95-aaf9-b826a6e22c25"),
-                            Amount = 0m,
-                            MemberId = new Guid("743e47d8-d927-4999-ac3f-87ca70e37025"),
-                            Note = "Quae error optio est dicta omnis. Ratione pariatur harum ut optio aliquid accusantium iste voluptas dolorem. Suscipit pariatur facilis hic voluptatibus. Possimus expedita dolorem iusto voluptatem harum velit ab.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PaymentType = 0
-                        },
-                        new
-                        {
-                            Id = new Guid("47f8ddc6-ade3-4eef-9564-86062526392f"),
-                            Amount = 0m,
-                            MemberId = new Guid("743e47d8-d927-4999-ac3f-87ca70e37025"),
-                            Note = "Voluptatem quia possimus dolores dolorem.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PaymentType = 0
-                        },
-                        new
-                        {
-                            Id = new Guid("29d8f4ac-4c82-4640-8e55-9079f09cec92"),
-                            Amount = 0m,
-                            MemberId = new Guid("743e47d8-d927-4999-ac3f-87ca70e37025"),
-                            Note = "Rem minus optio et molestiae earum porro voluptatem voluptatibus. Molestias saepe beatae harum repudiandae id.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PaymentType = 0
-                        },
-                        new
-                        {
-                            Id = new Guid("d57a8f1f-93e9-4937-94bb-d25b78bd0694"),
-                            Amount = 0m,
-                            MemberId = new Guid("743e47d8-d927-4999-ac3f-87ca70e37025"),
-                            Note = "Debitis vel ad vel dolor perspiciatis delectus voluptas. Consequatur deserunt quisquam perferendis autem et non adipisci et. Eos sed et cupiditate.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = new Guid("ccdaa3a7-18d0-40df-9460-712bad89d814"),
+                            Amount = 615.495634647578000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("b2724ea1-4cce-450f-8bab-67988a9f865e"),
+                            Note = "At quasi est eius. Deleniti recusandae repellendus consequatur quo optio. Consequatur culpa modi et neque sequi adipisci cupiditate autem rerum. Non omnis qui necessitatibus ut nihil ducimus.",
+                            PaymentDate = new DateTime(2018, 5, 26, 5, 56, 45, 269, DateTimeKind.Utc).AddTicks(1186),
                             PaymentType = 1
                         },
                         new
                         {
-                            Id = new Guid("56a454d5-f82b-430e-b809-e7484b52432a"),
-                            Amount = 0m,
-                            MemberId = new Guid("743e47d8-d927-4999-ac3f-87ca70e37025"),
-                            Note = "Quas tempora dignissimos molestias vero. Ratione magnam et aut iure.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PaymentType = 0
-                        },
-                        new
-                        {
-                            Id = new Guid("7fdd27b3-9be0-464e-9bde-119189b02b6a"),
-                            Amount = 0m,
-                            MemberId = new Guid("743e47d8-d927-4999-ac3f-87ca70e37025"),
-                            Note = "Voluptas aut rerum nesciunt rerum. Est nesciunt placeat eos expedita est expedita. Minima omnis qui repudiandae. Eum rerum eos quae eum est minima.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = new Guid("47e7a786-995c-43c9-8289-548f11cb83f5"),
+                            Amount = 742.289227413526000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("b2724ea1-4cce-450f-8bab-67988a9f865e"),
+                            Note = "Quibusdam magni architecto odio harum qui quisquam voluptas a blanditiis. Quam dolores eveniet qui laboriosam ex voluptatem voluptas explicabo. Provident velit perspiciatis rerum facilis rerum quaerat temporibus distinctio occaecati. Porro fuga assumenda id.",
+                            PaymentDate = new DateTime(2019, 12, 14, 2, 4, 32, 243, DateTimeKind.Utc).AddTicks(1234),
                             PaymentType = 99
                         },
                         new
                         {
-                            Id = new Guid("621729ba-251c-4407-bda3-59d273ae7505"),
-                            Amount = 0m,
-                            MemberId = new Guid("743e47d8-d927-4999-ac3f-87ca70e37025"),
-                            Note = "Nulla reprehenderit praesentium beatae dignissimos. Qui rem non tempora quam. Impedit commodi eaque veritatis modi. Aliquid ut aliquid ut perferendis deleniti recusandae in enim deserunt.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = new Guid("5e878e13-5fb5-4973-b5fb-ab1d6da6c8ae"),
+                            Amount = 910.433284700239000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("b2724ea1-4cce-450f-8bab-67988a9f865e"),
+                            Note = "Provident quidem blanditiis voluptas quia id cum ut et. Labore cupiditate quaerat. Minima sit non beatae temporibus.",
+                            PaymentDate = new DateTime(2018, 9, 20, 13, 53, 1, 47, DateTimeKind.Utc).AddTicks(1332),
                             PaymentType = 1
                         },
                         new
                         {
-                            Id = new Guid("19ad734f-2872-45bf-8d3c-6fc98c59ca09"),
-                            Amount = 0m,
-                            MemberId = new Guid("743e47d8-d927-4999-ac3f-87ca70e37025"),
-                            Note = "Temporibus est aspernatur doloremque quaerat repudiandae rerum accusantium quisquam sunt.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = new Guid("be035a1a-6fc6-4297-8256-ae45ea4d66e8"),
+                            Amount = 290.731300891108000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("b2724ea1-4cce-450f-8bab-67988a9f865e"),
+                            Note = "Placeat recusandae accusantium animi qui. Rerum atque deserunt qui incidunt.",
+                            PaymentDate = new DateTime(2016, 4, 11, 19, 0, 1, 548, DateTimeKind.Utc).AddTicks(3011),
+                            PaymentType = 0
+                        },
+                        new
+                        {
+                            Id = new Guid("d264cb23-1f15-4055-a647-cf657c59c1c8"),
+                            Amount = 966.420519815876000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("b2724ea1-4cce-450f-8bab-67988a9f865e"),
+                            Note = "Voluptas consequuntur perferendis dolorem qui suscipit.",
+                            PaymentDate = new DateTime(2019, 10, 31, 20, 3, 6, 848, DateTimeKind.Utc).AddTicks(4089),
+                            PaymentType = 0
+                        },
+                        new
+                        {
+                            Id = new Guid("61a18276-c477-4784-b701-d14c73d86504"),
+                            Amount = 320.418170372947000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("b2724ea1-4cce-450f-8bab-67988a9f865e"),
+                            Note = "Perspiciatis nisi voluptatem molestiae optio est laudantium sed a.",
+                            PaymentDate = new DateTime(2012, 12, 29, 17, 8, 14, 668, DateTimeKind.Utc).AddTicks(9687),
+                            PaymentType = 0
+                        },
+                        new
+                        {
+                            Id = new Guid("661df8fe-fff1-49a5-975c-aafc7d1a3e9d"),
+                            Amount = 663.193391681295000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("b2724ea1-4cce-450f-8bab-67988a9f865e"),
+                            Note = "Qui natus ut maxime reprehenderit ex modi quia laboriosam. Alias in hic et iusto aliquam eaque officia enim. Nihil ipsum eligendi. Dicta nesciunt voluptas autem maiores odit.",
+                            PaymentDate = new DateTime(2021, 7, 20, 14, 40, 32, 750, DateTimeKind.Utc).AddTicks(1929),
+                            PaymentType = 0
+                        },
+                        new
+                        {
+                            Id = new Guid("d51e386f-c910-41b7-bcf2-5ee63cd3c982"),
+                            Amount = 751.548079342036000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("b2724ea1-4cce-450f-8bab-67988a9f865e"),
+                            Note = "Sunt sit cupiditate. Molestiae perspiciatis fuga est dolore. Officia dolor molestiae quia rem dolorem nihil id voluptas. Libero quae ut quis molestias.",
+                            PaymentDate = new DateTime(2015, 3, 9, 18, 16, 50, 763, DateTimeKind.Utc).AddTicks(4721),
+                            PaymentType = 0
+                        },
+                        new
+                        {
+                            Id = new Guid("dc559554-3e50-40b7-9847-509187ae2019"),
+                            Amount = 264.471642440553000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("b2724ea1-4cce-450f-8bab-67988a9f865e"),
+                            Note = "Et facere aliquid repudiandae est eius similique ut.",
+                            PaymentDate = new DateTime(2018, 3, 20, 8, 53, 31, 724, DateTimeKind.Utc).AddTicks(6421),
                             PaymentType = 99
                         },
                         new
                         {
-                            Id = new Guid("61a48a69-48c2-4a50-af6e-f7b571104ced"),
-                            Amount = 0m,
-                            MemberId = new Guid("743e47d8-d927-4999-ac3f-87ca70e37025"),
-                            Note = "Ipsa ut molestiae. Quaerat commodi eaque ut sint quaerat. Est corporis reiciendis amet deleniti voluptatem vitae enim eveniet voluptate.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = new Guid("f4861269-eda4-4463-a567-050a808f7a5d"),
+                            Amount = 313.891924399633000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("b2724ea1-4cce-450f-8bab-67988a9f865e"),
+                            Note = "Quae vel consequatur quos. Molestias repellendus consectetur aspernatur labore optio.",
+                            PaymentDate = new DateTime(2013, 1, 30, 16, 16, 57, 917, DateTimeKind.Utc).AddTicks(8588),
                             PaymentType = 99
                         },
                         new
                         {
-                            Id = new Guid("d6840a07-4a5c-4d71-835b-8f79d222fbac"),
-                            Amount = 0m,
-                            MemberId = new Guid("c40325b2-00dc-424c-bdb2-826cb64bc22a"),
-                            Note = "Est quia voluptate blanditiis voluptate qui. Optio excepturi molestiae explicabo facere et. Non dolores aut ut. Voluptas dicta earum.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = new Guid("eb3975ce-9a98-4b45-b864-3e3bc241232a"),
+                            Amount = 216.872954230253000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("15358ab3-4b57-4e5e-877a-7e4762f018d4"),
+                            Note = "Illum dolore at et id molestiae dolorem sed. Dignissimos a qui quas error laboriosam explicabo eligendi aperiam laborum. Eum eveniet est. Recusandae quasi minus sint.",
+                            PaymentDate = new DateTime(2017, 5, 13, 5, 59, 35, 11, DateTimeKind.Utc).AddTicks(8897),
                             PaymentType = 1
                         },
                         new
                         {
-                            Id = new Guid("77248df8-e443-41d2-87ff-9495f05bb660"),
-                            Amount = 0m,
-                            MemberId = new Guid("c40325b2-00dc-424c-bdb2-826cb64bc22a"),
-                            Note = "Repellat ipsum pariatur cupiditate accusantium. Sed odio voluptatem non perferendis quia earum unde. Qui iste qui aut ullam iure aut consectetur omnis. Cumque eum sit veritatis voluptatem ut.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PaymentType = 1
-                        },
-                        new
-                        {
-                            Id = new Guid("f1d51545-aab2-4018-8940-880ccdb41c5b"),
-                            Amount = 0m,
-                            MemberId = new Guid("c40325b2-00dc-424c-bdb2-826cb64bc22a"),
-                            Note = "Cumque praesentium vitae magnam saepe sint aut maxime perferendis.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = new Guid("0890ebc8-257f-4f51-a155-86aab41068c9"),
+                            Amount = 626.777899132457000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("15358ab3-4b57-4e5e-877a-7e4762f018d4"),
+                            Note = "Saepe illum sequi ut et molestiae cum et. Est sint dolores nostrum consequatur ipsa. Illum repellat et dolor pariatur culpa.",
+                            PaymentDate = new DateTime(2017, 9, 16, 15, 0, 48, 688, DateTimeKind.Utc).AddTicks(6925),
                             PaymentType = 0
                         },
                         new
                         {
-                            Id = new Guid("25eb0173-6c88-423b-bd4e-36b3c3dcf151"),
-                            Amount = 0m,
-                            MemberId = new Guid("c40325b2-00dc-424c-bdb2-826cb64bc22a"),
-                            Note = "Tenetur dolor eaque officia assumenda sit minus. Provident odit tempora dolore voluptas. Non pariatur modi dolorem quasi et ut.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PaymentType = 1
-                        },
-                        new
-                        {
-                            Id = new Guid("45db87eb-6346-4b24-a4f0-3285831144f8"),
-                            Amount = 0m,
-                            MemberId = new Guid("c40325b2-00dc-424c-bdb2-826cb64bc22a"),
-                            Note = "Perferendis rem consequatur animi facere. Voluptate dolorem beatae exercitationem reiciendis.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = new Guid("96f3057a-eaef-44cf-ab41-dcb1762d8a00"),
+                            Amount = 803.334828922538000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("15358ab3-4b57-4e5e-877a-7e4762f018d4"),
+                            Note = "Nulla excepturi voluptates facilis modi ipsam. Quod officia consequatur nobis voluptatibus numquam vel.",
+                            PaymentDate = new DateTime(2012, 2, 29, 0, 15, 35, 151, DateTimeKind.Utc).AddTicks(8891),
                             PaymentType = 0
                         },
                         new
                         {
-                            Id = new Guid("a2f2a624-9b4b-4895-b38f-e67a918ceada"),
-                            Amount = 0m,
-                            MemberId = new Guid("c40325b2-00dc-424c-bdb2-826cb64bc22a"),
-                            Note = "Sint voluptatem explicabo sint.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = new Guid("b3e82d01-7453-4af1-af50-690d81f82eac"),
+                            Amount = 768.107933915128000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("15358ab3-4b57-4e5e-877a-7e4762f018d4"),
+                            Note = "Qui voluptatum odio voluptatem dolorem est velit ea corrupti et. Eveniet sed aperiam non dolores quod reprehenderit. Autem ut enim. Quaerat laborum ullam quia sint maiores et quo ea.",
+                            PaymentDate = new DateTime(2016, 11, 19, 15, 43, 47, 71, DateTimeKind.Utc).AddTicks(8840),
                             PaymentType = 0
                         },
                         new
                         {
-                            Id = new Guid("4adc2d5a-b12c-4957-8f0f-8c6f98902ad3"),
-                            Amount = 0m,
-                            MemberId = new Guid("c40325b2-00dc-424c-bdb2-826cb64bc22a"),
-                            Note = "Molestias accusantium qui nihil consequatur ea qui. Sit odio velit itaque quis. Perferendis expedita id quod quia quaerat in voluptas at.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PaymentType = 1
-                        },
-                        new
-                        {
-                            Id = new Guid("f9c41c52-13b4-4290-8616-a0fb33738471"),
-                            Amount = 0m,
-                            MemberId = new Guid("c40325b2-00dc-424c-bdb2-826cb64bc22a"),
-                            Note = "Voluptates ducimus tempora odit commodi laboriosam distinctio incidunt.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = new Guid("339b8107-0e45-48c6-9005-2013e16f2edc"),
+                            Amount = 649.66363633491000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("15358ab3-4b57-4e5e-877a-7e4762f018d4"),
+                            Note = "Dolorem animi incidunt voluptatum provident culpa. Ut rerum quia. Repellendus dolores nisi iusto numquam et error dolor voluptas veritatis.",
+                            PaymentDate = new DateTime(2017, 5, 16, 21, 20, 16, 876, DateTimeKind.Utc).AddTicks(2823),
                             PaymentType = 0
                         },
                         new
                         {
-                            Id = new Guid("f5c84be1-429a-4f51-828e-4ac2202b9d42"),
-                            Amount = 0m,
-                            MemberId = new Guid("c40325b2-00dc-424c-bdb2-826cb64bc22a"),
-                            Note = "Autem dicta aspernatur itaque aliquam quis tempora qui. Aliquid quo ipsa.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PaymentType = 0
-                        },
-                        new
-                        {
-                            Id = new Guid("4c60c38c-4e14-4780-94f5-3700e0340a61"),
-                            Amount = 0m,
-                            MemberId = new Guid("c40325b2-00dc-424c-bdb2-826cb64bc22a"),
-                            Note = "Nulla officiis in non ut exercitationem.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PaymentType = 1
-                        },
-                        new
-                        {
-                            Id = new Guid("8b8df073-6114-4b36-8cfc-f7a59b291348"),
-                            Amount = 0m,
-                            MemberId = new Guid("1986cf92-661b-4935-8549-b47c80bc9455"),
-                            Note = "Qui eaque quasi aut consectetur doloribus fuga esse. Autem sapiente delectus. Dolorum voluptates nulla aliquid officiis eaque. Sed accusamus ea dignissimos.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = new Guid("9372e73a-14c7-4d3b-8f29-623c797402ed"),
+                            Amount = 95.7347933972326000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("15358ab3-4b57-4e5e-877a-7e4762f018d4"),
+                            Note = "Velit nihil atque amet et voluptas itaque facilis sed voluptatem. Doloribus molestiae quaerat voluptate eos rerum saepe.",
+                            PaymentDate = new DateTime(2020, 9, 26, 8, 27, 44, 633, DateTimeKind.Utc).AddTicks(917),
                             PaymentType = 99
                         },
                         new
                         {
-                            Id = new Guid("b245042f-e5c9-4ded-8b87-fd2218e801f6"),
-                            Amount = 0m,
-                            MemberId = new Guid("1986cf92-661b-4935-8549-b47c80bc9455"),
-                            Note = "Autem et et id deleniti ab repellat reprehenderit quia.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = new Guid("4f43e387-69d2-4835-8429-43fb82055f59"),
+                            Amount = 569.438713214252000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("15358ab3-4b57-4e5e-877a-7e4762f018d4"),
+                            Note = "At dolores aspernatur reiciendis enim autem sed molestias vel laboriosam. Fugit illum quaerat debitis veniam. Dolores vitae enim odit nemo itaque dolore vel voluptatibus sit. Mollitia expedita assumenda.",
+                            PaymentDate = new DateTime(2017, 3, 19, 8, 6, 49, 226, DateTimeKind.Utc).AddTicks(3041),
                             PaymentType = 0
                         },
                         new
                         {
-                            Id = new Guid("5b5a4e06-82ab-4456-968c-0c240278a5c6"),
-                            Amount = 0m,
-                            MemberId = new Guid("1986cf92-661b-4935-8549-b47c80bc9455"),
-                            Note = "Dolorem distinctio incidunt tempore quos dolorum. Illo praesentium enim hic. Occaecati quidem reprehenderit natus repellendus recusandae consequuntur enim.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PaymentType = 1
-                        },
-                        new
-                        {
-                            Id = new Guid("66a5912c-fa5b-4a1e-8587-432b30597be2"),
-                            Amount = 0m,
-                            MemberId = new Guid("1986cf92-661b-4935-8549-b47c80bc9455"),
-                            Note = "Eum ut velit esse non omnis distinctio ut.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PaymentType = 0
-                        },
-                        new
-                        {
-                            Id = new Guid("884d67f0-8262-4b86-8e17-1ef5c692b24c"),
-                            Amount = 0m,
-                            MemberId = new Guid("1986cf92-661b-4935-8549-b47c80bc9455"),
-                            Note = "Aut cumque nesciunt nulla voluptatem eaque. Dolores consequatur repellendus. Qui et exercitationem hic illum expedita. Molestias eaque eum numquam.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PaymentType = 0
-                        },
-                        new
-                        {
-                            Id = new Guid("4d29d89d-ab47-4c0b-b636-2a23b8f20b14"),
-                            Amount = 0m,
-                            MemberId = new Guid("1986cf92-661b-4935-8549-b47c80bc9455"),
-                            Note = "Nobis maxime omnis quis voluptatem dolore.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PaymentType = 0
-                        },
-                        new
-                        {
-                            Id = new Guid("758fe342-be14-49ed-ac12-3ebcba1e4921"),
-                            Amount = 0m,
-                            MemberId = new Guid("1986cf92-661b-4935-8549-b47c80bc9455"),
-                            Note = "In qui ipsum blanditiis eaque nemo rerum nihil optio. Nam quisquam aspernatur rem officiis rem excepturi et labore est.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PaymentType = 1
-                        },
-                        new
-                        {
-                            Id = new Guid("08ddcca3-908a-4b97-9d34-b8ddce2fe673"),
-                            Amount = 0m,
-                            MemberId = new Guid("1986cf92-661b-4935-8549-b47c80bc9455"),
-                            Note = "Perferendis beatae corrupti beatae. Qui sint ex.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PaymentType = 0
-                        },
-                        new
-                        {
-                            Id = new Guid("f928f057-e5b4-4b0a-8dfa-cf53d5ea7ca2"),
-                            Amount = 0m,
-                            MemberId = new Guid("1986cf92-661b-4935-8549-b47c80bc9455"),
-                            Note = "Dolor sunt natus explicabo pariatur esse asperiores et dolores non. Minima deleniti quasi dolore vel consequatur consequatur enim.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = new Guid("f5b4e279-e57e-4eef-ad8c-25cbcbcde582"),
+                            Amount = 930.38380562798000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("15358ab3-4b57-4e5e-877a-7e4762f018d4"),
+                            Note = "Accusamus possimus eos eius. Temporibus ea quia ratione voluptatem dolores quaerat repellat neque. Voluptatem et numquam consectetur quo dolorem cumque modi iste quae.",
+                            PaymentDate = new DateTime(2013, 4, 30, 13, 48, 20, 63, DateTimeKind.Utc).AddTicks(4166),
                             PaymentType = 99
                         },
                         new
                         {
-                            Id = new Guid("bc8c67e4-6434-4948-911d-73970c916d35"),
-                            Amount = 0m,
-                            MemberId = new Guid("1986cf92-661b-4935-8549-b47c80bc9455"),
-                            Note = "Eaque consequatur quia natus. Magnam porro in est omnis qui. Quasi eius laborum reprehenderit praesentium pariatur autem. Dolorum dolore dolor.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = new Guid("bede8267-1a7f-47c1-9c65-c4f0ab0e1f02"),
+                            Amount = 198.213873283313000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("15358ab3-4b57-4e5e-877a-7e4762f018d4"),
+                            Note = "Facilis autem modi deleniti. Omnis non adipisci sint rerum voluptatem. At odit esse totam.",
+                            PaymentDate = new DateTime(2020, 5, 24, 10, 41, 40, 664, DateTimeKind.Utc).AddTicks(5656),
+                            PaymentType = 1
+                        },
+                        new
+                        {
+                            Id = new Guid("74835d25-3078-4b0e-8bb6-8451cce5c17d"),
+                            Amount = 41.570279168368000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("15358ab3-4b57-4e5e-877a-7e4762f018d4"),
+                            Note = "Consequuntur natus provident est nisi dolor aperiam nulla est blanditiis.",
+                            PaymentDate = new DateTime(2013, 12, 11, 14, 27, 26, 920, DateTimeKind.Utc).AddTicks(2512),
+                            PaymentType = 0
+                        },
+                        new
+                        {
+                            Id = new Guid("facb382f-66ea-4619-9457-dd0ccc34e255"),
+                            Amount = 922.904180377964000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("ed8f84dd-7f9d-4317-80fa-419913dc23fb"),
+                            Note = "Quia quia dignissimos praesentium quo voluptate exercitationem. Ex voluptas quo excepturi. Corrupti velit quae aperiam molestiae velit. Ut sequi et molestiae et minus cupiditate.",
+                            PaymentDate = new DateTime(2012, 6, 26, 22, 50, 54, 834, DateTimeKind.Utc).AddTicks(5208),
+                            PaymentType = 0
+                        },
+                        new
+                        {
+                            Id = new Guid("ee5fd65e-2c0f-4e73-88c7-7da406418806"),
+                            Amount = 458.200506981484000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("ed8f84dd-7f9d-4317-80fa-419913dc23fb"),
+                            Note = "Minima facilis aspernatur quo velit et porro aperiam nobis. Est temporibus consequatur.",
+                            PaymentDate = new DateTime(2019, 7, 21, 15, 15, 7, 821, DateTimeKind.Utc).AddTicks(7097),
+                            PaymentType = 1
+                        },
+                        new
+                        {
+                            Id = new Guid("a79d6561-9667-4414-b228-6d03d64d75e0"),
+                            Amount = 940.520786059744000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("ed8f84dd-7f9d-4317-80fa-419913dc23fb"),
+                            Note = "Ipsa eos harum et libero iure nam fugiat ipsa. Soluta officiis rerum est dolores velit.",
+                            PaymentDate = new DateTime(2017, 8, 8, 9, 48, 45, 268, DateTimeKind.Utc).AddTicks(9547),
+                            PaymentType = 0
+                        },
+                        new
+                        {
+                            Id = new Guid("ed8a4406-1cf5-430d-937b-c1af4b180b32"),
+                            Amount = 439.721315331927000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("ed8f84dd-7f9d-4317-80fa-419913dc23fb"),
+                            Note = "Pariatur reiciendis nihil ratione sed id maiores. Tempora harum vel non et quo est qui necessitatibus. Repellat voluptas quia culpa id et eligendi aut animi ut. Fugit necessitatibus eligendi nihil vel et.",
+                            PaymentDate = new DateTime(2019, 10, 14, 22, 7, 43, 357, DateTimeKind.Utc).AddTicks(5298),
                             PaymentType = 99
                         },
                         new
                         {
-                            Id = new Guid("20d81f5c-e564-455c-a5a0-4f0ee1590691"),
-                            Amount = 0m,
-                            MemberId = new Guid("e4863da0-3e5c-4431-9dfa-551c4ef94c56"),
-                            Note = "Ratione et ea.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = new Guid("63f9a087-993b-47f7-bda9-2e6f41a560c3"),
+                            Amount = 333.019670271946000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("ed8f84dd-7f9d-4317-80fa-419913dc23fb"),
+                            Note = "Repellendus voluptates eius.",
+                            PaymentDate = new DateTime(2015, 12, 27, 7, 44, 8, 700, DateTimeKind.Utc).AddTicks(855),
                             PaymentType = 0
                         },
                         new
                         {
-                            Id = new Guid("d4623e1e-818b-4047-9e50-e8b248865cd0"),
-                            Amount = 0m,
-                            MemberId = new Guid("e4863da0-3e5c-4431-9dfa-551c4ef94c56"),
-                            Note = "Molestiae quis quod maxime. Velit id ut ut eligendi voluptas ratione repellendus ut est. Qui sed dolorem blanditiis est incidunt.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PaymentType = 0
-                        },
-                        new
-                        {
-                            Id = new Guid("a2b6fef4-0ed0-4c5c-b1c8-aac9c87d3abb"),
-                            Amount = 0m,
-                            MemberId = new Guid("e4863da0-3e5c-4431-9dfa-551c4ef94c56"),
-                            Note = "Et eaque illo laboriosam non quis. Rerum rerum perferendis sed fugiat sint. Possimus tempore explicabo autem tenetur velit non praesentium provident.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PaymentType = 1
-                        },
-                        new
-                        {
-                            Id = new Guid("ed300646-0384-4b78-b4b5-6316f6ac4b98"),
-                            Amount = 0m,
-                            MemberId = new Guid("e4863da0-3e5c-4431-9dfa-551c4ef94c56"),
-                            Note = "Rerum tempore placeat dolorum qui quo.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = new Guid("8b4527b2-754e-4c0c-8ee1-0f552dc6951f"),
+                            Amount = 711.144720000516000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("ed8f84dd-7f9d-4317-80fa-419913dc23fb"),
+                            Note = "Accusantium maiores dolorum voluptatibus eaque vel id atque. Ex est unde quaerat numquam. Culpa quia sed ut perspiciatis assumenda necessitatibus.",
+                            PaymentDate = new DateTime(2013, 10, 19, 23, 47, 19, 148, DateTimeKind.Utc).AddTicks(7193),
                             PaymentType = 99
                         },
                         new
                         {
-                            Id = new Guid("131ebe59-a3ed-45f6-986e-a5d3a59b2b12"),
-                            Amount = 0m,
-                            MemberId = new Guid("e4863da0-3e5c-4431-9dfa-551c4ef94c56"),
-                            Note = "Saepe nemo et voluptate. Aut sunt repellat et atque occaecati molestias nihil repellat error. Laborum alias in ut et nobis. Molestiae eos quis qui illum ut.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = new Guid("1ac9cbbc-e59f-49fd-8af2-e7520584cabf"),
+                            Amount = 470.508075371841000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("ed8f84dd-7f9d-4317-80fa-419913dc23fb"),
+                            Note = "Sed magni est pariatur. Ea sequi nesciunt alias consequuntur dolores et expedita dolores tenetur.",
+                            PaymentDate = new DateTime(2021, 3, 15, 14, 29, 6, 594, DateTimeKind.Utc).AddTicks(8689),
+                            PaymentType = 0
+                        },
+                        new
+                        {
+                            Id = new Guid("be2018f9-c160-4d36-b56c-3c9a34ad1fd7"),
+                            Amount = 265.775943156696000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("ed8f84dd-7f9d-4317-80fa-419913dc23fb"),
+                            Note = "Quis itaque voluptatum.",
+                            PaymentDate = new DateTime(2012, 3, 24, 1, 18, 43, 225, DateTimeKind.Utc).AddTicks(6802),
+                            PaymentType = 1
+                        },
+                        new
+                        {
+                            Id = new Guid("2b637225-d642-4aa5-ab2c-1074123c2b88"),
+                            Amount = 42.8300846375527000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("ed8f84dd-7f9d-4317-80fa-419913dc23fb"),
+                            Note = "Quos culpa voluptatem atque qui aspernatur provident rerum.",
+                            PaymentDate = new DateTime(2017, 7, 19, 18, 19, 37, 796, DateTimeKind.Utc).AddTicks(2642),
                             PaymentType = 99
                         },
                         new
                         {
-                            Id = new Guid("5bbd64bc-9d4c-4a37-b878-2f2df55f87f8"),
-                            Amount = 0m,
-                            MemberId = new Guid("e4863da0-3e5c-4431-9dfa-551c4ef94c56"),
-                            Note = "Consequatur fuga sed ut quia perferendis dolorem. Esse omnis aut. At ut omnis repudiandae.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PaymentType = 0
-                        },
-                        new
-                        {
-                            Id = new Guid("525814b0-c79e-423e-bb2b-8a245f60af02"),
-                            Amount = 0m,
-                            MemberId = new Guid("e4863da0-3e5c-4431-9dfa-551c4ef94c56"),
-                            Note = "Possimus dolorem facere quae. Suscipit laboriosam sit libero natus aut. Voluptatem nisi ducimus facilis magnam aperiam quis eum.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PaymentType = 0
-                        },
-                        new
-                        {
-                            Id = new Guid("b3770c67-d0b7-41db-9330-da41b8170feb"),
-                            Amount = 0m,
-                            MemberId = new Guid("e4863da0-3e5c-4431-9dfa-551c4ef94c56"),
-                            Note = "Repudiandae laborum repellendus eos. Aliquam labore aut corporis et. Debitis quo non consequatur vero et autem dolor aliquam perspiciatis. Fugit et sed amet sint hic.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PaymentType = 0
-                        },
-                        new
-                        {
-                            Id = new Guid("8630326a-863a-4f3d-9dec-ef885cdc4e95"),
-                            Amount = 0m,
-                            MemberId = new Guid("e4863da0-3e5c-4431-9dfa-551c4ef94c56"),
-                            Note = "Enim iure id deleniti et minus fugiat dolorem necessitatibus.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = new Guid("83a06d9b-729e-4012-a54e-d767bbadd080"),
+                            Amount = 48.5575010043712000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("ed8f84dd-7f9d-4317-80fa-419913dc23fb"),
+                            Note = "Magni velit qui explicabo doloremque eligendi fugiat.",
+                            PaymentDate = new DateTime(2021, 11, 8, 2, 43, 50, 754, DateTimeKind.Utc).AddTicks(1855),
                             PaymentType = 1
                         },
                         new
                         {
-                            Id = new Guid("ab76b171-026a-4631-9e2a-e6e572511c1b"),
-                            Amount = 0m,
-                            MemberId = new Guid("e4863da0-3e5c-4431-9dfa-551c4ef94c56"),
-                            Note = "Adipisci laudantium placeat sed sed expedita. Dignissimos debitis labore.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = new Guid("40931248-d543-415a-abce-aee226333402"),
+                            Amount = 881.599918649108000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("1f75aa88-935c-4eb2-9891-d39332949ed6"),
+                            Note = "Voluptates illo accusantium. Molestiae suscipit asperiores aut mollitia dignissimos ab possimus odio. Quidem quia provident at cupiditate quisquam. Esse animi ipsum vitae maxime et sit sed aut.",
+                            PaymentDate = new DateTime(2020, 6, 2, 14, 40, 26, 430, DateTimeKind.Utc).AddTicks(4803),
+                            PaymentType = 0
+                        },
+                        new
+                        {
+                            Id = new Guid("56c78a49-44d1-4935-96fc-1be7075b4f9e"),
+                            Amount = 392.481217791673000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("1f75aa88-935c-4eb2-9891-d39332949ed6"),
+                            Note = "Voluptatem ipsa sit nam qui debitis. Odio aliquam numquam error ea nulla quis culpa.",
+                            PaymentDate = new DateTime(2019, 7, 14, 6, 50, 18, 464, DateTimeKind.Utc).AddTicks(5948),
+                            PaymentType = 1
+                        },
+                        new
+                        {
+                            Id = new Guid("0e61a0ff-5921-4ce5-894e-0502cb22b3ab"),
+                            Amount = 338.244991402592000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("1f75aa88-935c-4eb2-9891-d39332949ed6"),
+                            Note = "Culpa fugit maiores. Fuga beatae molestiae culpa aut officia accusantium quia. Id eveniet expedita laboriosam et.",
+                            PaymentDate = new DateTime(2013, 5, 13, 19, 32, 14, 765, DateTimeKind.Utc).AddTicks(1908),
+                            PaymentType = 1
+                        },
+                        new
+                        {
+                            Id = new Guid("0d233e58-2ca8-4830-9997-d7dae2a90a10"),
+                            Amount = 289.180298265437000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("1f75aa88-935c-4eb2-9891-d39332949ed6"),
+                            Note = "Occaecati qui ratione.",
+                            PaymentDate = new DateTime(2018, 2, 22, 19, 6, 55, 421, DateTimeKind.Utc).AddTicks(8922),
+                            PaymentType = 0
+                        },
+                        new
+                        {
+                            Id = new Guid("e684d8e6-9e5b-4241-b174-d8cb06539af2"),
+                            Amount = 463.155352142312000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("1f75aa88-935c-4eb2-9891-d39332949ed6"),
+                            Note = "Ex et maxime et. Eum sapiente iste delectus qui vel quo.",
+                            PaymentDate = new DateTime(2012, 3, 26, 0, 48, 19, 285, DateTimeKind.Utc).AddTicks(5961),
+                            PaymentType = 1
+                        },
+                        new
+                        {
+                            Id = new Guid("98e40511-f236-4381-b3cd-f633a22f14bc"),
+                            Amount = 942.895343609696000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("1f75aa88-935c-4eb2-9891-d39332949ed6"),
+                            Note = "Eius deleniti fugiat et soluta quia nihil sequi. Similique modi minima qui et dolorem maiores vel. Et non itaque itaque nisi corrupti facilis animi. Quia voluptas harum.",
+                            PaymentDate = new DateTime(2018, 4, 10, 11, 54, 19, 118, DateTimeKind.Utc).AddTicks(9491),
+                            PaymentType = 1
+                        },
+                        new
+                        {
+                            Id = new Guid("dfe1cf6f-960f-4f35-93d6-3be69c6f60fd"),
+                            Amount = 229.904568068617000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("1f75aa88-935c-4eb2-9891-d39332949ed6"),
+                            Note = "Ratione et itaque sapiente qui. Necessitatibus laborum esse error libero. Vitae veritatis rerum aspernatur officia. Maiores illo nulla consequatur voluptate sed rerum totam.",
+                            PaymentDate = new DateTime(2012, 12, 14, 2, 15, 15, 483, DateTimeKind.Utc).AddTicks(7386),
                             PaymentType = 99
                         },
                         new
                         {
-                            Id = new Guid("6e7a55d0-352b-4d9a-89a8-f4de2ff2a32d"),
-                            Amount = 0m,
-                            MemberId = new Guid("4333d245-b59c-47df-b304-0504151cd170"),
-                            Note = "Modi libero labore quo non adipisci et quia officia. Vitae est nihil id cumque quis porro incidunt architecto. Eveniet dignissimos molestiae laudantium illum ut.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PaymentType = 1
-                        },
-                        new
-                        {
-                            Id = new Guid("0d2863bb-4f1f-43e4-93d0-2ab9e4e38f39"),
-                            Amount = 0m,
-                            MemberId = new Guid("4333d245-b59c-47df-b304-0504151cd170"),
-                            Note = "Libero tempore sint.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PaymentType = 1
-                        },
-                        new
-                        {
-                            Id = new Guid("689df250-409a-41c7-b651-47ef1e5ecba1"),
-                            Amount = 0m,
-                            MemberId = new Guid("4333d245-b59c-47df-b304-0504151cd170"),
-                            Note = "Rerum consequatur ut totam et sit illo.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = new Guid("05f86833-16f9-4606-8372-68261022a08f"),
+                            Amount = 528.141589196356000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("1f75aa88-935c-4eb2-9891-d39332949ed6"),
+                            Note = "Vel in aut dolor minima ut magni nemo ipsa. Ducimus voluptas molestiae ut minus cum. Qui autem voluptatem.",
+                            PaymentDate = new DateTime(2016, 1, 16, 22, 21, 50, 441, DateTimeKind.Utc).AddTicks(5221),
                             PaymentType = 99
                         },
                         new
                         {
-                            Id = new Guid("7d1ab0a9-ff62-4535-9e86-8ab2b1d308a6"),
-                            Amount = 0m,
-                            MemberId = new Guid("4333d245-b59c-47df-b304-0504151cd170"),
-                            Note = "In et accusamus et id iure error.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PaymentType = 1
-                        },
-                        new
-                        {
-                            Id = new Guid("aaa2c1c6-ff3f-45e2-81f5-53dbf21b8cb5"),
-                            Amount = 0m,
-                            MemberId = new Guid("4333d245-b59c-47df-b304-0504151cd170"),
-                            Note = "Eum porro delectus eum ducimus ipsum.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PaymentType = 1
-                        },
-                        new
-                        {
-                            Id = new Guid("2dd7bc3b-ee0b-4b0f-b80a-5bd2f95f5f54"),
-                            Amount = 0m,
-                            MemberId = new Guid("4333d245-b59c-47df-b304-0504151cd170"),
-                            Note = "Perferendis sunt quia et itaque ipsum officiis itaque voluptatem atque.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PaymentType = 1
-                        },
-                        new
-                        {
-                            Id = new Guid("1dcd0ed1-4bb3-450b-8618-c8a5363901e7"),
-                            Amount = 0m,
-                            MemberId = new Guid("4333d245-b59c-47df-b304-0504151cd170"),
-                            Note = "Autem autem aliquam esse accusantium numquam.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = new Guid("971e4800-ee2d-4412-96bc-79859a43e5ae"),
+                            Amount = 234.805834658014000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("1f75aa88-935c-4eb2-9891-d39332949ed6"),
+                            Note = "Natus amet maxime aperiam ab. Asperiores tempora sit accusamus ad laborum soluta cupiditate. Quae praesentium expedita at.",
+                            PaymentDate = new DateTime(2019, 6, 22, 2, 5, 44, 879, DateTimeKind.Utc).AddTicks(6279),
                             PaymentType = 0
                         },
                         new
                         {
-                            Id = new Guid("2d4408c2-6c19-43e9-8079-5bab5f37f7ea"),
-                            Amount = 0m,
-                            MemberId = new Guid("4333d245-b59c-47df-b304-0504151cd170"),
-                            Note = "Porro magnam quis sunt omnis non numquam deleniti quis consectetur. Ab distinctio est est velit nesciunt est quis et et. Placeat aut est quis non voluptas. Et et quia.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = new Guid("ca0867be-c331-4465-88e1-7f25ba15dc7e"),
+                            Amount = 353.585892006573000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("1f75aa88-935c-4eb2-9891-d39332949ed6"),
+                            Note = "Nemo temporibus quas consectetur eligendi molestias quidem cum id id. Non doloremque ut minima. Nihil maxime laboriosam officia.",
+                            PaymentDate = new DateTime(2021, 5, 28, 17, 24, 20, 787, DateTimeKind.Utc).AddTicks(8388),
                             PaymentType = 0
                         },
                         new
                         {
-                            Id = new Guid("2391503d-1cd3-40ee-9fc4-52cad80e6867"),
-                            Amount = 0m,
-                            MemberId = new Guid("4333d245-b59c-47df-b304-0504151cd170"),
-                            Note = "Accusamus eaque error eaque. Iste quia vitae. Delectus fuga sed illum. Id consequatur rerum dolores molestiae.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = new Guid("8d57e277-03fe-44fe-a856-15526821b9eb"),
+                            Amount = 930.538557104964000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("3ee5aab2-ccc1-45d2-89c0-341336f72a9a"),
+                            Note = "Dolorum ipsam nam quos ducimus voluptatum nemo. Repudiandae eos quasi. Harum facere sunt dolor quidem.",
+                            PaymentDate = new DateTime(2019, 7, 2, 3, 9, 24, 813, DateTimeKind.Utc).AddTicks(7814),
+                            PaymentType = 1
+                        },
+                        new
+                        {
+                            Id = new Guid("9d82a471-e617-44a6-89c0-ffcf7fba828f"),
+                            Amount = 883.393450631244000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("3ee5aab2-ccc1-45d2-89c0-341336f72a9a"),
+                            Note = "Unde vel pariatur neque optio quod iusto et. Sint officia fuga.",
+                            PaymentDate = new DateTime(2021, 6, 22, 11, 21, 56, 500, DateTimeKind.Utc).AddTicks(9570),
                             PaymentType = 0
                         },
                         new
                         {
-                            Id = new Guid("d2a7d210-17f5-4c68-b34d-75d04fd3b906"),
-                            Amount = 0m,
-                            MemberId = new Guid("4333d245-b59c-47df-b304-0504151cd170"),
-                            Note = "Maxime consequuntur corrupti. Et modi velit odit dolorem. Veniam quos quos suscipit explicabo quisquam nihil.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = new Guid("0286bad7-c948-4feb-a11d-dfb84cd3aef0"),
+                            Amount = 203.989306413048000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("3ee5aab2-ccc1-45d2-89c0-341336f72a9a"),
+                            Note = "Labore libero est quo reiciendis ut omnis. Est iusto animi ipsam aliquam fugit enim modi consequatur est. Sint sint eligendi repellat omnis et ratione dolore quis voluptatem.",
+                            PaymentDate = new DateTime(2015, 4, 12, 11, 9, 10, 398, DateTimeKind.Utc).AddTicks(9908),
+                            PaymentType = 1
+                        },
+                        new
+                        {
+                            Id = new Guid("eba50770-5172-48ef-ad9d-c803afae2d84"),
+                            Amount = 723.470273409266000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("3ee5aab2-ccc1-45d2-89c0-341336f72a9a"),
+                            Note = "Cupiditate delectus omnis excepturi aut excepturi magnam sit similique. Voluptatem minus voluptate voluptates iste et. Aut et est ut occaecati velit deleniti tenetur.",
+                            PaymentDate = new DateTime(2017, 11, 2, 11, 43, 5, 433, DateTimeKind.Utc).AddTicks(3566),
+                            PaymentType = 0
+                        },
+                        new
+                        {
+                            Id = new Guid("faf4f110-fbd5-402a-aca6-e4eb4c59a662"),
+                            Amount = 415.784951419951000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("3ee5aab2-ccc1-45d2-89c0-341336f72a9a"),
+                            Note = "Laborum sequi minima excepturi earum. Suscipit et earum rerum. Facere et dolorum.",
+                            PaymentDate = new DateTime(2019, 9, 6, 17, 41, 35, 761, DateTimeKind.Utc).AddTicks(3278),
                             PaymentType = 99
                         },
                         new
                         {
-                            Id = new Guid("349afd77-ee4b-460d-8836-1cbfe53cd291"),
-                            Amount = 0m,
-                            MemberId = new Guid("2a94a07d-ba5d-4c1d-a884-18757698c355"),
-                            Note = "Quisquam eius quia voluptas. Voluptatibus pariatur in illum aut itaque odio. Vel voluptates amet mollitia. Exercitationem delectus odit quae architecto dolorum.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PaymentType = 0
-                        },
-                        new
-                        {
-                            Id = new Guid("860bf286-9338-4117-a45b-5fd77f7020b6"),
-                            Amount = 0m,
-                            MemberId = new Guid("2a94a07d-ba5d-4c1d-a884-18757698c355"),
-                            Note = "Unde consequuntur in molestias minima neque quam est. Expedita porro voluptas voluptas excepturi distinctio possimus modi deserunt eum.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = new Guid("8ed9d1c4-432b-45ce-a7c5-b20478509ca6"),
+                            Amount = 810.994073639345000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("3ee5aab2-ccc1-45d2-89c0-341336f72a9a"),
+                            Note = "Quis minima dolores. Voluptatem non cupiditate. Harum sit natus suscipit rerum. Et officiis laboriosam.",
+                            PaymentDate = new DateTime(2012, 12, 7, 9, 20, 27, 710, DateTimeKind.Utc).AddTicks(3820),
                             PaymentType = 99
                         },
                         new
                         {
-                            Id = new Guid("2015f68e-5385-4aad-989e-585526658423"),
-                            Amount = 0m,
-                            MemberId = new Guid("2a94a07d-ba5d-4c1d-a884-18757698c355"),
-                            Note = "Aut sed numquam ut. A voluptas adipisci earum ut tempore quisquam nihil. Voluptatem voluptatem nesciunt et a qui.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PaymentType = 0
-                        },
-                        new
-                        {
-                            Id = new Guid("28d63fd8-16e2-42fe-aa2c-1f636fb123ba"),
-                            Amount = 0m,
-                            MemberId = new Guid("2a94a07d-ba5d-4c1d-a884-18757698c355"),
-                            Note = "Numquam facere minus ea eum. Est nihil rerum. Et voluptatem repellendus est debitis et sed. Consequatur dignissimos vitae quod repellendus placeat ut.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = new Guid("b1d826f8-df36-45b7-b77b-778a42fa07ee"),
+                            Amount = 270.370198342188000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("3ee5aab2-ccc1-45d2-89c0-341336f72a9a"),
+                            Note = "Debitis eos totam. Magnam ratione sit cupiditate.",
+                            PaymentDate = new DateTime(2012, 7, 11, 21, 14, 33, 542, DateTimeKind.Utc).AddTicks(1898),
                             PaymentType = 99
                         },
                         new
                         {
-                            Id = new Guid("b435c701-f245-490c-be69-ccb9c84cd05b"),
-                            Amount = 0m,
-                            MemberId = new Guid("2a94a07d-ba5d-4c1d-a884-18757698c355"),
-                            Note = "Officia velit eum voluptas sed. Cum repellendus non possimus eveniet ea et.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = new Guid("5d4a9d83-4c4d-4c92-8046-c3f767787674"),
+                            Amount = 452.628093350438000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("3ee5aab2-ccc1-45d2-89c0-341336f72a9a"),
+                            Note = "Quia sed repudiandae pariatur quia et dolores sunt voluptatibus nihil. Est cum veritatis cum. Doloremque voluptas aliquam esse ut vero.",
+                            PaymentDate = new DateTime(2019, 5, 12, 2, 51, 25, 677, DateTimeKind.Utc).AddTicks(925),
+                            PaymentType = 0
+                        },
+                        new
+                        {
+                            Id = new Guid("251fa04d-bfd4-40b5-a938-0af181e8602d"),
+                            Amount = 618.955372431468000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("3ee5aab2-ccc1-45d2-89c0-341336f72a9a"),
+                            Note = "Aut est voluptas ipsa esse consequatur doloribus assumenda vel aut. Sed unde expedita blanditiis corporis eius. Delectus consequatur ex neque earum cupiditate ut sit quos.",
+                            PaymentDate = new DateTime(2021, 12, 5, 4, 52, 21, 962, DateTimeKind.Utc).AddTicks(1514),
                             PaymentType = 1
                         },
                         new
                         {
-                            Id = new Guid("94ac29c2-3abd-4d53-a477-9151bb9d50bb"),
-                            Amount = 0m,
-                            MemberId = new Guid("2a94a07d-ba5d-4c1d-a884-18757698c355"),
-                            Note = "Alias dolores quae voluptatem quo et quibusdam sit explicabo. Alias sed quis soluta laborum. Et vel nam magni voluptatum deleniti.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PaymentType = 0
-                        },
-                        new
-                        {
-                            Id = new Guid("5dcdeba4-0a8e-4fd0-818a-3b72bfbaeb4d"),
-                            Amount = 0m,
-                            MemberId = new Guid("2a94a07d-ba5d-4c1d-a884-18757698c355"),
-                            Note = "Necessitatibus qui velit. Labore est voluptatem nobis sed veniam.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PaymentType = 0
-                        },
-                        new
-                        {
-                            Id = new Guid("51c0a5ca-2daf-434e-8a53-09e04b2dbde8"),
-                            Amount = 0m,
-                            MemberId = new Guid("2a94a07d-ba5d-4c1d-a884-18757698c355"),
-                            Note = "Ducimus laborum totam inventore sit vel nam et est. Quo nemo praesentium ratione asperiores nulla dolor. Magnam doloribus architecto rerum eligendi. Aut natus ut magnam eos veniam quos consequatur.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = new Guid("c08e81cf-3622-45ba-9ec1-9ee02835b3c6"),
+                            Amount = 713.13222156037000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("3ee5aab2-ccc1-45d2-89c0-341336f72a9a"),
+                            Note = "Nihil facere dolor veniam sunt suscipit quia. Quo dolor dolor repudiandae.",
+                            PaymentDate = new DateTime(2016, 5, 3, 16, 5, 52, 683, DateTimeKind.Utc).AddTicks(7893),
                             PaymentType = 99
                         },
                         new
                         {
-                            Id = new Guid("ef9bc6d7-b0ca-4349-9e5a-67a2d5b4e896"),
-                            Amount = 0m,
-                            MemberId = new Guid("2a94a07d-ba5d-4c1d-a884-18757698c355"),
-                            Note = "Architecto magni cumque possimus. Et molestiae ipsum laboriosam aut sapiente. Tempora natus sapiente voluptatibus itaque necessitatibus doloribus.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = new Guid("169455e7-ff4e-4128-9c53-ae1a3371774e"),
+                            Amount = 29.6677507252673000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("39ef24e4-1de6-423d-b64d-c7057cd571cc"),
+                            Note = "Exercitationem quod qui quia numquam et labore deleniti sit. Numquam similique est et culpa. Fuga nam et corrupti.",
+                            PaymentDate = new DateTime(2014, 4, 1, 16, 44, 10, 713, DateTimeKind.Utc).AddTicks(2845),
+                            PaymentType = 1
+                        },
+                        new
+                        {
+                            Id = new Guid("1c124055-a88e-4f75-b623-b013eac76331"),
+                            Amount = 292.443930158305000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("39ef24e4-1de6-423d-b64d-c7057cd571cc"),
+                            Note = "Repudiandae rerum amet voluptas tempore. Odio expedita est aut qui eius. Atque consequatur cumque voluptas quod eum recusandae. Magni voluptas voluptas id nesciunt incidunt nisi.",
+                            PaymentDate = new DateTime(2014, 11, 8, 17, 33, 59, 246, DateTimeKind.Utc).AddTicks(2286),
                             PaymentType = 99
                         },
                         new
                         {
-                            Id = new Guid("3aaf9df3-f988-405c-acae-87b377517e78"),
-                            Amount = 0m,
-                            MemberId = new Guid("2a94a07d-ba5d-4c1d-a884-18757698c355"),
-                            Note = "Ad vel impedit quo qui. Consequatur non corrupti. Doloremque neque sapiente voluptatibus fugit accusamus quas iure.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PaymentType = 1
-                        },
-                        new
-                        {
-                            Id = new Guid("b2e07535-ed9a-43a0-82db-19157f36400f"),
-                            Amount = 0m,
-                            MemberId = new Guid("bfdab30f-4fba-4ff9-b315-49387b7a6372"),
-                            Note = "Odio alias ab suscipit debitis harum. Tenetur ad officia. Deserunt et quisquam vitae ut.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PaymentType = 1
-                        },
-                        new
-                        {
-                            Id = new Guid("30bfb023-f777-4b68-8d18-0391e40527f6"),
-                            Amount = 0m,
-                            MemberId = new Guid("bfdab30f-4fba-4ff9-b315-49387b7a6372"),
-                            Note = "Perspiciatis iure sed quaerat aspernatur nobis beatae est expedita.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PaymentType = 1
-                        },
-                        new
-                        {
-                            Id = new Guid("5cca30b6-a30e-4fac-888f-47b260f7e967"),
-                            Amount = 0m,
-                            MemberId = new Guid("bfdab30f-4fba-4ff9-b315-49387b7a6372"),
-                            Note = "Sit iure ullam ipsa necessitatibus sed sed quibusdam vel tempora.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = new Guid("32e0d1de-8711-4be4-87b9-cb915e41194c"),
+                            Amount = 578.627364454417000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("39ef24e4-1de6-423d-b64d-c7057cd571cc"),
+                            Note = "Enim beatae natus recusandae est.",
+                            PaymentDate = new DateTime(2021, 4, 23, 1, 58, 10, 574, DateTimeKind.Utc).AddTicks(8920),
                             PaymentType = 0
                         },
                         new
                         {
-                            Id = new Guid("26913b7a-f416-48c2-b8a8-08e6d6349545"),
-                            Amount = 0m,
-                            MemberId = new Guid("bfdab30f-4fba-4ff9-b315-49387b7a6372"),
-                            Note = "Nemo molestias omnis. Sit quia consequuntur corrupti sit natus provident et maiores et. Distinctio minima itaque. Et ut molestias omnis sint quo dolor.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = new Guid("e702488a-be0e-4d98-96dd-3d498fc9df3d"),
+                            Amount = 435.464529865748000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("39ef24e4-1de6-423d-b64d-c7057cd571cc"),
+                            Note = "Est quisquam ex nihil quia sunt fugit praesentium. Beatae blanditiis ad laborum ex quasi sint. Quam aspernatur eos minus quo repellendus quam. Qui eos ratione dolores vitae eum.",
+                            PaymentDate = new DateTime(2012, 2, 4, 21, 2, 58, 658, DateTimeKind.Utc).AddTicks(632),
+                            PaymentType = 1
+                        },
+                        new
+                        {
+                            Id = new Guid("b858d848-f463-4efd-b5e3-57e1cb292435"),
+                            Amount = 554.816505807515000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("39ef24e4-1de6-423d-b64d-c7057cd571cc"),
+                            Note = "Eos qui distinctio explicabo et provident labore repudiandae explicabo est.",
+                            PaymentDate = new DateTime(2012, 4, 13, 2, 3, 11, 24, DateTimeKind.Utc).AddTicks(728),
+                            PaymentType = 0
+                        },
+                        new
+                        {
+                            Id = new Guid("53b8f180-b915-490f-b9f3-0fc6a040eb2b"),
+                            Amount = 380.468125985094000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("39ef24e4-1de6-423d-b64d-c7057cd571cc"),
+                            Note = "Necessitatibus id earum assumenda iure.",
+                            PaymentDate = new DateTime(2018, 9, 3, 3, 55, 5, 852, DateTimeKind.Utc).AddTicks(7220),
+                            PaymentType = 1
+                        },
+                        new
+                        {
+                            Id = new Guid("8c248459-8cd6-4110-9d85-f3b0fcfd7a75"),
+                            Amount = 109.365053031084000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("39ef24e4-1de6-423d-b64d-c7057cd571cc"),
+                            Note = "Voluptas et assumenda recusandae omnis necessitatibus et sunt. Distinctio fugiat laudantium. Occaecati iusto atque et minus non voluptate.",
+                            PaymentDate = new DateTime(2012, 7, 21, 12, 41, 36, 296, DateTimeKind.Utc).AddTicks(7572),
                             PaymentType = 99
                         },
                         new
                         {
-                            Id = new Guid("beefdb90-04a2-45ba-b022-24bc6abbac9b"),
-                            Amount = 0m,
-                            MemberId = new Guid("bfdab30f-4fba-4ff9-b315-49387b7a6372"),
-                            Note = "Dicta consequatur et deleniti amet nihil quas facilis eum nihil. Debitis sunt dolorem ducimus.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = new Guid("68e72703-7d91-4a2c-bd04-bb317f31a846"),
+                            Amount = 625.645145144422000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("39ef24e4-1de6-423d-b64d-c7057cd571cc"),
+                            Note = "Laborum ab consequatur adipisci dignissimos at.",
+                            PaymentDate = new DateTime(2019, 4, 1, 4, 19, 26, 215, DateTimeKind.Utc).AddTicks(4732),
                             PaymentType = 1
                         },
                         new
                         {
-                            Id = new Guid("915e7776-e41c-493a-b869-d9d0857c7e5c"),
-                            Amount = 0m,
-                            MemberId = new Guid("bfdab30f-4fba-4ff9-b315-49387b7a6372"),
-                            Note = "Maxime blanditiis sapiente doloribus aut.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PaymentType = 0
-                        },
-                        new
-                        {
-                            Id = new Guid("c9dade01-da5e-4c23-ad39-f1763bffbd3e"),
-                            Amount = 0m,
-                            MemberId = new Guid("bfdab30f-4fba-4ff9-b315-49387b7a6372"),
-                            Note = "Cumque ipsum neque quaerat ullam.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PaymentType = 0
-                        },
-                        new
-                        {
-                            Id = new Guid("69b2b978-c643-4573-9671-32195ac99114"),
-                            Amount = 0m,
-                            MemberId = new Guid("bfdab30f-4fba-4ff9-b315-49387b7a6372"),
-                            Note = "Aliquam dolorem suscipit aut. Iste cumque sapiente debitis aut. Et qui iusto illum qui doloribus. Id voluptatem aut rem.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = new Guid("43eb916f-f448-4826-864f-1dad495ce04a"),
+                            Amount = 363.945469317851000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("39ef24e4-1de6-423d-b64d-c7057cd571cc"),
+                            Note = "At doloribus adipisci placeat ut voluptatibus omnis.",
+                            PaymentDate = new DateTime(2014, 8, 29, 10, 39, 14, 678, DateTimeKind.Utc).AddTicks(3179),
                             PaymentType = 99
                         },
                         new
                         {
-                            Id = new Guid("1c8f8489-ca61-4af9-86b0-609801660c35"),
-                            Amount = 0m,
-                            MemberId = new Guid("bfdab30f-4fba-4ff9-b315-49387b7a6372"),
-                            Note = "Ducimus nesciunt praesentium. Voluptate et et.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = new Guid("49b2619a-cb19-4986-b3e6-59dcdb9ee2ea"),
+                            Amount = 378.854434175702000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("39ef24e4-1de6-423d-b64d-c7057cd571cc"),
+                            Note = "Saepe voluptatem molestias omnis sed repudiandae reiciendis. Libero qui commodi dignissimos reiciendis neque aliquid quibusdam in. Saepe est rerum expedita voluptatum quas. Est qui deleniti placeat molestiae reprehenderit.",
+                            PaymentDate = new DateTime(2018, 4, 19, 18, 42, 0, 148, DateTimeKind.Utc).AddTicks(2071),
+                            PaymentType = 0
+                        },
+                        new
+                        {
+                            Id = new Guid("7f393d96-4273-482d-80ad-fbb0d0bd9994"),
+                            Amount = 594.412452501825000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("c93cf7ba-5301-4a59-8238-b7a2e73b924f"),
+                            Note = "Ratione cupiditate sequi qui.",
+                            PaymentDate = new DateTime(2017, 9, 25, 11, 42, 51, 129, DateTimeKind.Utc).AddTicks(4818),
                             PaymentType = 99
                         },
                         new
                         {
-                            Id = new Guid("9ba8ce7d-81bc-4e76-ac6e-35ca3cb76345"),
-                            Amount = 0m,
-                            MemberId = new Guid("bfdab30f-4fba-4ff9-b315-49387b7a6372"),
-                            Note = "Sit aliquid animi qui sint. Non fugit illum voluptas facere dolorem atque fuga sequi dolor. Sit numquam aliquam.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PaymentType = 0
-                        },
-                        new
-                        {
-                            Id = new Guid("1f29cee6-119e-4abd-b5ec-68f8da0aacbb"),
-                            Amount = 0m,
-                            MemberId = new Guid("fb467bd5-82b5-4ead-91c0-9eb4170a49d4"),
-                            Note = "Sint nesciunt expedita ullam incidunt voluptatem inventore sed in consequatur. Dicta quis velit repudiandae quisquam ullam.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PaymentType = 0
-                        },
-                        new
-                        {
-                            Id = new Guid("1950b895-4310-41b0-a14d-66f7d08a02d6"),
-                            Amount = 0m,
-                            MemberId = new Guid("fb467bd5-82b5-4ead-91c0-9eb4170a49d4"),
-                            Note = "Laborum sit ab. Aspernatur sed cumque velit saepe ratione debitis. Possimus labore aspernatur.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PaymentType = 0
-                        },
-                        new
-                        {
-                            Id = new Guid("505f2662-98b8-4a66-95b7-74802ca8765f"),
-                            Amount = 0m,
-                            MemberId = new Guid("fb467bd5-82b5-4ead-91c0-9eb4170a49d4"),
-                            Note = "Impedit vero recusandae libero a consequuntur sed.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PaymentType = 0
-                        },
-                        new
-                        {
-                            Id = new Guid("7c91be28-5b38-4b2c-9165-30e99e840067"),
-                            Amount = 0m,
-                            MemberId = new Guid("fb467bd5-82b5-4ead-91c0-9eb4170a49d4"),
-                            Note = "Iusto eum quia ut qui ut repellendus dolorem quis consectetur. In dolores ratione architecto dicta et et qui facilis. Nobis libero consequatur ut est ex.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PaymentType = 1
-                        },
-                        new
-                        {
-                            Id = new Guid("d22863a0-4bea-41f8-90dd-7b046b4ccf3b"),
-                            Amount = 0m,
-                            MemberId = new Guid("fb467bd5-82b5-4ead-91c0-9eb4170a49d4"),
-                            Note = "Ratione facilis fugit ut temporibus animi laudantium at. Quia atque nobis sed et excepturi voluptate voluptas. Rem aut hic dolores quos beatae rem. Optio officiis harum laboriosam nostrum dolore quas beatae omnis.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PaymentType = 1
-                        },
-                        new
-                        {
-                            Id = new Guid("75e56f41-8754-49d3-8ed3-cedd5ee451df"),
-                            Amount = 0m,
-                            MemberId = new Guid("fb467bd5-82b5-4ead-91c0-9eb4170a49d4"),
-                            Note = "Accusantium odit quia minus ipsam rerum iste qui qui.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = new Guid("2a6842b7-a5ec-46a0-829a-fcd76172286d"),
+                            Amount = 744.22594289524000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("c93cf7ba-5301-4a59-8238-b7a2e73b924f"),
+                            Note = "Quo qui porro eius et nam error. Esse harum labore illo blanditiis qui dolores quisquam omnis.",
+                            PaymentDate = new DateTime(2013, 9, 30, 7, 33, 12, 943, DateTimeKind.Utc).AddTicks(6993),
                             PaymentType = 99
                         },
                         new
                         {
-                            Id = new Guid("7b326d83-a5fa-4622-b023-61423bbdf52b"),
-                            Amount = 0m,
-                            MemberId = new Guid("fb467bd5-82b5-4ead-91c0-9eb4170a49d4"),
-                            Note = "Et ut aliquid voluptate enim quis tenetur vitae. Corrupti quaerat iure ut aut velit reprehenderit. Veniam quia dolor sapiente eaque.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PaymentType = 1
+                            Id = new Guid("ca5ea13c-4081-4f3f-a63d-222905e4b9ce"),
+                            Amount = 440.8895603418000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("c93cf7ba-5301-4a59-8238-b7a2e73b924f"),
+                            Note = "Aut sed iure aspernatur quaerat. Ea et provident possimus aut eos quisquam deleniti quas omnis.",
+                            PaymentDate = new DateTime(2017, 3, 12, 19, 33, 22, 270, DateTimeKind.Utc).AddTicks(1515),
+                            PaymentType = 0
                         },
                         new
                         {
-                            Id = new Guid("51f54d42-8660-45a7-8c01-324c6a2ee116"),
-                            Amount = 0m,
-                            MemberId = new Guid("fb467bd5-82b5-4ead-91c0-9eb4170a49d4"),
-                            Note = "Rerum esse accusantium omnis quisquam blanditiis ut debitis ut quaerat. Sed sit aut praesentium deleniti sit maxime aut exercitationem unde. Perferendis sapiente ipsum culpa quaerat impedit sunt.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = new Guid("4c7b3a13-026a-4fa1-8573-d2645382d4a4"),
+                            Amount = 764.31470810144000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("c93cf7ba-5301-4a59-8238-b7a2e73b924f"),
+                            Note = "At laborum excepturi. Molestias dolores rem a ab recusandae omnis nisi odio. Est possimus illum beatae autem voluptatem animi. Consequatur in consequuntur veniam.",
+                            PaymentDate = new DateTime(2017, 11, 20, 16, 56, 39, 624, DateTimeKind.Utc).AddTicks(2040),
                             PaymentType = 99
                         },
                         new
                         {
-                            Id = new Guid("ceb51e48-2aed-4270-8ad0-1995d9cae01a"),
-                            Amount = 0m,
-                            MemberId = new Guid("fb467bd5-82b5-4ead-91c0-9eb4170a49d4"),
-                            Note = "Repellat deserunt aut et. Deleniti dolorem in qui saepe voluptas error blanditiis ullam. Sed amet voluptatibus laboriosam eum incidunt rerum aut debitis harum. Omnis quas et nesciunt distinctio fuga nisi nihil sit.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = new Guid("ceaa626b-42c4-4149-9542-0a1b43c43c27"),
+                            Amount = 317.991836538942000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("c93cf7ba-5301-4a59-8238-b7a2e73b924f"),
+                            Note = "Ut quia similique dolorum autem. Doloremque culpa quo accusantium voluptatem ab voluptatem.",
+                            PaymentDate = new DateTime(2012, 11, 17, 13, 38, 49, 64, DateTimeKind.Utc).AddTicks(4000),
+                            PaymentType = 1
+                        },
+                        new
+                        {
+                            Id = new Guid("51dd17ed-ea5d-4c07-9ad7-b0c220c7daef"),
+                            Amount = 963.608437024897000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("c93cf7ba-5301-4a59-8238-b7a2e73b924f"),
+                            Note = "Deserunt facere libero ex totam et error molestiae aliquid. Eveniet tenetur quibusdam voluptatem error nihil velit. Aut autem provident fugit quo distinctio facilis.",
+                            PaymentDate = new DateTime(2012, 6, 10, 17, 14, 34, 655, DateTimeKind.Utc).AddTicks(4455),
+                            PaymentType = 1
+                        },
+                        new
+                        {
+                            Id = new Guid("82339eb8-107b-4931-8b4e-3bb47754dd49"),
+                            Amount = 56.0159674186042000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("c93cf7ba-5301-4a59-8238-b7a2e73b924f"),
+                            Note = "Magni qui id voluptas. Molestias aut fuga et et consequatur et optio necessitatibus ad.",
+                            PaymentDate = new DateTime(2012, 8, 19, 12, 56, 44, 700, DateTimeKind.Utc).AddTicks(2172),
                             PaymentType = 0
                         },
                         new
                         {
-                            Id = new Guid("fd0ce3a6-a0a6-4ce2-a9cd-daa08bbbbd21"),
-                            Amount = 0m,
-                            MemberId = new Guid("fb467bd5-82b5-4ead-91c0-9eb4170a49d4"),
-                            Note = "Id laboriosam et dignissimos. Adipisci voluptatem rem laudantium sunt in nihil et assumenda qui.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PaymentType = 1
+                            Id = new Guid("cf5c65a3-e937-4462-8ed1-e649ac565c4a"),
+                            Amount = 804.922446947421000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("c93cf7ba-5301-4a59-8238-b7a2e73b924f"),
+                            Note = "Eveniet rerum voluptatum unde vitae rerum perferendis nam tempora. Ipsam quis quia est blanditiis rerum. Fuga a dolores a dolore saepe ut natus officiis. Dolores nisi qui provident ullam at.",
+                            PaymentDate = new DateTime(2017, 6, 23, 20, 58, 3, 33, DateTimeKind.Utc).AddTicks(7205),
+                            PaymentType = 0
                         },
                         new
                         {
-                            Id = new Guid("e56b3c58-3f77-420e-849f-7d5803181a49"),
-                            Amount = 0m,
-                            MemberId = new Guid("4341e472-ce11-4bb5-9627-a8b78fac99f7"),
-                            Note = "Ea ab est omnis ad. Iusto assumenda id aut.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PaymentType = 1
+                            Id = new Guid("0ef179e4-c68f-42fe-b644-91e9da826683"),
+                            Amount = 38.0661890518579000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("c93cf7ba-5301-4a59-8238-b7a2e73b924f"),
+                            Note = "Earum incidunt et. Distinctio eius voluptatem repellendus quidem totam. Quibusdam cum saepe ut voluptatem ullam nemo eos consequuntur enim.",
+                            PaymentDate = new DateTime(2021, 8, 16, 0, 6, 37, 930, DateTimeKind.Utc).AddTicks(3697),
+                            PaymentType = 0
                         },
                         new
                         {
-                            Id = new Guid("18886826-7691-4268-ab4f-e15e1cd2e63b"),
-                            Amount = 0m,
-                            MemberId = new Guid("4341e472-ce11-4bb5-9627-a8b78fac99f7"),
-                            Note = "Ab ipsam velit omnis est dolorem ut dolorum.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = new Guid("f0b95ee3-0b92-4cea-8c80-7a04e49a8b9d"),
+                            Amount = 180.52529097871000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("c93cf7ba-5301-4a59-8238-b7a2e73b924f"),
+                            Note = "Maxime molestiae provident labore ea nesciunt neque.",
+                            PaymentDate = new DateTime(2012, 10, 29, 7, 56, 49, 330, DateTimeKind.Utc).AddTicks(1529),
                             PaymentType = 99
                         },
                         new
                         {
-                            Id = new Guid("785a30eb-f014-46ad-ac8c-567913911306"),
-                            Amount = 0m,
-                            MemberId = new Guid("4341e472-ce11-4bb5-9627-a8b78fac99f7"),
-                            Note = "Molestias perspiciatis earum neque nam beatae veniam.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = new Guid("1c3e4e72-4a3c-435c-bcdb-e44b07216e42"),
+                            Amount = 983.944071825388000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("83f91037-a88d-4711-9911-ff86488bc237"),
+                            Note = "In doloribus quia dicta quo et. Laboriosam iusto eos consequuntur quia omnis ut modi.",
+                            PaymentDate = new DateTime(2020, 6, 6, 17, 6, 39, 366, DateTimeKind.Utc).AddTicks(7940),
                             PaymentType = 99
                         },
                         new
                         {
-                            Id = new Guid("dbe6be36-f002-433c-bca8-09c8cb9a0e9d"),
-                            Amount = 0m,
-                            MemberId = new Guid("4341e472-ce11-4bb5-9627-a8b78fac99f7"),
-                            Note = "Ex delectus libero quas consequatur eos dolorem. Omnis perspiciatis dolores mollitia. Corrupti vel reprehenderit in iusto dolor amet.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = new Guid("c08234b4-7168-4747-8806-e27cb894d478"),
+                            Amount = 357.238828504736000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("83f91037-a88d-4711-9911-ff86488bc237"),
+                            Note = "Repudiandae sunt cupiditate corporis dolorem et rerum. Alias laborum ratione.",
+                            PaymentDate = new DateTime(2015, 10, 5, 13, 49, 23, 511, DateTimeKind.Utc).AddTicks(9640),
                             PaymentType = 1
                         },
                         new
                         {
-                            Id = new Guid("f8520101-516d-4d2e-8966-968e0faabd57"),
-                            Amount = 0m,
-                            MemberId = new Guid("4341e472-ce11-4bb5-9627-a8b78fac99f7"),
-                            Note = "Quaerat harum non necessitatibus.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PaymentType = 0
-                        },
-                        new
-                        {
-                            Id = new Guid("02ec7915-ad36-40e0-ab6a-8223a5a5d42f"),
-                            Amount = 0m,
-                            MemberId = new Guid("4341e472-ce11-4bb5-9627-a8b78fac99f7"),
-                            Note = "Et cum et laboriosam eligendi id distinctio. Mollitia enim eaque provident nostrum quam autem. Sed voluptate qui.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = new Guid("b72bbf5f-c324-435f-aa09-86826e9f97bb"),
+                            Amount = 481.448804877418000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("83f91037-a88d-4711-9911-ff86488bc237"),
+                            Note = "Rerum expedita voluptatibus consequatur rerum ad modi id voluptas eveniet. Sit quia autem iusto est sunt. Odio aliquam dolor et dolor pariatur minus.",
+                            PaymentDate = new DateTime(2012, 6, 7, 16, 29, 27, 646, DateTimeKind.Utc).AddTicks(2366),
                             PaymentType = 99
                         },
                         new
                         {
-                            Id = new Guid("6f2e3fc0-863d-4d56-92eb-a3d78e35994b"),
-                            Amount = 0m,
-                            MemberId = new Guid("4341e472-ce11-4bb5-9627-a8b78fac99f7"),
-                            Note = "Explicabo minima quis doloribus necessitatibus aut voluptatem dolores voluptatum nostrum.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PaymentType = 0
-                        },
-                        new
-                        {
-                            Id = new Guid("e1845f3e-19bf-4a68-879f-661347c2949e"),
-                            Amount = 0m,
-                            MemberId = new Guid("4341e472-ce11-4bb5-9627-a8b78fac99f7"),
-                            Note = "Provident optio et numquam velit tempore incidunt saepe. Dolor est aut repudiandae maiores et optio ea. Dolorem quas qui nesciunt magni et iure esse.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PaymentType = 1
-                        },
-                        new
-                        {
-                            Id = new Guid("427dd293-a894-4e97-b7bd-07cfeefb2e51"),
-                            Amount = 0m,
-                            MemberId = new Guid("4341e472-ce11-4bb5-9627-a8b78fac99f7"),
-                            Note = "Pariatur et veritatis. Occaecati sint accusamus voluptate qui aut expedita rerum. Maxime porro dolorum quo et minus ipsam aperiam. Rem qui molestiae.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PaymentType = 1
-                        },
-                        new
-                        {
-                            Id = new Guid("429a22e2-3a35-4331-bf81-22b3e4effba7"),
-                            Amount = 0m,
-                            MemberId = new Guid("4341e472-ce11-4bb5-9627-a8b78fac99f7"),
-                            Note = "Laudantium cupiditate et molestiae. Dolorem a veritatis earum esse minima ut eveniet beatae optio. In accusantium repellat adipisci aut praesentium optio. Quasi aut deserunt itaque excepturi.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PaymentType = 1
-                        },
-                        new
-                        {
-                            Id = new Guid("8d45bfe9-27b4-4d29-a0b6-dd138546001f"),
-                            Amount = 0m,
-                            MemberId = new Guid("6bb109f5-75b5-4c06-ab9f-3be75d2ee8cb"),
-                            Note = "Voluptatem animi amet totam laboriosam. Explicabo sint doloremque veniam laudantium voluptatem rerum exercitationem aspernatur. Blanditiis ut reprehenderit cum totam.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PaymentType = 1
-                        },
-                        new
-                        {
-                            Id = new Guid("88bdfe58-a133-4f65-9ae5-ce0cd40db5ba"),
-                            Amount = 0m,
-                            MemberId = new Guid("6bb109f5-75b5-4c06-ab9f-3be75d2ee8cb"),
-                            Note = "Consequatur debitis unde consequatur error incidunt.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = new Guid("51928f8c-ebf5-48c7-a1cc-a410fba46736"),
+                            Amount = 436.131888966955000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("83f91037-a88d-4711-9911-ff86488bc237"),
+                            Note = "Ut debitis nemo. Cupiditate vitae maxime. In optio praesentium doloribus laudantium ea.",
+                            PaymentDate = new DateTime(2018, 3, 16, 0, 36, 27, 818, DateTimeKind.Utc).AddTicks(380),
                             PaymentType = 99
                         },
                         new
                         {
-                            Id = new Guid("ba248b21-e93f-4034-8ec4-58efadd16f45"),
-                            Amount = 0m,
-                            MemberId = new Guid("6bb109f5-75b5-4c06-ab9f-3be75d2ee8cb"),
-                            Note = "Animi id voluptas velit quo consectetur repellendus. Quod mollitia asperiores ipsum velit ipsum. Vitae placeat delectus autem.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = new Guid("a6329bd9-6225-47f3-ae8d-60493ac2ccd6"),
+                            Amount = 480.71459145939000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("83f91037-a88d-4711-9911-ff86488bc237"),
+                            Note = "Fugiat blanditiis eos quo velit aliquam debitis magnam. Fuga quo quasi modi.",
+                            PaymentDate = new DateTime(2020, 6, 15, 1, 21, 35, 993, DateTimeKind.Utc).AddTicks(7499),
                             PaymentType = 99
                         },
                         new
                         {
-                            Id = new Guid("05577c0b-631e-4107-96fe-97a8156e4d57"),
-                            Amount = 0m,
-                            MemberId = new Guid("6bb109f5-75b5-4c06-ab9f-3be75d2ee8cb"),
-                            Note = "Et est velit quo natus perspiciatis nam debitis aut et.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = new Guid("1c4f5a89-21d6-4502-b70a-edd848d11e19"),
+                            Amount = 55.6685698229085000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("83f91037-a88d-4711-9911-ff86488bc237"),
+                            Note = "Dolorem repellendus eius fuga et iure eaque ut sunt omnis.",
+                            PaymentDate = new DateTime(2021, 12, 27, 12, 28, 39, 140, DateTimeKind.Utc).AddTicks(6236),
+                            PaymentType = 1
+                        },
+                        new
+                        {
+                            Id = new Guid("1901cb89-1504-4ec6-9d22-e459e93ea572"),
+                            Amount = 61.1278807960801000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("83f91037-a88d-4711-9911-ff86488bc237"),
+                            Note = "Accusamus architecto ad. Recusandae totam et. Ea et libero ut autem voluptates est.",
+                            PaymentDate = new DateTime(2016, 7, 17, 22, 58, 10, 713, DateTimeKind.Utc).AddTicks(3996),
+                            PaymentType = 1
+                        },
+                        new
+                        {
+                            Id = new Guid("2205a804-d029-4ba9-9a5d-c4276e2433d0"),
+                            Amount = 39.7040727361657000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("83f91037-a88d-4711-9911-ff86488bc237"),
+                            Note = "Ducimus aut sequi vel ipsa aperiam sequi saepe rem deleniti. Iste qui provident ut voluptas veritatis consequatur. Sed vitae repudiandae doloremque quo veritatis commodi. In est modi.",
+                            PaymentDate = new DateTime(2016, 1, 24, 1, 51, 21, 712, DateTimeKind.Utc).AddTicks(3301),
+                            PaymentType = 0
+                        },
+                        new
+                        {
+                            Id = new Guid("ee2cd6fb-2d0d-4265-9649-2559c0c86b4a"),
+                            Amount = 968.318381189419000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("83f91037-a88d-4711-9911-ff86488bc237"),
+                            Note = "Quod autem dolorem excepturi aut iste doloribus et sit sequi. Voluptate voluptatem error consequuntur libero ut quo autem.",
+                            PaymentDate = new DateTime(2014, 1, 15, 4, 50, 44, 779, DateTimeKind.Utc).AddTicks(7442),
+                            PaymentType = 1
+                        },
+                        new
+                        {
+                            Id = new Guid("532cd956-17b1-485a-9904-8c82301c1e1d"),
+                            Amount = 171.647429696366000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("83f91037-a88d-4711-9911-ff86488bc237"),
+                            Note = "Et suscipit saepe iure.",
+                            PaymentDate = new DateTime(2020, 9, 15, 7, 55, 18, 266, DateTimeKind.Utc).AddTicks(6502),
                             PaymentType = 99
                         },
                         new
                         {
-                            Id = new Guid("66426514-400c-446e-b2cb-899373866a99"),
-                            Amount = 0m,
-                            MemberId = new Guid("6bb109f5-75b5-4c06-ab9f-3be75d2ee8cb"),
-                            Note = "Cumque omnis dolor laborum veritatis. Eos aut magni adipisci.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PaymentType = 0
-                        },
-                        new
-                        {
-                            Id = new Guid("0d49ea98-916e-43e6-bc62-f7159c0fb9b6"),
-                            Amount = 0m,
-                            MemberId = new Guid("6bb109f5-75b5-4c06-ab9f-3be75d2ee8cb"),
-                            Note = "Qui est reiciendis et soluta harum quasi aut maxime sit.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PaymentType = 0
-                        },
-                        new
-                        {
-                            Id = new Guid("63a72525-e41b-4c81-9f0c-c50b340233a5"),
-                            Amount = 0m,
-                            MemberId = new Guid("6bb109f5-75b5-4c06-ab9f-3be75d2ee8cb"),
-                            Note = "Vero modi esse voluptates accusantium repellendus nam repellendus sunt culpa.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = new Guid("47cfd85c-6236-46dc-b93c-bfa6692ca192"),
+                            Amount = 505.793588324296000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("09f419d2-09d8-4182-ac95-695055e5e634"),
+                            Note = "Alias non harum cupiditate ut. Iure reiciendis necessitatibus quia dignissimos et necessitatibus.",
+                            PaymentDate = new DateTime(2021, 7, 20, 23, 43, 25, 635, DateTimeKind.Utc).AddTicks(8712),
                             PaymentType = 99
                         },
                         new
                         {
-                            Id = new Guid("b9cc2aa6-09ec-4288-b202-3f82a7e96462"),
-                            Amount = 0m,
-                            MemberId = new Guid("6bb109f5-75b5-4c06-ab9f-3be75d2ee8cb"),
-                            Note = "Minima quas dolor quasi ullam accusantium. Voluptate ea est molestiae iusto aut. Sunt placeat fugiat.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PaymentType = 0
-                        },
-                        new
-                        {
-                            Id = new Guid("5c4943f6-01ec-46d3-a124-7ca93bbb6d76"),
-                            Amount = 0m,
-                            MemberId = new Guid("6bb109f5-75b5-4c06-ab9f-3be75d2ee8cb"),
-                            Note = "Qui dolorem porro veniam. Ab ad sit delectus alias. Autem deleniti ut non ab quo totam corporis.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = new Guid("2ab39056-c8bb-4d63-9f02-7754dbbafe36"),
+                            Amount = 859.679259290034000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("09f419d2-09d8-4182-ac95-695055e5e634"),
+                            Note = "Et consequatur blanditiis beatae earum earum temporibus adipisci. Dolorum tenetur voluptas reiciendis quam.",
+                            PaymentDate = new DateTime(2015, 7, 8, 4, 33, 44, 992, DateTimeKind.Utc).AddTicks(7028),
                             PaymentType = 99
                         },
                         new
                         {
-                            Id = new Guid("7cc03f88-895f-4506-81af-37e3c809a03f"),
-                            Amount = 0m,
-                            MemberId = new Guid("6bb109f5-75b5-4c06-ab9f-3be75d2ee8cb"),
-                            Note = "Harum quaerat autem dicta minima nulla illum quia. Laboriosam deserunt repellat totam quis eveniet quis iure. Architecto tenetur quo aut praesentium. Deleniti quae aut molestias molestiae.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PaymentType = 0
-                        },
-                        new
-                        {
-                            Id = new Guid("420979bb-22e7-48f2-a4ec-2792b0d2ad8a"),
-                            Amount = 0m,
-                            MemberId = new Guid("a577cef9-574f-4b4b-a550-d73ee538cf8e"),
-                            Note = "Inventore a enim sit ea.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = new Guid("51461674-ac67-41ef-82db-0a14671388c9"),
+                            Amount = 101.045441592939000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("09f419d2-09d8-4182-ac95-695055e5e634"),
+                            Note = "Doloremque voluptates sed iste. Consequatur sint qui suscipit iste sunt aliquid distinctio. Autem voluptas omnis doloribus quia et accusantium et.",
+                            PaymentDate = new DateTime(2020, 4, 3, 21, 45, 50, 267, DateTimeKind.Utc).AddTicks(3222),
                             PaymentType = 1
                         },
                         new
                         {
-                            Id = new Guid("9ebab6e3-b173-4aae-9b30-78bb6f590c49"),
-                            Amount = 0m,
-                            MemberId = new Guid("a577cef9-574f-4b4b-a550-d73ee538cf8e"),
-                            Note = "Sed qui atque voluptatem sit maxime accusamus repellendus. Et maxime qui voluptates neque vero sed suscipit omnis.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = new Guid("e58b5aec-c71f-40b6-8f3f-74a1af464fe4"),
+                            Amount = 616.01727770905000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("09f419d2-09d8-4182-ac95-695055e5e634"),
+                            Note = "Fugiat distinctio est unde adipisci non.",
+                            PaymentDate = new DateTime(2015, 6, 11, 19, 59, 34, 862, DateTimeKind.Utc).AddTicks(3845),
+                            PaymentType = 1
+                        },
+                        new
+                        {
+                            Id = new Guid("fc03f79d-b5dc-4ad2-a4d4-6006d7512eed"),
+                            Amount = 25.7475902268374000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("09f419d2-09d8-4182-ac95-695055e5e634"),
+                            Note = "Enim nihil in cum modi rerum. Et consequatur debitis quia ut similique ipsum. Molestiae nisi et. Dolores sit quas.",
+                            PaymentDate = new DateTime(2013, 6, 7, 17, 44, 49, 444, DateTimeKind.Utc).AddTicks(3462),
+                            PaymentType = 1
+                        },
+                        new
+                        {
+                            Id = new Guid("fcbb9bb3-09e1-4d3c-b48d-e8fc4ae38214"),
+                            Amount = 219.262346568166000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("09f419d2-09d8-4182-ac95-695055e5e634"),
+                            Note = "Error eius vel quis similique sed saepe rerum. Voluptatibus doloribus vel voluptatibus incidunt odio odit consequatur error ea.",
+                            PaymentDate = new DateTime(2012, 1, 31, 2, 49, 30, 69, DateTimeKind.Utc).AddTicks(8380),
                             PaymentType = 0
                         },
                         new
                         {
-                            Id = new Guid("6b09ea5d-b997-48ec-b964-415e15d1ed19"),
-                            Amount = 0m,
-                            MemberId = new Guid("a577cef9-574f-4b4b-a550-d73ee538cf8e"),
-                            Note = "Sint nisi laborum quia recusandae corporis qui numquam.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = new Guid("c0b9b554-0baf-4152-b642-9ac732b8b6cd"),
+                            Amount = 817.205238058568000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("09f419d2-09d8-4182-ac95-695055e5e634"),
+                            Note = "Culpa cumque similique architecto omnis dolorum.",
+                            PaymentDate = new DateTime(2016, 6, 21, 13, 24, 56, 710, DateTimeKind.Utc).AddTicks(847),
                             PaymentType = 99
                         },
                         new
                         {
-                            Id = new Guid("721638f5-7bc5-4d28-b871-eb95cf187d69"),
-                            Amount = 0m,
-                            MemberId = new Guid("a577cef9-574f-4b4b-a550-d73ee538cf8e"),
-                            Note = "Laborum ipsa voluptatibus illo.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PaymentType = 1
-                        },
-                        new
-                        {
-                            Id = new Guid("55210db2-3342-48e4-a5c5-a7f68f2de159"),
-                            Amount = 0m,
-                            MemberId = new Guid("a577cef9-574f-4b4b-a550-d73ee538cf8e"),
-                            Note = "Quia error error eum praesentium ipsa tenetur ex repudiandae. Excepturi quae rerum aperiam id rerum non cupiditate.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PaymentType = 1
-                        },
-                        new
-                        {
-                            Id = new Guid("8894a94e-0fff-4bb5-a4c7-9e96cfc88ef7"),
-                            Amount = 0m,
-                            MemberId = new Guid("a577cef9-574f-4b4b-a550-d73ee538cf8e"),
-                            Note = "Quibusdam magnam ea rerum. Optio aliquid culpa dicta blanditiis veniam nesciunt et at consectetur. Expedita maiores aut similique quas eveniet. Nobis deleniti enim hic in nesciunt alias modi ut provident.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = new Guid("01846f64-6d6b-4665-a335-e6ec71e4185a"),
+                            Amount = 464.277525171198000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("09f419d2-09d8-4182-ac95-695055e5e634"),
+                            Note = "Tempore iste id aspernatur facere voluptas tempora. Quia et incidunt.",
+                            PaymentDate = new DateTime(2015, 10, 7, 16, 56, 1, 987, DateTimeKind.Utc).AddTicks(4372),
                             PaymentType = 0
                         },
                         new
                         {
-                            Id = new Guid("3b1d356c-5ade-46db-9a89-93c44cc4cc99"),
-                            Amount = 0m,
-                            MemberId = new Guid("a577cef9-574f-4b4b-a550-d73ee538cf8e"),
-                            Note = "Est id voluptatibus et repellat deleniti et.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PaymentType = 1
-                        },
-                        new
-                        {
-                            Id = new Guid("179d467a-614e-4587-adb7-4c9eaee9cd07"),
-                            Amount = 0m,
-                            MemberId = new Guid("a577cef9-574f-4b4b-a550-d73ee538cf8e"),
-                            Note = "Et autem maxime vero sunt optio dicta quo. Voluptas minus perferendis aut et et dolorum.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PaymentType = 1
-                        },
-                        new
-                        {
-                            Id = new Guid("4bb09c21-212f-41bd-888e-c2d99e67e7ec"),
-                            Amount = 0m,
-                            MemberId = new Guid("a577cef9-574f-4b4b-a550-d73ee538cf8e"),
-                            Note = "Non repellat saepe et molestias consequuntur ullam nisi sunt non.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PaymentType = 0
-                        },
-                        new
-                        {
-                            Id = new Guid("ddf24138-aef6-4ee3-9340-c42f1c05e1ab"),
-                            Amount = 0m,
-                            MemberId = new Guid("a577cef9-574f-4b4b-a550-d73ee538cf8e"),
-                            Note = "Dignissimos excepturi deserunt.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = new Guid("c4b10fb3-9749-4e1b-bf87-7e65f60de03a"),
+                            Amount = 463.520552436977000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("09f419d2-09d8-4182-ac95-695055e5e634"),
+                            Note = "Quidem libero et. Et officia eum unde sed vitae dolorum sed id.",
+                            PaymentDate = new DateTime(2012, 8, 6, 5, 21, 53, 309, DateTimeKind.Utc).AddTicks(4855),
                             PaymentType = 99
                         },
                         new
                         {
-                            Id = new Guid("4b790174-509f-4a7c-9902-ea51a9c73fe5"),
-                            Amount = 0m,
-                            MemberId = new Guid("f434642d-c01d-4cdd-85c5-4fdf5df07c0e"),
-                            Note = "Aut hic maiores quo voluptatem. Explicabo dolores facilis vitae alias rerum dicta alias. Perferendis qui quasi dolores neque voluptatibus.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PaymentType = 1
-                        },
-                        new
-                        {
-                            Id = new Guid("10180639-92c7-4cb4-acdf-85be740b58b4"),
-                            Amount = 0m,
-                            MemberId = new Guid("f434642d-c01d-4cdd-85c5-4fdf5df07c0e"),
-                            Note = "Provident rerum repellat qui dicta ea nam sequi. Rerum molestiae eius blanditiis natus placeat incidunt dolorum excepturi adipisci. Minima maxime fuga dolorem corporis nesciunt voluptas animi eveniet blanditiis.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = new Guid("3c171bca-9fcf-47cd-8458-c17d5867d71a"),
+                            Amount = 807.276782262486000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("09f419d2-09d8-4182-ac95-695055e5e634"),
+                            Note = "Eos et cupiditate dolores dignissimos. In porro qui ipsam aspernatur culpa hic voluptatem assumenda eum. Aut neque voluptatem suscipit.",
+                            PaymentDate = new DateTime(2014, 7, 5, 6, 34, 44, 244, DateTimeKind.Utc).AddTicks(2961),
                             PaymentType = 0
                         },
                         new
                         {
-                            Id = new Guid("6f4e0f0c-af4f-4902-9314-d3d4b366a4ba"),
-                            Amount = 0m,
-                            MemberId = new Guid("f434642d-c01d-4cdd-85c5-4fdf5df07c0e"),
-                            Note = "Officiis atque blanditiis necessitatibus.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = new Guid("a6189e23-bd69-4d27-925b-d4c5487a4986"),
+                            Amount = 695.856293366844000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("8c59bd75-b7f6-43d5-87c5-c44061095f9c"),
+                            Note = "Earum voluptatem accusantium. Hic dignissimos exercitationem fugiat temporibus rerum odit ut ratione.",
+                            PaymentDate = new DateTime(2014, 6, 25, 1, 16, 15, 752, DateTimeKind.Utc).AddTicks(206),
                             PaymentType = 1
                         },
                         new
                         {
-                            Id = new Guid("a453894f-6f62-4146-ad88-fb5ea454ec18"),
-                            Amount = 0m,
-                            MemberId = new Guid("f434642d-c01d-4cdd-85c5-4fdf5df07c0e"),
-                            Note = "Expedita temporibus facilis minus nemo quaerat. Numquam exercitationem sit. Ipsa dolores fugit tempora hic et. Fuga officia accusamus velit molestiae aperiam non.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = new Guid("752c1939-f26a-4345-bf00-c7f30500e3ca"),
+                            Amount = 374.919538067373000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("8c59bd75-b7f6-43d5-87c5-c44061095f9c"),
+                            Note = "Velit dolorem in magnam totam nobis.",
+                            PaymentDate = new DateTime(2014, 7, 29, 8, 37, 44, 454, DateTimeKind.Utc).AddTicks(1541),
                             PaymentType = 0
                         },
                         new
                         {
-                            Id = new Guid("95f12c45-2dc3-47eb-b161-8ab5e2c9e8a2"),
-                            Amount = 0m,
-                            MemberId = new Guid("f434642d-c01d-4cdd-85c5-4fdf5df07c0e"),
-                            Note = "Nulla autem molestiae praesentium doloremque aut dolorum dolor omnis. Ab minus nostrum vero vel eveniet eius. Dolor quia quam. Hic asperiores quod.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = new Guid("202722ac-13a7-46a5-b142-ba846854d107"),
+                            Amount = 293.893354919699000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("8c59bd75-b7f6-43d5-87c5-c44061095f9c"),
+                            Note = "Alias aliquid similique ab laboriosam nemo tempore fugit voluptatem. Incidunt autem sed. Aliquam consectetur minima et. Odio a sunt modi.",
+                            PaymentDate = new DateTime(2016, 12, 12, 18, 39, 46, 728, DateTimeKind.Utc).AddTicks(1844),
+                            PaymentType = 1
+                        },
+                        new
+                        {
+                            Id = new Guid("1a279943-daba-4000-b170-c46a5f7c2a77"),
+                            Amount = 392.640783637317000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("8c59bd75-b7f6-43d5-87c5-c44061095f9c"),
+                            Note = "Nesciunt omnis voluptas nesciunt ea eos nihil perspiciatis.",
+                            PaymentDate = new DateTime(2014, 9, 4, 21, 58, 51, 249, DateTimeKind.Utc).AddTicks(1357),
+                            PaymentType = 1
+                        },
+                        new
+                        {
+                            Id = new Guid("bf9c3555-a081-4a61-a5b3-02db4bed25da"),
+                            Amount = 314.879138509942000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("8c59bd75-b7f6-43d5-87c5-c44061095f9c"),
+                            Note = "Adipisci quidem et facilis harum ut alias. Suscipit ea rem magnam perspiciatis sit itaque consequatur. Est dolores et earum consequatur eligendi qui nostrum perferendis.",
+                            PaymentDate = new DateTime(2016, 12, 27, 5, 57, 32, 445, DateTimeKind.Utc).AddTicks(6081),
                             PaymentType = 99
                         },
                         new
                         {
-                            Id = new Guid("81265497-0c4c-4b19-a947-37d8b09648b3"),
-                            Amount = 0m,
-                            MemberId = new Guid("f434642d-c01d-4cdd-85c5-4fdf5df07c0e"),
-                            Note = "Perferendis qui quae nihil.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = new Guid("0eebba63-c2fe-4c5a-9af1-4985a7caa8c0"),
+                            Amount = 159.496339505332000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("8c59bd75-b7f6-43d5-87c5-c44061095f9c"),
+                            Note = "Veniam odio placeat suscipit autem fugiat reiciendis est laudantium consequatur. Eum quis voluptas ut sed exercitationem eligendi totam in. Quia sed saepe hic esse ut. Voluptates et temporibus reiciendis architecto quia aspernatur.",
+                            PaymentDate = new DateTime(2013, 2, 26, 20, 7, 18, 943, DateTimeKind.Utc).AddTicks(6407),
                             PaymentType = 99
                         },
                         new
                         {
-                            Id = new Guid("1242f2c4-1819-43e0-9295-e505a57c7738"),
-                            Amount = 0m,
-                            MemberId = new Guid("f434642d-c01d-4cdd-85c5-4fdf5df07c0e"),
-                            Note = "Doloremque excepturi aspernatur qui dolor. Est corporis distinctio omnis corporis. Laudantium dolores deleniti quisquam autem.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = new Guid("f66cab7b-9bb5-4d2f-8f70-9863883abf8b"),
+                            Amount = 476.063996108306000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("8c59bd75-b7f6-43d5-87c5-c44061095f9c"),
+                            Note = "Eaque quibusdam minima et autem aut ab deleniti voluptate. Accusantium et illo cum repudiandae non velit non iste amet.",
+                            PaymentDate = new DateTime(2021, 6, 6, 14, 58, 34, 975, DateTimeKind.Utc).AddTicks(6022),
+                            PaymentType = 1
+                        },
+                        new
+                        {
+                            Id = new Guid("6e217da1-df4a-4489-a7cc-03d60b49492c"),
+                            Amount = 160.258932743355000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("8c59bd75-b7f6-43d5-87c5-c44061095f9c"),
+                            Note = "Quos consequatur et maiores necessitatibus consectetur et sapiente distinctio non. Voluptas et rerum atque nihil repudiandae animi. Earum minus neque ut perferendis doloremque corporis ducimus. Est officia ipsa.",
+                            PaymentDate = new DateTime(2013, 6, 19, 7, 38, 2, 374, DateTimeKind.Utc).AddTicks(6202),
+                            PaymentType = 1
+                        },
+                        new
+                        {
+                            Id = new Guid("0af8ad3c-f21f-4bdd-b45e-50b34b7c49e5"),
+                            Amount = 265.123479975336000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("8c59bd75-b7f6-43d5-87c5-c44061095f9c"),
+                            Note = "Iusto aliquid atque temporibus neque rem. Reiciendis et omnis enim nostrum doloremque omnis fuga placeat. Omnis cupiditate itaque est reiciendis provident. Asperiores ut et sint et aut aperiam libero perspiciatis.",
+                            PaymentDate = new DateTime(2021, 2, 10, 8, 53, 37, 732, DateTimeKind.Utc).AddTicks(638),
                             PaymentType = 0
                         },
                         new
                         {
-                            Id = new Guid("d2ccc7ac-6678-4b2b-8470-9d41552726b3"),
-                            Amount = 0m,
-                            MemberId = new Guid("f434642d-c01d-4cdd-85c5-4fdf5df07c0e"),
-                            Note = "Quo ut est inventore adipisci alias iure. Laudantium atque nihil nihil enim. Sint atque ut.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = new Guid("aebbf9d4-5488-4191-aabb-9b502999068b"),
+                            Amount = 247.455633681758000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("8c59bd75-b7f6-43d5-87c5-c44061095f9c"),
+                            Note = "Amet ipsum ipsa magnam possimus.",
+                            PaymentDate = new DateTime(2014, 12, 23, 14, 46, 1, 325, DateTimeKind.Utc).AddTicks(4359),
+                            PaymentType = 1
+                        },
+                        new
+                        {
+                            Id = new Guid("4d5c59fa-9631-4fda-b0e0-f5eceaba43af"),
+                            Amount = 980.752646205105000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("4385ff43-6e8d-444f-a265-cf8d478744f6"),
+                            Note = "Sunt totam odio quaerat. Omnis quibusdam illo autem iure sint eveniet. Temporibus delectus magnam qui ducimus.",
+                            PaymentDate = new DateTime(2014, 10, 18, 3, 46, 43, 84, DateTimeKind.Utc).AddTicks(6542),
+                            PaymentType = 1
+                        },
+                        new
+                        {
+                            Id = new Guid("bb273ebb-fb99-45f9-bd87-0d30401e96c6"),
+                            Amount = 928.37754015769000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("4385ff43-6e8d-444f-a265-cf8d478744f6"),
+                            Note = "Non quis soluta placeat repellendus repudiandae praesentium. Sapiente ullam et. Dolor fugiat aut est ab ipsam et sit ducimus. Debitis pariatur ullam voluptatem odio numquam.",
+                            PaymentDate = new DateTime(2013, 10, 23, 8, 7, 13, 503, DateTimeKind.Utc).AddTicks(3161),
                             PaymentType = 99
                         },
                         new
                         {
-                            Id = new Guid("89f8801f-4e6f-432c-8488-534293c985bd"),
-                            Amount = 0m,
-                            MemberId = new Guid("f434642d-c01d-4cdd-85c5-4fdf5df07c0e"),
-                            Note = "Id et optio laudantium rerum et ipsum. Sequi expedita qui nobis deleniti sit. Ut temporibus accusamus repellat facere. Qui sequi autem autem maxime voluptas dolorum amet.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PaymentType = 1
-                        },
-                        new
-                        {
-                            Id = new Guid("51ea5c4f-ac1a-474a-a5e9-5c774b9174d4"),
-                            Amount = 0m,
-                            MemberId = new Guid("f434642d-c01d-4cdd-85c5-4fdf5df07c0e"),
-                            Note = "Praesentium voluptatem dolorum natus doloribus ad consequuntur. Odio a explicabo.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = new Guid("f3541b3d-03b8-4aba-af56-4b43688c740c"),
+                            Amount = 337.348284576868000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("4385ff43-6e8d-444f-a265-cf8d478744f6"),
+                            Note = "Vero voluptas ut.",
+                            PaymentDate = new DateTime(2019, 9, 17, 4, 16, 48, 75, DateTimeKind.Utc).AddTicks(3879),
                             PaymentType = 0
                         },
                         new
                         {
-                            Id = new Guid("911ebd28-73c4-4a12-9491-56810c53988a"),
-                            Amount = 0m,
-                            MemberId = new Guid("66176f28-d002-454d-b567-38f41464878f"),
-                            Note = "Suscipit quos earum ut ullam dolorem sint consectetur sit error. Rerum qui eum accusamus est voluptas in at provident maxime. Temporibus aut dolores ducimus et ducimus nisi nulla dolor error. Aliquid quia accusantium aut sint officia.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PaymentType = 1
-                        },
-                        new
-                        {
-                            Id = new Guid("27d5bcb9-084f-4155-adbf-c0da3682d29b"),
-                            Amount = 0m,
-                            MemberId = new Guid("66176f28-d002-454d-b567-38f41464878f"),
-                            Note = "Nostrum at dolores cumque itaque aspernatur ut nisi quia. Non expedita vitae rem.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PaymentType = 1
-                        },
-                        new
-                        {
-                            Id = new Guid("0a51f1e0-6d08-4fb1-94ff-a7a6d078d909"),
-                            Amount = 0m,
-                            MemberId = new Guid("66176f28-d002-454d-b567-38f41464878f"),
-                            Note = "Enim et laborum. Delectus ratione ex voluptates provident. Et vel quo necessitatibus.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PaymentType = 1
-                        },
-                        new
-                        {
-                            Id = new Guid("c89d2b37-282d-41fc-87cd-4d1c676a0b51"),
-                            Amount = 0m,
-                            MemberId = new Guid("66176f28-d002-454d-b567-38f41464878f"),
-                            Note = "Dolores minima eius ea eveniet et blanditiis soluta. Molestiae id vitae sunt rerum animi qui facere nisi.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = new Guid("b124ed35-1ff2-4dec-973c-a6eeff4bd778"),
+                            Amount = 518.302594378287000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("4385ff43-6e8d-444f-a265-cf8d478744f6"),
+                            Note = "Blanditiis magni dolore molestiae accusantium eligendi. Laborum voluptas vel.",
+                            PaymentDate = new DateTime(2020, 6, 18, 5, 32, 8, 616, DateTimeKind.Utc).AddTicks(7412),
                             PaymentType = 0
                         },
                         new
                         {
-                            Id = new Guid("aabbcb62-83b2-44d9-a778-cffce53469e5"),
-                            Amount = 0m,
-                            MemberId = new Guid("66176f28-d002-454d-b567-38f41464878f"),
-                            Note = "Quam a odio nesciunt magnam aliquam et dolorum aut. Tempora pariatur aut rem sint aspernatur magnam et itaque. Aut commodi ducimus.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PaymentType = 1
-                        },
-                        new
-                        {
-                            Id = new Guid("853c1f60-9755-4bab-9c3e-077742785c8a"),
-                            Amount = 0m,
-                            MemberId = new Guid("66176f28-d002-454d-b567-38f41464878f"),
-                            Note = "Est aut distinctio enim ratione animi autem labore necessitatibus. Laudantium quis ea quisquam libero rerum qui quos. Velit et qui deleniti ducimus nobis et et at.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PaymentType = 1
-                        },
-                        new
-                        {
-                            Id = new Guid("03a4db10-9a07-4088-bc08-a2c94ce4d781"),
-                            Amount = 0m,
-                            MemberId = new Guid("66176f28-d002-454d-b567-38f41464878f"),
-                            Note = "Ut aut ex.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PaymentType = 1
-                        },
-                        new
-                        {
-                            Id = new Guid("aed45d1b-33d7-4b9d-b8cf-e09b1755405f"),
-                            Amount = 0m,
-                            MemberId = new Guid("66176f28-d002-454d-b567-38f41464878f"),
-                            Note = "Accusamus nostrum et iste. Distinctio voluptatem neque non aliquam reprehenderit officia iure eos. Enim et vitae suscipit molestiae doloribus. Ratione cumque qui ab delectus ut quas perspiciatis.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PaymentType = 0
-                        },
-                        new
-                        {
-                            Id = new Guid("cf0003cd-f8b0-43ac-918e-39aa6475eaec"),
-                            Amount = 0m,
-                            MemberId = new Guid("66176f28-d002-454d-b567-38f41464878f"),
-                            Note = "Pariatur harum hic sed recusandae repellat iure atque voluptas.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PaymentType = 1
-                        },
-                        new
-                        {
-                            Id = new Guid("e470ddd5-53be-4755-9b37-2d96db2b1b5a"),
-                            Amount = 0m,
-                            MemberId = new Guid("66176f28-d002-454d-b567-38f41464878f"),
-                            Note = "Autem quisquam ratione modi rem. Amet mollitia minus vel consectetur aspernatur incidunt et.",
-                            PaymentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = new Guid("e8850f6e-5ce7-4524-a5bd-eebee8083d41"),
+                            Amount = 366.693410064667000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("4385ff43-6e8d-444f-a265-cf8d478744f6"),
+                            Note = "Aut cum quia excepturi aut quo aut atque. Molestiae debitis officiis atque ut ut recusandae aspernatur voluptas. Recusandae harum eos. Omnis reiciendis temporibus debitis facere rerum optio perferendis voluptatibus vel.",
+                            PaymentDate = new DateTime(2018, 10, 15, 18, 32, 25, 634, DateTimeKind.Utc).AddTicks(19),
                             PaymentType = 99
+                        },
+                        new
+                        {
+                            Id = new Guid("11963338-08e6-4c97-9d74-1c8c69fa4781"),
+                            Amount = 732.03364700091000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("4385ff43-6e8d-444f-a265-cf8d478744f6"),
+                            Note = "Qui reprehenderit doloremque id sed sit odio quidem at.",
+                            PaymentDate = new DateTime(2012, 6, 23, 9, 32, 34, 819, DateTimeKind.Utc).AddTicks(5263),
+                            PaymentType = 99
+                        },
+                        new
+                        {
+                            Id = new Guid("f9dbde2b-7ff4-4b82-bda7-2e959d88d7fd"),
+                            Amount = 26.9142092444313000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("4385ff43-6e8d-444f-a265-cf8d478744f6"),
+                            Note = "Ut repellat ut corrupti quibusdam aut. Architecto voluptatem molestias facere aut quo quo. Excepturi debitis inventore et deserunt aut in accusamus. Minus esse minima.",
+                            PaymentDate = new DateTime(2013, 3, 6, 12, 9, 40, 29, DateTimeKind.Utc).AddTicks(9960),
+                            PaymentType = 0
+                        },
+                        new
+                        {
+                            Id = new Guid("014a468d-5771-4f1f-9b63-05f59776766d"),
+                            Amount = 722.912756240841000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("4385ff43-6e8d-444f-a265-cf8d478744f6"),
+                            Note = "Et est labore nulla autem autem tempore. Molestiae corrupti magni sapiente esse. Dolorem commodi ipsum deleniti architecto aut cum enim. Officiis reiciendis error debitis enim accusamus voluptatem dolores quae.",
+                            PaymentDate = new DateTime(2019, 8, 28, 4, 53, 44, 541, DateTimeKind.Utc).AddTicks(5637),
+                            PaymentType = 0
+                        },
+                        new
+                        {
+                            Id = new Guid("0e72a308-063c-40b8-9404-8c7dfac3ce62"),
+                            Amount = 748.916408231903000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("4385ff43-6e8d-444f-a265-cf8d478744f6"),
+                            Note = "Repellendus animi ducimus consequuntur. Et ut in quidem optio. Quo quidem eos sunt.",
+                            PaymentDate = new DateTime(2013, 3, 29, 3, 29, 42, 563, DateTimeKind.Utc).AddTicks(7498),
+                            PaymentType = 0
+                        },
+                        new
+                        {
+                            Id = new Guid("75ae3b21-0825-4c49-93e7-ae88c5def32e"),
+                            Amount = 785.622435358437000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("4385ff43-6e8d-444f-a265-cf8d478744f6"),
+                            Note = "Aperiam aperiam numquam nostrum. Omnis eum facere exercitationem voluptatem in rem labore voluptas. Rerum asperiores veniam libero ratione rerum quo earum voluptas.",
+                            PaymentDate = new DateTime(2018, 3, 22, 10, 39, 0, 630, DateTimeKind.Utc).AddTicks(2162),
+                            PaymentType = 99
+                        },
+                        new
+                        {
+                            Id = new Guid("e95f2f0b-65c6-4cb1-a782-46efc4284581"),
+                            Amount = 159.389687741479000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("cbf11d4f-3fe4-4ec9-ba79-fc5ff2ee2f4b"),
+                            Note = "Similique corrupti beatae est harum. Debitis eius eveniet optio nulla. Dolorem omnis quia asperiores. Est aperiam sed deserunt unde et.",
+                            PaymentDate = new DateTime(2018, 4, 23, 12, 38, 31, 429, DateTimeKind.Utc).AddTicks(4523),
+                            PaymentType = 99
+                        },
+                        new
+                        {
+                            Id = new Guid("715ee34d-0b0b-4a67-849f-eac77a5317ff"),
+                            Amount = 341.62061870738000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("cbf11d4f-3fe4-4ec9-ba79-fc5ff2ee2f4b"),
+                            Note = "Laudantium rerum qui rem debitis id facere. Reiciendis ea veritatis et quos enim cum et.",
+                            PaymentDate = new DateTime(2013, 8, 7, 18, 9, 57, 590, DateTimeKind.Utc).AddTicks(8824),
+                            PaymentType = 0
+                        },
+                        new
+                        {
+                            Id = new Guid("36657482-d18f-4061-ad45-98f2db5c1291"),
+                            Amount = 834.97948389981000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("cbf11d4f-3fe4-4ec9-ba79-fc5ff2ee2f4b"),
+                            Note = "Velit itaque pariatur excepturi eos ipsam nostrum. Adipisci eum id aliquid similique ad quia quia neque a.",
+                            PaymentDate = new DateTime(2018, 10, 17, 11, 43, 36, 206, DateTimeKind.Utc).AddTicks(2957),
+                            PaymentType = 99
+                        },
+                        new
+                        {
+                            Id = new Guid("6c897f63-ffb2-4872-b57c-9da8f2d5ebe7"),
+                            Amount = 31.6758183461558000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("cbf11d4f-3fe4-4ec9-ba79-fc5ff2ee2f4b"),
+                            Note = "Qui similique eos quod nihil eos esse. Dolorem minima voluptatem eaque facere. Eveniet minus iusto perspiciatis et sed ipsa.",
+                            PaymentDate = new DateTime(2013, 6, 24, 8, 43, 1, 490, DateTimeKind.Utc).AddTicks(9413),
+                            PaymentType = 99
+                        },
+                        new
+                        {
+                            Id = new Guid("12747bbc-c925-4718-b291-93a25209fb4d"),
+                            Amount = 586.371520615042000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("cbf11d4f-3fe4-4ec9-ba79-fc5ff2ee2f4b"),
+                            Note = "Ratione deserunt ut qui. Animi qui est enim officia numquam.",
+                            PaymentDate = new DateTime(2016, 12, 21, 3, 11, 26, 287, DateTimeKind.Utc).AddTicks(6996),
+                            PaymentType = 0
+                        },
+                        new
+                        {
+                            Id = new Guid("6708debc-3484-4ccf-b21e-f9c06266821e"),
+                            Amount = 302.140923211181000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("cbf11d4f-3fe4-4ec9-ba79-fc5ff2ee2f4b"),
+                            Note = "Incidunt et dolor delectus accusamus. Id laboriosam ea recusandae dolorem magnam. Voluptas possimus laborum. Repellat culpa eveniet ut enim sed.",
+                            PaymentDate = new DateTime(2012, 2, 29, 16, 43, 6, 353, DateTimeKind.Utc).AddTicks(1264),
+                            PaymentType = 1
+                        },
+                        new
+                        {
+                            Id = new Guid("c06e68b6-012d-43c1-b1c3-bd9d043037be"),
+                            Amount = 987.834902335258000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("cbf11d4f-3fe4-4ec9-ba79-fc5ff2ee2f4b"),
+                            Note = "Dolore pariatur exercitationem sit illo velit distinctio. Molestiae fuga voluptatem.",
+                            PaymentDate = new DateTime(2019, 4, 27, 10, 36, 52, 700, DateTimeKind.Utc).AddTicks(516),
+                            PaymentType = 1
+                        },
+                        new
+                        {
+                            Id = new Guid("b8687d84-9dce-46cb-962e-988e790e17be"),
+                            Amount = 630.563057148881000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("cbf11d4f-3fe4-4ec9-ba79-fc5ff2ee2f4b"),
+                            Note = "Nisi tempora nihil ullam. Velit qui voluptas dolor ratione delectus eveniet voluptatum consectetur.",
+                            PaymentDate = new DateTime(2019, 9, 23, 16, 19, 59, 390, DateTimeKind.Utc).AddTicks(3807),
+                            PaymentType = 1
+                        },
+                        new
+                        {
+                            Id = new Guid("97c700dd-1c66-4efb-b97d-ca54e1bf162b"),
+                            Amount = 886.582528563196000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("cbf11d4f-3fe4-4ec9-ba79-fc5ff2ee2f4b"),
+                            Note = "Consequatur corrupti quisquam est nihil.",
+                            PaymentDate = new DateTime(2021, 9, 16, 21, 9, 45, 898, DateTimeKind.Utc).AddTicks(1608),
+                            PaymentType = 1
+                        },
+                        new
+                        {
+                            Id = new Guid("a415f689-782e-4ca1-99c8-e6857f698a00"),
+                            Amount = 870.478304596259000m,
+                            IsDeleted = false,
+                            MemberId = new Guid("cbf11d4f-3fe4-4ec9-ba79-fc5ff2ee2f4b"),
+                            Note = "Rerum quos libero quisquam. Sint laborum delectus est et ad quaerat qui. Laudantium iure tenetur similique sit et est ipsa quo.",
+                            PaymentDate = new DateTime(2015, 5, 31, 19, 13, 56, 781, DateTimeKind.Utc).AddTicks(2416),
+                            PaymentType = 1
                         });
                 });
 
@@ -4271,7 +4514,7 @@ namespace MosqueLife.Server.Data.Migrations
                     b.HasData(
                         new
                         {
-                            MemberId = new Guid("c390632f-04e2-4bda-9d3e-f8bf13c27f00"),
+                            MemberId = new Guid("48fd525f-4966-41e8-968d-3f7149e389ae"),
                             Year = 2015,
                             April = true,
                             August = true,
@@ -4288,7 +4531,7 @@ namespace MosqueLife.Server.Data.Migrations
                         },
                         new
                         {
-                            MemberId = new Guid("c390632f-04e2-4bda-9d3e-f8bf13c27f00"),
+                            MemberId = new Guid("48fd525f-4966-41e8-968d-3f7149e389ae"),
                             Year = 2016,
                             April = true,
                             August = true,
@@ -4305,41 +4548,7 @@ namespace MosqueLife.Server.Data.Migrations
                         },
                         new
                         {
-                            MemberId = new Guid("c390632f-04e2-4bda-9d3e-f8bf13c27f00"),
-                            Year = 2017,
-                            April = true,
-                            August = true,
-                            December = true,
-                            February = true,
-                            January = true,
-                            July = true,
-                            June = true,
-                            March = true,
-                            May = true,
-                            November = true,
-                            October = true,
-                            September = true
-                        },
-                        new
-                        {
-                            MemberId = new Guid("c390632f-04e2-4bda-9d3e-f8bf13c27f00"),
-                            Year = 2018,
-                            April = true,
-                            August = true,
-                            December = true,
-                            February = true,
-                            January = true,
-                            July = true,
-                            June = true,
-                            March = true,
-                            May = true,
-                            November = true,
-                            October = true,
-                            September = true
-                        },
-                        new
-                        {
-                            MemberId = new Guid("fc9ea8ee-18c0-463e-b208-5b82657999c5"),
+                            MemberId = new Guid("f6cde8a2-e554-41d3-ae69-9589170b99c9"),
                             Year = 2015,
                             April = true,
                             August = true,
@@ -4356,7 +4565,7 @@ namespace MosqueLife.Server.Data.Migrations
                         },
                         new
                         {
-                            MemberId = new Guid("fc9ea8ee-18c0-463e-b208-5b82657999c5"),
+                            MemberId = new Guid("f6cde8a2-e554-41d3-ae69-9589170b99c9"),
                             Year = 2016,
                             April = true,
                             August = true,
@@ -4373,7 +4582,7 @@ namespace MosqueLife.Server.Data.Migrations
                         },
                         new
                         {
-                            MemberId = new Guid("fc9ea8ee-18c0-463e-b208-5b82657999c5"),
+                            MemberId = new Guid("f6cde8a2-e554-41d3-ae69-9589170b99c9"),
                             Year = 2017,
                             April = true,
                             August = true,
@@ -4390,7 +4599,7 @@ namespace MosqueLife.Server.Data.Migrations
                         },
                         new
                         {
-                            MemberId = new Guid("fc9ea8ee-18c0-463e-b208-5b82657999c5"),
+                            MemberId = new Guid("f6cde8a2-e554-41d3-ae69-9589170b99c9"),
                             Year = 2018,
                             April = true,
                             August = true,
@@ -4407,7 +4616,7 @@ namespace MosqueLife.Server.Data.Migrations
                         },
                         new
                         {
-                            MemberId = new Guid("fc9ea8ee-18c0-463e-b208-5b82657999c5"),
+                            MemberId = new Guid("f6cde8a2-e554-41d3-ae69-9589170b99c9"),
                             Year = 2019,
                             April = true,
                             August = true,
@@ -4424,7 +4633,7 @@ namespace MosqueLife.Server.Data.Migrations
                         },
                         new
                         {
-                            MemberId = new Guid("fc9ea8ee-18c0-463e-b208-5b82657999c5"),
+                            MemberId = new Guid("f6cde8a2-e554-41d3-ae69-9589170b99c9"),
                             Year = 2020,
                             April = true,
                             August = true,
@@ -4441,7 +4650,483 @@ namespace MosqueLife.Server.Data.Migrations
                         },
                         new
                         {
-                            MemberId = new Guid("fc9ea8ee-18c0-463e-b208-5b82657999c5"),
+                            MemberId = new Guid("fdaf0699-a28e-403c-8775-54a475a1cf0a"),
+                            Year = 2015,
+                            April = true,
+                            August = true,
+                            December = true,
+                            February = true,
+                            January = true,
+                            July = true,
+                            June = true,
+                            March = true,
+                            May = true,
+                            November = true,
+                            October = true,
+                            September = true
+                        },
+                        new
+                        {
+                            MemberId = new Guid("7e3ec143-3e22-48ca-8dd5-4fb8965cbebe"),
+                            Year = 2015,
+                            April = true,
+                            August = true,
+                            December = true,
+                            February = true,
+                            January = true,
+                            July = true,
+                            June = true,
+                            March = true,
+                            May = true,
+                            November = true,
+                            October = true,
+                            September = true
+                        },
+                        new
+                        {
+                            MemberId = new Guid("abe7de98-bd86-4c20-9918-d0e3d8867123"),
+                            Year = 2015,
+                            April = true,
+                            August = true,
+                            December = true,
+                            February = true,
+                            January = true,
+                            July = true,
+                            June = true,
+                            March = true,
+                            May = true,
+                            November = true,
+                            October = true,
+                            September = true
+                        },
+                        new
+                        {
+                            MemberId = new Guid("abe7de98-bd86-4c20-9918-d0e3d8867123"),
+                            Year = 2016,
+                            April = true,
+                            August = true,
+                            December = true,
+                            February = true,
+                            January = true,
+                            July = true,
+                            June = true,
+                            March = true,
+                            May = true,
+                            November = true,
+                            October = true,
+                            September = true
+                        },
+                        new
+                        {
+                            MemberId = new Guid("abe7de98-bd86-4c20-9918-d0e3d8867123"),
+                            Year = 2017,
+                            April = true,
+                            August = true,
+                            December = true,
+                            February = true,
+                            January = true,
+                            July = true,
+                            June = true,
+                            March = true,
+                            May = true,
+                            November = true,
+                            October = true,
+                            September = true
+                        },
+                        new
+                        {
+                            MemberId = new Guid("abe7de98-bd86-4c20-9918-d0e3d8867123"),
+                            Year = 2018,
+                            April = true,
+                            August = true,
+                            December = true,
+                            February = true,
+                            January = true,
+                            July = true,
+                            June = true,
+                            March = true,
+                            May = true,
+                            November = true,
+                            October = true,
+                            September = true
+                        },
+                        new
+                        {
+                            MemberId = new Guid("12d76e6f-a966-4235-8f43-991d88418b1f"),
+                            Year = 2015,
+                            April = true,
+                            August = true,
+                            December = true,
+                            February = true,
+                            January = true,
+                            July = true,
+                            June = true,
+                            March = true,
+                            May = true,
+                            November = true,
+                            October = true,
+                            September = true
+                        },
+                        new
+                        {
+                            MemberId = new Guid("12d76e6f-a966-4235-8f43-991d88418b1f"),
+                            Year = 2016,
+                            April = true,
+                            August = true,
+                            December = true,
+                            February = true,
+                            January = true,
+                            July = true,
+                            June = true,
+                            March = true,
+                            May = true,
+                            November = true,
+                            October = true,
+                            September = true
+                        },
+                        new
+                        {
+                            MemberId = new Guid("12d76e6f-a966-4235-8f43-991d88418b1f"),
+                            Year = 2017,
+                            April = true,
+                            August = true,
+                            December = true,
+                            February = true,
+                            January = true,
+                            July = true,
+                            June = true,
+                            March = true,
+                            May = true,
+                            November = true,
+                            October = true,
+                            September = true
+                        },
+                        new
+                        {
+                            MemberId = new Guid("12d76e6f-a966-4235-8f43-991d88418b1f"),
+                            Year = 2018,
+                            April = true,
+                            August = true,
+                            December = true,
+                            February = true,
+                            January = true,
+                            July = true,
+                            June = true,
+                            March = true,
+                            May = true,
+                            November = true,
+                            October = true,
+                            September = true
+                        },
+                        new
+                        {
+                            MemberId = new Guid("12d76e6f-a966-4235-8f43-991d88418b1f"),
+                            Year = 2019,
+                            April = true,
+                            August = true,
+                            December = true,
+                            February = true,
+                            January = true,
+                            July = true,
+                            June = true,
+                            March = true,
+                            May = true,
+                            November = true,
+                            October = true,
+                            September = true
+                        },
+                        new
+                        {
+                            MemberId = new Guid("12d76e6f-a966-4235-8f43-991d88418b1f"),
+                            Year = 2020,
+                            April = true,
+                            August = true,
+                            December = true,
+                            February = true,
+                            January = true,
+                            July = true,
+                            June = true,
+                            March = true,
+                            May = true,
+                            November = true,
+                            October = true,
+                            September = true
+                        },
+                        new
+                        {
+                            MemberId = new Guid("b2724ea1-4cce-450f-8bab-67988a9f865e"),
+                            Year = 2015,
+                            April = true,
+                            August = true,
+                            December = true,
+                            February = true,
+                            January = true,
+                            July = true,
+                            June = true,
+                            March = true,
+                            May = true,
+                            November = true,
+                            October = true,
+                            September = true
+                        },
+                        new
+                        {
+                            MemberId = new Guid("b2724ea1-4cce-450f-8bab-67988a9f865e"),
+                            Year = 2016,
+                            April = true,
+                            August = true,
+                            December = true,
+                            February = true,
+                            January = true,
+                            July = true,
+                            June = true,
+                            March = true,
+                            May = true,
+                            November = true,
+                            October = true,
+                            September = true
+                        },
+                        new
+                        {
+                            MemberId = new Guid("b2724ea1-4cce-450f-8bab-67988a9f865e"),
+                            Year = 2017,
+                            April = true,
+                            August = true,
+                            December = true,
+                            February = true,
+                            January = true,
+                            July = true,
+                            June = true,
+                            March = true,
+                            May = true,
+                            November = true,
+                            October = true,
+                            September = true
+                        },
+                        new
+                        {
+                            MemberId = new Guid("15358ab3-4b57-4e5e-877a-7e4762f018d4"),
+                            Year = 2015,
+                            April = true,
+                            August = true,
+                            December = true,
+                            February = true,
+                            January = true,
+                            July = true,
+                            June = true,
+                            March = true,
+                            May = true,
+                            November = true,
+                            October = true,
+                            September = true
+                        },
+                        new
+                        {
+                            MemberId = new Guid("15358ab3-4b57-4e5e-877a-7e4762f018d4"),
+                            Year = 2016,
+                            April = true,
+                            August = true,
+                            December = true,
+                            February = true,
+                            January = true,
+                            July = true,
+                            June = true,
+                            March = true,
+                            May = true,
+                            November = true,
+                            October = true,
+                            September = true
+                        },
+                        new
+                        {
+                            MemberId = new Guid("15358ab3-4b57-4e5e-877a-7e4762f018d4"),
+                            Year = 2017,
+                            April = true,
+                            August = true,
+                            December = true,
+                            February = true,
+                            January = true,
+                            July = true,
+                            June = true,
+                            March = true,
+                            May = true,
+                            November = true,
+                            October = true,
+                            September = true
+                        },
+                        new
+                        {
+                            MemberId = new Guid("15358ab3-4b57-4e5e-877a-7e4762f018d4"),
+                            Year = 2018,
+                            April = true,
+                            August = true,
+                            December = true,
+                            February = true,
+                            January = true,
+                            July = true,
+                            June = true,
+                            March = true,
+                            May = true,
+                            November = true,
+                            October = true,
+                            September = true
+                        },
+                        new
+                        {
+                            MemberId = new Guid("1f75aa88-935c-4eb2-9891-d39332949ed6"),
+                            Year = 2015,
+                            April = true,
+                            August = true,
+                            December = true,
+                            February = true,
+                            January = true,
+                            July = true,
+                            June = true,
+                            March = true,
+                            May = true,
+                            November = true,
+                            October = true,
+                            September = true
+                        },
+                        new
+                        {
+                            MemberId = new Guid("1f75aa88-935c-4eb2-9891-d39332949ed6"),
+                            Year = 2016,
+                            April = true,
+                            August = true,
+                            December = true,
+                            February = true,
+                            January = true,
+                            July = true,
+                            June = true,
+                            March = true,
+                            May = true,
+                            November = true,
+                            October = true,
+                            September = true
+                        },
+                        new
+                        {
+                            MemberId = new Guid("1f75aa88-935c-4eb2-9891-d39332949ed6"),
+                            Year = 2017,
+                            April = true,
+                            August = true,
+                            December = true,
+                            February = true,
+                            January = true,
+                            July = true,
+                            June = true,
+                            March = true,
+                            May = true,
+                            November = true,
+                            October = true,
+                            September = true
+                        },
+                        new
+                        {
+                            MemberId = new Guid("3ee5aab2-ccc1-45d2-89c0-341336f72a9a"),
+                            Year = 2015,
+                            April = true,
+                            August = true,
+                            December = true,
+                            February = true,
+                            January = true,
+                            July = true,
+                            June = true,
+                            March = true,
+                            May = true,
+                            November = true,
+                            October = true,
+                            September = true
+                        },
+                        new
+                        {
+                            MemberId = new Guid("3ee5aab2-ccc1-45d2-89c0-341336f72a9a"),
+                            Year = 2016,
+                            April = true,
+                            August = true,
+                            December = true,
+                            February = true,
+                            January = true,
+                            July = true,
+                            June = true,
+                            March = true,
+                            May = true,
+                            November = true,
+                            October = true,
+                            September = true
+                        },
+                        new
+                        {
+                            MemberId = new Guid("3ee5aab2-ccc1-45d2-89c0-341336f72a9a"),
+                            Year = 2017,
+                            April = true,
+                            August = true,
+                            December = true,
+                            February = true,
+                            January = true,
+                            July = true,
+                            June = true,
+                            March = true,
+                            May = true,
+                            November = true,
+                            October = true,
+                            September = true
+                        },
+                        new
+                        {
+                            MemberId = new Guid("3ee5aab2-ccc1-45d2-89c0-341336f72a9a"),
+                            Year = 2018,
+                            April = true,
+                            August = true,
+                            December = true,
+                            February = true,
+                            January = true,
+                            July = true,
+                            June = true,
+                            March = true,
+                            May = true,
+                            November = true,
+                            October = true,
+                            September = true
+                        },
+                        new
+                        {
+                            MemberId = new Guid("3ee5aab2-ccc1-45d2-89c0-341336f72a9a"),
+                            Year = 2019,
+                            April = true,
+                            August = true,
+                            December = true,
+                            February = true,
+                            January = true,
+                            July = true,
+                            June = true,
+                            March = true,
+                            May = true,
+                            November = true,
+                            October = true,
+                            September = true
+                        },
+                        new
+                        {
+                            MemberId = new Guid("3ee5aab2-ccc1-45d2-89c0-341336f72a9a"),
+                            Year = 2020,
+                            April = true,
+                            August = true,
+                            December = true,
+                            February = true,
+                            January = true,
+                            July = true,
+                            June = true,
+                            March = true,
+                            May = true,
+                            November = true,
+                            October = true,
+                            September = true
+                        },
+                        new
+                        {
+                            MemberId = new Guid("3ee5aab2-ccc1-45d2-89c0-341336f72a9a"),
                             Year = 2021,
                             April = true,
                             August = true,
@@ -4458,7 +5143,7 @@ namespace MosqueLife.Server.Data.Migrations
                         },
                         new
                         {
-                            MemberId = new Guid("0a54a9bf-901f-49a5-a249-17c711bb6621"),
+                            MemberId = new Guid("39ef24e4-1de6-423d-b64d-c7057cd571cc"),
                             Year = 2015,
                             April = true,
                             August = true,
@@ -4475,7 +5160,24 @@ namespace MosqueLife.Server.Data.Migrations
                         },
                         new
                         {
-                            MemberId = new Guid("0a54a9bf-901f-49a5-a249-17c711bb6621"),
+                            MemberId = new Guid("c93cf7ba-5301-4a59-8238-b7a2e73b924f"),
+                            Year = 2015,
+                            April = true,
+                            August = true,
+                            December = true,
+                            February = true,
+                            January = true,
+                            July = true,
+                            June = true,
+                            March = true,
+                            May = true,
+                            November = true,
+                            October = true,
+                            September = true
+                        },
+                        new
+                        {
+                            MemberId = new Guid("c93cf7ba-5301-4a59-8238-b7a2e73b924f"),
                             Year = 2016,
                             April = true,
                             August = true,
@@ -4492,7 +5194,7 @@ namespace MosqueLife.Server.Data.Migrations
                         },
                         new
                         {
-                            MemberId = new Guid("0a54a9bf-901f-49a5-a249-17c711bb6621"),
+                            MemberId = new Guid("c93cf7ba-5301-4a59-8238-b7a2e73b924f"),
                             Year = 2017,
                             April = true,
                             August = true,
@@ -4509,7 +5211,7 @@ namespace MosqueLife.Server.Data.Migrations
                         },
                         new
                         {
-                            MemberId = new Guid("0a54a9bf-901f-49a5-a249-17c711bb6621"),
+                            MemberId = new Guid("c93cf7ba-5301-4a59-8238-b7a2e73b924f"),
                             Year = 2018,
                             April = true,
                             August = true,
@@ -4526,7 +5228,7 @@ namespace MosqueLife.Server.Data.Migrations
                         },
                         new
                         {
-                            MemberId = new Guid("0a54a9bf-901f-49a5-a249-17c711bb6621"),
+                            MemberId = new Guid("c93cf7ba-5301-4a59-8238-b7a2e73b924f"),
                             Year = 2019,
                             April = true,
                             August = true,
@@ -4543,7 +5245,7 @@ namespace MosqueLife.Server.Data.Migrations
                         },
                         new
                         {
-                            MemberId = new Guid("0a54a9bf-901f-49a5-a249-17c711bb6621"),
+                            MemberId = new Guid("c93cf7ba-5301-4a59-8238-b7a2e73b924f"),
                             Year = 2020,
                             April = true,
                             August = true,
@@ -4560,7 +5262,7 @@ namespace MosqueLife.Server.Data.Migrations
                         },
                         new
                         {
-                            MemberId = new Guid("0a54a9bf-901f-49a5-a249-17c711bb6621"),
+                            MemberId = new Guid("c93cf7ba-5301-4a59-8238-b7a2e73b924f"),
                             Year = 2021,
                             April = true,
                             August = true,
@@ -4577,7 +5279,7 @@ namespace MosqueLife.Server.Data.Migrations
                         },
                         new
                         {
-                            MemberId = new Guid("ffbc275f-ea62-4f58-a600-cd8a0ea8c3ed"),
+                            MemberId = new Guid("83f91037-a88d-4711-9911-ff86488bc237"),
                             Year = 2015,
                             April = true,
                             August = true,
@@ -4594,41 +5296,7 @@ namespace MosqueLife.Server.Data.Migrations
                         },
                         new
                         {
-                            MemberId = new Guid("ffbc275f-ea62-4f58-a600-cd8a0ea8c3ed"),
-                            Year = 2016,
-                            April = true,
-                            August = true,
-                            December = true,
-                            February = true,
-                            January = true,
-                            July = true,
-                            June = true,
-                            March = true,
-                            May = true,
-                            November = true,
-                            October = true,
-                            September = true
-                        },
-                        new
-                        {
-                            MemberId = new Guid("ffbc275f-ea62-4f58-a600-cd8a0ea8c3ed"),
-                            Year = 2017,
-                            April = true,
-                            August = true,
-                            December = true,
-                            February = true,
-                            January = true,
-                            July = true,
-                            June = true,
-                            March = true,
-                            May = true,
-                            November = true,
-                            October = true,
-                            September = true
-                        },
-                        new
-                        {
-                            MemberId = new Guid("6a817924-9c58-4dfd-8737-0c3c2a5d009d"),
+                            MemberId = new Guid("09f419d2-09d8-4182-ac95-695055e5e634"),
                             Year = 2015,
                             April = true,
                             August = true,
@@ -4645,7 +5313,24 @@ namespace MosqueLife.Server.Data.Migrations
                         },
                         new
                         {
-                            MemberId = new Guid("6a817924-9c58-4dfd-8737-0c3c2a5d009d"),
+                            MemberId = new Guid("8c59bd75-b7f6-43d5-87c5-c44061095f9c"),
+                            Year = 2015,
+                            April = true,
+                            August = true,
+                            December = true,
+                            February = true,
+                            January = true,
+                            July = true,
+                            June = true,
+                            March = true,
+                            May = true,
+                            November = true,
+                            October = true,
+                            September = true
+                        },
+                        new
+                        {
+                            MemberId = new Guid("8c59bd75-b7f6-43d5-87c5-c44061095f9c"),
                             Year = 2016,
                             April = true,
                             August = true,
@@ -4662,7 +5347,7 @@ namespace MosqueLife.Server.Data.Migrations
                         },
                         new
                         {
-                            MemberId = new Guid("6a817924-9c58-4dfd-8737-0c3c2a5d009d"),
+                            MemberId = new Guid("8c59bd75-b7f6-43d5-87c5-c44061095f9c"),
                             Year = 2017,
                             April = true,
                             August = true,
@@ -4679,7 +5364,7 @@ namespace MosqueLife.Server.Data.Migrations
                         },
                         new
                         {
-                            MemberId = new Guid("6a817924-9c58-4dfd-8737-0c3c2a5d009d"),
+                            MemberId = new Guid("8c59bd75-b7f6-43d5-87c5-c44061095f9c"),
                             Year = 2018,
                             April = true,
                             August = true,
@@ -4696,194 +5381,7 @@ namespace MosqueLife.Server.Data.Migrations
                         },
                         new
                         {
-                            MemberId = new Guid("743e47d8-d927-4999-ac3f-87ca70e37025"),
-                            Year = 2015,
-                            April = true,
-                            August = true,
-                            December = true,
-                            February = true,
-                            January = true,
-                            July = true,
-                            June = true,
-                            March = true,
-                            May = true,
-                            November = true,
-                            October = true,
-                            September = true
-                        },
-                        new
-                        {
-                            MemberId = new Guid("1986cf92-661b-4935-8549-b47c80bc9455"),
-                            Year = 2015,
-                            April = true,
-                            August = true,
-                            December = true,
-                            February = true,
-                            January = true,
-                            July = true,
-                            June = true,
-                            March = true,
-                            May = true,
-                            November = true,
-                            October = true,
-                            September = true
-                        },
-                        new
-                        {
-                            MemberId = new Guid("1986cf92-661b-4935-8549-b47c80bc9455"),
-                            Year = 2016,
-                            April = true,
-                            August = true,
-                            December = true,
-                            February = true,
-                            January = true,
-                            July = true,
-                            June = true,
-                            March = true,
-                            May = true,
-                            November = true,
-                            October = true,
-                            September = true
-                        },
-                        new
-                        {
-                            MemberId = new Guid("e4863da0-3e5c-4431-9dfa-551c4ef94c56"),
-                            Year = 2015,
-                            April = true,
-                            August = true,
-                            December = true,
-                            February = true,
-                            January = true,
-                            July = true,
-                            June = true,
-                            March = true,
-                            May = true,
-                            November = true,
-                            October = true,
-                            September = true
-                        },
-                        new
-                        {
-                            MemberId = new Guid("e4863da0-3e5c-4431-9dfa-551c4ef94c56"),
-                            Year = 2016,
-                            April = true,
-                            August = true,
-                            December = true,
-                            February = true,
-                            January = true,
-                            July = true,
-                            June = true,
-                            March = true,
-                            May = true,
-                            November = true,
-                            October = true,
-                            September = true
-                        },
-                        new
-                        {
-                            MemberId = new Guid("e4863da0-3e5c-4431-9dfa-551c4ef94c56"),
-                            Year = 2017,
-                            April = true,
-                            August = true,
-                            December = true,
-                            February = true,
-                            January = true,
-                            July = true,
-                            June = true,
-                            March = true,
-                            May = true,
-                            November = true,
-                            October = true,
-                            September = true
-                        },
-                        new
-                        {
-                            MemberId = new Guid("e4863da0-3e5c-4431-9dfa-551c4ef94c56"),
-                            Year = 2018,
-                            April = true,
-                            August = true,
-                            December = true,
-                            February = true,
-                            January = true,
-                            July = true,
-                            June = true,
-                            March = true,
-                            May = true,
-                            November = true,
-                            October = true,
-                            September = true
-                        },
-                        new
-                        {
-                            MemberId = new Guid("4333d245-b59c-47df-b304-0504151cd170"),
-                            Year = 2015,
-                            April = true,
-                            August = true,
-                            December = true,
-                            February = true,
-                            January = true,
-                            July = true,
-                            June = true,
-                            March = true,
-                            May = true,
-                            November = true,
-                            October = true,
-                            September = true
-                        },
-                        new
-                        {
-                            MemberId = new Guid("4333d245-b59c-47df-b304-0504151cd170"),
-                            Year = 2016,
-                            April = true,
-                            August = true,
-                            December = true,
-                            February = true,
-                            January = true,
-                            July = true,
-                            June = true,
-                            March = true,
-                            May = true,
-                            November = true,
-                            October = true,
-                            September = true
-                        },
-                        new
-                        {
-                            MemberId = new Guid("4333d245-b59c-47df-b304-0504151cd170"),
-                            Year = 2017,
-                            April = true,
-                            August = true,
-                            December = true,
-                            February = true,
-                            January = true,
-                            July = true,
-                            June = true,
-                            March = true,
-                            May = true,
-                            November = true,
-                            October = true,
-                            September = true
-                        },
-                        new
-                        {
-                            MemberId = new Guid("4333d245-b59c-47df-b304-0504151cd170"),
-                            Year = 2018,
-                            April = true,
-                            August = true,
-                            December = true,
-                            February = true,
-                            January = true,
-                            July = true,
-                            June = true,
-                            March = true,
-                            May = true,
-                            November = true,
-                            October = true,
-                            September = true
-                        },
-                        new
-                        {
-                            MemberId = new Guid("4333d245-b59c-47df-b304-0504151cd170"),
+                            MemberId = new Guid("8c59bd75-b7f6-43d5-87c5-c44061095f9c"),
                             Year = 2019,
                             April = true,
                             August = true,
@@ -4900,296 +5398,7 @@ namespace MosqueLife.Server.Data.Migrations
                         },
                         new
                         {
-                            MemberId = new Guid("2a94a07d-ba5d-4c1d-a884-18757698c355"),
-                            Year = 2015,
-                            April = true,
-                            August = true,
-                            December = true,
-                            February = true,
-                            January = true,
-                            July = true,
-                            June = true,
-                            March = true,
-                            May = true,
-                            November = true,
-                            October = true,
-                            September = true
-                        },
-                        new
-                        {
-                            MemberId = new Guid("bfdab30f-4fba-4ff9-b315-49387b7a6372"),
-                            Year = 2015,
-                            April = true,
-                            August = true,
-                            December = true,
-                            February = true,
-                            January = true,
-                            July = true,
-                            June = true,
-                            March = true,
-                            May = true,
-                            November = true,
-                            October = true,
-                            September = true
-                        },
-                        new
-                        {
-                            MemberId = new Guid("bfdab30f-4fba-4ff9-b315-49387b7a6372"),
-                            Year = 2016,
-                            April = true,
-                            August = true,
-                            December = true,
-                            February = true,
-                            January = true,
-                            July = true,
-                            June = true,
-                            March = true,
-                            May = true,
-                            November = true,
-                            October = true,
-                            September = true
-                        },
-                        new
-                        {
-                            MemberId = new Guid("bfdab30f-4fba-4ff9-b315-49387b7a6372"),
-                            Year = 2017,
-                            April = true,
-                            August = true,
-                            December = true,
-                            February = true,
-                            January = true,
-                            July = true,
-                            June = true,
-                            March = true,
-                            May = true,
-                            November = true,
-                            October = true,
-                            September = true
-                        },
-                        new
-                        {
-                            MemberId = new Guid("bfdab30f-4fba-4ff9-b315-49387b7a6372"),
-                            Year = 2018,
-                            April = true,
-                            August = true,
-                            December = true,
-                            February = true,
-                            January = true,
-                            July = true,
-                            June = true,
-                            March = true,
-                            May = true,
-                            November = true,
-                            October = true,
-                            September = true
-                        },
-                        new
-                        {
-                            MemberId = new Guid("fb467bd5-82b5-4ead-91c0-9eb4170a49d4"),
-                            Year = 2015,
-                            April = true,
-                            August = true,
-                            December = true,
-                            February = true,
-                            January = true,
-                            July = true,
-                            June = true,
-                            March = true,
-                            May = true,
-                            November = true,
-                            October = true,
-                            September = true
-                        },
-                        new
-                        {
-                            MemberId = new Guid("4341e472-ce11-4bb5-9627-a8b78fac99f7"),
-                            Year = 2015,
-                            April = true,
-                            August = true,
-                            December = true,
-                            February = true,
-                            January = true,
-                            July = true,
-                            June = true,
-                            March = true,
-                            May = true,
-                            November = true,
-                            October = true,
-                            September = true
-                        },
-                        new
-                        {
-                            MemberId = new Guid("4341e472-ce11-4bb5-9627-a8b78fac99f7"),
-                            Year = 2016,
-                            April = true,
-                            August = true,
-                            December = true,
-                            February = true,
-                            January = true,
-                            July = true,
-                            June = true,
-                            March = true,
-                            May = true,
-                            November = true,
-                            October = true,
-                            September = true
-                        },
-                        new
-                        {
-                            MemberId = new Guid("4341e472-ce11-4bb5-9627-a8b78fac99f7"),
-                            Year = 2017,
-                            April = true,
-                            August = true,
-                            December = true,
-                            February = true,
-                            January = true,
-                            July = true,
-                            June = true,
-                            March = true,
-                            May = true,
-                            November = true,
-                            October = true,
-                            September = true
-                        },
-                        new
-                        {
-                            MemberId = new Guid("4341e472-ce11-4bb5-9627-a8b78fac99f7"),
-                            Year = 2018,
-                            April = true,
-                            August = true,
-                            December = true,
-                            February = true,
-                            January = true,
-                            July = true,
-                            June = true,
-                            March = true,
-                            May = true,
-                            November = true,
-                            October = true,
-                            September = true
-                        },
-                        new
-                        {
-                            MemberId = new Guid("6bb109f5-75b5-4c06-ab9f-3be75d2ee8cb"),
-                            Year = 2015,
-                            April = true,
-                            August = true,
-                            December = true,
-                            February = true,
-                            January = true,
-                            July = true,
-                            June = true,
-                            March = true,
-                            May = true,
-                            November = true,
-                            October = true,
-                            September = true
-                        },
-                        new
-                        {
-                            MemberId = new Guid("6bb109f5-75b5-4c06-ab9f-3be75d2ee8cb"),
-                            Year = 2016,
-                            April = true,
-                            August = true,
-                            December = true,
-                            February = true,
-                            January = true,
-                            July = true,
-                            June = true,
-                            March = true,
-                            May = true,
-                            November = true,
-                            October = true,
-                            September = true
-                        },
-                        new
-                        {
-                            MemberId = new Guid("a577cef9-574f-4b4b-a550-d73ee538cf8e"),
-                            Year = 2015,
-                            April = true,
-                            August = true,
-                            December = true,
-                            February = true,
-                            January = true,
-                            July = true,
-                            June = true,
-                            March = true,
-                            May = true,
-                            November = true,
-                            October = true,
-                            September = true
-                        },
-                        new
-                        {
-                            MemberId = new Guid("a577cef9-574f-4b4b-a550-d73ee538cf8e"),
-                            Year = 2016,
-                            April = true,
-                            August = true,
-                            December = true,
-                            February = true,
-                            January = true,
-                            July = true,
-                            June = true,
-                            March = true,
-                            May = true,
-                            November = true,
-                            October = true,
-                            September = true
-                        },
-                        new
-                        {
-                            MemberId = new Guid("a577cef9-574f-4b4b-a550-d73ee538cf8e"),
-                            Year = 2017,
-                            April = true,
-                            August = true,
-                            December = true,
-                            February = true,
-                            January = true,
-                            July = true,
-                            June = true,
-                            March = true,
-                            May = true,
-                            November = true,
-                            October = true,
-                            September = true
-                        },
-                        new
-                        {
-                            MemberId = new Guid("a577cef9-574f-4b4b-a550-d73ee538cf8e"),
-                            Year = 2018,
-                            April = true,
-                            August = true,
-                            December = true,
-                            February = true,
-                            January = true,
-                            July = true,
-                            June = true,
-                            March = true,
-                            May = true,
-                            November = true,
-                            October = true,
-                            September = true
-                        },
-                        new
-                        {
-                            MemberId = new Guid("a577cef9-574f-4b4b-a550-d73ee538cf8e"),
-                            Year = 2019,
-                            April = true,
-                            August = true,
-                            December = true,
-                            February = true,
-                            January = true,
-                            July = true,
-                            June = true,
-                            March = true,
-                            May = true,
-                            November = true,
-                            October = true,
-                            September = true
-                        },
-                        new
-                        {
-                            MemberId = new Guid("a577cef9-574f-4b4b-a550-d73ee538cf8e"),
+                            MemberId = new Guid("8c59bd75-b7f6-43d5-87c5-c44061095f9c"),
                             Year = 2020,
                             April = true,
                             August = true,
@@ -5206,7 +5415,7 @@ namespace MosqueLife.Server.Data.Migrations
                         },
                         new
                         {
-                            MemberId = new Guid("66176f28-d002-454d-b567-38f41464878f"),
+                            MemberId = new Guid("4385ff43-6e8d-444f-a265-cf8d478744f6"),
                             Year = 2015,
                             April = true,
                             August = true,
@@ -5223,7 +5432,7 @@ namespace MosqueLife.Server.Data.Migrations
                         },
                         new
                         {
-                            MemberId = new Guid("66176f28-d002-454d-b567-38f41464878f"),
+                            MemberId = new Guid("4385ff43-6e8d-444f-a265-cf8d478744f6"),
                             Year = 2016,
                             April = true,
                             August = true,
@@ -5240,7 +5449,7 @@ namespace MosqueLife.Server.Data.Migrations
                         },
                         new
                         {
-                            MemberId = new Guid("66176f28-d002-454d-b567-38f41464878f"),
+                            MemberId = new Guid("4385ff43-6e8d-444f-a265-cf8d478744f6"),
                             Year = 2017,
                             April = true,
                             August = true,
@@ -5257,7 +5466,7 @@ namespace MosqueLife.Server.Data.Migrations
                         },
                         new
                         {
-                            MemberId = new Guid("66176f28-d002-454d-b567-38f41464878f"),
+                            MemberId = new Guid("4385ff43-6e8d-444f-a265-cf8d478744f6"),
                             Year = 2018,
                             April = true,
                             August = true,
@@ -5274,8 +5483,59 @@ namespace MosqueLife.Server.Data.Migrations
                         },
                         new
                         {
-                            MemberId = new Guid("66176f28-d002-454d-b567-38f41464878f"),
+                            MemberId = new Guid("4385ff43-6e8d-444f-a265-cf8d478744f6"),
                             Year = 2019,
+                            April = true,
+                            August = true,
+                            December = true,
+                            February = true,
+                            January = true,
+                            July = true,
+                            June = true,
+                            March = true,
+                            May = true,
+                            November = true,
+                            October = true,
+                            September = true
+                        },
+                        new
+                        {
+                            MemberId = new Guid("4385ff43-6e8d-444f-a265-cf8d478744f6"),
+                            Year = 2020,
+                            April = true,
+                            August = true,
+                            December = true,
+                            February = true,
+                            January = true,
+                            July = true,
+                            June = true,
+                            March = true,
+                            May = true,
+                            November = true,
+                            October = true,
+                            September = true
+                        },
+                        new
+                        {
+                            MemberId = new Guid("4385ff43-6e8d-444f-a265-cf8d478744f6"),
+                            Year = 2021,
+                            April = true,
+                            August = true,
+                            December = true,
+                            February = true,
+                            January = true,
+                            July = true,
+                            June = true,
+                            March = true,
+                            May = true,
+                            November = true,
+                            October = true,
+                            September = true
+                        },
+                        new
+                        {
+                            MemberId = new Guid("cbf11d4f-3fe4-4ec9-ba79-fc5ff2ee2f4b"),
+                            Year = 2015,
                             April = true,
                             August = true,
                             December = true,

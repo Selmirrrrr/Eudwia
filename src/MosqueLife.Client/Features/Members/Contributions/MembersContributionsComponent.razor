@@ -8,7 +8,9 @@
     <MudItem xs="12" md="12">
         <MudTable Items="@_memebersContributions" Style="" Hover="true" Dense="false" Striped="true" T="MemebersContributionsViewModel">
             <ToolBarContent>
-                <MudText Typo="Typo.h6">Cotisations</MudText>
+                <MudText Typo="Typo.h6">Ajouter une année</MudText>
+                <MudSpacer/>
+                <MudNumericField Class="mt-0" @bind-Value="@YearToAdd" Required="true" Label="Année" HideSpinButtons="true" Variant="Variant.Outlined" Adornment="Adornment.End" AdornmentIcon="@Icons.Material.Filled.Add" OnAdornmentClick="AddYear"></MudNumericField>
             </ToolBarContent>
             <HeaderContent>
                 <MudTh>Année</MudTh>
@@ -65,12 +67,6 @@
                 </MudTd>
             </RowTemplate>
         </MudTable>
-    </MudItem>
-    <MudItem xs="12" md="12">
-        <MudPaper Class="d-flex flex-row-reverse py-2 px-1">
-            <MudNumericField @bind-Value="@YearToAdd" Required="true" Label="Année" Variant="Variant.Outlined"></MudNumericField>
-            <MudIconButton Icon="@Icons.Material.Outlined.Add" OnClick="() => AddYear()"/>
-        </MudPaper>
     </MudItem>
 </MudGrid>
 
@@ -129,7 +125,7 @@
                 model.December = !model.December;
                 break;
         }
-        
+
         try
         {
             var result = await _httpClient.PostAsJsonAsync($"api/members/{MemberId}/contributions/{model.Year}/{month}", value);
@@ -155,8 +151,8 @@
             _snackbar.Add("Année déjà existante", Severity.Warning);
             return;
         }
-        
-        _memebersContributions.Add(new MemebersContributionsViewModel
+
+        _memebersContributions.Insert(0, new MemebersContributionsViewModel
         {
             Year = YearToAdd,
             January = false,

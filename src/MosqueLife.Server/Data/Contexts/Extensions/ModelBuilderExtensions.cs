@@ -284,7 +284,7 @@ public static class ModelBuilderExtensions
                 PaymentType = _faker.Random.Enum<PaymentType>(),
                 MemberId = member.Id,
                 Amount = _faker.Random.Decimal(0, 1000),
-                PaymentDate = _faker.Date.Past(10)
+                PaymentDate = DateTime.SpecifyKind(_faker.Date.Past(10), DateTimeKind.Utc)
             }).ToList());
 
             subscriptions.AddRange(Enumerable.Range(2015, _faker.Random.Int(0, 7)).Select(s => new SubscriptionPaid

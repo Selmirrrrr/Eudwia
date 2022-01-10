@@ -13,6 +13,8 @@ public class Payment
     public Guid MemberId { get; set; }
 
     public Member Member { get; set; } = default!;
+    
+    public bool IsDeleted { get; set; }
 
     public PaymentType PaymentType { get; set; }
 
