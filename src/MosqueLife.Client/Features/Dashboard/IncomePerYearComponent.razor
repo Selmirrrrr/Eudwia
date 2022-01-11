@@ -1,0 +1,55 @@
+@using MosqueLife.Shared.Features.Dashboard
+@using MosqueLife.Shared.Enums
+@using System.Linq
+@using Color = ApexCharts.Color
+@inject HttpClient _httpClient
+
+@if (_stats.Any())
+{
+    <ApexChart TItem="IncomePerYearViewModel" Title="Revenus" Options="_options">
+        <ApexPointSeries TItem="IncomePerYearViewModel"
+                         Items="_stats"
+                         SeriesType="@SeriesType.Area"
+                         Name="Cotisations"
+                         XValue="@(e => e.Year)"
+                         YAggregate="@(e => e.Where(a => a.PaymentType == PaymentType.Membership).Sum(a => a.Amount))"
+                         />
+        <ApexPointSeries TItem="IncomePerYearViewModel"
+                         Items="_stats"
+                         SeriesType="@SeriesType.Area"
+                         Name="Dons"
+                         XValue="@(e => e.Year)"
+                         YAggregate="@(e => e.Where(a => a.PaymentType == PaymentType.Donation).Sum(a => a.Amount))"
+                         />
+        <ApexPointSeries TItem="IncomePerYearViewModel"
+                         Items="_stats"
+                         SeriesType="@SeriesType.Area"
+                         Name="Autres"
+                         XValue="@(e => e.Year)"
+                         YAggregate="@(e => e.Where(a => a.PaymentType == PaymentType.Other).Sum(a => a.Amount))"
+                         />
+    </ApexChart>
+}
+
+@code {
+    private List<IncomePerYearViewModel> _stats = new();
+
+    private ApexChartOptions<IncomePerYearViewModel> _options = new()
+    {
+        Chart = new Chart
+        {
+            Stacked = true,
+        },
+        Yaxis = new List<YAxis> { new YAxis { Labels = new AxisLabels { Formatter = @"function (value) { return Number(value).toLocaleString() }" } } }
+    };
+
+    protected override async Task OnInitializedAsync()
+    {
+        _stats = await _httpClient.GetFromJsonAsync<List<IncomePerYearViewModel>>($"api/dashboard/income-per-year") ?? new List<IncomePerYearViewModel>();
+    }
+    
+    private string GetYAxisLabel(decimal value)
+    {
+        return $"{value:C}";
+    }
+}

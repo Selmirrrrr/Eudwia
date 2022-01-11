@@ -21,8 +21,8 @@ public class CountriesListEndpoint : ControllerBase
 
     [Authorize]
     [HttpGet("countries")]
-    [ProducesResponseType(typeof(CountriesListViewModel), StatusCodes.Status200OK)]
-    public async Task<ActionResult<CountriesListViewModel>> Handle()
+    [ProducesResponseType(typeof(List<CountriesListViewModel>), StatusCodes.Status200OK)]
+    public async Task<ActionResult<List<CountriesListViewModel>>> Handle()
     {
         var countries = await _applicationDbContext.Countries.Select(m => new CountriesListViewModel
         {
