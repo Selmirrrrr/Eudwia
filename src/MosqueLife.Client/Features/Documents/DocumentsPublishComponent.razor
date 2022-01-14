@@ -1,0 +1,101 @@
+﻿@page "/documents"
+@page "/documents/publish"
+@using Color = MudBlazor.Color
+@using Align = MudBlazor.Align
+@using System.Net.Http.Headers
+@inject HttpClient _httpClient
+@inject ISnackbar _snackbar
+@inject AuthenticationStateProvider _getAuthenticationStateAsync
+@inject IJSRuntime _jsRuntime
+
+@attribute [Authorize]
+<MudText Typo="Typo.h5" Color="Color.Primary" Class="mb-4">Génération de courrier</MudText>
+<MudGrid>
+    <MudItem xs="12" sm="12" md="12">
+        <MudCard>
+            <MudCardContent>
+                <MudText Typo="Typo.h6" Align="Align.Left">Marche à suivre</MudText>
+                <br/>
+                <MudText Typo="Typo.body1" Align="Align.Justify">
+                    <ul>
+                        <li>1. Préparer le courrier dans Word au format .doc ou .docx</li>
+                        <li>2. Utiliser les variables ci-dessous à la place des données personnelles du membre</li>
+                        <li>3. Cliquer sur le bouton "Générer un courrier" et sélectionner votre modèle</li>
+                        <li>4. Envoyer le courrier</li>
+                    </ul>
+                </MudText>
+                <br/>
+                <MudText Typo="Typo.h6" Align="Align.Left">Variables</MudText>
+                <br/>
+                <ul>
+                    <MudText Align="Align.Left">
+                        <li> - Prénom - <b>{{FirstName}}</b></li>
+                    </MudText>
+                    <MudText Align="Align.Left">
+                        <li> - Nom - <b>{{LastName}}</b></li>
+                    </MudText>
+                    <MudText Align="Align.Left">
+                        <li> - Adresse Ligne 1 - <b>{{StreetLine1}}</b></li>
+                    </MudText>
+                    <MudText Align="Align.Left">
+                        <li> - Adresse ligne 2 - <b>{{StreetLine2}}</b></li>
+                    </MudText>
+                    <MudText Align="Align.Left">
+                        <li> - Numéro d'immeuble/maison - <b>{{HouseNumber}}</b></li>
+                    </MudText>
+                    <MudText Align="Align.Left">
+                        <li> - Ville - <b>{{City}}</b></li>
+                    </MudText>
+                    <MudText Align="Align.Left">
+                        <li> - Code postal - <b>{{ZipCode}}</b></li>
+                    </MudText>
+                    <MudText Align="Align.Left">
+                        <li> - Pays - <b>{{Country}}</b></li>
+                    </MudText>
+                    <MudText Align="Align.Left">
+                        <li> - Canton - <b>{{State}}</b></li>
+                    </MudText>
+                    <MudText Align="Align.Left">
+                        <li> - Date du jour - <b>{{DateTexte}}</b></li>
+                    </MudText>
+                </ul>
+            </MudCardContent>
+        </MudCard>
+    </MudItem>
+    <MudItem xs="12" md="12">
+        <MudPaper Class="d-flex flex-row-reverse py-2 px-1">
+            <InputFile id="docInput" OnChange="UploadFiles" hidden accept=".doc, .docx"/>
+            <MudButton HtmlTag="label"
+                       Variant="Variant.Filled"
+                       Color="Color.Primary"
+                       StartIcon="@Icons.Filled.CloudUpload"
+                       for="docInput">
+                Générer un courrier
+            </MudButton>
+        </MudPaper>
+    </MudItem>
+</MudGrid>
+
+@code {
+
+    private async Task UploadFiles(InputFileChangeEventArgs e)
+    {
+        var file = e.GetMultipleFiles().FirstOrDefault();
+        if (file == null)
+        {
+            _snackbar.Add("Impossible de lire le fichier sélectionné, veuillez réessayer", Severity.Error);
+            return;
+        }
+
+        using var form = new MultipartFormDataContent();
+        using var fileContent = new StreamContent(file.OpenReadStream());
+        fileContent.Headers.ContentType = MediaTypeHeaderValue.Parse("multipart/form-data");
+        form.Add(fileContent, "file", file.Name);
+
+        var response = await _httpClient.PostAsync($"/api/documents/publish", form);
+        using var streamRef = new DotNetStreamReference(stream: await response.Content.ReadAsStreamAsync());
+
+        await _jsRuntime.InvokeVoidAsync("downloadFileFromStream", "courrier.pdf", streamRef);
+    }
+
+}
