@@ -63,26 +63,37 @@
         </MudCard>
     </MudItem>
     <MudItem xs="12" md="12">
+
         <MudPaper Class="d-flex flex-row-reverse py-2 px-1">
-            <InputFile id="docInput" OnChange="UploadFiles" hidden accept=".doc, .docx"/>
-            <MudButton HtmlTag="label"
-                       Variant="Variant.Filled"
-                       Color="Color.Primary"
-                       StartIcon="@Icons.Filled.CloudUpload"
-                       for="docInput">
-                Générer un courrier
-            </MudButton>
+            @if (_loading)
+            {
+                <MudProgressLinear Color="Color.Primary" Indeterminate="true" Class="my-7"/>
+            }
+            else
+            {
+                <InputFile id="docInput" OnChange="UploadFiles" hidden accept=".doc, .docx"/>
+                <MudButton HtmlTag="label"
+                           Variant="Variant.Filled"
+                           Color="Color.Primary"
+                           StartIcon="@Icons.Filled.CloudUpload"
+                           for="docInput">
+                    Générer un courrier
+                </MudButton>
+            }
         </MudPaper>
     </MudItem>
 </MudGrid>
 
 @code {
+    private bool _loading;
 
     private async Task UploadFiles(InputFileChangeEventArgs e)
     {
+        _loading = true;
         var file = e.GetMultipleFiles().FirstOrDefault();
         if (file == null)
         {
+            _loading = false;
             _snackbar.Add("Impossible de lire le fichier sélectionné, veuillez réessayer", Severity.Error);
             return;
         }
@@ -96,6 +107,7 @@
         using var streamRef = new DotNetStreamReference(stream: await response.Content.ReadAsStreamAsync());
 
         await _jsRuntime.InvokeVoidAsync("downloadFileFromStream", "courrier.pdf", streamRef);
+        _loading = false;
     }
 
 }
