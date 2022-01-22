@@ -29,9 +29,11 @@ public class Program
         builder.Services.AddScoped<TokenAuthenticationStateProvider>();
         builder.Services.AddScoped<AuthenticationStateProvider>(provider => provider.GetRequiredService<TokenAuthenticationStateProvider>());
         builder.Services.AddSingleton<MudTheme, MudBlazorAdminDashboard>();
-        
-        CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("fr-CH");
-        CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo("fr-CH");
+
+        var culture = new CultureInfo("fr-CH");
+        culture.NumberFormat.NumberDecimalSeparator = ".";
+        CultureInfo.DefaultThreadCurrentCulture = culture;
+        CultureInfo.DefaultThreadCurrentUICulture = culture;
 
         await builder.Build().RunAsync();
     }

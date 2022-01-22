@@ -13,9 +13,9 @@ namespace MosqueLife.Server.Features.Account.Details;
 [Produces(MediaTypeNames.Application.Json)]
 public class AccountDetailsEndpoint : ControllerBase
 {
-    private readonly UserManager<ApplicationUser> _userManager;
+    private readonly UserManager<Member> _userManager;
 
-    public AccountDetailsEndpoint(UserManager<ApplicationUser> userManager)
+    public AccountDetailsEndpoint(UserManager<Member> userManager)
     {
         _userManager = userManager;
     }

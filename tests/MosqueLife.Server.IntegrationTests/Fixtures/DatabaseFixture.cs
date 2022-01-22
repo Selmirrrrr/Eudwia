@@ -38,7 +38,7 @@ namespace MosqueLife.Server.IntegrationTests.Fixtures
 
         protected override void ConfigureWebHost(IWebHostBuilder builder)
         {
-            builder.ConfigureTestServices(async services =>
+            builder.ConfigureTestServices((Action<IServiceCollection>)(async services =>
             {
                 services.BuildServiceProvider();
                 services.Replace(new ServiceDescriptor(typeof(IContextConfiguration), new TestContextConfiguration(ContainerFixture.ConnectionString)));
@@ -51,12 +51,18 @@ namespace MosqueLife.Server.IntegrationTests.Fixtures
 
                 context.Database.Migrate();
 
-                var userManager = scopedServices.GetRequiredService<UserManager<ApplicationUser>>();
+                var userManager = scopedServices.GetRequiredService<UserManager<Member>>();
 
-                var newUser = new ApplicationUser { UserName = TestEmail, Email = TestEmail, FirstName = "Test", LastName = "Example" };
+                var newUser = new Member 
+                { 
+                    UserName = TestEmail, 
+                    Email = TestEmail, 
+                    FirstName = "Test", 
+                    LastName = "Example"
+                };
 
                 await userManager.CreateAsync(newUser, TestPassword);
-            });
+            }));
         }
 
         public async Task<HttpClient> CreateAuthorizedClient()

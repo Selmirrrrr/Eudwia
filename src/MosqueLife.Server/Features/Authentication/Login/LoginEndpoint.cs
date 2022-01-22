@@ -16,11 +16,11 @@ namespace MosqueLife.Server.Features.Authentication.Login;
 [Produces(MediaTypeNames.Application.Json)]
 public class LoginEndpoint : ControllerBase
 {
-    private readonly UserManager<ApplicationUser> _userManager;
+    private readonly UserManager<Member> _userManager;
     private readonly IConfiguration _configuration;
-    private readonly SignInManager<ApplicationUser> _signInManager;
+    private readonly SignInManager<Member> _signInManager;
 
-    public LoginEndpoint(UserManager<ApplicationUser> userManager, IConfiguration configuration, SignInManager<ApplicationUser> signInManager)
+    public LoginEndpoint(UserManager<Member> userManager, IConfiguration configuration, SignInManager<Member> signInManager)
     {
         _userManager = userManager;
         _configuration = configuration;

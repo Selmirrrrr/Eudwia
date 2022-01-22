@@ -72,7 +72,7 @@ public class AccountDetailsEndpointTests
             LastName = "sdfsd"
         });
 
-        using var userManager = _databaseFixture.Services.CreateScope().ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+        using var userManager = _databaseFixture.Services.CreateScope().ServiceProvider.GetRequiredService<UserManager<Member>>();
         var userId = (await userManager.FindByEmailAsync(email)).Id;
         
         // Act

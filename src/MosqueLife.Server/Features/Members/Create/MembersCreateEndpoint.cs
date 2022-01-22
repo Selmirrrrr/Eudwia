@@ -1,5 +1,6 @@
 ﻿using System.Net.Mime;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using MosqueLife.Server.Data;
 using MosqueLife.Server.Data.Contexts;
@@ -14,17 +15,19 @@ namespace MosqueLife.Server.Features.Members.Create;
 public class MembersCreateEndpoint : ControllerBase
 {
     private readonly ApplicationDbContext _applicationDbContext;
+    private readonly UserManager<Member> _userManager;
 
-    public MembersCreateEndpoint(ApplicationDbContext applicationDbContext)
+    public MembersCreateEndpoint(ApplicationDbContext applicationDbContext, UserManager<Member> userManager)
     {
         _applicationDbContext = applicationDbContext;
+        _userManager = userManager;
     }
 
     [Authorize]
     [HttpPost(Routes.Members.CreateMember)]
     [ProducesResponseType(typeof(Guid), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult<Guid>> Handle([FromRoute] Guid memberId, [FromBody] MembersCreateCommand command)
+    public async Task<ActionResult<Guid>> Handle([FromBody] MembersCreateCommand command)
     {
         var birthDate = command.BirthDate ?? new DateTime(1900, 1, 1);
         var memberSince = command.MemberSince ?? new DateTime(1900, 1, 1);
@@ -49,8 +52,7 @@ public class MembersCreateEndpoint : ControllerBase
             SubscriptionsPaid = {new SubscriptionPaid {Year = DateTime.Now.Year}}
         };
 
-        await _applicationDbContext.Members.AddAsync(member);
-        await _applicationDbContext.SaveChangesAsync();
+        await _userManager.CreateAsync(member, Guid.NewGuid().ToString());
 
         return Ok(member.Id);
     }

@@ -26,7 +26,7 @@ public class AccountUpdateEndpointTests
         // Arrange
         var client = await _databaseFixture.CreateAuthorizedClient();
 
-        using var userManager = _databaseFixture.Services.CreateScope().ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+        using var userManager = _databaseFixture.Services.CreateScope().ServiceProvider.GetRequiredService<UserManager<Member>>();
         var userId = (await userManager.FindByEmailAsync(DatabaseFixture.TestEmail)).Id;
         
         // Act

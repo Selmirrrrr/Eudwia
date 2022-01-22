@@ -7,16 +7,15 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Infrastructure;
 
 namespace MosqueLife.Server.Data.Contexts;
 
-public class ApplicationDbContext : IdentityDbContext<ApplicationUser, IdentityRole<Guid>, Guid>
+public class ApplicationDbContext : IdentityDbContext<Member, IdentityRole<Guid>, Guid>
 {
-    private readonly IConfiguration _configuration;
     private readonly ILoggerFactory _loggerFactory;
     private readonly IContextConfiguration _config;
 
-    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options, ILoggerFactory loggerFactory, IConfiguration configuration, IContextConfiguration config)
+    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options, ILoggerFactory loggerFactory, IContextConfiguration config)
         : base(options)
     {
-        (_loggerFactory, _configuration) = (loggerFactory, configuration);
+        _loggerFactory = loggerFactory;
         _config = config;
     }
 

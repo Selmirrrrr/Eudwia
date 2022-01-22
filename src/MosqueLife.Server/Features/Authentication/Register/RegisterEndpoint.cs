@@ -12,9 +12,9 @@ namespace MosqueLife.Server.Features.Authentication.Register;
 [Produces(MediaTypeNames.Application.Json)]
 public class RegisterEndpoint : ControllerBase
 {
-    private readonly UserManager<ApplicationUser> _userManager;
+    private readonly UserManager<Member> _userManager;
 
-    public RegisterEndpoint(UserManager<ApplicationUser> userManager)
+    public RegisterEndpoint(UserManager<Member> userManager)
     {
         _userManager = userManager;
     }
@@ -25,7 +25,13 @@ public class RegisterEndpoint : ControllerBase
     [ProducesResponseType(typeof(RegisterResult), StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<RegisterResult>> HandleAsync([FromBody] RegisterModel model)
     {
-        var newUser = new ApplicationUser { UserName = model.Email, Email = model.Email, FirstName = model.FirstName, LastName = model.LastName };
+        var newUser = new Member 
+        { 
+            UserName = model.Email, 
+            Email = model.Email, 
+            FirstName = model.FirstName, 
+            LastName = model.LastName
+        };
 
         var result = await _userManager.CreateAsync(newUser, model.Password);
 

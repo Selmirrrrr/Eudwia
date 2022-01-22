@@ -13,9 +13,9 @@ namespace MosqueLife.Server.Features.Account.Update;
 [Produces(MediaTypeNames.Application.Json)]
 public class AccountUpdateEndpoint : ControllerBase
 {
-    private readonly UserManager<ApplicationUser> _userManager;
+    private readonly UserManager<Member> _userManager;
 
-    public AccountUpdateEndpoint(UserManager<ApplicationUser> userManager)
+    public AccountUpdateEndpoint(UserManager<Member> userManager)
     {
         _userManager = userManager;
     }

@@ -45,7 +45,7 @@ public class StatsEndpoint : ControllerBase
                                              s.November ||
                                              s.December)));
         result.TotalRevenue = await _applicationDbContext.Payments.Where(p => p.PaymentDate.Year == year).SumAsync(p => p.Amount);
-        result.AverageAge = (int)(await _applicationDbContext.Members.AverageAsync(m => year - m.BirthDate.Year));
+        result.AverageAge = await _applicationDbContext.Members.AverageAsync(m => year - m.BirthDate.Year);
 
         return Ok(result);
     }

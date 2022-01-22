@@ -1,12 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Identity;
 using MosqueLife.Shared.Enums;
 
 namespace MosqueLife.Server.Data;
 
-public class Member
+public class Member : IdentityUser<Guid>
 {
-    public Guid Id { get; set; }
-
     [Required]
     [MinLength(2)]
     [MaxLength(100)]
@@ -47,13 +46,9 @@ public class Member
     [MaxLength(100)]
     public string? State { get; set; } = string.Empty;
 
-    public Guid CountryId { get; set; }
+    public Guid CountryId { get; set; } = Guid.Parse("20ea933e-023a-4e5b-997e-b9bad3e54cd2");
 
     public Country Country { get; set; } = default!;
-
-    public string? PhoneNumber { get; set; }
-
-    public string? Email { get; set; }
 
     public Language Language { get; set; }
 

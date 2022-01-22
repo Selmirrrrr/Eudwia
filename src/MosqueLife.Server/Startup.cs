@@ -25,10 +25,10 @@ public class Startup
     // This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices(IServiceCollection services)
     {
-        services.AddControllers().AddFluentValidation(s => 
-        { 
-            s.RegisterValidatorsFromAssemblyContaining<Language>(); 
-            s.DisableDataAnnotationsValidation = true; 
+        services.AddControllers().AddFluentValidation(s =>
+        {
+            s.RegisterValidatorsFromAssemblyContaining<Language>();
+            s.DisableDataAnnotationsValidation = false;
         });
         services.AddSwaggerGen(c =>
         {
@@ -75,7 +75,18 @@ public class Startup
 
 
         //configure identity
-        services.AddIdentity<ApplicationUser, IdentityRole<Guid>>()
+        services.Configure<IdentityOptions>(options =>
+        {
+            // Password settings.
+            options.Password.RequireDigit = true;
+            options.Password.RequireLowercase = false;
+            options.Password.RequireNonAlphanumeric = false;
+            options.Password.RequireUppercase = false;
+            options.Password.RequiredLength = 8;
+            options.Password.RequiredUniqueChars = 1;
+        });
+
+        services.AddIdentity<Member, IdentityRole<Guid>>()
             .AddEntityFrameworkStores<ApplicationDbContext>()
             .AddDefaultTokenProviders();
 
