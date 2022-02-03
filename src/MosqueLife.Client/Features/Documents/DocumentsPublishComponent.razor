@@ -106,7 +106,7 @@
         var response = await _httpClient.PostAsync($"/api/documents/publish", form);
         using var streamRef = new DotNetStreamReference(stream: await response.Content.ReadAsStreamAsync());
 
-        await _jsRuntime.InvokeVoidAsync("downloadFileFromStream", "courrier.pdf", streamRef);
+        await _jsRuntime.InvokeVoidAsync("downloadFileFromStream", "courrier.docx", streamRef);
         _loading = false;
     }
 

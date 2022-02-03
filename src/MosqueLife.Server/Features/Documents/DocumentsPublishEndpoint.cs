@@ -1,12 +1,12 @@
 ﻿using System.Net.Mime;
 using Microsoft.AspNetCore.Mvc;
 using MosqueLife.Server.Data.Contexts;
-using PdfSharpCore.Pdf;
-using PdfSharpCore.Pdf.IO;
-using Spire.Doc;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
-using Document = Spire.Doc.Document;
+using Wordroller;
+using OpenXmlPowerTools;
+using SharpDocx;
+using MosqueLife.Shared.Features.Authentication.Login;
 
 namespace MosqueLife.Server.Features.Documents;
 
@@ -30,56 +30,74 @@ public class DocumentsPublishEndpoint : ControllerBase
             !string.IsNullOrWhiteSpace(m.StreetLine1) &&
             !string.IsNullOrWhiteSpace(m.City) &&
             !string.IsNullOrWhiteSpace(m.ZipCode) &&
-            !string.IsNullOrWhiteSpace(m.HouseNumber)).Select(m => new
+            !string.IsNullOrWhiteSpace(m.HouseNumber)).Select(m => new DocumentViewModel
+            {
+                FirstName = m.FirstName,
+                LastName = m.LastName,
+                StreetLine1 = m.StreetLine1,
+                HouseNumber = m.HouseNumber,
+                City = m.City,
+                ZipCode = m.ZipCode,
+                Country = m.Country.Name,
+                State = m.State
+            }).AsAsyncEnumerable();
+
+
+        var path = Path.GetTempFileName();
+        using (var fileStream = new FileStream(path, FileMode.Create))
         {
-            m.FirstName,
-            m.LastName,
-            m.StreetLine1,
-            m.StreetLine2,
-            m.HouseNumber,
-            m.City,
-            m.ZipCode,
-            Country = m.Country.Name,
-            m.State
-        }).AsAsyncEnumerable();
+            await file.CopyToAsync(fileStream);
+        }
 
-        var pdfs = new List<Stream>();
-
+        var documents = new List<MemoryStream>();
         await foreach (var member in members)
         {
-            using var document = new Document();
-            document.LoadFromStream(file.OpenReadStream(), FileFormat.Auto);
-            document.Replace("{{FirstName}}", member.FirstName ?? string.Empty, false, true);
-            document.Replace("{{LastName}}", member.LastName ?? string.Empty, false, false);
-            document.Replace("{{StreetLine1}}", member.StreetLine1 ?? string.Empty, false, false);
-            document.Replace("{{StreetLine2}}", member.StreetLine2 ?? string.Empty, false, false);
-            document.Replace("{{HouseNumber}}", member.HouseNumber ?? string.Empty, false, false);
-            document.Replace("{{City}}", member.City ?? string.Empty, false, false);
-            document.Replace("{{ZipCode}}", member.ZipCode ?? string.Empty, false, false);
-            document.Replace("{{Country}}", member.Country ?? string.Empty, false, false);
-            document.Replace("{{State}}", member.State ?? string.Empty, false, false);
-            document.Replace("{{DateTexte}}", DateTime.Now.ToString("dd MMMM yyyy"), false, false);
-            var fileMemoryStream = new MemoryStream();
-            document.SaveToStream(fileMemoryStream, FileFormat.PDF);
-            pdfs.Add(fileMemoryStream);
+            var document = DocumentFactory.Create(path, member, forceCompile: false);
+            var doc = document.Generate();
+
+            documents.Add(doc);
         }
 
-        var outputDocument = new PdfDocument();
+        System.IO.File.Delete(path);
 
-        foreach (var pdfPath in pdfs)
-        {
-            var inputDocument = PdfReader.Open(pdfPath, PdfDocumentOpenMode.Import);
-            var count = inputDocument.PageCount;
-            for (var idx = 0; idx < count; idx++)
-            {
-                var page = inputDocument.Pages[idx];
-                outputDocument.AddPage(page);
-            }
-        }
-
-        var ms = new MemoryStream();
-        outputDocument.Save(ms);
+        var ms = MergeDocuments(documents);
         ms.Position = 0;
-        return File(ms, MediaTypeNames.Application.Pdf, "document.pdf");
+        return File(ms, file.ContentType);
     }
+
+    private static Stream MergeDocuments(List<MemoryStream> files)
+    {
+        var outputFileStream = new MemoryStream();
+        var sources = new List<Source>();
+
+        foreach (var file in files)
+        {
+            var openXmlPowerToolsDocument = new OpenXmlPowerToolsDocument(Guid.NewGuid().ToString(), file);
+            var document = new WmlDocument(openXmlPowerToolsDocument);
+            var source = new Source(document, true);
+            sources.Add(source);
+        }
+
+        MergeXmlDocuments(outputFileStream, sources);
+        return outputFileStream;
+    }
+
+    private static void MergeXmlDocuments(Stream outStream, List<Source> sources)
+    {
+        WmlDocument buildDocument = DocumentBuilder.BuildDocument(sources);
+        buildDocument.WriteByteArray(outStream);
+    }
+}
+
+public class DocumentViewModel
+{
+    public string FirstName { get; set; } = string.Empty;
+    public string LastName { get; set; } = string.Empty;
+    public string StreetLine1 { get; set; } = string.Empty;
+    public string HouseNumber { get; set; } = string.Empty;
+    public string City { get; set; } = string.Empty;
+    public string ZipCode { get; set; } = string.Empty;
+    public string Country { get; set; } = string.Empty;
+    public string? State { get; set; } = string.Empty;
+    public string DateTexte { get; set; } = DateTime.Now.ToShortDateString();
 }
