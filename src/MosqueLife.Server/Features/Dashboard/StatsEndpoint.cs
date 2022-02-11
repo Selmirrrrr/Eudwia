@@ -14,11 +14,11 @@ namespace MosqueLife.Server.Features.Dashboard;
 [Produces(MediaTypeNames.Application.Json)]
 public class StatsEndpoint : ControllerBase
 {
-    private readonly ApplicationDbContext _applicationDbContext;
+    private readonly ApplicationDbContext _context;
 
     public StatsEndpoint(ApplicationDbContext applicationDbContext)
     {
-        _applicationDbContext = applicationDbContext;
+        _context = applicationDbContext;
     }
 
     [Authorize]
@@ -29,9 +29,9 @@ public class StatsEndpoint : ControllerBase
         var year = DateTime.UtcNow.Year;
 
         var result = new StatsViewModel();
-        result.MembersCount = await _applicationDbContext.Members.CountAsync();
-        result.PaidMembersCount = await _applicationDbContext.Members.CountAsync(m 
-            => m.SubscriptionsPaid.Any(s => s.Year == year && 
+        result.MembersCount = await _context.Members.CountAsync();
+        result.PaidMembersCount = await _context.Members.CountAsync(
+            m => m.SubscriptionsPaid.Any(s => s.Year == year && 
                                             (s.January || 
                                              s.February ||
                                              s.March ||
@@ -44,8 +44,11 @@ public class StatsEndpoint : ControllerBase
                                              s.October ||
                                              s.November ||
                                              s.December)));
-        result.TotalRevenue = await _applicationDbContext.Payments.Where(p => p.PaymentDate.Year == year).SumAsync(p => p.Amount);
-        result.AverageAge = await _applicationDbContext.Members.AverageAsync(m => year - m.BirthDate.Year);
+        result.TotalRevenue = await _context.Payments.Where(p => p.PaymentDate.Year == year).SumAsync(p => p.Amount);
+        result.TopDonator = (await _context.Members.OrderByDescending(m => m.Payments.Where(p => p.PaymentType == Shared.Enums.PaymentType.Donation).Sum(p => p.Amount))
+                                                   .Take(1)
+                                                   .Select(m => new { Name = $"{m.FirstName} {m.LastName}" })
+                                                   .FirstAsync()).Name;
 
         return Ok(result);
     }
