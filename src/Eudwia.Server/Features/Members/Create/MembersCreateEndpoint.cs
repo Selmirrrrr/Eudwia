@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Eudwia.Server.Data;
 using Eudwia.Server.Data.Contexts;
 using Eudwia.Shared;
+using Eudwia.Shared.Authorization;
 using Eudwia.Shared.Features.Members.Create;
 
 namespace Eudwia.Server.Features.Members.Create;
@@ -23,7 +24,7 @@ public class MembersCreateEndpoint : ControllerBase
         _userManager = userManager;
     }
 
-    [Authorize]
+    [Authorize(Policy = Policies.IsAdmin)]
     [HttpPost(Routes.Members.CreateMember)]
     [ProducesResponseType(typeof(Guid), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]

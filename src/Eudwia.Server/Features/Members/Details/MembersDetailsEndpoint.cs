@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Eudwia.Server.Data.Contexts;
 using Eudwia.Shared;
+using Eudwia.Shared.Authorization;
+using Eudwia.Shared.Extensions;
 using Eudwia.Shared.Features.Members.Details;
 
 namespace Eudwia.Server.Features.Members.Details;
@@ -13,20 +15,29 @@ namespace Eudwia.Server.Features.Members.Details;
 [Produces(MediaTypeNames.Application.Json)]
 public class MembersDetailsEndpoint : ControllerBase
 {
+    private readonly IAuthorizationService _authorizationService;
     private readonly ApplicationDbContext _applicationDbContext;
 
-    public MembersDetailsEndpoint(ApplicationDbContext applicationDbContext)
+    public MembersDetailsEndpoint(IAuthorizationService authorizationService, ApplicationDbContext applicationDbContext)
     {
+        _authorizationService = authorizationService;
         _applicationDbContext = applicationDbContext;
     }
 
-    [Authorize]
+    [Authorize(Policy = Policies.IsAdmin)]
     [HttpGet(Routes.Members.GetMember)]
     [ProducesResponseType(typeof(MembersDetailsViewModel), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult<MembersDetailsViewModel>> Handle([FromRoute] Guid memberId)
     {
         if (!_applicationDbContext.Members.Any(m => m.Id == memberId)) return NotFound(memberId);
+
+        if (!User.IsInRoleAdmin() && !User.IsInRoleSuperAdmin())
+        {
+            var authorizationResult = await _authorizationService.AuthorizeAsync(User, memberId, Policies.IsCurrentdUser);
+            if (!authorizationResult.Succeeded)
+                return Forbid();
+        }
         
         var member = await _applicationDbContext.Members.Select(m => new MembersDetailsViewModel
         {

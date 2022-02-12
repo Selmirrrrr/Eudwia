@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Eudwia.Server.Data.Contexts;
 using Eudwia.Shared;
+using Eudwia.Shared.Authorization;
 using Eudwia.Shared.Features.Members.Details;
 using Eudwia.Shared.Features.Members.Update;
 
@@ -11,6 +12,7 @@ namespace Eudwia.Server.Features.Members.Update;
 
 [Route("api")]
 [ApiController]
+[Authorize(Policy = Policies.IsAdmin)]
 [Produces(MediaTypeNames.Application.Json)]
 public class MembersUpdateEndpoint : ControllerBase
 {

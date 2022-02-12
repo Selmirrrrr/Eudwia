@@ -1,15 +1,15 @@
 ﻿using System.Net.Mime;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Eudwia.Server.Data.Contexts;
-using Eudwia.Shared.Features.Members.Details;
+using Eudwia.Shared.Authorization;
 using Eudwia.Shared.Features.Members.Payments;
 
 namespace Eudwia.Server.Features.Members.Payments;
 
 [Route("api")]
 [ApiController]
+[Authorize(Policy = Policies.IsAdmin)]
 [Produces(MediaTypeNames.Application.Json)]
 public class MemebersPaymentsDeleteEndpoint : ControllerBase
 {

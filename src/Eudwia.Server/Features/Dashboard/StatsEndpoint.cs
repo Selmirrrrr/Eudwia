@@ -1,16 +1,16 @@
 ﻿using System.Net.Mime;
-using Bogus.DataSets;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Eudwia.Server.Data.Contexts;
-using Eudwia.Shared.Features.Countries.List;
+using Eudwia.Shared.Authorization;
 using Eudwia.Shared.Features.Dashboard;
 
 namespace Eudwia.Server.Features.Dashboard;
 
 [Route("api")]
 [ApiController]
+[Authorize(Policy = Policies.IsAdmin)]
 [Produces(MediaTypeNames.Application.Json)]
 public class StatsEndpoint : ControllerBase
 {
@@ -21,7 +21,6 @@ public class StatsEndpoint : ControllerBase
         _context = applicationDbContext;
     }
 
-    [Authorize]
     [HttpGet("dashboard/stats")]
     [ProducesResponseType(typeof(List<StatsViewModel>), StatusCodes.Status200OK)]
     public async Task<ActionResult<List<StatsViewModel>>> Handle()

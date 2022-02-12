@@ -9,6 +9,7 @@ using Swashbuckle.AspNetCore.Filters;
 using System.Reflection;
 using System.Text;
 using Eudwia.Server.Settings;
+using Eudwia.Shared.Authorization;
 using Eudwia.Shared.Enums;
 using FluentValidation.AspNetCore;
 
@@ -113,6 +114,15 @@ public class Startup
 
         services.AddSingleton(jwtSettings);
         services.Configure<SuperAdminAccountSettings>(Configuration.GetSection(SuperAdminAccountSettings.Position));
+        
+        //configure authorization
+        services.AddAuthorization(config =>
+        {
+            config.AddPolicy(Policies.IsSuperAdmin, Policies.IsSuperAdminPolicy());
+            config.AddPolicy(Policies.IsAdmin, Policies.IsAdminPolicy());
+            config.AddPolicy(Policies.IsUser, Policies.IsUserPolicy());
+            config.AddPolicy(Policies.IsCurrentdUser, policy => policy.Requirements.Add(new ConnectedUserRequirement()));
+        });
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

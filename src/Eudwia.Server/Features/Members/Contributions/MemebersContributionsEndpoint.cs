@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Eudwia.Server.Data.Contexts;
+using Eudwia.Shared.Authorization;
 using Eudwia.Shared.Features.Members.Contributions;
 using Eudwia.Shared.Features.Members.Details;
 
@@ -20,7 +21,7 @@ public class MemebersContributionsEndpoint : ControllerBase
         _applicationDbContext = applicationDbContext;
     }
 
-    [Authorize]
+    [Authorize(Policy = Policies.IsAdmin)]
     [HttpGet("members/{memberId:guid}/contributions")]
     [ProducesResponseType(typeof(MembersDetailsViewModel), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]

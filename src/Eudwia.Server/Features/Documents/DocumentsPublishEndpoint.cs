@@ -1,17 +1,17 @@
 ﻿using System.Net.Mime;
 using Microsoft.AspNetCore.Mvc;
 using Eudwia.Server.Data.Contexts;
+using Eudwia.Shared.Authorization;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
-using Wordroller;
 using OpenXmlPowerTools;
 using SharpDocx;
-using Eudwia.Shared.Features.Authentication.Login;
 
 namespace Eudwia.Server.Features.Documents;
 
 [Route("api")]
 [ApiController]
+[Authorize(Policy = Policies.IsAdmin)]
 [Produces(MediaTypeNames.Application.Json)]
 public class DocumentsPublishEndpoint : ControllerBase
 {
@@ -22,7 +22,6 @@ public class DocumentsPublishEndpoint : ControllerBase
         _applicationDbContext = applicationDbContext;
     }
 
-    [Authorize]
     [HttpPost("documents/publish")]
     public async Task<ActionResult> Handle(IFormFile file)
     {

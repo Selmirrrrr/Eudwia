@@ -40,14 +40,16 @@ public class LoginEndpoint : ControllerBase
 
         var user = await _userManager.FindByEmailAsync(request.Email);
 
-        var claims = new[]
+        var claims = new List<Claim>
         {
-            new Claim(ClaimTypes.Name, request.Email),
-            new Claim("FirstName", user.FirstName),
-            new Claim("LastName", user.LastName),
-            new Claim("Id", user.Id.ToString()),
-            new Claim("Lang", user.Language.ToString())
+            new(ClaimTypes.Name, request.Email),
+            new("FirstName", user.FirstName),
+            new("LastName", user.LastName),
+            new("Id", user.Id.ToString()),
+            new("Lang", user.Language.ToString())
         };
+        
+        claims.AddRange((await _userManager.GetRolesAsync(user)).Select(role => new Claim(ClaimTypes.Role, role)).ToList());
 
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtSettings.SecurityKey));
         var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
