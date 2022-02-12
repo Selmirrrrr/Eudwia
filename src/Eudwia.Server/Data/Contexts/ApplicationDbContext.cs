@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Eudwia.Server.Data.Contexts.Extensions;
+using Eudwia.Server.Settings;
+using Microsoft.Extensions.Options;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Infrastructure;
 
 namespace Eudwia.Server.Data.Contexts;
@@ -11,12 +13,14 @@ public class ApplicationDbContext : IdentityDbContext<Member, IdentityRole<Guid>
 {
     private readonly ILoggerFactory _loggerFactory;
     private readonly IContextConfiguration _config;
+    private readonly SuperAdminAccountSettings _adminAccountSettings;
 
-    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options, ILoggerFactory loggerFactory, IContextConfiguration config)
+    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options, ILoggerFactory loggerFactory, IContextConfiguration config, IOptions<SuperAdminAccountSettings> adminAccountSettings)
         : base(options)
     {
         _loggerFactory = loggerFactory;
         _config = config;
+        _adminAccountSettings = adminAccountSettings.Value;
     }
 
     public virtual DbSet<Member> Members { get; set; }
@@ -47,4 +51,5 @@ public class ApplicationDbContext : IdentityDbContext<Member, IdentityRole<Guid>
 
     private void SqlServerOptionsAction(NpgsqlDbContextOptionsBuilder optionsBuilder)
         => optionsBuilder.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.GetName().Name);
+
 }

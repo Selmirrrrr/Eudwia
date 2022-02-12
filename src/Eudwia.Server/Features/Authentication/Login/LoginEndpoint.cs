@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using Eudwia.Server.Data;
+using Eudwia.Server.Settings;
 using Eudwia.Shared;
 using Eudwia.Shared.Features.Authentication.Login;
 
@@ -17,13 +18,13 @@ namespace Eudwia.Server.Features.Authentication.Login;
 public class LoginEndpoint : ControllerBase
 {
     private readonly UserManager<Member> _userManager;
-    private readonly IConfiguration _configuration;
+    private readonly JwtSettings _jwtSettings;
     private readonly SignInManager<Member> _signInManager;
 
-    public LoginEndpoint(UserManager<Member> userManager, IConfiguration configuration, SignInManager<Member> signInManager)
+    public LoginEndpoint(UserManager<Member> userManager, JwtSettings jwtSettings, SignInManager<Member> signInManager)
     {
         _userManager = userManager;
-        _configuration = configuration;
+        _jwtSettings = jwtSettings;
         _signInManager = signInManager;
     }
 
@@ -44,16 +45,17 @@ public class LoginEndpoint : ControllerBase
             new Claim(ClaimTypes.Name, request.Email),
             new Claim("FirstName", user.FirstName),
             new Claim("LastName", user.LastName),
-            new Claim("Id", user.Id.ToString())
+            new Claim("Id", user.Id.ToString()),
+            new Claim("Lang", user.Language.ToString())
         };
 
-        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JwtSecurityKey"]));
+        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtSettings.SecurityKey));
         var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-        var expiry = DateTime.Now.AddDays(Convert.ToInt32(_configuration["JwtExpiryInDays"]));
+        var expiry = DateTime.Now.AddDays(Convert.ToInt32(_jwtSettings.ExpiryInDays));
 
         var token = new JwtSecurityToken(
-            _configuration["JwtIssuer"],
-            _configuration["JwtAudience"],
+            _jwtSettings.Issuer,
+            _jwtSettings.Audience,
             claims,
             expires: expiry,
             signingCredentials: creds

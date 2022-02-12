@@ -8,8 +8,9 @@ using Eudwia.Server.Data.Contexts;
 using Swashbuckle.AspNetCore.Filters;
 using System.Reflection;
 using System.Text;
-using FluentValidation.AspNetCore;
+using Eudwia.Server.Settings;
 using Eudwia.Shared.Enums;
+using FluentValidation.AspNetCore;
 
 namespace Eudwia.Server;
 
@@ -90,6 +91,8 @@ public class Startup
             .AddEntityFrameworkStores<ApplicationDbContext>()
             .AddDefaultTokenProviders();
 
+
+        var jwtSettings = Configuration.GetSection(JwtSettings.Position).Get<JwtSettings>();
         services.AddAuthentication(options =>
         {
             options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -102,11 +105,14 @@ public class Startup
                 ValidateAudience = true,
                 ValidateLifetime = true,
                 ValidateIssuerSigningKey = true,
-                ValidIssuer = Configuration["JwtIssuer"],
-                ValidAudience = Configuration["JwtAudience"],
-                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JwtSecurityKey"]))
+                ValidIssuer = jwtSettings.Issuer,
+                ValidAudience = jwtSettings.Issuer,
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.SecurityKey))
             };
         });
+
+        services.AddSingleton(jwtSettings);
+        services.Configure<SuperAdminAccountSettings>(Configuration.GetSection(SuperAdminAccountSettings.Position));
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -117,10 +123,7 @@ public class Startup
             app.UseDeveloperExceptionPage();
             app.UseSwagger();
 
-            app.UseSwaggerUI(c =>
-            {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Eudwia.Server v1");
-            });
+            app.UseSwaggerUI(c => { c.SwaggerEndpoint("/swagger/v1/swagger.json", "Eudwia.Server v1"); });
 
             app.UseWebAssemblyDebugging();
         }
