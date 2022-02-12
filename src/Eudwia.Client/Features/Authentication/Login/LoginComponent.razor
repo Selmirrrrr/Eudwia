@@ -10,25 +10,21 @@
 
 @if (_showErrorAlert)
 {
-    <MudAlert Severity="Severity.Error" ContentAlignment="HorizontalAlignment.Center" ShowCloseIcon="true" CloseIconClicked="(() => CloseMe(true))" >Invalid username or password!</MudAlert>
+    <MudAlert Severity="Severity.Error" ContentAlignment="HorizontalAlignment.Center" ShowCloseIcon="true" CloseIconClicked="() => CloseMe(true)" >Invalid username or password!</MudAlert>
 }
 
-<MudForm @ref="_form" @bind-IsValid="@_success" @bind-Errors="@_errors">
-    <MudText Typo="Typo.h4" GutterBottom="true" Class="mt-4">Sign In</MudText>
-
-    <MudText>Don't have an account? <MudLink Href="/authentication/register">Sign Up</MudLink></MudText>
+<MudForm @ref="_form">
+    <MudText Typo="Typo.h4" GutterBottom="true" Class="mt-4">Connexion</MudText>
 
     <MudTextField T="string" @bind-Value="@Email" Required="true" Label="E-mail " Variant="Variant.Outlined" Class="my-6"></MudTextField>
 
     <MudTextField @bind-Value="@Password" Label="Password " Required="true" Variant="Variant.Outlined" InputType="@_passwordInput" Adornment="Adornment.End" AdornmentIcon="@_passwordInputIcon" OnAdornmentClick="TogglePasswordVisibility" />
 
-    <div Class="d-flex justify-space-between align-center">
-        <MudCheckBox T="bool" Label="Remember me?" @bind-Checked="RememberMe" Color="Color.Primary" Class="ml-n1 my-3"></MudCheckBox>
-        <MudSpacer />
-        <MudLink Href="/authentication/forgot-password">Forgot pwd?</MudLink>
-    </div>
-
-    <MudButton Variant="Variant.Filled" Color="Color.Primary" Disabled="@(!_success && !_isBusy)" Size="Size.Large" FullWidth="true" OnClick="() => HandleSubmit()">Sign In</MudButton>
+    @* <div Class="d-flex justify-space-between align-center"> *@
+    @*     <MudLink Href="/authentication/forgot-password">Forgot pwd?</MudLink> *@
+    @* </div> *@
+    <MudSpacer></MudSpacer>
+    <MudButton Class="mt-6" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Large" FullWidth="true" OnClick="HandleSubmit">Connexion</MudButton>
 </MudForm>
 
 @code {
@@ -36,44 +32,17 @@
 
     private string Password { get; set; } = string.Empty;
     private string Email { get; set; } =  string.Empty;
-    private bool RememberMe { get; set; }
-
-    private bool _isBusy;
 
     private LoginCommand _model = new();
-    private bool _success;
 
-    private string[] _errors = { };
     private MudForm? _form;
-
-    public class RegisterAccountForm
-    {
-        [Required]
-        [StringLength(8, ErrorMessage = "Name length can't be more than 8.")]
-        public string Username { get; set; } = string.Empty;
-
-        [Required]
-        [EmailAddress]
-        public string Email { get; set; } = string.Empty;
-
-        [Required]
-        [StringLength(30, ErrorMessage = "Password must be at least 8 characters long.", MinimumLength = 8)]
-        public string Password { get; set; } = string.Empty;
-
-        [Required]
-        [Compare(nameof(Password))]
-        public string Password2 { get; set; } = string.Empty;
-    }
 
     private async Task HandleSubmit()
     {
-        _isBusy = false;
-        _success = false;
         _model = new LoginCommand
         {
             Email = Email,
-            Password = Password,
-            RememberMe = RememberMe
+            Password = Password
         };
 
         var response = await _httpClient.PostAsJsonAsync("api/account/login", _model);
@@ -84,29 +53,8 @@
             _navigationManager.NavigateTo("/personal/dashboard");
         }
         else
-        {
             _showErrorAlert = true;
-            Console.WriteLine("Invalid username or password");
-        }
 
-    }
-
-    private async Task OnValidSubmit(EditContext context)
-    {
-        //success = true;
-        //StateHasChanged();
-
-        var response = await _httpClient.PostAsJsonAsync("api/account/login", _model);
-        var loginResult = await response.Content.ReadFromJsonAsync<LoginResult>();
-        if (loginResult?.Successful == true)
-        {
-            await _tokenAuthenticationStateProvider.Login(loginResult.Token);
-            _navigationManager.NavigateTo("/personal/dashboard");
-        }
-        else
-        {
-            _showErrorAlert = true;
-        }
     }
 
     bool _passwordVisibility;
