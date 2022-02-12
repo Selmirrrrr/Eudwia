@@ -4,13 +4,14 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Eudwia.Server.Data;
 using Eudwia.Server.Data.Contexts;
-using Eudwia.Shared.Features.Members.Contributions;
+using Eudwia.Shared.Authorization;
 using Eudwia.Shared.Features.Members.Details;
 
 namespace Eudwia.Server.Features.Members.Contributions;
 
 [Route("api")]
 [ApiController]
+[Authorize(Policy = Policies.IsAdmin)]
 [Produces(MediaTypeNames.Application.Json)]
 public class MemebersContributionsChangeEndpoint : ControllerBase
 {
@@ -21,7 +22,6 @@ public class MemebersContributionsChangeEndpoint : ControllerBase
         _applicationDbContext = applicationDbContext;
     }
 
-    [Authorize]
     [HttpPost("members/{memberId:guid}/contributions/{year:int}/{month:int}")]
     [ProducesResponseType(typeof(MembersDetailsViewModel), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]

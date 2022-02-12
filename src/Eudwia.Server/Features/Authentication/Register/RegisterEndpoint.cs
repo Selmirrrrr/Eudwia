@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Eudwia.Server.Data;
 using Eudwia.Shared;
+using Eudwia.Shared.Authorization;
 using Eudwia.Shared.Features.Authentication.Register;
 
 namespace Eudwia.Server.Features.Authentication.Register;
@@ -13,10 +14,12 @@ namespace Eudwia.Server.Features.Authentication.Register;
 public class RegisterEndpoint : ControllerBase
 {
     private readonly UserManager<Member> _userManager;
+    private readonly RoleManager<IdentityRole<Guid>> _roleManager;
 
-    public RegisterEndpoint(UserManager<Member> userManager)
+    public RegisterEndpoint(UserManager<Member> userManager, RoleManager<IdentityRole<Guid>> roleManager)
     {
         _userManager = userManager;
+        _roleManager = roleManager;
     }
 
     [HttpPost(Routes.Account.Register)]
@@ -34,14 +37,19 @@ public class RegisterEndpoint : ControllerBase
         };
 
         var result = await _userManager.CreateAsync(newUser, model.Password);
-
-        if (!result.Succeeded)
+        
+        if (!_roleManager.Roles.Any())
         {
-            var errors = result.Errors.Select(x => x.Description);
-
-            return BadRequest(new RegisterResult { Successful = false, Errors = errors });
+            var lol = await _roleManager.CreateAsync(new IdentityRole<Guid>(Roles.SuperAdmin));
+            await _roleManager.CreateAsync(new IdentityRole<Guid>(Roles.Admin));
+            await _roleManager.CreateAsync(new IdentityRole<Guid>(Roles.User));
+            await _userManager.AddToRoleAsync(newUser, Roles.SuperAdmin);
         }
+        
+        if (result.Succeeded) return Ok(new RegisterResult {Successful = true});
+        var errors = result.Errors.Select(x => x.Description);
 
-        return Ok(new RegisterResult { Successful = true });
+        return BadRequest(new RegisterResult { Successful = false, Errors = errors });
+
     }
 }

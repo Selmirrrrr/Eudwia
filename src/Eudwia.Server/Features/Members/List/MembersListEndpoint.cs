@@ -4,12 +4,14 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Eudwia.Server.Data.Contexts;
 using Eudwia.Shared;
+using Eudwia.Shared.Authorization;
 using Eudwia.Shared.Features.Members.List;
 
 namespace Eudwia.Server.Features.Members.List;
 
 [Route("api")]
 [ApiController]
+[Authorize(Policy = Policies.IsAdmin)]
 [Produces(MediaTypeNames.Application.Json)]
 public class MembersListEndpoint : ControllerBase
 {
@@ -20,7 +22,6 @@ public class MembersListEndpoint : ControllerBase
         _applicationDbContext = applicationDbContext;
     }
 
-    [Authorize]
     [HttpGet(Routes.Members.GetMembers)]
     [ProducesResponseType(typeof(MembersListViewModel), StatusCodes.Status200OK)]
     public async Task<ActionResult<MembersListViewModel>> Handle()
