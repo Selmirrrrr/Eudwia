@@ -1,0 +1,67 @@
+﻿@page "/"
+@page "/personal/dashboard"
+@using Eudwia.Client.Features.Dashboard
+@using Eudwia.Shared.Features.Dashboard
+@using Color = MudBlazor.Color
+
+@inject HttpClient _httpClient
+@attribute [Authorize]
+
+<MudText Typo="Typo.h5" Color="Color.Primary" Class="mb-4">Dashboard</MudText>
+<MudGrid>
+    <MudItem xs="12" sm="6" md="3">
+        <MudPaper Class="d-flex flex-row pt-6 pb-4" Style="height:100px;">
+            <MudIcon Icon="@Icons.Material.Filled.PeopleOutline" Color="Color.Secondary" Class="mx-4" Style="width:54px; height:54px;"></MudIcon>
+            <div>
+                <MudText Typo="Typo.subtitle1" Class="mud-text-secondary mb-n1">Membres</MudText>
+                <MudText Typo="Typo.h5">@_stats.MembersCount</MudText>
+            </div>
+        </MudPaper>
+    </MudItem>
+    <MudItem xs="12" sm="6" md="3">
+        <MudPaper Class="d-flex flex-row pt-6 pb-4" Style="height:100px;">
+            <MudIcon Icon="@Icons.Material.Filled.People" Color="Color.Primary" Class="mx-4" Style="width:54px; height:54px;"></MudIcon>
+            <div>
+                <MudText Typo="Typo.subtitle1" Class="mud-text-secondary mb-n1">Membres payants</MudText>
+                <MudText Typo="Typo.h5">@_stats.PaidMembersCount</MudText>
+            </div>
+        </MudPaper>
+    </MudItem>
+    <MudItem xs="12" sm="6" md="3">
+        <MudPaper Class="d-flex flex-row pt-6 pb-4" Style="height:100px;">
+            <MudIcon Icon="@Icons.Material.Outlined.Paid" Color="Color.Success" Class="mx-4" Style="width:54px; height:54px;"></MudIcon>
+            <div>
+                <MudText Typo="Typo.subtitle1" Class="mud-text-secondary mb-n1">Revenus de l'année</MudText>
+                <MudText Typo="Typo.h5">@($"{_stats.TotalRevenue:C2}")</MudText>
+            </div>
+        </MudPaper>
+    </MudItem>
+    <MudItem xs="12" sm="6" md="3">
+        <MudPaper Class="d-flex flex-row pt-6 pb-4" Style="height:100px;">
+            <MudIcon Icon="@Icons.Material.Outlined.LooksOne" Color="Color.Warning" Class="mx-4" Style="width:54px; height:54px;"></MudIcon>
+            <div>
+                <MudText Typo="Typo.subtitle1" Class="mud-text-secondary mb-n1">Top donateur</MudText>
+                <MudText Typo="Typo.h5">@($"{_stats.TopDonator:F2}")</MudText>
+            </div>
+        </MudPaper>
+    </MudItem>
+    <MudItem xs="12" sm="6">
+        <MudPaper Class="d-flex flex-row pt-6 pb-4 pa-5">
+            <MembersPerYearComponent/>
+        </MudPaper>
+    </MudItem>
+    <MudItem xs="12" sm="6">
+        <MudPaper Class="d-flex flex-row pt-6 pb-4 pa-5">
+            <IncomePerYearComponent/>
+        </MudPaper>
+    </MudItem>
+</MudGrid>
+
+@code {
+    private StatsViewModel _stats = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        _stats = await _httpClient.GetFromJsonAsync<StatsViewModel>($"api/dashboard/stats") ?? new StatsViewModel();
+    }
+}

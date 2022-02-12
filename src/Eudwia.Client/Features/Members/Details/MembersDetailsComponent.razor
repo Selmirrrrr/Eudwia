@@ -1,0 +1,46 @@
+﻿@page "/members/{MemberId:guid}"
+@using Eudwia.Shared.Features.Members.Details
+@using Eudwia.Client.Features.Members.Update
+@using Eudwia.Client.Features.Members.Contributions
+@using Eudwia.Client.Features.Members.Payments
+@using Color = MudBlazor.Color
+@inject HttpClient _httpClient
+@inject ISnackbar _snackbar
+@inject AuthenticationStateProvider _getAuthenticationStateAsync
+
+@attribute [Authorize]
+@if (!_loaded)
+{
+    <MudProgressLinear Color="Color.Primary" Indeterminate="true" Class="my-7" />
+}
+else 
+{
+    <MudText Typo="Typo.h5" Color="Color.Primary" Class="mb-4">@_model.FirstName @_model.LastName</MudText>
+    <MudTabs Elevation="1" Rounded="true" PanelClass="mt-6">
+        <MudTabPanel Text="Général">
+            <MembersUpdateComponent ViewModel="@_model"/>
+        </MudTabPanel>
+        <MudTabPanel Text="Cotisations">
+            <MembersContributionsComponent MemberId="@MemberId"/>
+        </MudTabPanel>
+        <MudTabPanel Text="Paiements">
+            <MembersPaymentsComponent MemberId="@MemberId"/>
+        </MudTabPanel>
+    </MudTabs>
+}
+
+@code {
+
+    [Parameter]
+    public Guid MemberId { get; set; }
+
+    private MembersDetailsViewModel _model = new();
+    private bool _loaded;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _model = await _httpClient.GetFromJsonAsync<MembersDetailsViewModel>($"api/members/{MemberId}") ?? new MembersDetailsViewModel();
+        _loaded = true;
+    }
+
+}
