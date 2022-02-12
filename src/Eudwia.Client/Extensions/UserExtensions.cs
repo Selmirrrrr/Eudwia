@@ -1,6 +1,7 @@
 ﻿using System.Security.Claims;
+using Eudwia.Shared.Authorization;
 
-namespace Eudwia.Client.Extensions;
+namespace Eudwia.Shared.Extensions;
 
 public static class UserExtensions
 {

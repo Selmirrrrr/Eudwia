@@ -1,7 +1,7 @@
 ﻿using System.Security.Claims;
 using System.Text.Json;
 
-namespace Eudwia.Client.Extensions;
+namespace Eudwia.Shared.Extensions;
 
 public static class StringExtensions
 {
