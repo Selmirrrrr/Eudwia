@@ -40,7 +40,7 @@ public class RegisterEndpoint : ControllerBase
         
         if (!_roleManager.Roles.Any())
         {
-            var lol = await _roleManager.CreateAsync(new IdentityRole<Guid>(Roles.SuperAdmin));
+            await _roleManager.CreateAsync(new IdentityRole<Guid>(Roles.SuperAdmin));
             await _roleManager.CreateAsync(new IdentityRole<Guid>(Roles.Admin));
             await _roleManager.CreateAsync(new IdentityRole<Guid>(Roles.User));
             await _userManager.AddToRoleAsync(newUser, Roles.SuperAdmin);
@@ -50,6 +50,5 @@ public class RegisterEndpoint : ControllerBase
         var errors = result.Errors.Select(x => x.Description);
 
         return BadRequest(new RegisterResult { Successful = false, Errors = errors });
-
     }
 }

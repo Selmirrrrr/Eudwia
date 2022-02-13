@@ -7,7 +7,7 @@ public static class Policies
     public const string IsSuperAdmin = "IsSuperAdmin";
     public const string IsAdmin = "IsAdmin";
     public const string IsUser = "IsUser";
-    public const string IsCurrentdUser = "IsCurrentdUser";
+    public const string IsCurrentdUser = "IsCurrentUser";
     
     public static AuthorizationPolicy IsSuperAdminPolicy()
     {

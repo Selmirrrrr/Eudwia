@@ -1,0 +1,109 @@
+@using Microsoft.AspNetCore.Components
+@using Eudwia.Shared.Enums
+@using Color = MudBlazor.Color
+@using Eudwia.Shared.Authorization
+@using Eudwia.Shared.Features.Members.Security
+@inject HttpClient _httpClient
+@inject ISnackbar _snackbar
+
+<MudGrid>
+    <MudItem xs="12" sm="12" md="12">
+        <MudCard>
+            <MudCardHeader>
+                <CardHeaderContent>
+                    <MudText>Role</MudText>
+                </CardHeaderContent>
+            </MudCardHeader>
+            <MudCardContent>
+                <MudGrid>
+                    <MudItem xs="12" md="12">
+                        <MudCheckBox Label="Administrateur" Checked="@_roles.IsAdmin" Color="Color.Primary" CheckedChanged="(bool value) => AdminRoleChanged(Roles.Admin, value)"/>
+                        <MudCheckBox Label="Utilisateur" Checked="@_roles.IsUser" Color="Color.Primary" CheckedChanged="(bool value) => UserRoleChanged(Roles.User, value)"/>
+                    </MudItem>
+                </MudGrid>
+            </MudCardContent>
+        </MudCard>
+    </MudItem>
+    <MudItem xs="12" sm="12" md="12">
+        <MudCard>
+            <MudCardHeader>
+                <CardHeaderContent>
+                    <MudText>Mot de passe</MudText>
+                </CardHeaderContent>
+            </MudCardHeader>
+            <MudCardContent>
+                <MudForm Model="@_model" @ref="@Form">
+                    <MudGrid>
+                        <MudItem xs="12" md="5">
+                            <MudTextField Variant="Variant.Outlined" @bind-Value="_model.Password" Validation="@(_validator.ValidateValue)" For="@(() => _model.Password)" Immediate="true" Label="Mot de passe"/>
+                        </MudItem>
+                        <MudItem xs="12" md="5">
+                            <MudTextField Variant="Variant.Outlined" @bind-Value="_model.ConfirmPassword" Validation="@(_validator.ValidateValue)" For="@(() => _model.ConfirmPassword)" Immediate="true" Label="Confirmation°"/>
+                        </MudItem>
+                        <MudItem xs="12" md="2">
+                            <MudButton FullWidth="true" Class="pa-3 mt-2" Variant="Variant.Filled" Color="Color.Primary" StartIcon="@Icons.Material.Filled.SaveAlt" OnClick="@(async () => await Submit())">Enregistrer</MudButton>
+                        </MudItem>
+                    </MudGrid>
+                </MudForm>
+            </MudCardContent>
+        </MudCard>
+    </MudItem>
+</MudGrid>
+
+@code {
+
+    [Parameter]
+    public Guid MemberId { get; set; }
+
+    private MudForm Form { get; set; } = default!;
+    private string SelectedRole { get; set; } = string.Empty;
+    private readonly MembersPasswordUpdateCommand _model = new();
+    private readonly MembersPasswordUpdateCommandValidator _validator = new();
+    private MembersSecurityGetRolesViewModel _roles = new();
+    private bool _isUser;
+    
+    
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+        try
+        {
+            _roles = await _httpClient.GetFromJsonAsync<MembersSecurityGetRolesViewModel>($"api/members/{MemberId}/roles") ?? new MembersSecurityGetRolesViewModel();
+        }
+        catch (Exception ex)
+        {
+            _snackbar.Add(ex.Message, Severity.Error);
+        }
+    }
+
+    private async Task Submit()
+    {
+        
+    }
+
+    private async Task AdminRoleChanged(string role, bool value)
+    {
+        _roles.IsAdmin = !_roles.IsAdmin;
+        await RoleChanged(role, value, "Administrateur");
+    }
+
+    private async Task UserRoleChanged(string role, bool value)
+    {
+        _roles.IsUser = !_roles.IsUser;
+        await RoleChanged(role, value, "Utilisateur");
+    }
+    
+    private async Task RoleChanged(string role, bool value, string roleDisplayName)
+    {
+        var result = await _httpClient.PostAsJsonAsync($"api/members/{MemberId}/roles/{role}", value);
+        if (result.IsSuccessStatusCode)
+        {
+            _snackbar.Add(value ? $"Le membre est maintenant un \"{roleDisplayName}\" de l'application." : $"Le membre m'est plus un \"{role}\" de l'application.", Severity.Success);
+        }
+        else
+        {
+            var errors = await result.Content.ReadAsStringAsync();
+            _snackbar.Add(errors, Severity.Warning);
+        }
+    }
+}
