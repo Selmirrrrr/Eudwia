@@ -20,7 +20,7 @@ public class AccountUpdateEndpoint : ControllerBase
         _userManager = userManager;
     }
 
-    [HttpPost(Routes.Account.Update)]
+    [HttpPost("account/{id}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [Authorize]

@@ -22,7 +22,7 @@ public class RegisterEndpoint : ControllerBase
         _roleManager = roleManager;
     }
 
-    [HttpPost(Routes.Account.Register)]
+    [HttpPost("account/register")]
     [ProducesDefaultResponseType]
     [ProducesResponseType(typeof(RegisterResult), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(RegisterResult), StatusCodes.Status400BadRequest)]

@@ -24,7 +24,7 @@ public class MembersUpdateEndpoint : ControllerBase
     }
 
     [Authorize]
-    [HttpPost(Routes.Members.UpdateMember)]
+    [HttpPost("members/{memberId:guid}")]
     [ProducesResponseType(typeof(MembersDetailsViewModel), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult> Handle([FromRoute] Guid memberId, [FromBody] MembersUpdateCommand command)

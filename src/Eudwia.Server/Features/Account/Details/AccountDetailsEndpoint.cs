@@ -21,7 +21,7 @@ public class AccountDetailsEndpoint : ControllerBase
     }
 
     [Authorize]
-    [HttpGet(Routes.Account.Get)]
+    [HttpGet("account/{id}")]
     [ProducesResponseType(typeof(AccountDetailsViewModel), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult<AccountDetailsViewModel>> Handle(Guid id)

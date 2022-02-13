@@ -28,7 +28,7 @@ public class LoginEndpoint : ControllerBase
         _signInManager = signInManager;
     }
 
-    [HttpPost(Routes.Account.Login)]
+    [HttpPost("account/login")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesDefaultResponseType]
