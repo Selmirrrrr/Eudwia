@@ -1,8 +1,9 @@
-﻿using Eudwia.Server.Data.Contracts;
+﻿using System.ComponentModel.DataAnnotations;
+using Eudwia.Server.Data.Contracts;
 
 namespace Eudwia.Server.Data;
 
-public class SubscriptionPaid : IAuditableEntity
+public class SubscriptionPaid : IAuditableEntity, ITenantEntity
 {
     public int Year { get; set; }
     public bool January { get; set; }
@@ -19,7 +20,14 @@ public class SubscriptionPaid : IAuditableEntity
     public bool December { get; set; }
     public Guid MemberId { get; set; }
     public DateTime AuditCreatedAt { get; set; } = DateTime.UtcNow;
+    
+    [MaxLength(200)]
     public string AuditCreatedBy { get; set; } = string.Empty;
+    
     public DateTime AuditModifiedAt { get; set; } = DateTime.UtcNow;
+    
+    [MaxLength(200)]
     public string AuditModifiedBy { get; set; } = string.Empty;
+    
+    public Guid TenantId { get; set; }
 }

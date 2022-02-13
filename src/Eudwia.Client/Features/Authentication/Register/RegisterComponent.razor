@@ -1,4 +1,4 @@
-﻿@page "/authentication/register"
+﻿@page "/register"
 @using Eudwia.Shared.Features.Authentication.Register
 @using Color = MudBlazor.Color
 @layout LoginLayout
@@ -7,26 +7,18 @@
 @inject NavigationManager _navigationManager
 
 <br />
-@if (_showErrorAlert)
-{
-    <MudAlert Severity="Severity.Error" ContentAlignment="HorizontalAlignment.Center" ShowCloseIcon="true" CloseIconClicked="(() => CloseMe(true))">
-        @foreach (var item in _apiErrors)
-        {
-            <span>@item</span>
-        }
-    </MudAlert>
-}
+
 
 <MudForm @ref="_form" @bind-IsValid="@_success" @bind-Errors="@_errors">
 
     <MudText Typo="Typo.h4" GutterBottom="true">Sign Up</MudText>
-    <MudText>Already have an account? <MudLink Href="/authentication/login">Sign In</MudLink></MudText>
+    <MudText>Déjà enregistré? <MudLink Href="/authentication/login">Connexion</MudLink></MudText>
 
+    <MudTextField T="string" @bind-Value="_model.Tenant" Required="true" RequiredError="Tenant is required!" Label="Tenant" Variant=" Variant.Outlined" Class="mt-4"></MudTextField>
     <MudTextField T="string" @bind-Value="_model.FirstName" Required="true" RequiredError="First name is required!" Label="First Name " Variant=" Variant.Outlined" Class="mt-4"></MudTextField>
     <MudTextField T="string" @bind-Value="_model.LastName" Required="true" RequiredError="Last name is required!" Label="Last Name " Variant=" Variant.Outlined" Class="mt-4"></MudTextField>
 
     <MudTextField T="string" @bind-Value="_model.Email" Required="true" RequiredError="Email is required!" Label="E-mail " Validation="@(new EmailAddressAttribute {ErrorMessage = "The email address is invalid"})" Variant=" Variant.Outlined" Class="mt-4" Fo></MudTextField>
-
     <MudTextField T="string" Label="Password " @bind-Value="_model.Password" Variant="Variant.Outlined"
                   InputType="InputType.Password"
                   Validation="@(new Func<string, IEnumerable<string>>(PasswordStrength))" Required="true"
@@ -35,6 +27,15 @@
                   Label="Enter password again " @bind-Value="_model.ConfirmPassword" Variant="Variant.Outlined" InputType="InputType.Password"
                   Class="mt-4" />
 
+    @if (_showErrorAlert)
+    {
+        <MudAlert Class="mt-4" Severity="Severity.Error" ContentAlignment="HorizontalAlignment.Center" ShowCloseIcon="true" CloseIconClicked="(() => CloseMe(true))">
+            @foreach (var item in _apiErrors)
+            {
+                <span>@item</span>
+            }
+        </MudAlert>
+    }
     <MudButton Variant="Variant.Filled" Color="Color.Primary" Disabled="@(!_success && !_isBusy)" OnClick="HandleSubmit" Size="Size.Large" FullWidth="true" Class="mt-4">Register</MudButton>
 </MudForm>
 
@@ -68,6 +69,7 @@
     {
         _isBusy = false;
         _success = false;
+        _apiErrors.Clear();
 
         var response = await _httpClient.PostAsJsonAsync("api/account/register/", _model);
 

@@ -1,4 +1,5 @@
-﻿using Bogus;
+﻿using System.Security.Cryptography.X509Certificates;
+using Bogus;
 using Microsoft.EntityFrameworkCore;
 using Eudwia.Shared.Enums;
 
@@ -263,11 +264,23 @@ public static class ModelBuilderExtensions
 
     public static void Seed(this ModelBuilder modelBuilder)
     {
+        var tenantGuid = modelBuilder.SeedTenant();
         modelBuilder.SeedCountries();
-        modelBuilder.SeedPersons();
+        modelBuilder.SeedPersons(tenantGuid);
     }
 
-    private static void SeedPersons(this ModelBuilder modelBuilder)
+    private static Guid SeedTenant(this ModelBuilder modelBuilder)
+    {
+        var guid = Guid.NewGuid();
+        modelBuilder.Entity<Tenant>().HasData(new Tenant
+        {
+            TenantId = guid,
+            Name = "DEMO"
+        });
+        return guid;
+    }
+
+    private static void SeedPersons(this ModelBuilder modelBuilder, Guid tenantGuid)
     {
         _faker = new Faker("fr");
         var members = new List<Member>();
@@ -276,15 +289,16 @@ public static class ModelBuilderExtensions
 
         for (var i = 0; i < 20; i++)
         {
-            var member = CreateMember();
+            var member = CreateMember(tenantGuid);
             payments.AddRange(Enumerable.Range(0, 10).Select(_ => new Payment
             {
                 Id = Guid.NewGuid(),
-                Note = _faker.Lorem.Paragraph(1),
+                Note = _faker.Lorem.Sentence(),
                 PaymentType = _faker.Random.Enum<PaymentType>(),
                 MemberId = member.Id,
                 Amount = _faker.Random.Decimal(0, 1000),
-                PaymentDate = DateTime.SpecifyKind(_faker.Date.Past(10), DateTimeKind.Utc)
+                PaymentDate = DateTime.SpecifyKind(_faker.Date.Past(10), DateTimeKind.Utc),
+                TenantId = tenantGuid
             }).ToList());
 
             subscriptions.AddRange(Enumerable.Range(2015, _faker.Random.Int(0, 7)).Select(s => new SubscriptionPaid
@@ -302,7 +316,8 @@ public static class ModelBuilderExtensions
                 October = true,
                 November = true,
                 December = true,
-                MemberId = member.Id
+                MemberId = member.Id,
+                TenantId = tenantGuid
             }).ToList());
             members.Add(member);
         }
@@ -311,7 +326,8 @@ public static class ModelBuilderExtensions
         modelBuilder.Entity<SubscriptionPaid>().HasData(subscriptions);
     }
 
-    public static Member CreateMember()
+    public static Member CreateMember() => CreateMember(Guid.NewGuid());
+    public static Member CreateMember(Guid tenantGuid)
     {
         var faker = new Faker("fr");
 
@@ -335,6 +351,7 @@ public static class ModelBuilderExtensions
             Language = faker.Random.Enum<Language>(),
             SecurityStamp = Guid.NewGuid().ToString(),
             UserName = faker.Person.Email,
+            TenantId = tenantGuid
         };
     }
 
