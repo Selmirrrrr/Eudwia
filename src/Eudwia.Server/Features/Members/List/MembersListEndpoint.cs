@@ -22,7 +22,7 @@ public class MembersListEndpoint : ControllerBase
         _applicationDbContext = applicationDbContext;
     }
 
-    [HttpGet(Routes.Members.GetMembers)]
+    [HttpGet("members")]
     [ProducesResponseType(typeof(MembersListViewModel), StatusCodes.Status200OK)]
     public async Task<ActionResult<MembersListViewModel>> Handle()
     {

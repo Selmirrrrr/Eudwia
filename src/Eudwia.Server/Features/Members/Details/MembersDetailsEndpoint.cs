@@ -25,7 +25,7 @@ public class MembersDetailsEndpoint : ControllerBase
     }
 
     [Authorize(Policy = Policies.IsAdmin)]
-    [HttpGet(Routes.Members.GetMember)]
+    [HttpGet("members/{memberId:guid}")]
     [ProducesResponseType(typeof(MembersDetailsViewModel), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult<MembersDetailsViewModel>> Handle([FromRoute] Guid memberId)

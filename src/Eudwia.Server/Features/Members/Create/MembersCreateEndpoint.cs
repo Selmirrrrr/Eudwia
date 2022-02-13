@@ -25,7 +25,7 @@ public class MembersCreateEndpoint : ControllerBase
     }
 
     [Authorize(Policy = Policies.IsAdmin)]
-    [HttpPost(Routes.Members.CreateMember)]
+    [HttpPost("members")]
     [ProducesResponseType(typeof(Guid), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<Guid>> Handle([FromBody] MembersCreateCommand command)
