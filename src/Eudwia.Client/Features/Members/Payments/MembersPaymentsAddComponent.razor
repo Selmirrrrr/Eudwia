@@ -24,7 +24,7 @@
                     <MudNumericField Variant="Variant.Outlined" Label="Montant" @bind-Value="_model.Amount" Validation="@(_validator.ValidateValue)" For="@(() => _model.Amount)" Adornment="Adornment.End" AdornmentText="CHF" HideSpinButtons="true"/>
                 </MudItem>
                 <MudItem xs="12" md="12">
-                    <MudTextField Variant="Variant.Outlined" @bind-Value="_model.Note" Validation="@(_validator.ValidateValue)" For="@(() => _model.Note)" Immediate="true" Label="Note" Lines="3   "/>
+                    <MudTextField Variant="Variant.Outlined" @bind-Value="_model.Note" Validation="@(_validator.ValidateValue)" For="@(() => _model.Note)" Immediate="true" Label="Note" Lines="3"/>
                 </MudItem>
             </MudGrid>
         </MudForm>
@@ -72,4 +72,5 @@
         _model = new MembersAddPaymentCommand();
         MudDialog.Cancel();
     }
+
 }

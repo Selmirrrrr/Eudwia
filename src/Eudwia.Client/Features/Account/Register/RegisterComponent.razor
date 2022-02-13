@@ -6,7 +6,7 @@
 @inject HttpClient _httpClient
 @inject NavigationManager _navigationManager
 
-<br />
+<br/>
 
 
 <MudForm @ref="_form" @bind-IsValid="@_success" @bind-Errors="@_errors">
@@ -14,22 +14,22 @@
     <MudText Typo="Typo.h4" GutterBottom="true">Créer un compte</MudText>
     <MudText>Déjà enregistré? <MudLink Href="/account/login">Connexion</MudLink></MudText>
 
-    <MudTextField T="string" @bind-Value="_model.Tenant" Required="true" RequiredError="Tenant is required!" Label="Tenant" Variant=" Variant.Outlined" Class="mt-4"></MudTextField>
-    <MudTextField T="string" @bind-Value="_model.FirstName" Required="true" RequiredError="First name is required!" Label="First Name " Variant=" Variant.Outlined" Class="mt-4"></MudTextField>
-    <MudTextField T="string" @bind-Value="_model.LastName" Required="true" RequiredError="Last name is required!" Label="Last Name " Variant=" Variant.Outlined" Class="mt-4"></MudTextField>
+    <MudTextField T="string" @bind-Value="_model.Tenant" Required="true" RequiredError="Tenant is required!" Label="Tenant" Variant="Variant.Outlined" Class="mt-4"></MudTextField>
+    <MudTextField T="string" @bind-Value="_model.FirstName" Required="true" RequiredError="First name is required!" Label="First Name " Variant="Variant.Outlined" Class="mt-4"></MudTextField>
+    <MudTextField T="string" @bind-Value="_model.LastName" Required="true" RequiredError="Last name is required!" Label="Last Name " Variant="Variant.Outlined" Class="mt-4"></MudTextField>
 
-    <MudTextField T="string" @bind-Value="_model.Email" Required="true" RequiredError="Email is required!" Label="E-mail " Validation="@(new EmailAddressAttribute {ErrorMessage = "The email address is invalid"})" Variant=" Variant.Outlined" Class="mt-4" Fo></MudTextField>
+    <MudTextField T="string" @bind-Value="_model.Email" Required="true" RequiredError="Email is required!" Label="E-mail " Validation="@(new EmailAddressAttribute {ErrorMessage = "The email address is invalid"})" Variant="Variant.Outlined" Class="mt-4" Fo></MudTextField>
     <MudTextField T="string" Label="Password " @bind-Value="_model.Password" Variant="Variant.Outlined"
                   InputType="InputType.Password"
                   Validation="@(new Func<string, IEnumerable<string>>(PasswordStrength))" Required="true"
-                  RequiredError="Password is required!" Class="mt-4" />
+                  RequiredError="Password is required!" Class="mt-4"/>
     <MudTextField T="string"
                   Label="Enter password again " @bind-Value="_model.ConfirmPassword" Variant="Variant.Outlined" InputType="InputType.Password"
-                  Class="mt-4" />
+                  Class="mt-4"/>
 
     @if (_showErrorAlert)
     {
-        <MudAlert Class="mt-4" Severity="Severity.Error" ContentAlignment="HorizontalAlignment.Center" ShowCloseIcon="true" CloseIconClicked="(() => CloseMe(true))">
+        <MudAlert Class="mt-4" Severity="Severity.Error" ContentAlignment="HorizontalAlignment.Center" ShowCloseIcon="true" CloseIconClicked="() => CloseMe(true)">
             @foreach (var item in _apiErrors)
             {
                 <span>@item</span>
@@ -43,7 +43,7 @@
     private bool _success;
     private bool _isBusy;
     private bool _showErrorAlert;
-    private string[] _errors = { };
+    private string[] _errors = {};
     private MudForm? _form;
     private readonly RegisterModel _model = new();
     readonly List<string> _apiErrors = new();
@@ -82,7 +82,6 @@
             _showErrorAlert = true;
             if (registerResult?.Errors.Any() == true)
                 _apiErrors.AddRange(registerResult.Errors);
-            
         }
     }
 
@@ -90,5 +89,5 @@
     {
         _showErrorAlert = !value;
     }
-}
 
+}

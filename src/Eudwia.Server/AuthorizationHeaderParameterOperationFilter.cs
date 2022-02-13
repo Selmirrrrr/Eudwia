@@ -11,11 +11,10 @@ public class AuthorizationHeaderParameterOperationFilter : IOperationFilter
             operation.Security = new List<OpenApiSecurityRequirement>();
 
 
-        var scheme = new OpenApiSecurityScheme { Reference = new OpenApiReference { Type = ReferenceType.SecurityScheme, Id = "bearer" } };
+        var scheme = new OpenApiSecurityScheme {Reference = new OpenApiReference {Type = ReferenceType.SecurityScheme, Id = "bearer"}};
         operation.Security.Add(new OpenApiSecurityRequirement
         {
             [scheme] = new List<string>()
         });
-
     }
 }

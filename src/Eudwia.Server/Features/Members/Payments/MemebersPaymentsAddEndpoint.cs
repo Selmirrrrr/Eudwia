@@ -37,7 +37,7 @@ public class MemebersPaymentsAddEndpoint : ControllerBase
             PaymentType = command.PaymentType,
             Note = command.Note
         };
-        
+
         await _applicationDbContext.Payments.AddAsync(payment);
         await _applicationDbContext.SaveChangesAsync();
 

@@ -12,22 +12,19 @@
                          SeriesType="@SeriesType.Area"
                          Name="Cotisations"
                          XValue="@(e => e.Year)"
-                         YAggregate="@(e => e.Where(a => a.PaymentType == PaymentType.Membership).Sum(a => a.Amount))"
-                         />
+                         YAggregate="@(e => e.Where(a => a.PaymentType == PaymentType.Membership).Sum(a => a.Amount))"/>
         <ApexPointSeries TItem="IncomePerYearViewModel"
                          Items="_stats"
                          SeriesType="@SeriesType.Area"
                          Name="Dons"
                          XValue="@(e => e.Year)"
-                         YAggregate="@(e => e.Where(a => a.PaymentType == PaymentType.Donation).Sum(a => a.Amount))"
-                         />
+                         YAggregate="@(e => e.Where(a => a.PaymentType == PaymentType.Donation).Sum(a => a.Amount))"/>
         <ApexPointSeries TItem="IncomePerYearViewModel"
                          Items="_stats"
                          SeriesType="@SeriesType.Area"
                          Name="Autres"
                          XValue="@(e => e.Year)"
-                         YAggregate="@(e => e.Where(a => a.PaymentType == PaymentType.Other).Sum(a => a.Amount))"
-                         />
+                         YAggregate="@(e => e.Where(a => a.PaymentType == PaymentType.Other).Sum(a => a.Amount))"/>
     </ApexChart>
 }
 
@@ -38,18 +35,19 @@
     {
         Chart = new Chart
         {
-            Stacked = true,
+            Stacked = true
         },
-        Yaxis = new List<YAxis> { new YAxis { Labels = new AxisLabels { Formatter = @"function (value) { return Number(value).toLocaleString() }" } } }
+        Yaxis = new List<YAxis> {new() {Labels = new AxisLabels {Formatter = @"function (value) { return Number(value).toLocaleString() }"}}}
     };
 
     protected override async Task OnInitializedAsync()
     {
         _stats = await _httpClient.GetFromJsonAsync<List<IncomePerYearViewModel>>($"api/dashboard/income-per-year") ?? new List<IncomePerYearViewModel>();
     }
-    
+
     private string GetYAxisLabel(decimal value)
     {
         return $"{value:C}";
     }
+
 }

@@ -34,7 +34,7 @@ public class MemebersContributionsChangeEndpoint : ControllerBase
         if (!_applicationDbContext.Members.Any(m => m.Id == memberId)) return NotFound(memberId);
 
         SubscriptionPaid? subscriptionPaid = null;
-        
+
         if (!_applicationDbContext.SubscriptionsPaid.Any(sp => sp.Year == year && sp.MemberId == memberId))
             subscriptionPaid = _applicationDbContext.SubscriptionsPaid.Add(new SubscriptionPaid
             {
@@ -43,7 +43,7 @@ public class MemebersContributionsChangeEndpoint : ControllerBase
             }).Entity;
 
         subscriptionPaid ??= await _applicationDbContext.SubscriptionsPaid.FirstAsync(sp => sp.Year == year && sp.MemberId == memberId);
-        
+
         switch (month)
         {
             case 1:

@@ -14,7 +14,7 @@ public record MembersAddPaymentCommand
     public DateTime? PaymentDate { get; set; }
 }
 
-public class MembersAddPaymentCommandValidator : AbstractValidator<MembersAddPaymentCommand> 
+public class MembersAddPaymentCommandValidator : AbstractValidator<MembersAddPaymentCommand>
 {
     public MembersAddPaymentCommandValidator()
     {
@@ -23,10 +23,10 @@ public class MembersAddPaymentCommandValidator : AbstractValidator<MembersAddPay
         RuleFor(x => x.PaymentType).IsInEnum();
         RuleFor(x => x.PaymentDate).NotNull().LessThanOrEqualTo(DateTime.Now).GreaterThan(new DateTime(2000, 1, 1));
     }
-    
+
     public Func<object, string, Task<IEnumerable<string>>> ValidateValue => async (model, propertyName) =>
     {
-        var result = await ValidateAsync(ValidationContext<MembersAddPaymentCommand>.CreateWithOptions((MembersAddPaymentCommand)model, x => x.IncludeProperties(propertyName)));
+        var result = await ValidateAsync(ValidationContext<MembersAddPaymentCommand>.CreateWithOptions((MembersAddPaymentCommand) model, x => x.IncludeProperties(propertyName)));
         return result.IsValid ? Array.Empty<string>() : result.Errors.Select(e => e.ErrorMessage);
     };
 }

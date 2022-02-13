@@ -56,17 +56,17 @@ public class Member : IdentityUser<Guid>, IAuditableEntity, ITenantEntity
     public virtual ICollection<Payment> Payments { get; private set; }
 
     public virtual ICollection<SubscriptionPaid> SubscriptionsPaid { get; private set; }
-    
+
     public DateTime AuditCreatedAt { get; set; } = DateTime.UtcNow;
-    
+
     [MaxLength(200)]
     public string AuditCreatedBy { get; set; } = string.Empty;
-    
+
     public DateTime AuditModifiedAt { get; set; } = DateTime.UtcNow;
-    
+
     [MaxLength(200)]
     public string AuditModifiedBy { get; set; } = string.Empty;
-    
+
     public Guid TenantId { get; set; }
 
     public Member(ICollection<Payment> payments, ICollection<SubscriptionPaid> subscriptionsPaid)

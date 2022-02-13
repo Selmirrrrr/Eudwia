@@ -34,7 +34,7 @@ public record MembersUpdateCommand
     public Language Language { get; set; }
 }
 
-public class MembersUpdateCommandValidator : AbstractValidator<MembersUpdateCommand> 
+public class MembersUpdateCommandValidator : AbstractValidator<MembersUpdateCommand>
 {
     public MembersUpdateCommandValidator()
     {
@@ -53,10 +53,10 @@ public class MembersUpdateCommandValidator : AbstractValidator<MembersUpdateComm
         RuleFor(x => x.Email).EmailAddress().When(x => !string.IsNullOrWhiteSpace(x.Email));
         RuleFor(x => x.PhoneNumber).Length(9, 50).When(x => !string.IsNullOrWhiteSpace(x.PhoneNumber));
     }
-    
+
     public Func<object, string, Task<IEnumerable<string>>> ValidateValue => async (model, propertyName) =>
     {
-        var result = await ValidateAsync(ValidationContext<MembersUpdateCommand>.CreateWithOptions((MembersUpdateCommand)model, x => x.IncludeProperties(propertyName)));
+        var result = await ValidateAsync(ValidationContext<MembersUpdateCommand>.CreateWithOptions((MembersUpdateCommand) model, x => x.IncludeProperties(propertyName)));
         return result.IsValid ? Array.Empty<string>() : result.Errors.Select(e => e.ErrorMessage);
     };
 }

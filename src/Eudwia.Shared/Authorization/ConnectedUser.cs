@@ -7,18 +7,16 @@ public class ConnectedUserHandler : AuthorizationHandler<ConnectedUserRequiremen
 {
     protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, ConnectedUserRequirement requirement, Guid memberId)
     {
-        if (string.Equals(context.User.Id(), memberId.ToString(), StringComparison.InvariantCultureIgnoreCase))
-        {
+        if (string.Equals(context.User.Id(), memberId.ToString(), StringComparison.InvariantCultureIgnoreCase)) 
             context.Succeed(requirement);
-        }
-        
-        if (context.User.IsInRole(Roles.Admin) || context.User.IsInRole(Roles.SuperAdmin))
-        {
+
+        if (context.User.IsInRole(Roles.Admin) || context.User.IsInRole(Roles.SuperAdmin)) 
             context.Succeed(requirement);
-        }
 
         return Task.CompletedTask;
     }
 }
 
-public class ConnectedUserRequirement : IAuthorizationRequirement { }
+public class ConnectedUserRequirement : IAuthorizationRequirement
+{
+}

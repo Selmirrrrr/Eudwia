@@ -21,8 +21,8 @@ public record MembersListViewModel
     public bool November { get; set; }
     public bool December { get; set; }
 
-    public int MonthsPaid => this.GetType()
-                                 .GetProperties()
-                                 .Where(x => x.PropertyType == typeof(bool))
-                                 .Count(x => x.GetValue(this) as bool? == true);
+    public int MonthsPaid => GetType()
+        .GetProperties()
+        .Where(x => x.PropertyType == typeof(bool))
+        .Count(x => x.GetValue(this) as bool? == true);
 }

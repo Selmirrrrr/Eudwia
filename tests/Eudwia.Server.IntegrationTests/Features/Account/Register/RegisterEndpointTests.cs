@@ -8,11 +8,11 @@ using Xunit;
 namespace Eudwia.Server.IntegrationTests.Features.Account.Register;
 
 [Collection(DatabaseTestsCollection.CollectionName)]
-public class RegisterEndpointTests 
+public class RegisterEndpointTests
 {
     private readonly DatabaseFixture _databaseFixture;
 
-    public RegisterEndpointTests(DatabaseFixture  databaseFixture)
+    public RegisterEndpointTests(DatabaseFixture databaseFixture)
     {
         _databaseFixture = databaseFixture;
     }
@@ -23,9 +23,9 @@ public class RegisterEndpointTests
         // Arrange
         var client = _databaseFixture.CreateClient();
         const string password = "Passw0rd!";
-        
+
         // Act
-        var result = await client.PostAsJsonAsync("api/account/register", new RegisterModel { Email = "dfsdf@lol.ch", Password = password, ConfirmPassword = password, FirstName = "sdfs", LastName = "sdfsd" });
+        var result = await client.PostAsJsonAsync("api/account/register", new RegisterModel {Email = "dfsdf@lol.ch", Password = password, ConfirmPassword = password, FirstName = "sdfs", LastName = "sdfsd"});
 
         // Assert
         result.StatusCode.ShouldBe(System.Net.HttpStatusCode.OK);

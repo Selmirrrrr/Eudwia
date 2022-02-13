@@ -31,14 +31,11 @@ public class MembersUpdateEndpoint : ControllerBase
     {
         var member = await _applicationDbContext.Members.SingleOrDefaultAsync(x => x.Id == memberId);
 
-        if (member == null)
-        {
-            return BadRequest();
-        }
+        if (member == null) return BadRequest();
 
         var birthDate = command.BirthDate ?? new DateTime(1900, 1, 1);
         var memberSince = command.MemberSince ?? new DateTime(1900, 1, 1);
-        
+
         member.FirstName = command.FirstName;
         member.LastName = command.LastName;
         member.StreetLine1 = command.StreetLine1;

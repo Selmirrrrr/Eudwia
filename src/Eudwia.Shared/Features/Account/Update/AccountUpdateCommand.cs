@@ -19,12 +19,11 @@ public class MembersUpdateCommandValidator : AbstractValidator<AccountUpdateComm
         //RuleFor(x => x.Password).Matches(new Regex(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^a-zA-Z\d]).{8,}$"))
         //    .WithMessage("Le mot de passe doit contenir au moins 8 caractères.");
         //RuleFor(x => x.Password).Matches("");
-
     }
 
     public Func<object, string, Task<IEnumerable<string>>> ValidateValue => async (model, propertyName) =>
     {
-        var result = await ValidateAsync(ValidationContext<AccountUpdateCommand>.CreateWithOptions((AccountUpdateCommand)model, x => x.IncludeProperties(propertyName)));
+        var result = await ValidateAsync(ValidationContext<AccountUpdateCommand>.CreateWithOptions((AccountUpdateCommand) model, x => x.IncludeProperties(propertyName)));
         return result.IsValid ? Array.Empty<string>() : result.Errors.Select(e => e.ErrorMessage);
     };
 }

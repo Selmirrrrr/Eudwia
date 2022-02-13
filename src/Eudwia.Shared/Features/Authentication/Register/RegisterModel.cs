@@ -8,7 +8,7 @@ public record RegisterModel
     [Required]
     [Display(Name = "Tenant")]
     public string Tenant { get; set; } = string.Empty;
-    
+
     [Required]
     [EmailAddress(ErrorMessage = "The value is not valid email address")]
     [Display(Name = "Email")]
@@ -30,7 +30,7 @@ public record RegisterModel
     public string LastName { get; set; } = string.Empty;
 }
 
-public class RegisterModelValidator : AbstractValidator<RegisterModel> 
+public class RegisterModelValidator : AbstractValidator<RegisterModel>
 {
     public RegisterModelValidator()
     {
@@ -40,11 +40,12 @@ public class RegisterModelValidator : AbstractValidator<RegisterModel>
         RuleFor(x => x.Password).NotEmpty().MinimumLength(8);
         RuleFor(x => x.Password)
             .Equal(x => x.ConfirmPassword)
-            .When(x=>!string.IsNullOrWhiteSpace(x.Password));}
-    
+            .When(x => !string.IsNullOrWhiteSpace(x.Password));
+    }
+
     public Func<object, string, Task<IEnumerable<string>>> ValidateValue => async (model, propertyName) =>
     {
-        var result = await ValidateAsync(ValidationContext<RegisterModel>.CreateWithOptions((RegisterModel)model, x => x.IncludeProperties(propertyName)));
+        var result = await ValidateAsync(ValidationContext<RegisterModel>.CreateWithOptions((RegisterModel) model, x => x.IncludeProperties(propertyName)));
         return result.IsValid ? Array.Empty<string>() : result.Errors.Select(e => e.ErrorMessage);
     };
 }

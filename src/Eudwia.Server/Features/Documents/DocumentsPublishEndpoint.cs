@@ -30,16 +30,16 @@ public class DocumentsPublishEndpoint : ControllerBase
             !string.IsNullOrWhiteSpace(m.City) &&
             !string.IsNullOrWhiteSpace(m.ZipCode) &&
             !string.IsNullOrWhiteSpace(m.HouseNumber)).Select(m => new DocumentViewModel
-            {
-                FirstName = m.FirstName,
-                LastName = m.LastName,
-                StreetLine1 = m.StreetLine1,
-                HouseNumber = m.HouseNumber,
-                City = m.City,
-                ZipCode = m.ZipCode,
-                Country = m.Country.Name,
-                State = m.State
-            }).AsAsyncEnumerable();
+        {
+            FirstName = m.FirstName,
+            LastName = m.LastName,
+            StreetLine1 = m.StreetLine1,
+            HouseNumber = m.HouseNumber,
+            City = m.City,
+            ZipCode = m.ZipCode,
+            Country = m.Country.Name,
+            State = m.State
+        }).AsAsyncEnumerable();
 
 
         var path = Path.GetTempFileName();
@@ -83,7 +83,7 @@ public class DocumentsPublishEndpoint : ControllerBase
 
     private static void MergeXmlDocuments(Stream outStream, List<Source> sources)
     {
-        WmlDocument buildDocument = DocumentBuilder.BuildDocument(sources);
+        var buildDocument = DocumentBuilder.BuildDocument(sources);
         buildDocument.WriteByteArray(outStream);
     }
 }
