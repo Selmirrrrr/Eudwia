@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Eudwia.Server.Data.Contexts.Extensions;
+using Eudwia.Server.Data.Contracts;
+using Eudwia.Server.Providers;
 using Eudwia.Server.Settings;
 using Microsoft.Extensions.Options;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Infrastructure;
@@ -13,13 +15,19 @@ public class ApplicationDbContext : IdentityDbContext<Member, IdentityRole<Guid>
 {
     private readonly ILoggerFactory _loggerFactory;
     private readonly IContextConfiguration _config;
+    private readonly ICurrentUserProvider _currentUserProvider;
     private readonly SuperAdminAccountSettings _adminAccountSettings;
 
-    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options, ILoggerFactory loggerFactory, IContextConfiguration config, IOptions<SuperAdminAccountSettings> adminAccountSettings)
+    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options,
+        ILoggerFactory loggerFactory, 
+        IContextConfiguration config, 
+        IOptions<SuperAdminAccountSettings> adminAccountSettings,
+        ICurrentUserProvider currentUserProvider)
         : base(options)
     {
         _loggerFactory = loggerFactory;
         _config = config;
+        _currentUserProvider = currentUserProvider;
         _adminAccountSettings = adminAccountSettings.Value;
     }
 
@@ -51,5 +59,25 @@ public class ApplicationDbContext : IdentityDbContext<Member, IdentityRole<Guid>
 
     private void SqlServerOptionsAction(NpgsqlDbContextOptionsBuilder optionsBuilder)
         => optionsBuilder.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.GetName().Name);
+    
+    public async override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+    {
+        var addedEntries = ChangeTracker.Entries<IAuditableEntity>().Where(x => x.State == EntityState.Added);
+        var modifiedEntries = ChangeTracker.Entries<IAuditableEntity>().Where(x => x.State == EntityState.Modified);
+
+        foreach (var entry in addedEntries)
+        {
+            entry.CurrentValues[nameof(IAuditableEntity.AuditCreatedAt)] = DateTime.UtcNow;
+            entry.CurrentValues[nameof(IAuditableEntity.AuditCreatedBy)] = _currentUserProvider.Username;
+        }
+
+        foreach (var entry in modifiedEntries)
+        {
+            entry.CurrentValues[nameof(IAuditableEntity.AuditModifiedAt)] = DateTime.UtcNow;
+            entry.CurrentValues[nameof(IAuditableEntity.AuditModifiedBy)] = _currentUserProvider.Username;
+        }
+
+        return await base.SaveChangesAsync(cancellationToken);
+    }
 
 }

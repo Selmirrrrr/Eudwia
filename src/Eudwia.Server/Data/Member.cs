@@ -1,10 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Eudwia.Server.Data.Contracts;
 using Microsoft.AspNetCore.Identity;
 using Eudwia.Shared.Enums;
 
 namespace Eudwia.Server.Data;
 
-public class Member : IdentityUser<Guid>
+public class Member : IdentityUser<Guid>, IAuditableEntity
 {
     [Required]
     [MinLength(2)]
@@ -55,6 +56,11 @@ public class Member : IdentityUser<Guid>
     public virtual ICollection<Payment> Payments { get; private set; }
 
     public virtual ICollection<SubscriptionPaid> SubscriptionsPaid { get; private set; }
+    
+    public DateTime AuditCreatedAt { get; set; } = DateTime.UtcNow;
+    public string AuditCreatedBy { get; set; } = string.Empty;
+    public DateTime AuditModifiedAt { get; set; } = DateTime.UtcNow;
+    public string AuditModifiedBy { get; set; } = string.Empty;
 
     public Member(ICollection<Payment> payments, ICollection<SubscriptionPaid> subscriptionsPaid)
     {
