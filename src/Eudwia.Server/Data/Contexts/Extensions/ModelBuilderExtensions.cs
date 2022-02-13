@@ -313,26 +313,28 @@ public static class ModelBuilderExtensions
 
     public static Member CreateMember()
     {
-        _faker ??= new Faker("fr");
+        var faker = new Faker("fr");
 
         var guid = Guid.NewGuid();
         return new Member
         {
             Id = guid,
-            FirstName = _faker.Name.FirstName(),
-            LastName = _faker.Name.LastName(),
-            Email = _faker.Person.Email,
-            PhoneNumber = _faker.Person.Phone,
-            BirthDate = _faker.Date.PastDateOnly(50, new DateOnly(2000, 1, 1)),
-            MemberSince = _faker.Date.PastDateOnly(10),
-            StreetLine1 = _faker.Address.StreetAddress(),
-            StreetLine2 = _faker.Address.SecondaryAddress(),
-            HouseNumber = _faker.Address.BuildingNumber(),
-            City = _faker.Address.City(),
-            ZipCode = _faker.Address.ZipCode(),
+            FirstName = faker.Name.FirstName(),
+            LastName = faker.Name.LastName(),
+            Email = faker.Person.Email,
+            PhoneNumber = faker.Person.Phone,
+            BirthDate = faker.Date.PastDateOnly(50, new DateOnly(2000, 1, 1)),
+            MemberSince = faker.Date.PastDateOnly(10),
+            StreetLine1 = faker.Address.StreetAddress(),
+            StreetLine2 = faker.Address.SecondaryAddress(),
+            HouseNumber = faker.Address.BuildingNumber(),
+            City = faker.Address.City(),
+            ZipCode = faker.Address.ZipCode(),
             State = "VD",
             CountryId = Guid.Parse("9bc1f1a9-7696-42e4-89aa-c93800704582"),
-            Language = _faker.Random.Enum<Language>()
+            Language = faker.Random.Enum<Language>(),
+            SecurityStamp = Guid.NewGuid().ToString(),
+            UserName = faker.Person.Email,
         };
     }
 
