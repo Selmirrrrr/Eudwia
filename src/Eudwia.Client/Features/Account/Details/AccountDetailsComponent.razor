@@ -1,7 +1,8 @@
 ﻿@page "/personal/account"
-@using Eudwia.Shared.Features.Account.Update
 @using Eudwia.Shared.Features.Account.Details
 @using Eudwia.Shared.Extensions
+@using Eudwia.Shared.Features.Members.Security
+@using Microsoft.AspNetCore.Components
 @using Color = MudBlazor.Color
 @using Align = MudBlazor.Align
 @inject HttpClient _httpClient
@@ -40,15 +41,43 @@
                         <MudCardContent>
                             <MudGrid>
                                 <MudItem xs="12" md="6">
-                                    <MudTextField @bind-Value="_userDetails.FirstName" Label="First Name" Variant="Variant.Outlined" />
+                                    <MudTextField @bind-Value="_userDetails.FirstName" Label="Prénom" Variant="Variant.Outlined"/>
                                 </MudItem>
                                 <MudItem xs="12" md="6">
-                                    <MudTextField @bind-Value="_userDetails.LastName" Label="Last Name" Variant="Variant.Outlined" />
+                                    <MudTextField @bind-Value="_userDetails.LastName" Label="Nom" Variant="Variant.Outlined"/>
                                 </MudItem>
                                 <MudItem xs="12" md="6">
-                                    <MudTextField Value="context?.User?.Identity?.Name" Label="Email" Variant="Variant.Outlined" HelperText="Dont worry, we shall not spam!" Disabled="true" InputType="InputType.Email"/>
+                                    <MudTextField Value="context?.User?.Identity?.Name" Label="Email" Variant="Variant.Outlined" Disabled="true" InputType="InputType.Email"/>
                                 </MudItem>
                             </MudGrid>
+                        </MudCardContent>
+                    </MudCard>
+                </MudItem>
+            </MudGrid>
+        </MudTabPanel>
+        <MudTabPanel Text="Sécurité">
+            <MudGrid>
+                <MudItem xs="12" sm="12" md="12">
+                    <MudCard>
+                        <MudCardHeader>
+                            <CardHeaderContent>
+                                <MudText>Mot de passe</MudText>
+                            </CardHeaderContent>
+                        </MudCardHeader>
+                        <MudCardContent>
+                            <MudForm Model="@_model" @ref="@Form">
+                                <MudGrid>
+                                    <MudItem xs="12" md="5">
+                                        <MudTextField Variant="Variant.Outlined" @bind-Value="_model.Password" Validation="@(_validator.ValidateValue)" For="@(() => _model.Password)" Immediate="true" Label="Mot de passe"/>
+                                    </MudItem>
+                                    <MudItem xs="12" md="5">
+                                        <MudTextField Variant="Variant.Outlined" @bind-Value="_model.ConfirmPassword" Validation="@(_validator.ValidateValue)" For="@(() => _model.ConfirmPassword)" Immediate="true" Label="Confirmation°"/>
+                                    </MudItem>
+                                    <MudItem xs="12" md="2">
+                                        <MudButton FullWidth="true" Class="pa-3 mt-2" Variant="Variant.Filled" Color="Color.Primary" StartIcon="@Icons.Material.Filled.SaveAlt" OnClick="@(async () => await Submit())">Enregistrer</MudButton>
+                                    </MudItem>
+                                </MudGrid>
+                            </MudForm>
                         </MudCardContent>
                     </MudCard>
                 </MudItem>
@@ -58,16 +87,33 @@
 </AuthorizeView>
 
 @code {
-    private AccountUpdateCommand _model = new();
+    private MudForm Form { get; set; } = default!;
     private AccountDetailsViewModel _userDetails = new();
+    private readonly MembersSecuritySetPasswordCommand _model = new();
+    private readonly MembersSecuritySetPasswordCommandValidator _validator = new();
+    private string _currentUserId = string.Empty;
 
     protected override async Task OnInitializedAsync()
     {
-
         var authstate = await _getAuthenticationStateAsync.GetAuthenticationStateAsync();
         var user = authstate.User;
-        var username = user.Id();
+        _currentUserId = user.Id();
 
-        _userDetails = await _httpClient.GetFromJsonAsync<AccountDetailsViewModel>($"api/account/{username}") ?? new AccountDetailsViewModel();
+        _userDetails = await _httpClient.GetFromJsonAsync<AccountDetailsViewModel>($"api/account/{_currentUserId}") ?? new AccountDetailsViewModel();
     }
+
+    private async Task Submit()
+    {
+        var result = await _httpClient.PostAsJsonAsync($"api/members/{_currentUserId}/password", _model);
+        if (result.IsSuccessStatusCode)
+        {
+            _snackbar.Add("Le mot de passe a été mis à jour.", Severity.Success);
+        }
+        else
+        {
+            var errors = await result.Content.ReadAsStringAsync();
+            _snackbar.Add(errors, Severity.Error);
+        }
+    }
+
 }
