@@ -1,13 +1,13 @@
 ﻿using System.Net.Mime;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
 using Eudwia.Server.Data;
 using Eudwia.Server.Data.Contexts;
 using Eudwia.Shared.Authorization;
 using Eudwia.Shared.Features.Authentication.Register;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-namespace Eudwia.Server.Features.Authentication.Register;
+namespace Eudwia.Server.Features.Account.Register;
 
 [Route("api")]
 [ApiController]

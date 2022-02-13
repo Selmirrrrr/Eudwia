@@ -5,7 +5,7 @@ using Eudwia.Shared.Features.Authentication.Register;
 using Shouldly;
 using Xunit;
 
-namespace Eudwia.Server.IntegrationTests.Features.Authentication.Register;
+namespace Eudwia.Server.IntegrationTests.Features.Account.Register;
 
 [Collection(DatabaseTestsCollection.CollectionName)]
 public class RegisterEndpointTests 

@@ -1,4 +1,4 @@
-﻿@page "/register"
+﻿@page "/account/register"
 @using Eudwia.Shared.Features.Authentication.Register
 @using Color = MudBlazor.Color
 @layout LoginLayout
@@ -11,8 +11,8 @@
 
 <MudForm @ref="_form" @bind-IsValid="@_success" @bind-Errors="@_errors">
 
-    <MudText Typo="Typo.h4" GutterBottom="true">Sign Up</MudText>
-    <MudText>Déjà enregistré? <MudLink Href="/authentication/login">Connexion</MudLink></MudText>
+    <MudText Typo="Typo.h4" GutterBottom="true">Créer un compte</MudText>
+    <MudText>Déjà enregistré? <MudLink Href="/account/login">Connexion</MudLink></MudText>
 
     <MudTextField T="string" @bind-Value="_model.Tenant" Required="true" RequiredError="Tenant is required!" Label="Tenant" Variant=" Variant.Outlined" Class="mt-4"></MudTextField>
     <MudTextField T="string" @bind-Value="_model.FirstName" Required="true" RequiredError="First name is required!" Label="First Name " Variant=" Variant.Outlined" Class="mt-4"></MudTextField>
@@ -76,7 +76,7 @@
         var registerResult = await response.Content.ReadFromJsonAsync<RegisterResult>();
 
         if (registerResult?.Successful == true)
-            _navigationManager.NavigateTo("authentication/login");
+            _navigationManager.NavigateTo("account/login");
         else
         {
             _showErrorAlert = true;

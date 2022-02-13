@@ -20,7 +20,7 @@ public class AccountUpdateEndpoint : ControllerBase
         _userManager = userManager;
     }
 
-    [HttpPost("account/{id}")]
+    [HttpPost("account/{id:guid}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [Authorize]
@@ -29,7 +29,7 @@ public class AccountUpdateEndpoint : ControllerBase
         var user = await _userManager.FindByIdAsync(id.ToString());
         if (user is null)
         {
-            return BadRequest("error");
+            return NotFound("Utilisateur introuvable.");
         }
 
         user.FirstName = accountUpdate.FirstName;

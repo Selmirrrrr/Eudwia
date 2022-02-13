@@ -30,8 +30,4 @@
 		<ProjectReference Include="..\Eudwia.Client\Eudwia.Client.csproj" />
 		<ProjectReference Include="..\Eudwia.Shared\Eudwia.Shared.csproj" />
 	</ItemGroup>
-
-	<ItemGroup>
-		<Folder Include="Features\Authentication" />
-	</ItemGroup>
 </Project>

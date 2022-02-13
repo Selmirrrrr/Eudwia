@@ -2,15 +2,15 @@
 using System.Net.Mime;
 using System.Security.Claims;
 using System.Text;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.Tokens;
 using Eudwia.Server.Data;
 using Eudwia.Server.Settings;
 using Eudwia.Shared.Features.Authentication.Login;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 
-namespace Eudwia.Server.Features.Authentication.Login;
+namespace Eudwia.Server.Features.Account.Login;
 
 [Route("api")]
 [ApiController]
