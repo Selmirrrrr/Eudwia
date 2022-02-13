@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 
-namespace Eudwia.Client.Features.Authentication.Login;
+namespace Eudwia.Client.Features.Account.Login;
 
 public partial class RedirectToLogin : ComponentBase 
 {
@@ -10,6 +10,6 @@ public partial class RedirectToLogin : ComponentBase
 
     protected override void OnInitialized()
     {
-        NavigationManager.NavigateTo("authentication/login");
+        NavigationManager.NavigateTo("account/login");
     }
 }

@@ -15,12 +15,10 @@ namespace Eudwia.Server.Features.Members.Create;
 [Produces(MediaTypeNames.Application.Json)]
 public class MembersCreateEndpoint : ControllerBase
 {
-    private readonly ApplicationDbContext _applicationDbContext;
     private readonly UserManager<Member> _userManager;
 
-    public MembersCreateEndpoint(ApplicationDbContext applicationDbContext, UserManager<Member> userManager)
+    public MembersCreateEndpoint(UserManager<Member> userManager)
     {
-        _applicationDbContext = applicationDbContext;
         _userManager = userManager;
     }
 

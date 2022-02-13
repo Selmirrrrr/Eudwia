@@ -4,7 +4,7 @@ using Eudwia.Shared.Features.Authentication.Login;
 using Shouldly;
 using Xunit;
 
-namespace Eudwia.Server.IntegrationTests.Features.Authentication.Login;
+namespace Eudwia.Server.IntegrationTests.Features.Account.Login;
 
 [Collection(DatabaseTestsCollection.CollectionName)]
 public class LoginEndpointTests 
