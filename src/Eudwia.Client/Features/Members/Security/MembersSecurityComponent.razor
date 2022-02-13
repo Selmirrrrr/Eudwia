@@ -57,8 +57,8 @@
 
     private MudForm Form { get; set; } = default!;
     private string SelectedRole { get; set; } = string.Empty;
-    private readonly MembersPasswordUpdateCommand _model = new();
-    private readonly MembersPasswordUpdateCommandValidator _validator = new();
+    private readonly MembersSecuritySetPasswordCommand _model = new();
+    private readonly MembersSecuritySetPasswordCommandValidator _validator = new();
     private MembersSecurityGetRolesViewModel _roles = new();
     private bool _isUser;
     
@@ -78,7 +78,16 @@
 
     private async Task Submit()
     {
-        
+        var result = await _httpClient.PostAsJsonAsync($"api/members/{MemberId}/password", _model);
+        if (result.IsSuccessStatusCode)
+        {
+            _snackbar.Add("Le mot de passe a été mis à jour.", Severity.Success);
+        }
+        else
+        {
+            var errors = await result.Content.ReadAsStringAsync();
+            _snackbar.Add(errors, Severity.Warning);
+        }
     }
 
     private async Task AdminRoleChanged(string role, bool value)
