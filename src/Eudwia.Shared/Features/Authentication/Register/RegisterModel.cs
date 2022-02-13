@@ -6,9 +6,12 @@ namespace Eudwia.Shared.Features.Authentication.Register;
 public record RegisterModel
 {
     [Required]
+    [Display(Name = "Tenant")]
+    public string Tenant { get; set; } = string.Empty;
+    
+    [Required]
     [EmailAddress(ErrorMessage = "The value is not valid email address")]
     [Display(Name = "Email")]
-
     public string Email { get; set; } = string.Empty;
 
     [Required]

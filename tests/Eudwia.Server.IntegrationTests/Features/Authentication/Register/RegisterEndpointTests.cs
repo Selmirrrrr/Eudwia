@@ -52,8 +52,7 @@ public class RegisterEndpointTests
         var result = await client.PostAsJsonAsync("api/account/login", new LoginCommand
         {
             Email = email,
-            Password = password,
-            RememberMe = true
+            Password = password
         });
 
         // Assert

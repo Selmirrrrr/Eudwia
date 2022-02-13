@@ -7,8 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using Eudwia.Server.Data;
 using Eudwia.Server.Settings;
-using Eudwia.Shared;
 using Eudwia.Shared.Features.Authentication.Login;
+using Microsoft.EntityFrameworkCore;
 
 namespace Eudwia.Server.Features.Authentication.Login;
 
@@ -34,11 +34,13 @@ public class LoginEndpoint : ControllerBase
     [ProducesDefaultResponseType]
     public async Task<ActionResult<IList<LoginResult>>> HandleAsync(LoginCommand request, CancellationToken cancellationToken = default)
     {
-        var result = await _signInManager.PasswordSignInAsync(request.Email, request.Password, false, false);
+        var user = _userManager.Users.IgnoreQueryFilters().FirstOrDefault(u => u.Email.Equals(request.Email));
+
+        if (user is null) return BadRequest(new LoginResult { Successful = false, Error = "Username and password are invalid." });
+
+        var result = await _signInManager.PasswordSignInAsync(user, request.Password, false, false);
 
         if (!result.Succeeded) return BadRequest(new LoginResult { Successful = false, Error = "Username and password are invalid." });
-
-        var user = await _userManager.FindByEmailAsync(request.Email);
 
         var claims = new List<Claim>
         {
@@ -46,7 +48,8 @@ public class LoginEndpoint : ControllerBase
             new("FirstName", user.FirstName),
             new("LastName", user.LastName),
             new("Id", user.Id.ToString()),
-            new("Lang", user.Language.ToString())
+            new("Lang", user.Language.ToString()),
+            new("Tenant", user.TenantId.ToString())
         };
         
         claims.AddRange((await _userManager.GetRolesAsync(user)).Select(role => new Claim(ClaimTypes.Role, role)).ToList());

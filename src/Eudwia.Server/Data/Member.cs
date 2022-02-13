@@ -5,7 +5,7 @@ using Eudwia.Shared.Enums;
 
 namespace Eudwia.Server.Data;
 
-public class Member : IdentityUser<Guid>, IAuditableEntity
+public class Member : IdentityUser<Guid>, IAuditableEntity, ITenantEntity
 {
     [Required]
     [MinLength(2)]
@@ -58,9 +58,16 @@ public class Member : IdentityUser<Guid>, IAuditableEntity
     public virtual ICollection<SubscriptionPaid> SubscriptionsPaid { get; private set; }
     
     public DateTime AuditCreatedAt { get; set; } = DateTime.UtcNow;
+    
+    [MaxLength(200)]
     public string AuditCreatedBy { get; set; } = string.Empty;
+    
     public DateTime AuditModifiedAt { get; set; } = DateTime.UtcNow;
+    
+    [MaxLength(200)]
     public string AuditModifiedBy { get; set; } = string.Empty;
+    
+    public Guid TenantId { get; set; }
 
     public Member(ICollection<Payment> payments, ICollection<SubscriptionPaid> subscriptionsPaid)
     {

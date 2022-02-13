@@ -35,6 +35,7 @@ public class ApplicationDbContext : IdentityDbContext<Member, IdentityRole<Guid>
     public virtual DbSet<Country> Countries { get; set; }
     public virtual DbSet<Payment> Payments { get; set; }
     public virtual DbSet<SubscriptionPaid> SubscriptionsPaid { get; set; }
+    public virtual DbSet<Tenant> Tenants { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -44,6 +45,9 @@ public class ApplicationDbContext : IdentityDbContext<Member, IdentityRole<Guid>
         modelBuilder.Seed();
 
         modelBuilder.Entity<SubscriptionPaid>().HasKey(o => new { o.MemberId, o.Year });
+        modelBuilder.Entity<Member>().HasQueryFilter(b => EF.Property<Guid>(b, "TenantId") == _currentUserProvider.TenantId);
+        modelBuilder.Entity<Payment>().HasQueryFilter(b => EF.Property<Guid>(b, "TenantId") == _currentUserProvider.TenantId);
+        modelBuilder.Entity<SubscriptionPaid>().HasQueryFilter(b => EF.Property<Guid>(b, "TenantId") == _currentUserProvider.TenantId);
     }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -60,11 +64,17 @@ public class ApplicationDbContext : IdentityDbContext<Member, IdentityRole<Guid>
     private void SqlServerOptionsAction(NpgsqlDbContextOptionsBuilder optionsBuilder)
         => optionsBuilder.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.GetName().Name);
     
-    public async override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+    public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
     {
+        var addedTenantEntries = ChangeTracker.Entries<ITenantEntity>().Where(x => x.State == EntityState.Added);
         var addedEntries = ChangeTracker.Entries<IAuditableEntity>().Where(x => x.State == EntityState.Added);
         var modifiedEntries = ChangeTracker.Entries<IAuditableEntity>().Where(x => x.State == EntityState.Modified);
 
+        foreach (var entry in addedTenantEntries.Where(x => x.Entity.TenantId == Guid.Empty))
+        {
+            entry.Entity.TenantId = _currentUserProvider.TenantId;
+        }
+        
         foreach (var entry in addedEntries)
         {
             entry.CurrentValues[nameof(IAuditableEntity.AuditCreatedAt)] = DateTime.UtcNow;

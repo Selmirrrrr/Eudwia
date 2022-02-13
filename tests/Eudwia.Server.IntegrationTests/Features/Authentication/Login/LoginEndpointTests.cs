@@ -23,7 +23,7 @@ public class LoginEndpointTests
         var client = _databaseFixture.CreateClient();
 
         // Act
-        var result = await client.PostAsJsonAsync("api/account/login", new LoginCommand { Email = "pauljean.ch", Password = "sdfsdsdfs", RememberMe = true });
+        var result = await client.PostAsJsonAsync("api/account/login", new LoginCommand { Email = "pauljean.ch", Password = "sdfsdsdfs" });
 
         // Assert
         result.StatusCode.ShouldBe(System.Net.HttpStatusCode.BadRequest);
