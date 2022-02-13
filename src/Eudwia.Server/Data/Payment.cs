@@ -1,8 +1,9 @@
-﻿using Eudwia.Shared.Enums;
+﻿using Eudwia.Server.Data.Contracts;
+using Eudwia.Shared.Enums;
 
 namespace Eudwia.Server.Data;
 
-public class Payment
+public class Payment : IAuditableEntity
 {
     public Guid Id { get; set; }
 
@@ -19,4 +20,9 @@ public class Payment
     public PaymentType PaymentType { get; set; }
 
     public DateTime PaymentDate { get; set; }
+    
+    public DateTime AuditCreatedAt { get; set; } = DateTime.UtcNow;
+    public string AuditCreatedBy { get; set; } = string.Empty;
+    public DateTime AuditModifiedAt { get; set; } = DateTime.UtcNow;
+    public string AuditModifiedBy { get; set; } = string.Empty;
 }

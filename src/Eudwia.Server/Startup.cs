@@ -8,6 +8,7 @@ using Eudwia.Server.Data.Contexts;
 using Swashbuckle.AspNetCore.Filters;
 using System.Reflection;
 using System.Text;
+using Eudwia.Server.Providers;
 using Eudwia.Server.Settings;
 using Eudwia.Shared.Authorization;
 using Eudwia.Shared.Enums;
@@ -123,6 +124,10 @@ public class Startup
             config.AddPolicy(Policies.IsUser, Policies.IsUserPolicy());
             config.AddPolicy(Policies.IsCurrentdUser, policy => policy.Requirements.Add(new ConnectedUserRequirement()));
         });
+        
+        //current user provider
+        services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+        services.AddScoped<ICurrentUserProvider, CurrentUserProvider>();
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
