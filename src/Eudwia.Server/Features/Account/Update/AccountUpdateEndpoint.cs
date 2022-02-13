@@ -27,10 +27,7 @@ public class AccountUpdateEndpoint : ControllerBase
     public async Task<IActionResult> Handle(Guid id, [FromBody] AccountUpdateCommand accountUpdate)
     {
         var user = await _userManager.FindByIdAsync(id.ToString());
-        if (user is null)
-        {
-            return NotFound("Utilisateur introuvable.");
-        }
+        if (user is null) return NotFound("Utilisateur introuvable.");
 
         user.FirstName = accountUpdate.FirstName;
         user.LastName = accountUpdate.LastName;

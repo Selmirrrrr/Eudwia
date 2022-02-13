@@ -115,7 +115,7 @@ public class Startup
 
         services.AddSingleton(jwtSettings);
         services.Configure<SuperAdminAccountSettings>(Configuration.GetSection(SuperAdminAccountSettings.Position));
-        
+
         //configure authorization
         services.AddAuthorization(config =>
         {
@@ -124,7 +124,7 @@ public class Startup
             config.AddPolicy(Policies.IsUser, Policies.IsUserPolicy());
             config.AddPolicy(Policies.IsCurrentdUser, policy => policy.Requirements.Add(new ConnectedUserRequirement()));
         });
-        
+
         //current user provider
         services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         services.AddScoped<ICurrentUserProvider, CurrentUserProvider>();

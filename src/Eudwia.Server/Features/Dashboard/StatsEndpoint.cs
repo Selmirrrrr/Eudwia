@@ -30,24 +30,24 @@ public class StatsEndpoint : ControllerBase
         var result = new StatsViewModel();
         result.MembersCount = await _context.Members.CountAsync();
         result.PaidMembersCount = await _context.Members.CountAsync(
-            m => m.SubscriptionsPaid.Any(s => s.Year == year && 
-                                            (s.January || 
-                                             s.February ||
-                                             s.March ||
-                                             s.April ||
-                                             s.May ||
-                                             s.June ||
-                                             s.July ||
-                                             s.August ||
-                                             s.September ||
-                                             s.October ||
-                                             s.November ||
-                                             s.December)));
+            m => m.SubscriptionsPaid.Any(s => s.Year == year &&
+                                              (s.January ||
+                                               s.February ||
+                                               s.March ||
+                                               s.April ||
+                                               s.May ||
+                                               s.June ||
+                                               s.July ||
+                                               s.August ||
+                                               s.September ||
+                                               s.October ||
+                                               s.November ||
+                                               s.December)));
         result.TotalRevenue = await _context.Payments.Where(p => p.PaymentDate.Year == year).SumAsync(p => p.Amount);
         result.TopDonator = (await _context.Members.OrderByDescending(m => m.Payments.Where(p => p.PaymentType == Shared.Enums.PaymentType.Donation).Sum(p => p.Amount))
-                                                   .Take(1)
-                                                   .Select(m => new { Name = $"{m.FirstName} {m.LastName}" })
-                                                   .FirstAsync()).Name;
+            .Take(1)
+            .Select(m => new {Name = $"{m.FirstName} {m.LastName}"})
+            .FirstAsync()).Name;
 
         return Ok(result);
     }

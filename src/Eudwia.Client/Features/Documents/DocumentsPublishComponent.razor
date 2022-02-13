@@ -98,7 +98,7 @@
         form.Add(fileContent, "file", file.Name);
 
         var response = await _httpClient.PostAsync($"/api/documents/publish", form);
-        using var streamRef = new DotNetStreamReference(stream: await response.Content.ReadAsStreamAsync());
+        using var streamRef = new DotNetStreamReference(await response.Content.ReadAsStreamAsync());
 
         await _jsRuntime.InvokeVoidAsync("downloadFileFromStream", "courrier.docx", streamRef);
         _loading = false;

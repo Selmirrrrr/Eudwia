@@ -10,7 +10,7 @@ using Xunit;
 namespace Eudwia.Server.IntegrationTests.Features.Members.List;
 
 [Collection(DatabaseTestsCollection.CollectionName)]
-public class MembersListEndpointTests 
+public class MembersListEndpointTests
 {
     private readonly DatabaseFixture _databaseFixture;
 

@@ -11,11 +11,11 @@ using Xunit;
 namespace Eudwia.Server.IntegrationTests.Features.Account.Update;
 
 [Collection(DatabaseTestsCollection.CollectionName)]
-public class AccountUpdateEndpointTests 
+public class AccountUpdateEndpointTests
 {
     private readonly DatabaseFixture _databaseFixture;
 
-    public AccountUpdateEndpointTests(DatabaseFixture  databaseFixture)
+    public AccountUpdateEndpointTests(DatabaseFixture databaseFixture)
     {
         _databaseFixture = databaseFixture;
     }
@@ -28,7 +28,7 @@ public class AccountUpdateEndpointTests
 
         using var userManager = _databaseFixture.Services.CreateScope().ServiceProvider.GetRequiredService<UserManager<Member>>();
         var userId = (await userManager.FindByEmailAsync(DatabaseFixture.TestEmail)).Id;
-        
+
         // Act
         var updateResult = await client.PostAsJsonAsync($"api/account/{userId}", new AccountUpdateCommand
         {

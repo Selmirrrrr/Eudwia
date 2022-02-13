@@ -31,8 +31,9 @@ public class MemebersSecurityGetRolesEndpoint : ControllerBase
 
         var isAdmin = await _userManager.IsInRoleAsync(member, Roles.SuperAdmin) ||
                       await _userManager.IsInRoleAsync(member, Roles.Admin);
-        var isUser = await _userManager.IsInRoleAsync(member, Roles.User);;
-        
-        return Ok(new MembersSecurityGetRolesViewModel { IsAdmin = isAdmin, IsUser = isUser});
+        var isUser = await _userManager.IsInRoleAsync(member, Roles.User);
+        ;
+
+        return Ok(new MembersSecurityGetRolesViewModel {IsAdmin = isAdmin, IsUser = isUser});
     }
 }

@@ -38,7 +38,7 @@ public class MembersDetailsEndpoint : ControllerBase
             if (!authorizationResult.Succeeded)
                 return Forbid();
         }
-        
+
         var member = await _applicationDbContext.Members.Select(m => new MembersDetailsViewModel
         {
             Id = m.Id,
@@ -58,21 +58,21 @@ public class MembersDetailsEndpoint : ControllerBase
             PhoneNumber = m.PhoneNumber,
             MemberSince = m.MemberSince.ToDateTime(new TimeOnly(0, 0)),
             MonthsPaidByYears = m.SubscriptionsPaid.Select(spg => new MembersDetailsViewModel.MonthsPaidByYear
-                                                   {
-                                                       Year = spg.Year,
-                                                       January = spg.January,
-                                                       February = spg.February,
-                                                       March = spg.March,
-                                                       April = spg.April,
-                                                       May = spg.May,
-                                                       June = spg.June,
-                                                       July = spg.July,
-                                                       August = spg.August,
-                                                       September = spg.September,
-                                                       October = spg.October,
-                                                       November = spg.November,
-                                                       December = spg.December
-                                                   }).ToArray(),
+            {
+                Year = spg.Year,
+                January = spg.January,
+                February = spg.February,
+                March = spg.March,
+                April = spg.April,
+                May = spg.May,
+                June = spg.June,
+                July = spg.July,
+                August = spg.August,
+                September = spg.September,
+                October = spg.October,
+                November = spg.November,
+                December = spg.December
+            }).ToArray(),
             Payments = m.Payments.Select(p => new MembersDetailsViewModel.PaymentOverview
             {
                 Id = p.Id,

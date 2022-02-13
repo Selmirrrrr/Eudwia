@@ -60,7 +60,7 @@
     private readonly MembersSecuritySetPasswordCommand _model = new();
     private readonly MembersSecuritySetPasswordCommandValidator _validator = new();
     private MembersSecurityGetRolesViewModel _roles = new();
-    
+
     protected override async Task OnInitializedAsync()
     {
         await base.OnInitializedAsync();
@@ -99,7 +99,7 @@
         _roles.IsUser = !_roles.IsUser;
         await RoleChanged(role, value, "Utilisateur");
     }
-    
+
     private async Task RoleChanged(string role, bool value, string roleDisplayName)
     {
         var result = await _httpClient.PostAsJsonAsync($"api/members/{MemberId}/roles/{role}", value);
@@ -113,4 +113,5 @@
             _snackbar.Add(errors, Severity.Warning);
         }
     }
+
 }

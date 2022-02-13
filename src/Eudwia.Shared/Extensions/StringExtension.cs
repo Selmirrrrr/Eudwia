@@ -33,7 +33,7 @@ public static class StringExtensions
         }
 
         claims.AddRange(keyValuePairs.Where(kvp => !string.IsNullOrWhiteSpace(kvp.Value.ToString()))
-                                     .Select(kvp => new Claim(kvp.Key, kvp!.Value.ToString()!)));
+            .Select(kvp => new Claim(kvp.Key, kvp!.Value.ToString()!)));
 
         return claims;
     }
@@ -42,9 +42,14 @@ public static class StringExtensions
     {
         switch (base64.Length % 4)
         {
-            case 2: base64 += "=="; break;
-            case 3: base64 += "="; break;
+            case 2:
+                base64 += "==";
+                break;
+            case 3:
+                base64 += "=";
+                break;
         }
+
         return Convert.FromBase64String(base64);
     }
 }

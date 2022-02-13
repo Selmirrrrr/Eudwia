@@ -10,20 +10,21 @@ public interface ICurrentUserProvider
 
 public class CurrentUserProvider : ICurrentUserProvider
 {
-        private readonly IHttpContextAccessor _httpContextAccessor;
+    private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public CurrentUserProvider(IHttpContextAccessor httpContextAccessor)
+    public CurrentUserProvider(IHttpContextAccessor httpContextAccessor)
+    {
+        _httpContextAccessor = httpContextAccessor;
+    }
+
+    public string Username => _httpContextAccessor.HttpContext?.User.FindFirstValue(ClaimTypes.Name) ?? string.Empty;
+
+    public Guid TenantId
+    {
+        get
         {
-            _httpContextAccessor = httpContextAccessor;
+            Guid.TryParse(_httpContextAccessor.HttpContext?.User.FindFirstValue("Tenant"), out var tenantId);
+            return tenantId;
         }
-        
-        public string Username => _httpContextAccessor.HttpContext?.User.FindFirstValue(ClaimTypes.Name) ?? string.Empty;
-        public Guid TenantId
-        {
-            get
-            {
-                Guid.TryParse(_httpContextAccessor.HttpContext?.User.FindFirstValue("Tenant"), out var tenantId);
-                return tenantId;
-            }
-        }
+    }
 }

@@ -36,9 +36,9 @@ public class RegisterEndpoint : ControllerBase
         if (model.Tenant.Equals("DEMO", StringComparison.InvariantCultureIgnoreCase))
             tenantId = await _context.Tenants.IgnoreQueryFilters().Where(t => t.Name.Equals(model.Tenant)).Select(t => t.TenantId).FirstOrDefaultAsync();
         else if (!await _context.Tenants.IgnoreQueryFilters().AnyAsync(t => t.Name.Equals(model.Tenant)))
-            tenantId = (await _context.Tenants.AddAsync(new Tenant { Name = model.Tenant })).Entity.TenantId;
+            tenantId = (await _context.Tenants.AddAsync(new Tenant {Name = model.Tenant})).Entity.TenantId;
         else
-            return BadRequest(new RegisterResult { Successful = false, Errors = new List<string> { $"Un tenant {model.Tenant} existe déjà" } });
+            return BadRequest(new RegisterResult {Successful = false, Errors = new List<string> {$"Un tenant {model.Tenant} existe déjà"}});
 
         var newUser = new Member
         {
@@ -63,11 +63,11 @@ public class RegisterEndpoint : ControllerBase
             }
 
             await _userManager.AddToRoleAsync(newUser, Roles.Admin);
-            return Ok(new RegisterResult { Successful = true });
+            return Ok(new RegisterResult {Successful = true});
         }
 
         var errors = result.Errors.Select(x => x.Description);
 
-        return BadRequest(new RegisterResult { Successful = false, Errors = errors });
+        return BadRequest(new RegisterResult {Successful = false, Errors = errors});
     }
 }

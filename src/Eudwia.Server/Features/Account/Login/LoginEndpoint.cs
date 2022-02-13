@@ -36,11 +36,11 @@ public class LoginEndpoint : ControllerBase
     {
         var user = _userManager.Users.IgnoreQueryFilters().FirstOrDefault(u => u.Email.Equals(request.Email));
 
-        if (user is null) return BadRequest(new LoginResult { Successful = false, Error = "Username and password are invalid." });
+        if (user is null) return BadRequest(new LoginResult {Successful = false, Error = "Username and password are invalid."});
 
         var result = await _signInManager.PasswordSignInAsync(user, request.Password, false, false);
 
-        if (!result.Succeeded) return BadRequest(new LoginResult { Successful = false, Error = "Username and password are invalid." });
+        if (!result.Succeeded) return BadRequest(new LoginResult {Successful = false, Error = "Username and password are invalid."});
 
         var claims = new List<Claim>
         {
@@ -51,7 +51,7 @@ public class LoginEndpoint : ControllerBase
             new("Lang", user.Language.ToString()),
             new("Tenant", user.TenantId.ToString())
         };
-        
+
         claims.AddRange((await _userManager.GetRolesAsync(user)).Select(role => new Claim(ClaimTypes.Role, role)).ToList());
 
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtSettings.SecurityKey));
@@ -66,6 +66,6 @@ public class LoginEndpoint : ControllerBase
             signingCredentials: creds
         );
 
-        return Ok(new LoginResult { Successful = true, Token = new JwtSecurityTokenHandler().WriteToken(token) });
+        return Ok(new LoginResult {Successful = true, Token = new JwtSecurityTokenHandler().WriteToken(token)});
     }
 }

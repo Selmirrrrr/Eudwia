@@ -36,7 +36,6 @@ public class TokenAuthenticationStateProvider : AuthenticationStateProvider
         }
 
         return new AuthenticationState(new ClaimsPrincipal());
-
     }
 
     public async Task Login(string token)

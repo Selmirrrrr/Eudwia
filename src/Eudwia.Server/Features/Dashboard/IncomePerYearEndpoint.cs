@@ -32,7 +32,7 @@ public class IncomePerYearEndpoint : ControllerBase
             .GroupBy(s => new {s.PaymentDate.Year, s.PaymentType})
             .Select(s => new IncomePerYearViewModel
             {
-                Year = s.Key.Year, 
+                Year = s.Key.Year,
                 Amount = s.Sum(x => x.Amount),
                 PaymentType = s.Key.PaymentType
             })

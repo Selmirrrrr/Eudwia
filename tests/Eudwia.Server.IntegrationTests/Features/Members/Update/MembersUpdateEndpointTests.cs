@@ -14,7 +14,7 @@ using Xunit;
 namespace Eudwia.Server.IntegrationTests.Features.Members.Update;
 
 [Collection(DatabaseTestsCollection.CollectionName)]
-public class MembersUpdateEndpointTests 
+public class MembersUpdateEndpointTests
 {
     private readonly DatabaseFixture _databaseFixture;
 
@@ -31,11 +31,11 @@ public class MembersUpdateEndpointTests
 
         // Act
         var result = await client.PostAsJsonAsync($"api/members/{Guid.Empty}", new MembersUpdateCommand());
-        
+
         // Assert
         result.StatusCode.ShouldBe(HttpStatusCode.Unauthorized);
     }
-    
+
     [Fact]
     public async Task UpdateShouldSuccessWhenAllRequirementsAreMeet()
     {
@@ -63,10 +63,10 @@ public class MembersUpdateEndpointTests
             MemberSince = DateTime.Now.Date,
             Language = Language.French
         };
-        
+
         var result = await client.PostAsJsonAsync($"api/members/{baseMember.Id}", memberUpdateCommand);
         var member = await client.GetFromJsonAsync<MembersDetailsViewModel>($"api/members/{baseMember.Id}");
-        
+
         // Assert
         result.StatusCode.ShouldBe(HttpStatusCode.OK);
         member.ShouldNotBeNull();
@@ -85,7 +85,7 @@ public class MembersUpdateEndpointTests
         member.MemberSince.ShouldBe(memberUpdateCommand.MemberSince);
         member.Language.ShouldBe(memberUpdateCommand.Language);
     }
-    
+
     [Fact]
     public async Task UpdateShouldFailWhenEmailIsMalformed()
     {
@@ -113,9 +113,9 @@ public class MembersUpdateEndpointTests
             MemberSince = DateTime.Now.Date,
             Language = Language.French
         };
-        
+
         var result = await client.PostAsJsonAsync($"api/members/{baseMember.Id}", memberUpdateCommand);
-        
+
         // Assert
         result.StatusCode.ShouldBe(HttpStatusCode.BadRequest);
         var problemDetails = await result.Content.ReadFromJsonAsync<ProblemDetails>();
@@ -125,7 +125,7 @@ public class MembersUpdateEndpointTests
         problemDetails.Status.ShouldBe(400);
         problemDetails.Extensions["errors"]!.ToString().ShouldBe("{\"Email\":[\"'Email' is not a valid email address.\"]}");
     }
-    
+
     [Fact]
     public async Task UpdateShouldSucceedWhenEmailAndPhoneAreEmpty()
     {
@@ -153,13 +153,13 @@ public class MembersUpdateEndpointTests
             MemberSince = DateTime.Now.Date,
             Language = Language.French
         };
-        
+
         var result = await client.PostAsJsonAsync($"api/members/{baseMember.Id}", memberUpdateCommand);
-        
+
         // Assert
         result.StatusCode.ShouldBe(HttpStatusCode.OK);
     }
-    
+
     [Fact]
     public async Task UpdateShouldSucceedWhenStreetLine2IsEmpty()
     {
@@ -186,7 +186,7 @@ public class MembersUpdateEndpointTests
             MemberSince = DateTime.Now.Date,
             Language = Language.French
         };
-        
+
         var result = await client.PostAsJsonAsync($"api/members/{baseMember.Id}", memberUpdateCommand);
         var member = await client.GetFromJsonAsync<MembersDetailsViewModel>($"api/members/{baseMember.Id}");
 
@@ -195,7 +195,7 @@ public class MembersUpdateEndpointTests
         member.ShouldNotBeNull();
         member.StreetLine2.ShouldBeNullOrWhiteSpace();
     }
-    
+
     [Fact]
     public async Task UpdateShouldFailWhenStreetLine2Is2CharsLong()
     {
@@ -223,7 +223,7 @@ public class MembersUpdateEndpointTests
             MemberSince = DateTime.Now.Date,
             Language = Language.French
         };
-        
+
         var result = await client.PostAsJsonAsync($"api/members/{baseMember.Id}", memberUpdateCommand);
         var member = await client.GetFromJsonAsync<MembersDetailsViewModel>($"api/members/{baseMember.Id}");
 
@@ -232,7 +232,7 @@ public class MembersUpdateEndpointTests
         member.ShouldNotBeNull();
         member.StreetLine2.ShouldBe(baseMember.StreetLine2); // StreetLine2 is not updated
     }
-    
+
     [Fact]
     public async Task UpdateShouldFailWhenStreetLine2Is201CharsLong()
     {
@@ -260,7 +260,7 @@ public class MembersUpdateEndpointTests
             MemberSince = DateTime.Now.Date,
             Language = Language.French
         };
-        
+
         var result = await client.PostAsJsonAsync($"api/members/{baseMember.Id}", memberUpdateCommand);
         var member = await client.GetFromJsonAsync<MembersDetailsViewModel>($"api/members/{baseMember.Id}");
 

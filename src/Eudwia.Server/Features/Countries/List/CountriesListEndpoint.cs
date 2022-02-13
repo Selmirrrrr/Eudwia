@@ -27,7 +27,7 @@ public class CountriesListEndpoint : ControllerBase
         var countries = await _applicationDbContext.Countries.Select(m => new CountriesListViewModel
         {
             Id = m.Id,
-            Name = m.Name,
+            Name = m.Name
         }).ToListAsync();
 
         return Ok(countries);

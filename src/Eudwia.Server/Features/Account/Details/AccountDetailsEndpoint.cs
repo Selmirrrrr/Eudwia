@@ -28,17 +28,14 @@ public class AccountDetailsEndpoint : ControllerBase
     {
         var user = await _userManager.FindByIdAsync(id.ToString());
 
-        if (user is null)
-        {
-            return NotFound("user not found");
-        }
+        if (user is null) return NotFound("user not found");
 
         var details = new AccountDetailsViewModel
         {
             Id = user.Id,
             Email = user.Email,
             FirstName = user.FirstName,
-            LastName = user.LastName,
+            LastName = user.LastName
         };
 
         return Ok(details);

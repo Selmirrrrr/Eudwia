@@ -1,10 +1,9 @@
 ﻿using Xunit;
 
-namespace Eudwia.Server.IntegrationTests.Fixtures
+namespace Eudwia.Server.IntegrationTests.Fixtures;
+
+[CollectionDefinition(CollectionName)]
+public class DatabaseTestsCollection : ICollectionFixture<DatabaseFixture>
 {
-    [CollectionDefinition(CollectionName)]
-    public class DatabaseTestsCollection : ICollectionFixture<DatabaseFixture>
-    {
-        public const string CollectionName = "Database containers collection";
-    }
+    public const string CollectionName = "Database containers collection";
 }

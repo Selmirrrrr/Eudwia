@@ -27,11 +27,11 @@ public class MemebersSecurityUpdateRolesEndpoint : ControllerBase
     public async Task<ActionResult> Handle([FromRoute] Guid memberId, [FromRoute] string role, [FromBody] bool value)
     {
         var member = await _userManager.FindByIdAsync(memberId.ToString());
-        
+
         if (member is null) return NotFound(memberId);
 
         IdentityResult result;
-        
+
         if (value)
             result = await _userManager.AddToRoleAsync(member, role);
         else

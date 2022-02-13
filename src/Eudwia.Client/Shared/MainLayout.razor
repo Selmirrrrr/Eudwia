@@ -4,9 +4,9 @@
 @inject NavigationManager _navigationManager
 @inject MudTheme _theme;
 
-<MudThemeProvider Theme="_theme" />
-<MudDialogProvider />
-<MudSnackbarProvider />
+<MudThemeProvider Theme="_theme"/>
+<MudDialogProvider/>
+<MudSnackbarProvider/>
 
 <MudLayout>
     <MudAppBar Elevation="1">
@@ -14,12 +14,12 @@
             <MudText Typo="Typo.h5" Class="mudblazor-appbar-brand-text d-none d-md-flex">Eudwia</MudText>
         </MudHidden>
         <MudHidden Breakpoint="Breakpoint.MdAndUp">
-            <MudIconButton Icon="@Icons.Material.Outlined.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
+            <MudIconButton Icon="@Icons.Material.Outlined.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())"/>
         </MudHidden>
         <MudHidden Breakpoint="Breakpoint.Xs" Invert="true">
             <MudText Typo="Typo.subtitle2">Eudwia</MudText>
         </MudHidden>
-        <MudSpacer />
+        <MudSpacer/>
         <MudMenu Icon="@Icons.Material.Outlined.Translate" Color="Color.Inherit" Direction="Direction.Bottom" OffsetY="true" Dense="true">
             <MudMenuItem>🇧🇦</MudMenuItem>
             <MudMenuItem>🇫🇷</MudMenuItem>
@@ -27,21 +27,21 @@
         </MudMenu>
         <MudMenu Direction="Direction.Left" OffsetX="true" Dense="true" Class="mt-1 ml-4">
             <ActivatorContent>
-                <MudIcon Icon="@Icons.Material.Outlined.PowerSettingsNew" />
+                <MudIcon Icon="@Icons.Material.Outlined.PowerSettingsNew"/>
             </ActivatorContent>
             <ChildContent>
-                <MudListItem Text="Account" Icon="@Icons.Material.Outlined.Person" Href="/personal/account" />
-                <MudListItem Text="Logout" Icon="@Icons.Material.Outlined.Login" OnClick="Logout" Href="/account/login" />
+                <MudListItem Text="Account" Icon="@Icons.Material.Outlined.Person" Href="/personal/account"/>
+                <MudListItem Text="Logout" Icon="@Icons.Material.Outlined.Login" OnClick="Logout" Href="/account/login"/>
             </ChildContent>
         </MudMenu>
     </MudAppBar>
     <MudDrawer @bind-Open="_drawerOpen" Elevation="1" ClipMode="DrawerClipMode.Always">
-        <NavMenu />
+        <NavMenu/>
     </MudDrawer>
     <MudMainContent>
         <MudHidden Breakpoint="Breakpoint.SmAndDown">
             <MudToolBar DisableGutters="true">
-                <MudIconButton Icon="@Icons.Material.Outlined.Menu" Color="Color.Inherit" OnClick="@(_ => DrawerToggle())" Class="ml-3" />
+                <MudIconButton Icon="@Icons.Material.Outlined.Menu" Color="Color.Inherit" OnClick="@(_ => DrawerToggle())" Class="ml-3"/>
                 <MudBreadcrumbs Items="_items"></MudBreadcrumbs>
             </MudToolBar>
         </MudHidden>
@@ -77,4 +77,5 @@
         new BreadcrumbItem("Personal", "#"),
         new BreadcrumbItem("Dashboard", "#")
     };
+
 }

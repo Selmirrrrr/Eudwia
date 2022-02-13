@@ -115,7 +115,7 @@
 
 @code {
     private MudForm Form { get; set; } = default!;
-    private MembersCreateCommand _model = new MembersCreateCommand {CountryId = Guid.Parse("9bc1f1a9-7696-42e4-89aa-c93800704582")};
+    private MembersCreateCommand _model = new() {CountryId = Guid.Parse("9bc1f1a9-7696-42e4-89aa-c93800704582")};
     private IEnumerable<CountriesListViewModel> _countries = new List<CountriesListViewModel>();
     private CountriesListViewModel _selectedCountry = new();
     private readonly MembersCreateCommandValidator _validator = new();

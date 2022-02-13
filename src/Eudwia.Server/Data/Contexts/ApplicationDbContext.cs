@@ -19,8 +19,8 @@ public class ApplicationDbContext : IdentityDbContext<Member, IdentityRole<Guid>
     private readonly SuperAdminAccountSettings _adminAccountSettings;
 
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options,
-        ILoggerFactory loggerFactory, 
-        IContextConfiguration config, 
+        ILoggerFactory loggerFactory,
+        IContextConfiguration config,
         IOptions<SuperAdminAccountSettings> adminAccountSettings,
         ICurrentUserProvider currentUserProvider)
         : base(options)
@@ -44,7 +44,7 @@ public class ApplicationDbContext : IdentityDbContext<Member, IdentityRole<Guid>
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
         modelBuilder.Seed();
 
-        modelBuilder.Entity<SubscriptionPaid>().HasKey(o => new { o.MemberId, o.Year });
+        modelBuilder.Entity<SubscriptionPaid>().HasKey(o => new {o.MemberId, o.Year});
         modelBuilder.Entity<Member>().HasQueryFilter(b => EF.Property<Guid>(b, "TenantId") == _currentUserProvider.TenantId);
         modelBuilder.Entity<Payment>().HasQueryFilter(b => EF.Property<Guid>(b, "TenantId") == _currentUserProvider.TenantId);
         modelBuilder.Entity<SubscriptionPaid>().HasQueryFilter(b => EF.Property<Guid>(b, "TenantId") == _currentUserProvider.TenantId);
@@ -70,11 +70,8 @@ public class ApplicationDbContext : IdentityDbContext<Member, IdentityRole<Guid>
         var addedEntries = ChangeTracker.Entries<IAuditableEntity>().Where(x => x.State == EntityState.Added);
         var modifiedEntries = ChangeTracker.Entries<IAuditableEntity>().Where(x => x.State == EntityState.Modified);
 
-        foreach (var entry in addedTenantEntries.Where(x => x.Entity.TenantId == Guid.Empty))
-        {
-            entry.Entity.TenantId = _currentUserProvider.TenantId;
-        }
-        
+        foreach (var entry in addedTenantEntries.Where(x => x.Entity.TenantId == Guid.Empty)) entry.Entity.TenantId = _currentUserProvider.TenantId;
+
         foreach (var entry in addedEntries)
         {
             entry.CurrentValues[nameof(IAuditableEntity.AuditCreatedAt)] = DateTime.UtcNow;
@@ -89,5 +86,4 @@ public class ApplicationDbContext : IdentityDbContext<Member, IdentityRole<Guid>
 
         return await base.SaveChangesAsync(cancellationToken);
     }
-
 }

@@ -45,7 +45,7 @@ public class MembersPerYearEndpoint : ControllerBase
             .GroupBy(s => s.Year)
             .Select(s => new MembersPerYearViewModel
             {
-                Year = s.Key, 
+                Year = s.Key,
                 Count = s.Count()
             })
             .OrderByDescending(s => s.Year)
