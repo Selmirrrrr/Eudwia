@@ -4,6 +4,7 @@
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
         <UserSecretsId>aspnet-Eudwia-80ABFB99-10FF-4066-86BE-D05BCBE3DC6D</UserSecretsId>
+        <RunAOTCompilation>true</RunAOTCompilation>
     </PropertyGroup>
 
     <ItemGroup>
