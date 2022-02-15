@@ -1,11 +1,13 @@
-<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+﻿<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly" TreatAsLocalProperty="SelfContained">
     <PropertyGroup>
         <TargetFramework>net6.0</TargetFramework>
         <ServiceWorkerAssetsManifest>service-worker-assets.js</ServiceWorkerAssetsManifest>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
         <BlazorWebAssemblyLoadAllGlobalizationData>true</BlazorWebAssemblyLoadAllGlobalizationData>
-    </PropertyGroup>
+		<RunAOTCompilation>true</RunAOTCompilation>
+		<SelfContained>true</SelfContained>
+	</PropertyGroup>
 
     <ItemGroup>
         <PackageReference Include="Blazor-ApexCharts" Version="0.7.0-beta"/>

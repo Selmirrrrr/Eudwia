@@ -46,7 +46,7 @@ public class StatsEndpoint : ControllerBase
         result.TotalRevenue = await _context.Payments.Where(p => p.PaymentDate.Year == year).SumAsync(p => p.Amount);
         result.TopDonator = (await _context.Members.OrderByDescending(m => m.Payments.Where(p => p.PaymentType == Shared.Enums.PaymentType.Donation).Sum(p => p.Amount))
             .Take(1)
-            .Select(m => new {Name = $"{m.FirstName} {m.LastName}"})
+            .Select(m => new {Name = $"{m.FirstName[0]}.{m.LastName}"})
             .FirstAsync()).Name;
 
         return Ok(result);
