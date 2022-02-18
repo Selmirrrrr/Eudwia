@@ -41,7 +41,7 @@ public class MembersDetailsEndpointTests
     public async Task GetOneSimpleMember404WhenNotIdDoesntExists()
     {
         // Arrange
-        var client = await _databaseFixture.CreateAuthorizedClient();
+        var client = await _databaseFixture.CreateUserClient();
 
         // Act
         async Task Act()
@@ -58,7 +58,7 @@ public class MembersDetailsEndpointTests
     public async Task GetOneSimpleMemberReturnsMemberWhenIdExists()
     {
         // Arrange
-        var client = await _databaseFixture.CreateAuthorizedClient();
+        var client = await _databaseFixture.CreateUserClient();
         await using var context = _databaseFixture.Services.CreateScope().ServiceProvider.GetRequiredService<ApplicationDbContext>();
         var member = context.Members.Add(ModelBuilderExtensions.CreateMember()).Entity;
         await context.SaveChangesAsync();

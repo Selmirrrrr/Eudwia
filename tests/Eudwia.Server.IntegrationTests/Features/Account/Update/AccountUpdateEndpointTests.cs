@@ -7,6 +7,7 @@ using Eudwia.Shared.Features.Account.Details;
 using Eudwia.Shared.Features.Account.Update;
 using Shouldly;
 using Xunit;
+using Microsoft.EntityFrameworkCore;
 
 namespace Eudwia.Server.IntegrationTests.Features.Account.Update;
 
@@ -24,10 +25,10 @@ public class AccountUpdateEndpointTests
     public async Task UpdateAccountDetails()
     {
         // Arrange
-        var client = await _databaseFixture.CreateAuthorizedClient();
+        var client = await _databaseFixture.CreateUserClient();
 
         using var userManager = _databaseFixture.Services.CreateScope().ServiceProvider.GetRequiredService<UserManager<Member>>();
-        var userId = (await userManager.FindByEmailAsync(DatabaseFixture.TestEmail)).Id;
+        var userId = (await userManager.Users.FirstAsync()).Id;
 
         // Act
         var updateResult = await client.PostAsJsonAsync($"api/account/{userId}", new AccountUpdateCommand
