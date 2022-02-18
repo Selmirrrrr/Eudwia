@@ -21,7 +21,7 @@ public class MembersDetailsEndpointTests
     }
 
     [Fact]
-    public async Task GetOneSimpleMember401WhenNotAuthorized()
+    public async Task GetOneSimpleMember401WhenNotAuthenticated()
     {
         // Arrange
         var client = _databaseFixture.CreateClient();
@@ -41,7 +41,7 @@ public class MembersDetailsEndpointTests
     public async Task GetOneSimpleMember404WhenNotIdDoesntExists()
     {
         // Arrange
-        var client = await _databaseFixture.CreateUserClient();
+        var client = await _databaseFixture.CreateAdminClient();
 
         // Act
         async Task Act()
@@ -58,16 +58,36 @@ public class MembersDetailsEndpointTests
     public async Task GetOneSimpleMemberReturnsMemberWhenIdExists()
     {
         // Arrange
-        var client = await _databaseFixture.CreateUserClient();
+        var client = await _databaseFixture.CreateAdminClient();
         await using var context = _databaseFixture.Services.CreateScope().ServiceProvider.GetRequiredService<ApplicationDbContext>();
-        var member = context.Members.Add(ModelBuilderExtensions.CreateMember()).Entity;
+        var baseMember = context.Members.Add(DatabaseFixture.CreateNewMember(_databaseFixture.TenantId)).Entity;
         await context.SaveChangesAsync();
 
         // Act
-        var result = await client.GetFromJsonAsync<MembersDetailsViewModel>($"api/members/{member.Id}");
+        var result = await client.GetFromJsonAsync<MembersDetailsViewModel>($"api/members/{baseMember.Id}");
 
         // Assert
         result.ShouldNotBeNull();
-        result.Id.ShouldBe(member.Id);
+        result.Id.ShouldBe(baseMember.Id);
+    }
+
+    [Fact]
+    public async Task GetOneSimpleMember403WhenUserIsNotAuthorized()
+    {
+        // Arrange
+        var client = await _databaseFixture.CreateUserClient();
+        await using var context = _databaseFixture.Services.CreateScope().ServiceProvider.GetRequiredService<ApplicationDbContext>();
+        var member = context.Members.First();
+        await context.SaveChangesAsync();
+
+        // Act
+        async Task Act()
+        {
+            await client.GetFromJsonAsync<MembersDetailsViewModel>($"api/members/{member.Id}");
+        }
+
+        // Assert
+        var ex = await Should.ThrowAsync<HttpRequestException>(Act);
+        ex.StatusCode.ShouldBe(HttpStatusCode.Forbidden);
     }
 }

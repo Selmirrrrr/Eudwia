@@ -6,6 +6,7 @@ using Eudwia.Server.IntegrationTests.Fixtures;
 using Eudwia.Shared.Features.Members.List;
 using Shouldly;
 using Xunit;
+using System.Net;
 
 namespace Eudwia.Server.IntegrationTests.Features.Members.List;
 
@@ -20,12 +21,12 @@ public class MembersListEndpointTests
     }
 
     [Fact]
-    public async Task GetOneSimpleMember()
+    public async Task GetMembersReturnsMembresWhenUserIsAdmin()
     {
         // Arrange
-        var client = await _databaseFixture.CreateUserClient();
+        var client = await _databaseFixture.CreateAdminClient();
         await using var context = _databaseFixture.Services.CreateScope().ServiceProvider.GetRequiredService<ApplicationDbContext>();
-        var baseMember = context.Members.Add(ModelBuilderExtensions.CreateMember()).Entity;
+        var baseMember = context.Members.Add(DatabaseFixture.CreateNewMember(_databaseFixture.TenantId)).Entity;
         await context.SaveChangesAsync();
 
         // Act
@@ -34,5 +35,18 @@ public class MembersListEndpointTests
         // Assert
         result.ShouldNotBeNull();
         result.Any(m => m.Id == baseMember.Id).ShouldBeTrue();
+    }
+
+    [Fact]
+    public async Task GetMembersReturns403WhenUserIsNotAdmin()
+    {
+        // Arrange
+        var client = await _databaseFixture.CreateUserClient();
+
+        // Act
+        var result = await client.GetAsync("api/members");
+
+        // Assert
+        result.StatusCode.ShouldBe(HttpStatusCode.Forbidden);
     }
 }

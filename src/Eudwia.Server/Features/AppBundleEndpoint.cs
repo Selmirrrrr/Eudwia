@@ -23,7 +23,7 @@ public class BundleEndpoint : ControllerBase
     }
 
     [HttpGet("app.bundle")]
-    public async Task<IResult> Handle(HttpContext context)
+    public IResult Handle(HttpContext context)
     {
         string? contentEncoding = null;
         var contentType = "multipart/form-data; boundary=\"--0a7e8441d64b4bf89086b85e59523b7d\"";

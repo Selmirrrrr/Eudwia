@@ -25,7 +25,15 @@ public class RegisterEndpointTests
         const string password = "Passw0rd!";
 
         // Act
-        var result = await client.PostAsJsonAsync("api/account/register", new RegisterModel {Email = "dfsdf@lol.ch", Password = password, ConfirmPassword = password, FirstName = "sdfs", LastName = "sdfsd"});
+        var result = await client.PostAsJsonAsync("api/account/register", new RegisterModel 
+        {
+            Email = "dfsdf@lol.ch", 
+            Password = password, 
+            ConfirmPassword = password, 
+            FirstName = "sdfs", 
+            LastName = "sdfsd",
+            Tenant = Guid.NewGuid().ToString()
+        });
 
         // Assert
         result.StatusCode.ShouldBe(System.Net.HttpStatusCode.OK);
@@ -46,7 +54,8 @@ public class RegisterEndpointTests
             Password = password,
             ConfirmPassword = password,
             FirstName = "sdfs",
-            LastName = "sdfsd"
+            LastName = "sdfsd",
+            Tenant = Guid.NewGuid().ToString()
         });
 
         var result = await client.PostAsJsonAsync("api/account/login", new LoginCommand
@@ -57,5 +66,37 @@ public class RegisterEndpointTests
 
         // Assert
         result.StatusCode.ShouldBe(System.Net.HttpStatusCode.OK);
+    }
+
+    [Fact]
+    public async Task RegisterLoginFailsWhenTenantExists()
+    {
+        // Arrange
+        var tenantId = Guid.NewGuid().ToString();
+        var client = _databaseFixture.CreateClient();
+        await client.PostAsJsonAsync("api/account/register", new RegisterModel
+        {
+            Email = "email@example.com",
+            Password = "Pas$wo0rd",
+            ConfirmPassword = "Pas$wo0rd",
+            FirstName = "sdfs",
+            LastName = "sdfsd",
+            Tenant = tenantId
+        });
+
+        // Act
+        var result = await client.PostAsJsonAsync("api/account/register", new RegisterModel
+        {
+            Email = "email2@example.com",
+            Password = "Pas$wo0rd",
+            ConfirmPassword = "Pas$wo0rd",
+            FirstName = "sdfs",
+            LastName = "sdfsd",
+            Tenant = tenantId
+        });
+
+
+        // Assert
+        result.StatusCode.ShouldBe(System.Net.HttpStatusCode.BadRequest);
     }
 }
