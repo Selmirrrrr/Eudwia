@@ -10,7 +10,7 @@ using Eudwia.Client;
 using System.Net.Http.Headers;
 using Microsoft.Net.Http.Headers;
 
-namespace Eudwia.Server.Features.Dashboard;
+namespace Eudwia.Server.Features;
 
 [ApiController]
 public class BundleEndpoint : ControllerBase

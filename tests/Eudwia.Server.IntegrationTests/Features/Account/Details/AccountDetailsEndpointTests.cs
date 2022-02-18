@@ -42,7 +42,7 @@ public class AccountDetailsEndpointTests
     public async Task MembersDetailsRetunr401WhenMembersDontExists()
     {
         // Arrange
-        var client = await _databaseFixture.CreateAuthorizedClient();
+        var client = await _databaseFixture.CreateUserClient();
 
         // Act
         async Task Act()
@@ -59,7 +59,7 @@ public class AccountDetailsEndpointTests
     public async Task MembersDetailsReturnMember()
     {
         // Arrange
-        var client = await _databaseFixture.CreateAuthorizedClient();
+        var client = await _databaseFixture.CreateUserClient();
         const string email = "mirsel.doe@exemple.ch";
         const string password = "Passw0rd!";
 

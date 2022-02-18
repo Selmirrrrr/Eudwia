@@ -12,6 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Eudwia.Server.Data;
 using Eudwia.Server.Data.Contexts;
+using Eudwia.Shared.Authorization;
 using Eudwia.Shared.Features.Authentication.Login;
 using Xunit;
 
@@ -19,8 +20,10 @@ namespace Eudwia.Server.IntegrationTests.Fixtures;
 
 public class DatabaseFixture : WebApplicationFactory<Startup>, IAsyncLifetime
 {
-    public const string TestEmail = "test@example.com";
-    public const string TestPassword = "Pass$w0rd";
+    private readonly (string Email, string Password) _user = ("user@example.com", "Pass$w0rd");
+    private readonly (string Email, string Password) _admin = ("admin@example.com", "Pass$w0rd");
+    private readonly (string Email, string Password) _superAdmin = ("superadmin@example.com", "Pass$w0rd");
+
     private PostgreSqlTestcontainer ContainerFixture { get; }
 
     public DatabaseFixture()
@@ -34,11 +37,12 @@ public class DatabaseFixture : WebApplicationFactory<Startup>, IAsyncLifetime
             });
 
         ContainerFixture = testcontainersBuilder.Build();
+        //ContainerFixture.StartAsync().Wait();
     }
 
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
-        builder.ConfigureTestServices((Action<IServiceCollection>) (async services =>
+        builder.ConfigureTestServices(services =>
         {
             services.BuildServiceProvider();
             services.Replace(new ServiceDescriptor(typeof(IContextConfiguration), new TestContextConfiguration(ContainerFixture.ConnectionString)));
@@ -52,26 +56,55 @@ public class DatabaseFixture : WebApplicationFactory<Startup>, IAsyncLifetime
             context.Database.Migrate();
 
             var userManager = scopedServices.GetRequiredService<UserManager<Member>>();
+            var roleManager = scopedServices.GetRequiredService<RoleManager<IdentityRole<Guid>>>();
 
-            var newUser = new Member
+            var superAdminRole = roleManager.CreateAsync(new IdentityRole<Guid>(Roles.SuperAdmin)).GetAwaiter().GetResult();
+            var adminRole = roleManager.CreateAsync(new IdentityRole<Guid>(Roles.Admin)).GetAwaiter().GetResult();
+            var userRole = roleManager.CreateAsync(new IdentityRole<Guid>(Roles.User)).GetAwaiter().GetResult();
+
+            var user = new Member
             {
-                UserName = TestEmail,
-                Email = TestEmail,
-                FirstName = "Test",
-                LastName = "Example"
+                UserName = _user.Email,
+                Email = _user.Email,
+                FirstName = "user",
+                LastName = "user"
             };
 
-            await userManager.CreateAsync(newUser, TestPassword);
-        }));
+            var r = userManager.CreateAsync(user, _user.Password).GetAwaiter().GetResult();
+            var rr = userManager.AddToRoleAsync(user, Roles.User).GetAwaiter().GetResult();
+
+            var admin = new Member
+            {
+                UserName = _admin.Email,
+                Email = _admin.Email,
+                FirstName = "admin",
+                LastName = "admin"
+            };
+
+            var rrr = userManager.CreateAsync(admin, _admin.Password).GetAwaiter().GetResult();
+            var rrrr = userManager.AddToRoleAsync(admin, Roles.Admin).GetAwaiter().GetResult();
+
+            var superAdmin = new Member
+            {
+                UserName = _superAdmin.Email,
+                Email = _superAdmin.Email,
+                FirstName = "superadmin",
+                LastName = "superadmin"
+            };
+
+            var rrrrr = userManager.CreateAsync(superAdmin, _superAdmin.Password).GetAwaiter().GetResult();
+            var rrrrrr = userManager.AddToRoleAsync(superAdmin, Roles.SuperAdmin).GetAwaiter().GetResult();
+        });
     }
 
-    public async Task<HttpClient> CreateAuthorizedClient()
+    private async Task<HttpClient> CreatAuthClient(string email, string password)
     {
+        
         var client = CreateClient();
         var resultLogin = await client.PostAsJsonAsync("api/account/login", new LoginCommand
         {
-            Email = TestEmail,
-            Password = TestPassword
+            Email = email,
+            Password = password
         });
 
         var content = await resultLogin.Content.ReadFromJsonAsync<LoginResult>();
@@ -84,7 +117,15 @@ public class DatabaseFixture : WebApplicationFactory<Startup>, IAsyncLifetime
         return client;
     }
 
-    public async Task InitializeAsync() => await ContainerFixture.StartAsync();
+    public async Task<HttpClient> CreateUserClient() => await CreatAuthClient(_user.Email, _user.Password);
+    public async Task<HttpClient> CreateAdminClient() => await CreatAuthClient(_admin.Email, _admin.Password);
+    public async Task<HttpClient> CreateSuperAdminClient() => await CreatAuthClient(_superAdmin.Email, _superAdmin.Password);
+
+    public async Task InitializeAsync()
+    {
+        ContainerFixture.StartAsync().Wait();
+        CreateClient();
+    }
 
     async Task IAsyncLifetime.DisposeAsync() => await ContainerFixture.DisposeAsync();
 }

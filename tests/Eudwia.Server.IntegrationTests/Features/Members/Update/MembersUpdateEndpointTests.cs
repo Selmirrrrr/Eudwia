@@ -40,7 +40,7 @@ public class MembersUpdateEndpointTests
     public async Task UpdateShouldSuccessWhenAllRequirementsAreMeet()
     {
         // Arrange
-        var client = await _databaseFixture.CreateAuthorizedClient();
+        var client = await _databaseFixture.CreateUserClient();
         await using var context = _databaseFixture.Services.CreateScope().ServiceProvider.GetRequiredService<ApplicationDbContext>();
         var baseMember = context.Members.Add(ModelBuilderExtensions.CreateMember()).Entity;
         await context.SaveChangesAsync();
@@ -90,7 +90,7 @@ public class MembersUpdateEndpointTests
     public async Task UpdateShouldFailWhenEmailIsMalformed()
     {
         // Arrange
-        var client = await _databaseFixture.CreateAuthorizedClient();
+        var client = await _databaseFixture.CreateUserClient();
         await using var context = _databaseFixture.Services.CreateScope().ServiceProvider.GetRequiredService<ApplicationDbContext>();
         var baseMember = context.Members.Add(ModelBuilderExtensions.CreateMember()).Entity;
         await context.SaveChangesAsync();
@@ -130,7 +130,7 @@ public class MembersUpdateEndpointTests
     public async Task UpdateShouldSucceedWhenEmailAndPhoneAreEmpty()
     {
         // Arrange
-        var client = await _databaseFixture.CreateAuthorizedClient();
+        var client = await _databaseFixture.CreateUserClient();
         await using var context = _databaseFixture.Services.CreateScope().ServiceProvider.GetRequiredService<ApplicationDbContext>();
         var baseMember = context.Members.Add(ModelBuilderExtensions.CreateMember()).Entity;
         await context.SaveChangesAsync();
@@ -164,7 +164,7 @@ public class MembersUpdateEndpointTests
     public async Task UpdateShouldSucceedWhenStreetLine2IsEmpty()
     {
         // Arrange
-        var client = await _databaseFixture.CreateAuthorizedClient();
+        var client = await _databaseFixture.CreateUserClient();
         await using var context = _databaseFixture.Services.CreateScope().ServiceProvider.GetRequiredService<ApplicationDbContext>();
         var baseMember = context.Members.Add(ModelBuilderExtensions.CreateMember()).Entity;
         await context.SaveChangesAsync();
@@ -200,7 +200,7 @@ public class MembersUpdateEndpointTests
     public async Task UpdateShouldFailWhenStreetLine2Is2CharsLong()
     {
         // Arrange
-        var client = await _databaseFixture.CreateAuthorizedClient();
+        var client = await _databaseFixture.CreateUserClient();
         await using var context = _databaseFixture.Services.CreateScope().ServiceProvider.GetRequiredService<ApplicationDbContext>();
         var baseMember = context.Members.Add(ModelBuilderExtensions.CreateMember()).Entity;
         await context.SaveChangesAsync();
@@ -237,7 +237,7 @@ public class MembersUpdateEndpointTests
     public async Task UpdateShouldFailWhenStreetLine2Is201CharsLong()
     {
         // Arrange
-        var client = await _databaseFixture.CreateAuthorizedClient();
+        var client = await _databaseFixture.CreateUserClient();
         await using var context = _databaseFixture.Services.CreateScope().ServiceProvider.GetRequiredService<ApplicationDbContext>();
         var baseMember = context.Members.Add(ModelBuilderExtensions.CreateMember()).Entity;
         await context.SaveChangesAsync();
