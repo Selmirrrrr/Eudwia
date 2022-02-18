@@ -10,6 +10,8 @@ using Eudwia.Shared.Features.Members.Details;
 using Eudwia.Shared.Features.Members.Update;
 using Shouldly;
 using Xunit;
+using Eudwia.Server.Data;
+using Bogus;
 
 namespace Eudwia.Server.IntegrationTests.Features.Members.Update;
 
@@ -40,9 +42,9 @@ public class MembersUpdateEndpointTests
     public async Task UpdateShouldSuccessWhenAllRequirementsAreMeet()
     {
         // Arrange
-        var client = await _databaseFixture.CreateUserClient();
+        var client = await _databaseFixture.CreateAdminClient();
         await using var context = _databaseFixture.Services.CreateScope().ServiceProvider.GetRequiredService<ApplicationDbContext>();
-        var baseMember = context.Members.Add(ModelBuilderExtensions.CreateMember()).Entity;
+        var baseMember = context.Members.Add(DatabaseFixture.CreateNewMember(_databaseFixture.TenantId)).Entity;
         await context.SaveChangesAsync();
 
         // Act
@@ -90,9 +92,9 @@ public class MembersUpdateEndpointTests
     public async Task UpdateShouldFailWhenEmailIsMalformed()
     {
         // Arrange
-        var client = await _databaseFixture.CreateUserClient();
+        var client = await _databaseFixture.CreateAdminClient();
         await using var context = _databaseFixture.Services.CreateScope().ServiceProvider.GetRequiredService<ApplicationDbContext>();
-        var baseMember = context.Members.Add(ModelBuilderExtensions.CreateMember()).Entity;
+        var baseMember = context.Members.Add(DatabaseFixture.CreateNewMember(_databaseFixture.TenantId)).Entity;
         await context.SaveChangesAsync();
 
         // Act
@@ -130,9 +132,9 @@ public class MembersUpdateEndpointTests
     public async Task UpdateShouldSucceedWhenEmailAndPhoneAreEmpty()
     {
         // Arrange
-        var client = await _databaseFixture.CreateUserClient();
+        var client = await _databaseFixture.CreateAdminClient();
         await using var context = _databaseFixture.Services.CreateScope().ServiceProvider.GetRequiredService<ApplicationDbContext>();
-        var baseMember = context.Members.Add(ModelBuilderExtensions.CreateMember()).Entity;
+        var baseMember = context.Members.Add(DatabaseFixture.CreateNewMember(_databaseFixture.TenantId)).Entity;
         await context.SaveChangesAsync();
 
         // Act
@@ -164,9 +166,9 @@ public class MembersUpdateEndpointTests
     public async Task UpdateShouldSucceedWhenStreetLine2IsEmpty()
     {
         // Arrange
-        var client = await _databaseFixture.CreateUserClient();
+        var client = await _databaseFixture.CreateAdminClient();
         await using var context = _databaseFixture.Services.CreateScope().ServiceProvider.GetRequiredService<ApplicationDbContext>();
-        var baseMember = context.Members.Add(ModelBuilderExtensions.CreateMember()).Entity;
+        var baseMember = context.Members.Add(DatabaseFixture.CreateNewMember(_databaseFixture.TenantId)).Entity;
         await context.SaveChangesAsync();
 
         // Act
@@ -200,9 +202,9 @@ public class MembersUpdateEndpointTests
     public async Task UpdateShouldFailWhenStreetLine2Is2CharsLong()
     {
         // Arrange
-        var client = await _databaseFixture.CreateUserClient();
+        var client = await _databaseFixture.CreateAdminClient();
         await using var context = _databaseFixture.Services.CreateScope().ServiceProvider.GetRequiredService<ApplicationDbContext>();
-        var baseMember = context.Members.Add(ModelBuilderExtensions.CreateMember()).Entity;
+        var baseMember = context.Members.Add(DatabaseFixture.CreateNewMember(_databaseFixture.TenantId)).Entity;
         await context.SaveChangesAsync();
 
         // Act
@@ -237,9 +239,9 @@ public class MembersUpdateEndpointTests
     public async Task UpdateShouldFailWhenStreetLine2Is201CharsLong()
     {
         // Arrange
-        var client = await _databaseFixture.CreateUserClient();
+        var client = await _databaseFixture.CreateAdminClient();
         await using var context = _databaseFixture.Services.CreateScope().ServiceProvider.GetRequiredService<ApplicationDbContext>();
-        var baseMember = context.Members.Add(ModelBuilderExtensions.CreateMember()).Entity;
+        var baseMember = context.Members.Add(DatabaseFixture.CreateNewMember(_databaseFixture.TenantId)).Entity;
         await context.SaveChangesAsync();
 
         // Act

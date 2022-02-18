@@ -15,6 +15,8 @@ using Eudwia.Server.Data.Contexts;
 using Eudwia.Shared.Authorization;
 using Eudwia.Shared.Features.Authentication.Login;
 using Xunit;
+using Bogus;
+using Eudwia.Shared.Enums;
 
 namespace Eudwia.Server.IntegrationTests.Fixtures;
 
@@ -23,6 +25,7 @@ public class DatabaseFixture : WebApplicationFactory<Startup>, IAsyncLifetime
     private readonly (string Email, string Password) _user = ("user@example.com", "Pass$w0rd");
     private readonly (string Email, string Password) _admin = ("admin@example.com", "Pass$w0rd");
     private readonly (string Email, string Password) _superAdmin = ("superadmin@example.com", "Pass$w0rd");
+    public readonly Guid TenantId = Guid.Parse("CABB6053-353B-44F9-8088-47BB609753E2");
 
     private PostgreSqlTestcontainer ContainerFixture { get; }
 
@@ -37,7 +40,6 @@ public class DatabaseFixture : WebApplicationFactory<Startup>, IAsyncLifetime
             });
 
         ContainerFixture = testcontainersBuilder.Build();
-        //ContainerFixture.StartAsync().Wait();
     }
 
     protected override void ConfigureWebHost(IWebHostBuilder builder)
@@ -78,7 +80,8 @@ public class DatabaseFixture : WebApplicationFactory<Startup>, IAsyncLifetime
                 UserName = _admin.Email,
                 Email = _admin.Email,
                 FirstName = "admin",
-                LastName = "admin"
+                LastName = "admin",
+                TenantId = TenantId
             };
 
             var rrr = userManager.CreateAsync(admin, _admin.Password).GetAwaiter().GetResult();
@@ -121,9 +124,37 @@ public class DatabaseFixture : WebApplicationFactory<Startup>, IAsyncLifetime
     public async Task<HttpClient> CreateAdminClient() => await CreatAuthClient(_admin.Email, _admin.Password);
     public async Task<HttpClient> CreateSuperAdminClient() => await CreatAuthClient(_superAdmin.Email, _superAdmin.Password);
 
+    public static Member CreateNewMember(Guid tenantGuid)
+    {
+        var faker = new Faker("fr");
+
+        var guid = Guid.NewGuid();
+        return new Member
+        {
+            Id = guid,
+            FirstName = faker.Name.FirstName(),
+            LastName = faker.Name.LastName(),
+            Email = faker.Person.Email,
+            PhoneNumber = faker.Person.Phone,
+            BirthDate = faker.Date.PastDateOnly(50, new DateOnly(2000, 1, 1)),
+            MemberSince = faker.Date.PastDateOnly(10),
+            StreetLine1 = faker.Address.StreetAddress(),
+            StreetLine2 = faker.Address.SecondaryAddress(),
+            HouseNumber = faker.Address.BuildingNumber(),
+            City = faker.Address.City(),
+            ZipCode = faker.Address.ZipCode(),
+            State = "VD",
+            CountryId = Guid.Parse("9bc1f1a9-7696-42e4-89aa-c93800704582"),
+            Language = faker.Random.Enum<Language>(),
+            SecurityStamp = Guid.NewGuid().ToString(),
+            UserName = faker.Person.Email,
+            TenantId = tenantGuid
+        };
+    }
+
     public async Task InitializeAsync()
     {
-        ContainerFixture.StartAsync().Wait();
+        await ContainerFixture.StartAsync();
         CreateClient();
     }
 

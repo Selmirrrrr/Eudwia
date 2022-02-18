@@ -8,6 +8,8 @@ using Eudwia.Shared.Features.Account.Details;
 using Eudwia.Shared.Features.Authentication.Register;
 using Shouldly;
 using Xunit;
+using Eudwia.Server.Data.Contexts;
+using Microsoft.EntityFrameworkCore;
 
 namespace Eudwia.Server.IntegrationTests.Features.Account.Details;
 
@@ -22,7 +24,7 @@ public class AccountDetailsEndpointTests
     }
 
     [Fact]
-    public async Task MembersDetailsRetunr404WhenUnauthorized()
+    public async Task MembersDetailsReturn404WhenUnauthorized()
     {
         // Arrange
         var client = _databaseFixture.CreateClient();
@@ -39,7 +41,7 @@ public class AccountDetailsEndpointTests
     }
 
     [Fact]
-    public async Task MembersDetailsRetunr401WhenMembersDontExists()
+    public async Task MembersDetailsReturn401WhenMembersDontExists()
     {
         // Arrange
         var client = await _databaseFixture.CreateUserClient();
@@ -60,26 +62,14 @@ public class AccountDetailsEndpointTests
     {
         // Arrange
         var client = await _databaseFixture.CreateUserClient();
-        const string email = "mirsel.doe@exemple.ch";
-        const string password = "Passw0rd!";
-
-        await client.PostAsJsonAsync("api/account/register", new RegisterModel
-        {
-            Email = email,
-            Password = password,
-            ConfirmPassword = password,
-            FirstName = "sdfs",
-            LastName = "sdfsd"
-        });
-
-        using var userManager = _databaseFixture.Services.CreateScope().ServiceProvider.GetRequiredService<UserManager<Member>>();
-        var userId = (await userManager.FindByEmailAsync(email)).Id;
+        using var context = _databaseFixture.Services.CreateScope().ServiceProvider.GetRequiredService<ApplicationDbContext>();
+        var user = await context.Members.FirstAsync(m => m.Email == "user@example.com");
 
         // Act
-        var memberResult = await client.GetFromJsonAsync<AccountDetailsViewModel>($"api/account/{userId}");
+        var memberResult = await client.GetFromJsonAsync<AccountDetailsViewModel>($"api/account/{user.Id}");
 
         // Assert
         memberResult.ShouldNotBeNull();
-        memberResult.Id.ShouldBe(userId);
+        memberResult.Id.ShouldBe(user.Id);
     }
 }
