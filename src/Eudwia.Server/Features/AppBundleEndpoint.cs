@@ -1,25 +1,15 @@
-﻿using System.Net.Mime;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Eudwia.Server.Data.Contexts;
-using Eudwia.Shared.Authorization;
-using Eudwia.Shared.Features.Dashboard;
-using DocumentFormat.OpenXml.InkML;
-using Eudwia.Client;
-using System.Net.Http.Headers;
-using Microsoft.Net.Http.Headers;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace Eudwia.Server.Features;
 
 [ApiController]
 public class BundleEndpoint : ControllerBase
 {
-    private readonly IWebHostEnvironment env;
+    private readonly IWebHostEnvironment _env;
 
     public BundleEndpoint(IWebHostEnvironment env)
     {
-        this.env = env;
+        _env = env;
     }
 
     [HttpGet("app.bundle")]
@@ -47,8 +37,6 @@ public class BundleEndpoint : ControllerBase
         {
             context.Response.Headers.ContentEncoding = contentEncoding;
         }
-        return Results.File(
-                    env.WebRootFileProvider.GetFileInfo(fileName).CreateReadStream(),
-                    contentType);
+        return Results.File(_env.WebRootFileProvider.GetFileInfo(fileName).CreateReadStream(), contentType);
     }
 }
