@@ -72,8 +72,8 @@ public class DatabaseFixture : WebApplicationFactory<Startup>, IAsyncLifetime
                 LastName = "user"
             };
 
-            var r = userManager.CreateAsync(user, _user.Password).GetAwaiter().GetResult();
-            var rr = userManager.AddToRoleAsync(user, Roles.User).GetAwaiter().GetResult();
+            userManager.CreateAsync(user, _user.Password).GetAwaiter().GetResult();
+            userManager.AddToRoleAsync(user, Roles.User).GetAwaiter().GetResult();
 
             var admin = new Member
             {
@@ -84,8 +84,8 @@ public class DatabaseFixture : WebApplicationFactory<Startup>, IAsyncLifetime
                 TenantId = TenantId
             };
 
-            var rrr = userManager.CreateAsync(admin, _admin.Password).GetAwaiter().GetResult();
-            var rrrr = userManager.AddToRoleAsync(admin, Roles.Admin).GetAwaiter().GetResult();
+            userManager.CreateAsync(admin, _admin.Password).GetAwaiter().GetResult();
+            userManager.AddToRoleAsync(admin, Roles.Admin).GetAwaiter().GetResult();
 
             var superAdmin = new Member
             {
@@ -95,8 +95,8 @@ public class DatabaseFixture : WebApplicationFactory<Startup>, IAsyncLifetime
                 LastName = "superadmin"
             };
 
-            var rrrrr = userManager.CreateAsync(superAdmin, _superAdmin.Password).GetAwaiter().GetResult();
-            var rrrrrr = userManager.AddToRoleAsync(superAdmin, Roles.SuperAdmin).GetAwaiter().GetResult();
+            userManager.CreateAsync(superAdmin, _superAdmin.Password).GetAwaiter().GetResult();
+            userManager.AddToRoleAsync(superAdmin, Roles.SuperAdmin).GetAwaiter().GetResult();
         });
     }
 

@@ -24,10 +24,11 @@ public class ImportMembersEndpoint : ControllerBase
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesDefaultResponseType]
-    public async Task<IActionResult> HandleAsync(IFormFile file, CancellationToken cancellationToken = default)
+    public async Task<IActionResult> HandleAsync(IFormFile file, [FromRoute] Guid tenantId, CancellationToken cancellationToken = default)
     {
         var membersExcel = new ExcelMapper(file.OpenReadStream()) { HeaderRow = true }.Fetch<MemberImportDto>();
         var countries = _context.Countries.Select(c => new { c.Id, c.Alpha2Code }).ToDictionary(c => c.Alpha2Code);
+        var swissGuid = Guid.Parse("9bc1f1a9-7696-42e4-89aa-c93800704582");
         var members = membersExcel.Select(m => new Data.Member
         {
             FirstName = m.Firstname,
@@ -41,8 +42,9 @@ public class ImportMembersEndpoint : ControllerBase
             ZipCode = m.ZipCode,
             City = m.City,
             State = m.State,
-            CountryId = countries[m.Country].Id,
+            CountryId = countries.Keys.Any(a => a == m.Country) ? countries[m.Country].Id : swissGuid,
             MemberSince = m.MemberSince is null ? DateOnly.MinValue : DateOnly.FromDateTime(m.MemberSince.Value),
+            TenantId = tenantId
         });
         await _context.AddRangeAsync(members, cancellationToken);
         await _context.SaveChangesAsync(cancellationToken);

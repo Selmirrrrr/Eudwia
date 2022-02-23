@@ -93,7 +93,6 @@ public class Startup
             .AddEntityFrameworkStores<ApplicationDbContext>()
             .AddDefaultTokenProviders();
 
-
         var jwtSettings = Configuration.GetSection(JwtSettings.Position).Get<JwtSettings>();
         services.AddAuthentication(options =>
         {
