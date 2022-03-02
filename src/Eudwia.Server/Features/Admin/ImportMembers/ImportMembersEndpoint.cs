@@ -9,7 +9,7 @@ namespace Eudwia.Server.Features.Admin.ImportMembers;
 
 [Route("api")]
 [ApiController]
-[Authorize(Policy = Policies.IsSuperAdmin)]
+[Authorize(Policy = Policies.IsAdmin)]
 [Produces(MediaTypeNames.Application.Json)]
 public class ImportMembersEndpoint : ControllerBase
 {
@@ -44,7 +44,9 @@ public class ImportMembersEndpoint : ControllerBase
             State = m.State,
             CountryId = countries.Keys.Any(a => a == m.Country) ? countries[m.Country].Id : swissGuid,
             MemberSince = m.MemberSince is null ? DateOnly.MinValue : DateOnly.FromDateTime(m.MemberSince.Value),
-            TenantId = tenantId
+            TenantId = tenantId,
+            SecurityStamp = Guid.NewGuid().ToString(),
+            UserName = m.Email,
         });
         await _context.AddRangeAsync(members, cancellationToken);
         await _context.SaveChangesAsync(cancellationToken);

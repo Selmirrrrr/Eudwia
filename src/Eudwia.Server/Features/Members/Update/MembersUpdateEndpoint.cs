@@ -50,6 +50,7 @@ public class MembersUpdateEndpoint : ControllerBase
         member.BirthDate = new DateOnly(birthDate.Year, birthDate.Month, birthDate.Day);
         member.MemberSince = new DateOnly(memberSince.Year, memberSince.Month, memberSince.Day);
         member.Language = command.Language;
+        member.UserName = command.Email;
 
         _applicationDbContext.Members.Update(member);
         await _applicationDbContext.SaveChangesAsync();

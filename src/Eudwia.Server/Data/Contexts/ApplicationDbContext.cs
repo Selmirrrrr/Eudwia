@@ -70,7 +70,8 @@ public class ApplicationDbContext : IdentityDbContext<Member, IdentityRole<Guid>
         var addedEntries = ChangeTracker.Entries<IAuditableEntity>().Where(x => x.State == EntityState.Added);
         var modifiedEntries = ChangeTracker.Entries<IAuditableEntity>().Where(x => x.State == EntityState.Modified);
 
-        foreach (var entry in addedTenantEntries.Where(x => x.Entity.TenantId == Guid.Empty)) entry.Entity.TenantId = _currentUserProvider.TenantId;
+        foreach (var entry in addedTenantEntries.Where(x => x.Entity.TenantId == Guid.Empty)) 
+            entry.Entity.TenantId = _currentUserProvider.TenantId;
 
         foreach (var entry in addedEntries)
         {
