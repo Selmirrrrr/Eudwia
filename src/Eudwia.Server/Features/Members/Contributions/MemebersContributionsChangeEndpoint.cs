@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Eudwia.Server.Data;
 using Eudwia.Server.Data.Contexts;
 using Eudwia.Shared.Authorization;
+using Eudwia.Shared.Features.Members.Contributions;
 using Eudwia.Shared.Features.Members.Details;
 
 namespace Eudwia.Server.Features.Members.Contributions;
@@ -87,5 +88,58 @@ public class MemebersContributionsChangeEndpoint : ControllerBase
         await _applicationDbContext.SaveChangesAsync();
 
         return Ok();
+    }
+    
+    [HttpPost("members/{memberId:guid}/contributions/")]
+    [ProducesResponseType(typeof(MembersDetailsViewModel), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<ActionResult> HandleYear(
+        [FromRoute] Guid memberId,
+        [FromBody] int year)
+    {
+        if (!_applicationDbContext.Members.Any(m => m.Id == memberId)) return NotFound(memberId);
+
+        SubscriptionPaid? subscriptionPaid = null;
+
+        if (!_applicationDbContext.SubscriptionsPaid.Any(sp => sp.Year == year && sp.MemberId == memberId))
+            subscriptionPaid = _applicationDbContext.SubscriptionsPaid.Add(new SubscriptionPaid
+            {
+                MemberId = memberId,
+                Year = year
+            }).Entity;
+
+        subscriptionPaid ??= await _applicationDbContext.SubscriptionsPaid.FirstAsync(sp => sp.Year == year && sp.MemberId == memberId);
+
+        subscriptionPaid.January = !subscriptionPaid.January;
+        subscriptionPaid.February = !subscriptionPaid.February;
+        subscriptionPaid.March = !subscriptionPaid.March;
+        subscriptionPaid.April = !subscriptionPaid.April;
+        subscriptionPaid.May = !subscriptionPaid.May;
+        subscriptionPaid.June = !subscriptionPaid.June;
+        subscriptionPaid.July = !subscriptionPaid.July;
+        subscriptionPaid.August = !subscriptionPaid.August;
+        subscriptionPaid.September = !subscriptionPaid.September;
+        subscriptionPaid.October = !subscriptionPaid.October;
+        subscriptionPaid.November = !subscriptionPaid.November;
+        subscriptionPaid.December = !subscriptionPaid.December;
+
+        await _applicationDbContext.SaveChangesAsync();
+
+        return Ok(new MemebersContributionsViewModel
+        {
+            Year = subscriptionPaid.Year,
+            January = subscriptionPaid.January,
+            February = subscriptionPaid.February,
+            March = subscriptionPaid.March,
+            April = subscriptionPaid.April,
+            May = subscriptionPaid.May,
+            June = subscriptionPaid.June,
+            July = subscriptionPaid.July,
+            August = subscriptionPaid.August,
+            September = subscriptionPaid.September,
+            October = subscriptionPaid.October,
+            November = subscriptionPaid.November,
+            December = subscriptionPaid.December
+        });
     }
 }

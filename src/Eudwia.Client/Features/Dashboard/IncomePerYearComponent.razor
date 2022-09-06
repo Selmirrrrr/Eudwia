@@ -37,7 +37,7 @@
         {
             Stacked = true
         },
-        Yaxis = new List<YAxis> {new() {Labels = new AxisLabels {Formatter = @"function (value) { return Number(value).toLocaleString() }"}}}
+        Yaxis = new List<YAxis> {new() {Labels = new YAxisLabels {Formatter = @"function (value) { return Number(value).toLocaleString() }"}}}
     };
 
     protected override async Task OnInitializedAsync()

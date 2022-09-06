@@ -29,7 +29,11 @@
                 <MudTh>12</MudTh>
             </HeaderContent>
             <RowTemplate>
-                <MudTd DataLabel="Année">@context.Year</MudTd>
+                <MudButton OnClick="() => YearClick(context)">
+                    <MudTd DataLabel="Année">
+                        @context.Year
+                    </MudTd>
+                </MudButton>
                 <MudTd DataLabel="Janvier">
                     <MudCheckBox Checked="@context.January" Color="Color.Primary" CheckedChanged="(bool value) => CheckChanged(context, 1, value)"/>
                 </MudTd>
@@ -133,6 +137,41 @@
 
             if (result.IsSuccessStatusCode)
                 _snackbar.Add("Les cotisations ont bien été mises à jour.", Severity.Success);
+            else
+            {
+                var errors = await result.Content.ReadAsStringAsync();
+                _snackbar.Add(errors, Severity.Warning);
+            }
+        }
+        catch (Exception ex)
+        {
+            _snackbar.Add(ex.Message, Severity.Error);
+        }
+    }
+    
+    private async Task YearClick(MemebersContributionsViewModel model)
+    {
+        try
+        {
+            var result = await _httpClient.PostAsJsonAsync($"api/members/{MemberId}/contributions", model.Year);
+
+            if (result.IsSuccessStatusCode)
+            {
+                _snackbar.Add("Les cotisations ont bien été mises à jour.", Severity.Success);
+                var response = await result.Content.ReadFromJsonAsync<MemebersContributionsViewModel>();
+                model.January = response.January;
+                model.February = response.February;
+                model.March = response.March;
+                model.April = response.April;
+                model.May = response.May;
+                model.June = response.June;
+                model.July = response.July;
+                model.August = response.August;
+                model.September = response.September;
+                model.October = response.October;
+                model.November = response.November;
+                model.December = response.December;
+            }
             else
             {
                 var errors = await result.Content.ReadAsStringAsync();

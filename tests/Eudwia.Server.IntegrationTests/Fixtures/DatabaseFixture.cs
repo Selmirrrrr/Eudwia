@@ -1,8 +1,5 @@
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
-using DotNet.Testcontainers.Containers.Builders;
-using DotNet.Testcontainers.Containers.Configurations.Databases;
-using DotNet.Testcontainers.Containers.Modules.Databases;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Testing;
@@ -16,6 +13,9 @@ using Eudwia.Shared.Authorization;
 using Eudwia.Shared.Features.Authentication.Login;
 using Xunit;
 using Bogus;
+using DotNet.Testcontainers.Builders;
+using DotNet.Testcontainers.Configurations;
+using DotNet.Testcontainers.Containers;
 using Eudwia.Shared.Enums;
 
 namespace Eudwia.Server.IntegrationTests.Fixtures;
@@ -60,9 +60,9 @@ public class DatabaseFixture : WebApplicationFactory<Startup>, IAsyncLifetime
             var userManager = scopedServices.GetRequiredService<UserManager<Member>>();
             var roleManager = scopedServices.GetRequiredService<RoleManager<IdentityRole<Guid>>>();
 
-            var superAdminRole = roleManager.CreateAsync(new IdentityRole<Guid>(Roles.SuperAdmin)).GetAwaiter().GetResult();
-            var adminRole = roleManager.CreateAsync(new IdentityRole<Guid>(Roles.Admin)).GetAwaiter().GetResult();
-            var userRole = roleManager.CreateAsync(new IdentityRole<Guid>(Roles.User)).GetAwaiter().GetResult();
+            roleManager.CreateAsync(new IdentityRole<Guid>(Roles.SuperAdmin)).GetAwaiter().GetResult();
+            roleManager.CreateAsync(new IdentityRole<Guid>(Roles.Admin)).GetAwaiter().GetResult();
+            roleManager.CreateAsync(new IdentityRole<Guid>(Roles.User)).GetAwaiter().GetResult();
 
             var user = new Member
             {
