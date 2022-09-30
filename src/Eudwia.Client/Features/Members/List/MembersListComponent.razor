@@ -97,7 +97,7 @@ else
             var result = await _httpClient.PostAsJsonAsync($"api/members/{memberId}/contributions/{year}/{string.Join(",", payedMonths)}", true);
 
             if (result.IsSuccessStatusCode)
-                _snackbar.Add("Les cotisations ont bien été mises à jour.", Severity.Success);
+                _snackbar.Add($"Les cotisations {year} ont bien été mises à jour.", Severity.Success);
             else
             {
                 var errors = await result.Content.ReadAsStringAsync();
