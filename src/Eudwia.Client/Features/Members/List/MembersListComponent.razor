@@ -1,7 +1,8 @@
 ﻿@page "/members"
 @using Eudwia.Shared.Features.Members.List
 @using Color = MudBlazor.Color
-
+@using System.Web
+@inject ISnackbar _snackbar
 @inject HttpClient _httpClient
 @attribute [Authorize]
 
@@ -12,7 +13,7 @@
 }
 else
 {
-    <MudTable Items="@_members" Style="" Hover="true" Dense="true" Striped="true" Filter="new Func<MembersListViewModel, bool>(FilterFunc)" OnRowClick="RowClickEvent" T="MembersListViewModel">
+    <MudTable RowsPerPage="500" Items="@_members" Style="" Hover="true" Dense="true" Striped="true" Filter="new Func<MembersListViewModel, bool>(FilterFunc)" OnRowClick="RowClickEvent" T="MembersListViewModel">
         <ToolBarContent>
             <MudTextField @bind-Value="_searchString" Placeholder="Recherche" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
             <MudSpacer/>
@@ -24,7 +25,7 @@ else
             <MudTh>Email</MudTh>
             <MudTh>Tél.</MudTh>
             <MudTh>Membre depuis</MudTh>
-            <MudTh>Mois payés cette année</MudTh>
+            <MudTh>Paiements</MudTh>
         </HeaderContent>
         <RowTemplate>
             <MudTd DataLabel="Prénom">@context.FirstName</MudTd>
@@ -32,12 +33,18 @@ else
             <MudTd DataLabel="Email">@context.Email</MudTd>
             <MudTd DataLabel="Tél.">@context.Phone</MudTd>
             <MudTd DataLabel="Membre depuis">@context.MemberSince.ToShortDateString()</MudTd>
-            <MudTd DataLabel="Mois payés cette année">
-                <MudRating ReadOnly="true" SelectedValue="@context.MonthsPaid" MaxValue="12" FullIcon="@Icons.Material.Rounded.Star" EmptyIcon="@Icons.Material.Rounded.StarBorder" Color="Color.Primary"/>
+            <MudTd DataLabel="Paiements">
+                <MudStack Row="true">
+                    <MudNumericField @bind-Value="pay2019" Label="2019" Variant="Variant.Outlined" Min="1" Max="12" Adornment="Adornment.End" AdornmentIcon="@Icons.Material.Outlined.Money" OnAdornmentClick="() => Pay(context.Id,2019, pay2019)" AdornmentAriaLabel="Payé en 2019"/>
+                    <MudNumericField @bind-Value="pay2020" Label="2020" Variant="Variant.Outlined" Min="1" Max="12" Adornment="Adornment.End" AdornmentIcon="@Icons.Material.Outlined.Money" OnAdornmentClick="() => Pay(context.Id,2020, pay2020)" AdornmentAriaLabel="Payé en 2020"/>
+                    <MudNumericField @bind-Value="pay2021" Label="2021" Variant="Variant.Outlined" Min="1" Max="12" Adornment="Adornment.End" AdornmentIcon="@Icons.Material.Outlined.Money" OnAdornmentClick="() => Pay(context.Id,2021, pay2021)" AdornmentAriaLabel="Payé en 2021"/>
+                    <MudNumericField @bind-Value="pay2022" Label="2022" Variant="Variant.Outlined" Min="1" Max="12" Adornment="Adornment.End" AdornmentIcon="@Icons.Material.Outlined.Money" OnAdornmentClick="() => Pay(context.Id,2022, pay2022)" AdornmentAriaLabel="Payé en 2022"/>
+                </MudStack>
             </MudTd>
+
         </RowTemplate>
         <PagerContent>
-            <MudTablePager/>
+            <MudTablePager />
         </PagerContent>
     </MudTable>
 }
@@ -50,10 +57,17 @@ else
     private List<MembersListViewModel> _members = new();
     private string _searchString = string.Empty;
     private bool _loaded;
+    private int pay2019 = 12;
+    private int pay2020 = 12;
+    private int pay2021 = 12;
+    private int pay2022 = 12;
 
     protected override async Task OnInitializedAsync()
     {
-        _members = await _httpClient.GetFromJsonAsync<List<MembersListViewModel>>("api/members") ?? new List<MembersListViewModel>();
+        _members = (await _httpClient.GetFromJsonAsync<List<MembersListViewModel>>("api/members") ?? new List<MembersListViewModel>())
+            .OrderBy(o => o.LastName)
+            .ThenBy(o => o.FirstName)
+            .ToList();
         _loaded = true;
     }
 
@@ -72,5 +86,27 @@ else
     private void CreateMember()
     {
         NavigationManager.NavigateTo($"members/create");
+    }
+
+    private async Task Pay(Guid memberId, int year, int nbMonths)
+    {
+        try
+        {
+            var months = new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 };
+            var payedMonths = months[0..nbMonths];
+            var result = await _httpClient.PostAsJsonAsync($"api/members/{memberId}/contributions/{year}/{string.Join(",", payedMonths)}", true);
+
+            if (result.IsSuccessStatusCode)
+                _snackbar.Add("Les cotisations ont bien été mises à jour.", Severity.Success);
+            else
+            {
+                var errors = await result.Content.ReadAsStringAsync();
+                _snackbar.Add(errors, Severity.Warning);
+            }
+        }
+        catch (Exception ex)
+        {
+            _snackbar.Add(ex.Message, Severity.Error);
+        }
     }
 }

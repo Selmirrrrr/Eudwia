@@ -23,13 +23,13 @@ public class MemebersContributionsChangeEndpoint : ControllerBase
         _applicationDbContext = applicationDbContext;
     }
 
-    [HttpPost("members/{memberId:guid}/contributions/{year:int}/{month:int}")]
+    [HttpPost("members/{memberId:guid}/contributions/{year:int}/{months}")]
     [ProducesResponseType(typeof(MembersDetailsViewModel), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult> Handle(
         [FromRoute] Guid memberId,
         [FromRoute] int year,
-        [FromRoute] int month,
+        [FromRoute] int[] months,
         [FromBody] bool value)
     {
         if (!_applicationDbContext.Members.Any(m => m.Id == memberId)) return NotFound(memberId);
@@ -43,53 +43,58 @@ public class MemebersContributionsChangeEndpoint : ControllerBase
                 Year = year
             }).Entity;
 
-        subscriptionPaid ??= await _applicationDbContext.SubscriptionsPaid.FirstAsync(sp => sp.Year == year && sp.MemberId == memberId);
+        subscriptionPaid ??=
+            await _applicationDbContext.SubscriptionsPaid.FirstAsync(sp => sp.Year == year && sp.MemberId == memberId);
 
-        switch (month)
+        foreach (var month in months)
         {
-            case 1:
-                subscriptionPaid.January = value;
-                break;
-            case 2:
-                subscriptionPaid.February = value;
-                break;
-            case 3:
-                subscriptionPaid.March = value;
-                break;
-            case 4:
-                subscriptionPaid.April = value;
-                break;
-            case 5:
-                subscriptionPaid.May = value;
-                break;
-            case 6:
-                subscriptionPaid.June = value;
-                break;
-            case 7:
-                subscriptionPaid.July = value;
-                break;
-            case 8:
-                subscriptionPaid.August = value;
-                break;
-            case 9:
-                subscriptionPaid.September = value;
-                break;
-            case 10:
-                subscriptionPaid.October = value;
-                break;
-            case 11:
-                subscriptionPaid.November = value;
-                break;
-            case 12:
-                subscriptionPaid.December = value;
-                break;
+            switch (month)
+            {
+                case 1:
+                    subscriptionPaid.January = value;
+                    break;
+                case 2:
+                    subscriptionPaid.February = value;
+                    break;
+                case 3:
+                    subscriptionPaid.March = value;
+                    break;
+                case 4:
+                    subscriptionPaid.April = value;
+                    break;
+                case 5:
+                    subscriptionPaid.May = value;
+                    break;
+                case 6:
+                    subscriptionPaid.June = value;
+                    break;
+                case 7:
+                    subscriptionPaid.July = value;
+                    break;
+                case 8:
+                    subscriptionPaid.August = value;
+                    break;
+                case 9:
+                    subscriptionPaid.September = value;
+                    break;
+                case 10:
+                    subscriptionPaid.October = value;
+                    break;
+                case 11:
+                    subscriptionPaid.November = value;
+                    break;
+                case 12:
+                    subscriptionPaid.December = value;
+                    break;
+            }
         }
 
         await _applicationDbContext.SaveChangesAsync();
 
         return Ok();
     }
-    
+
+
     [HttpPost("members/{memberId:guid}/contributions/")]
     [ProducesResponseType(typeof(MembersDetailsViewModel), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
