@@ -13,7 +13,7 @@
 }
 else
 {
-    <MudTable RowsPerPage="500" Items="@_members" Style="" Hover="true" Dense="true" Striped="true" Filter="new Func<MembersListViewModel, bool>(FilterFunc)" OnRowClick="RowClickEvent" T="MembersListViewModel">
+    <MudTable RowsPerPage="33" Items="@_members" Style="" Hover="true" Dense="true" Striped="true" Filter="new Func<MembersListViewModel, bool>(FilterFunc)" OnRowClick="RowClickEvent" T="MembersListViewModel">
         <ToolBarContent>
             <MudTextField @bind-Value="_searchString" Placeholder="Recherche" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
             <MudSpacer/>
