@@ -20,16 +20,16 @@ else
             <MudButton OnClick="CreateMember" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Add" Color="Color.Primary">Nouveau membre</MudButton>
         </ToolBarContent>
         <HeaderContent>
-            <MudTh>Prénom</MudTh>
             <MudTh>Nom</MudTh>
+            <MudTh>Prénom</MudTh>
             <MudTh>Email</MudTh>
             <MudTh>Tél.</MudTh>
             <MudTh>Membre depuis</MudTh>
             <MudTh>Paiements</MudTh>
         </HeaderContent>
         <RowTemplate>
-            <MudTd DataLabel="Prénom">@context.FirstName</MudTd>
             <MudTd DataLabel="Nom">@context.LastName</MudTd>
+            <MudTd DataLabel="Prénom">@context.FirstName</MudTd>
             <MudTd DataLabel="Email">@context.Email</MudTd>
             <MudTd DataLabel="Tél.">@context.Phone</MudTd>
             <MudTd DataLabel="Membre depuis">@context.MemberSince.ToShortDateString()</MudTd>
