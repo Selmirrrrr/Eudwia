@@ -13,40 +13,69 @@
 }
 else
 {
-    <MudTable RowsPerPage="33" Items="@_members" Style="" Hover="true" Dense="true" Striped="true" Filter="new Func<MembersListViewModel, bool>(FilterFunc)" OnRowClick="RowClickEvent" T="MembersListViewModel">
-        <ToolBarContent>
-            <MudTextField @bind-Value="_searchString" Placeholder="Recherche" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
-            <MudSpacer/>
-            <MudButton OnClick="CreateMember" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Add" Color="Color.Primary">Nouveau membre</MudButton>
-        </ToolBarContent>
-        <HeaderContent>
-            <MudTh>Nom</MudTh>
-            <MudTh>Prénom</MudTh>
-            <MudTh>Email</MudTh>
-            <MudTh>Tél.</MudTh>
-            <MudTh>Membre depuis</MudTh>
-            <MudTh>Paiements</MudTh>
-        </HeaderContent>
-        <RowTemplate>
-            <MudTd DataLabel="Nom">@context.LastName</MudTd>
-            <MudTd DataLabel="Prénom">@context.FirstName</MudTd>
-            <MudTd DataLabel="Email">@context.Email</MudTd>
-            <MudTd DataLabel="Tél.">@context.Phone</MudTd>
-            <MudTd DataLabel="Membre depuis">@context.MemberSince.ToShortDateString()</MudTd>
-            <MudTd DataLabel="Paiements">
-                <MudStack Row="true">
-                    <MudNumericField @bind-Value="pay2019" Label="2019" Variant="Variant.Outlined" Min="1" Max="12" Adornment="Adornment.End" AdornmentIcon="@Icons.Material.Outlined.Money" OnAdornmentClick="() => Pay(context.Id,2019, pay2019)" AdornmentAriaLabel="Payé en 2019"/>
-                    <MudNumericField @bind-Value="pay2020" Label="2020" Variant="Variant.Outlined" Min="1" Max="12" Adornment="Adornment.End" AdornmentIcon="@Icons.Material.Outlined.Money" OnAdornmentClick="() => Pay(context.Id,2020, pay2020)" AdornmentAriaLabel="Payé en 2020"/>
-                    <MudNumericField @bind-Value="pay2021" Label="2021" Variant="Variant.Outlined" Min="1" Max="12" Adornment="Adornment.End" AdornmentIcon="@Icons.Material.Outlined.Money" OnAdornmentClick="() => Pay(context.Id,2021, pay2021)" AdornmentAriaLabel="Payé en 2021"/>
-                    <MudNumericField @bind-Value="pay2022" Label="2022" Variant="Variant.Outlined" Min="1" Max="12" Adornment="Adornment.End" AdornmentIcon="@Icons.Material.Outlined.Money" OnAdornmentClick="() => Pay(context.Id,2022, pay2022)" AdornmentAriaLabel="Payé en 2022"/>
-                </MudStack>
-            </MudTd>
-
-        </RowTemplate>
-        <PagerContent>
-            <MudTablePager />
-        </PagerContent>
-    </MudTable>
+    <MudGrid>
+        <MudItem xs="12" sm="12" md="12">
+            <MudTable RowsPerPage="33"
+                      Items="@_members"
+                      FixedHeader="true"
+                      FixedFooter="true"
+                      Virtualize="true"
+                      Hover="true"
+                      Dense="true"
+                      Striped="true"
+                      Filter="new Func<MembersListViewModel, bool>(FilterFunc)" OnRowClick="RowClickEvent" T="MembersListViewModel">
+                <ToolBarContent>
+                    <MudTextField @bind-Value="_searchString" Placeholder="Recherche" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+                    <MudSpacer/>
+                    <MudButton Size="Size.Small" OnClick="CreateMember" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Add" Color="Color.Primary">Nouveau membre</MudButton>
+                </ToolBarContent>
+                <HeaderContent>
+                    <MudTh>Nom</MudTh>
+                    <MudTh>Prénom</MudTh>
+                    <MudTh>Email</MudTh>
+                    <MudTh>Tél.</MudTh>
+                    <MudTh>Membre depuis</MudTh>
+                    <MudTh>Mois payés cette année</MudTh>
+                </HeaderContent>
+                <RowTemplate>
+                    <MudTd DataLabel="Nom">@context.LastName</MudTd>
+                    <MudTd DataLabel="Prénom">@context.FirstName</MudTd>
+                    <MudTd DataLabel="Email">@context.Email</MudTd>
+                    <MudTd DataLabel="Tél.">@context.Phone</MudTd>
+                    <MudTd DataLabel="Membre depuis">@context.MemberSince.ToShortDateString()</MudTd>
+                    <MudTd DataLabel="Mois payés cette année">
+                        @if (context.MonthsPaid == 0)
+                        {
+                            <MudChip Variant="Variant.Text" Color="Color.Error">
+                                <b>@context.MonthsPaid</b>
+                            </MudChip>
+                        }
+                        else if (context.MonthsPaid < DateTime.Now.Month)
+                        {
+                            <MudChip Variant="Variant.Text" Color="Color.Warning">
+                                <b>@context.MonthsPaid</b>
+                            </MudChip>
+                        }
+                        else if (context.MonthsPaid >= DateTime.Now.Month)
+                        {
+                            <MudChip Variant="Variant.Text" Color="Color.Success">
+                                <b>@context.MonthsPaid</b>
+                            </MudChip>
+                        }
+                        else
+                        {
+                            <MudChip Variant="Variant.Text" Color="Color.Info">
+                                <b>@context.MonthsPaid</b>
+                            </MudChip>
+                        }
+                    </MudTd>
+                </RowTemplate>
+                <PagerContent>
+                    <MudTablePager/>
+                </PagerContent>
+            </MudTable>
+        </MudItem>
+    </MudGrid>
 }
 
 @code
@@ -57,10 +86,6 @@ else
     private List<MembersListViewModel> _members = new();
     private string _searchString = string.Empty;
     private bool _loaded;
-    private int pay2019 = 12;
-    private int pay2020 = 12;
-    private int pay2021 = 12;
-    private int pay2022 = 12;
 
     protected override async Task OnInitializedAsync()
     {
@@ -86,27 +111,5 @@ else
     private void CreateMember()
     {
         NavigationManager.NavigateTo($"members/create");
-    }
-
-    private async Task Pay(Guid memberId, int year, int nbMonths)
-    {
-        try
-        {
-            var months = new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 };
-            var payedMonths = months[0..nbMonths];
-            var result = await _httpClient.PostAsJsonAsync($"api/members/{memberId}/contributions/{year}/{string.Join(",", payedMonths)}", true);
-
-            if (result.IsSuccessStatusCode)
-                _snackbar.Add($"Les cotisations {year} ont bien été mises à jour.", Severity.Success);
-            else
-            {
-                var errors = await result.Content.ReadAsStringAsync();
-                _snackbar.Add(errors, Severity.Warning);
-            }
-        }
-        catch (Exception ex)
-        {
-            _snackbar.Add(ex.Message, Severity.Error);
-        }
     }
 }
