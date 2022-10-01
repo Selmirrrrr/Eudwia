@@ -29,6 +29,9 @@
                 <MudTh>12</MudTh>
             </HeaderContent>
             <RowTemplate>
+                <MudTd DataLabel="Année">
+                    @context.Year
+                </MudTd>
                 <MudTd DataLabel="Janvier">
                     <MudCheckBox Checked="@context.January" Color="Color.Primary" CheckedChanged="(bool value) => CheckChanged(context, 1, value)"/>
                 </MudTd>
