@@ -7,6 +7,7 @@ public record MembersListViewModel
     public string LastName { get; set; } = string.Empty;
     public string Email { get; set; } = string.Empty;
     public string Phone { get; set; } = string.Empty;
+    public string City { get; set; } = string.Empty;
     public DateTime MemberSince { get; set; }
     public bool January { get; set; }
     public bool February { get; set; }

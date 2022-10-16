@@ -33,6 +33,7 @@ public class MembersListEndpoint : ControllerBase
             LastName = m.LastName,
             Email = m.Email ?? string.Empty,
             Phone = m.PhoneNumber ?? string.Empty,
+            City = m.City,
             MemberSince = m.MemberSince.ToDateTime(new TimeOnly(0, 0)),
             January = m.SubscriptionsPaid.First(sp => sp.Year == DateTime.Now.Year).January == true,
             February = m.SubscriptionsPaid.First(sp => sp.Year == DateTime.Now.Year).February == true,
