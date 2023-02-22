@@ -6,4 +6,5 @@ public interface IAuditableEntity
     string AuditCreatedBy { get; set; }
     DateTime AuditModifiedAt { get; set; }
     string AuditModifiedBy { get; set; }
+    bool IsDeleted { get; set; }
 }

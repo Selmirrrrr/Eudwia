@@ -30,4 +30,6 @@ public class SubscriptionPaid : IAuditableEntity, ITenantEntity
     public string AuditModifiedBy { get; set; } = string.Empty;
 
     public Guid TenantId { get; set; }
+    
+    public bool IsDeleted { get; set; }
 }

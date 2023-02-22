@@ -68,6 +68,8 @@ public class Member : IdentityUser<Guid>, IAuditableEntity, ITenantEntity
     public string AuditModifiedBy { get; set; } = string.Empty;
 
     public Guid TenantId { get; set; }
+    
+    public bool IsDeleted { get; set; }
 
     public Member(ICollection<Payment> payments, ICollection<SubscriptionPaid> subscriptionsPaid)
     {

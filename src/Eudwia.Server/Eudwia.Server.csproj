@@ -18,7 +18,7 @@
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
         <PackageReference Include="OpenXmlPowerTools-NetStandard" Version="4.6.23-alpha4" />
-        <PackageReference Include="SharpDocx" Version="2.2.0" />
+        <PackageReference Include="SharpDocx" Version="2.3.0" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
         <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="6.4.0" />
         <PackageReference Include="Swashbuckle.AspNetCore.Filters" Version="7.0.5" />

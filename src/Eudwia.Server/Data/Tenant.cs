@@ -19,4 +19,6 @@ public class Tenant : ITenantEntity, IAuditableEntity
 
     [MaxLength(200)]
     public string AuditModifiedBy { get; set; } = string.Empty;
+
+    public bool IsDeleted { get; set; }
 }

@@ -4,6 +4,7 @@ using System.Security.Claims;
 using System.Text;
 using Eudwia.Server.Data;
 using Eudwia.Server.Settings;
+using Eudwia.Shared;
 using Eudwia.Shared.Features.Authentication.Login;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -45,11 +46,11 @@ public class LoginEndpoint : ControllerBase
         var claims = new List<Claim>
         {
             new(ClaimTypes.Name, request.Email),
-            new("FirstName", user.FirstName),
-            new("LastName", user.LastName),
-            new("Id", user.Id.ToString()),
-            new("Lang", user.Language.ToString()),
-            new("Tenant", user.TenantId.ToString())
+            new(EudwiaClaims.FirstName, user.FirstName),
+            new(EudwiaClaims.LastName, user.LastName),
+            new(EudwiaClaims.Id, user.Id.ToString()),
+            new(EudwiaClaims.Lang, user.Language.ToString()),
+            new(EudwiaClaims.Tenant, user.TenantId.ToString())
         };
 
         claims.AddRange((await _userManager.GetRolesAsync(user)).Select(role => new Claim(ClaimTypes.Role, role)).ToList());

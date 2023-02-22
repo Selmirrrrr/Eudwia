@@ -8,10 +8,13 @@ using Eudwia.Server.Data.Contexts;
 using Swashbuckle.AspNetCore.Filters;
 using System.Reflection;
 using System.Text;
+using System.Text.Json;
+using Eudwia.Server.Converters;
 using Eudwia.Server.Providers;
 using Eudwia.Server.Settings;
 using Eudwia.Shared.Authorization;
 using Eudwia.Shared.Enums;
+using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 
@@ -33,11 +36,14 @@ public class Startup
         {
             c.ValueProviderFactories.RemoveType<RouteValueProviderFactory>();
             c.ValueProviderFactories.Add(new ArraySupportingRouteValueProviderFactory());
-        }).AddFluentValidation(s =>
+        })
+        .AddJsonOptions(options =>
         {
-            s.RegisterValidatorsFromAssemblyContaining<Language>();
-            s.DisableDataAnnotationsValidation = false;
+            options.JsonSerializerOptions.Converters.Add(new DateOnlyConverter());
         });
+
+        services.AddValidatorsFromAssemblyContaining<Language>();
+        
         services.AddSwaggerGen(c =>
         {
             c.SwaggerDoc("v1", new OpenApiInfo

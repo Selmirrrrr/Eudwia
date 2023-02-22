@@ -4,4 +4,5 @@ public class MembersSecurityGetRolesViewModel
 {
     public bool IsAdmin { get; set; }
     public bool IsUser { get; set; }
+    public bool IsDeleted { get; set; }
 }

@@ -135,18 +135,21 @@
     {
         try
         {
-            _model.CountryId = _selectedCountry.Id;
-            var result = await _httpClient.PostAsJsonAsync($"api/members/", _model);
+            if ((await _validator.ValidateAsync(_model)).IsValid)
+            {
+                _model.CountryId = _selectedCountry.Id;
+                var result = await _httpClient.PostAsJsonAsync($"api/members/", _model);
 
-            if (result.IsSuccessStatusCode)
-            {
-                _snackbar.Add("Le membre a bien été ajouté à la base données.", Severity.Success);
-                _navigationManager.NavigateTo($"/members/{(await result.Content.ReadAsStringAsync()).Trim('\"')}");
-            }
-            else
-            {
-                var errors = await result.Content.ReadAsStringAsync();
-                _snackbar.Add(errors, Severity.Warning);
+                if (result.IsSuccessStatusCode)
+                {
+                    _snackbar.Add("Le membre a bien été ajouté à la base données.", Severity.Success);
+                    _navigationManager.NavigateTo($"/members/{(await result.Content.ReadAsStringAsync()).Trim('\"')}");
+                }
+                else
+                {
+                    var errors = await result.Content.ReadAsStringAsync();
+                    _snackbar.Add(errors, Severity.Warning);
+                }
             }
         }
         catch (Exception ex)

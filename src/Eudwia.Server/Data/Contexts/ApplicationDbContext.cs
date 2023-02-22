@@ -1,4 +1,5 @@
 ﻿#nullable disable
+using Eudwia.Server.Data.AutoHistory.Extensions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -6,6 +7,7 @@ using Eudwia.Server.Data.Contexts.Extensions;
 using Eudwia.Server.Data.Contracts;
 using Eudwia.Server.Providers;
 using Eudwia.Server.Settings;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.Extensions.Options;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Infrastructure;
 
@@ -44,9 +46,17 @@ public class ApplicationDbContext : IdentityDbContext<Member, IdentityRole<Guid>
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
         modelBuilder.Seed();
 
-        modelBuilder.Entity<SubscriptionPaid>().HasKey(o => new {o.MemberId, o.Year});
+        // enable auto history functionality.
+        modelBuilder.EnableAutoHistory();
+        
+        modelBuilder.Entity<Member>().HasQueryFilter(p => !p.IsDeleted);
         modelBuilder.Entity<Member>().HasQueryFilter(b => EF.Property<Guid>(b, "TenantId") == _currentUserProvider.TenantId);
+        
+        modelBuilder.Entity<Payment>().HasQueryFilter(p => !p.IsDeleted);
         modelBuilder.Entity<Payment>().HasQueryFilter(b => EF.Property<Guid>(b, "TenantId") == _currentUserProvider.TenantId);
+        
+        modelBuilder.Entity<SubscriptionPaid>().HasKey(o => new {o.MemberId, o.Year});
+        modelBuilder.Entity<SubscriptionPaid>().HasQueryFilter(p => !p.IsDeleted);
         modelBuilder.Entity<SubscriptionPaid>().HasQueryFilter(b => EF.Property<Guid>(b, "TenantId") == _currentUserProvider.TenantId);
     }
 
@@ -66,25 +76,62 @@ public class ApplicationDbContext : IdentityDbContext<Member, IdentityRole<Guid>
     
     public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
     {
-        var addedTenantEntries = ChangeTracker.Entries<ITenantEntity>().Where(x => x.State == EntityState.Added);
+        EnsureSoftDelete();
+        EnsureAuditable();
+        EnsureTenant();
+
+        return await EnsureAutoHistory(cancellationToken);
+    }
+
+    private void EnsureAuditable()
+    {
         var addedEntries = ChangeTracker.Entries<IAuditableEntity>().Where(x => x.State == EntityState.Added);
         var modifiedEntries = ChangeTracker.Entries<IAuditableEntity>().Where(x => x.State == EntityState.Modified);
-
-        foreach (var entry in addedTenantEntries.Where(x => x.Entity.TenantId == Guid.Empty)) 
-            entry.Entity.TenantId = _currentUserProvider.TenantId;
 
         foreach (var entry in addedEntries)
         {
             entry.CurrentValues[nameof(IAuditableEntity.AuditCreatedAt)] = DateTime.UtcNow;
-            entry.CurrentValues[nameof(IAuditableEntity.AuditCreatedBy)] = _currentUserProvider.Username;
+            entry.CurrentValues[nameof(IAuditableEntity.AuditCreatedBy)] = _currentUserProvider.FullName;
         }
 
         foreach (var entry in modifiedEntries)
         {
             entry.CurrentValues[nameof(IAuditableEntity.AuditModifiedAt)] = DateTime.UtcNow;
-            entry.CurrentValues[nameof(IAuditableEntity.AuditModifiedBy)] = _currentUserProvider.Username;
+            entry.CurrentValues[nameof(IAuditableEntity.AuditModifiedBy)] = _currentUserProvider.FullName;
         }
+    }
 
-        return await base.SaveChangesAsync(cancellationToken);
+    private void EnsureTenant()
+    {
+        var addedTenantEntries = ChangeTracker.Entries<ITenantEntity>().Where(x => x.State == EntityState.Added);
+
+        foreach (var entry in addedTenantEntries.Where(x => x.Entity.TenantId == Guid.Empty))
+            entry.Entity.TenantId = _currentUserProvider.TenantId;
+    }
+    
+    private void EnsureSoftDelete()
+    {
+        var deletedEntries = ChangeTracker.Entries<IAuditableEntity>().Where(x => x.State == EntityState.Deleted);
+
+        foreach (var entry in deletedEntries)
+        {
+            entry.Entity.IsDeleted = true;
+            entry.State = EntityState.Modified;
+        }
+    }
+
+    private async Task<int> EnsureAutoHistory(CancellationToken cancellationToken)
+    {
+        var addedEntries = ChangeTracker.Entries<IAuditableEntity>().Where(x => x.State == EntityState.Added);
+
+        this.EnsureAutoHistory();
+        
+        var result = await base.SaveChangesAsync(cancellationToken);
+
+        this.EnsureAddedHistory(addedEntries.ToArray());
+        
+        await base.SaveChangesAsync(cancellationToken);
+
+        return result;
     }
 }

@@ -48,6 +48,25 @@
             </MudCardContent>
         </MudCard>
     </MudItem>
+    <MudItem xs="12" sm="12" md="12">
+        <MudCard>
+            <MudCardHeader>
+                <CardHeaderContent>
+                    <MudText Class="red-text text-accent-4">Danger Zone</MudText>
+                </CardHeaderContent>
+            </MudCardHeader>
+            <MudCardContent>
+                @if (_roles.IsDeleted)
+                {
+                    <MudButton Variant="Variant.Filled" Color="Color.Secondary" OnClick="Delete">Re-activer</MudButton>
+                }
+                else
+                {
+                    <MudButton Variant="Variant.Outlined" Color="Color.Secondary" OnClick="Delete">Supprimer</MudButton>
+                }
+            </MudCardContent>
+        </MudCard>
+    </MudItem>
 </MudGrid>
 
 @code {
@@ -114,4 +133,17 @@
         }
     }
 
+    private async Task Delete()
+    {
+        var result = await _httpClient.PostAsJsonAsync($"api/members/{MemberId}/remove", _model);
+        if (result.IsSuccessStatusCode)
+        {
+            _snackbar.Add("L'utilisateur a bien été supprimé.", Severity.Success);
+        }
+        else
+        {
+            var errors = await result.Content.ReadAsStringAsync();
+            _snackbar.Add(errors, Severity.Warning);
+        }
+    }
 }

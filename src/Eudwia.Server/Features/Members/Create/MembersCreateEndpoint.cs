@@ -7,6 +7,7 @@ using Eudwia.Server.Data.Contexts;
 using Eudwia.Shared;
 using Eudwia.Shared.Authorization;
 using Eudwia.Shared.Features.Members.Create;
+using FluentValidation;
 
 namespace Eudwia.Server.Features.Members.Create;
 

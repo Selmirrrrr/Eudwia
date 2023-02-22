@@ -1,9 +1,11 @@
-﻿using System.Globalization;
+﻿#nullable disable
+
+using System.Globalization;
 using Microsoft.AspNetCore.Mvc.Abstractions;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.Extensions.Primitives;
 
-namespace Eudwia.Server;
+namespace Eudwia.Server.Providers;
 
 /// <summary>
 /// Based on: https://github.com/dotnet/aspnetcore/blob/main/src/Mvc/Mvc.Core/src/ModelBinding/RouteValueProvider.cs
