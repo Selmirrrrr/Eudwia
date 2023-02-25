@@ -81,7 +81,6 @@ public class Startup
 
         services.AddSingleton<IContextConfiguration, DataContextConfiguration>();
 
-
         //configure identity
         services.Configure<IdentityOptions>(options =>
         {
