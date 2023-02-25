@@ -1,7 +1,6 @@
 ﻿// Copyright (c) Arch team. All rights reserved.
 
 using System.Text.Json;
-using Eudwia.Server.Converters;
 using Microsoft.EntityFrameworkCore;
 
 namespace Eudwia.Server.Data.AutoHistory.Extensions
@@ -23,7 +22,6 @@ namespace Eudwia.Server.Data.AutoHistory.Extensions
         public static ModelBuilder EnableAutoHistory(this ModelBuilder modelBuilder, int? changedMaxLength = null)
         {
             var config = new JsonSerializerOptions(JsonSerializerDefaults.General);
-            config.Converters.Add(new DateOnlyConverter());
             return ModelBuilderExtensions.EnableAutoHistory<AutoHistory>(modelBuilder, o =>
             {
                 o.ChangedMaxLength = changedMaxLength;

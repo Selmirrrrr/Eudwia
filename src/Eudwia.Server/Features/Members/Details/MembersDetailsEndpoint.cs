@@ -50,13 +50,13 @@ public class MembersDetailsEndpoint : ControllerBase
             City = m.City,
             ZipCode = m.ZipCode,
             Language = m.Language,
-            BirthDate = m.BirthDate.ToDateTime(new TimeOnly(0, 0)),
+            BirthDate = m.BirthDate,
             State = m.State,
             CountryId = m.CountryId,
             Country = m.Country.Name,
             Email = m.Email ?? string.Empty,
             PhoneNumber = m.PhoneNumber,
-            MemberSince = m.MemberSince.ToDateTime(new TimeOnly(0, 0)),
+            MemberSince = m.MemberSince,
             MonthsPaidByYears = m.SubscriptionsPaid.Select(spg => new MembersDetailsViewModel.MonthsPaidByYear
             {
                 Year = spg.Year,

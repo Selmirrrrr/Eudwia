@@ -1,14 +1,8 @@
 ﻿using System.Net.Mime;
-using System.Text;
-using Eudwia.Server.Data;
 using Microsoft.AspNetCore.Mvc;
 using Eudwia.Server.Data.Contexts;
 using Eudwia.Shared.Authorization;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.EntityFrameworkCore;
-using NPOI.SS.Formula.Functions;
-using OpenXmlPowerTools;
-using SharpDocx;
 
 namespace Eudwia.Server.Features.Documents;
 
@@ -19,10 +13,14 @@ namespace Eudwia.Server.Features.Documents;
 public class DocumentsPublishListEndpoint : ControllerBase
 {
     private readonly ApplicationDbContext _applicationDbContext;
+    private readonly DocumentService _documentService;
+    private readonly ILogger<DocumentsPublishListEndpoint> _logger;
 
-    public DocumentsPublishListEndpoint(ApplicationDbContext applicationDbContext)
+    public DocumentsPublishListEndpoint(ApplicationDbContext applicationDbContext, DocumentService documentService, ILogger<DocumentsPublishListEndpoint> logger)
     {
         _applicationDbContext = applicationDbContext;
+        _documentService = documentService;
+        _logger = logger;
     }
 
     [HttpPost("documents/list")]
@@ -36,131 +34,65 @@ public class DocumentsPublishListEndpoint : ControllerBase
             {
                 Name = $"{m.FirstName} {m.LastName}",
                 M1 = m.SubscriptionsPaid.Where(sp => sp.Year == currentYear - 1).Select(sp => new SubscriptionStateMember
-                {
-                    Jan = sp.January ? "X" : string.Empty,
-                    Feb = sp.February ? "X" : string.Empty,
-                    Mar = sp.March ? "X" : string.Empty,
-                    Apr = sp.April ? "X" : string.Empty,
-                    May = sp.May ? "X" : string.Empty,
-                    Jun = sp.June ? "X" : string.Empty,
-                    Jul = sp.July ? "X" : string.Empty,
-                    Aug = sp.August ? "X" : string.Empty,
-                    Sep = sp.September ? "X" : string.Empty,
-                    Oct = sp.October ? "X" : string.Empty,
-                    Nov = sp.November ? "X" : string.Empty,
-                    Dec = sp.December ? "X" : string.Empty
-                }).FirstOrDefault(),
+                (
+                    sp.January ? "X" : string.Empty,
+                    sp.February ? "X" : string.Empty,
+                    sp.March ? "X" : string.Empty,
+                    sp.April ? "X" : string.Empty,
+                    sp.May ? "X" : string.Empty,
+                    sp.June ? "X" : string.Empty,
+                    sp.July ? "X" : string.Empty,
+                    sp.August ? "X" : string.Empty,
+                    sp.September ? "X" : string.Empty,
+                    sp.October ? "X" : string.Empty,
+                    sp.November ? "X" : string.Empty,
+                    sp.December ? "X" : string.Empty
+                )).FirstOrDefault(),
                 M2 = m.SubscriptionsPaid.Where(sp => sp.Year == currentYear).Select(sp => new SubscriptionStateMember
-                {
-                    Jan = sp.January ? "X" : string.Empty,
-                    Feb = sp.February ? "X" : string.Empty,
-                    Mar = sp.March ? "X" : string.Empty,
-                    Apr = sp.April ? "X" : string.Empty,
-                    May = sp.May ? "X" : string.Empty,
-                    Jun = sp.June ? "X" : string.Empty,
-                    Jul = sp.July ? "X" : string.Empty,
-                    Aug = sp.August ? "X" : string.Empty,
-                    Sep = sp.September ? "X" : string.Empty,
-                    Oct = sp.October ? "X" : string.Empty,
-                    Nov = sp.November ? "X" : string.Empty,
-                    Dec = sp.December ? "X" : string.Empty
-                }).FirstOrDefault()
+                (
+                    sp.January ? "X" : string.Empty,
+                    sp.February ? "X" : string.Empty,
+                    sp.March ? "X" : string.Empty,
+                    sp.April ? "X" : string.Empty,
+                    sp.May ? "X" : string.Empty,
+                    sp.June ? "X" : string.Empty,
+                    sp.July ? "X" : string.Empty,
+                    sp.August ? "X" : string.Empty,
+                    sp.September ? "X" : string.Empty,
+                    sp.October ? "X" : string.Empty,
+                    sp.November ? "X" : string.Empty,
+                    sp.December ? "X" : string.Empty
+                )).FirstOrDefault()
                 
             }).ToList();
+
+        var viewModel = new SubscriptionStateViewModel(currentYear, members.Count, members);
+
+        var doc = await _documentService.GenerateDocument(file, viewModel);
         
-        var model = new SubscriptionStateViewModel
-        {
-            Lines = members,
-            Year = currentYear,
-            Count = members.Count
-        };
-        
-        var path = Path.GetTempFileName();
-        await using (var fileStream = new FileStream(path, FileMode.Create))
-        {
-            await file.CopyToAsync(fileStream);
-        }
-
-        try
-        {
-            var document = DocumentFactory.Create(path, model, forceCompile: false);
-            var doc = document.Generate();
-            return File(doc, file.ContentType);
-
-        }
-        catch (SharpDocx.SharpDocxCompilationException sdce)
-        {
-            StringBuilder sb = new StringBuilder(sdce.Errors);
-            sb.AppendLine(sdce.SourceCode);
-            Console.WriteLine(sb.ToString());
-        }
-        
-        return BadRequest();
-
-    }
-
-    private static Stream MergeDocuments(List<MemoryStream> files)
-    {
-        var outputFileStream = new MemoryStream();
-        var sources = new List<Source>();
-
-        foreach (var file in files)
-        {
-            var openXmlPowerToolsDocument = new OpenXmlPowerToolsDocument(Guid.NewGuid().ToString(), file);
-            var document = new WmlDocument(openXmlPowerToolsDocument);
-            var source = new Source(document, true);
-            sources.Add(source);
-        }
-
-        MergeXmlDocuments(outputFileStream, sources);
-        return outputFileStream;
-    }
-
-    private static void MergeXmlDocuments(Stream outStream, List<Source> sources)
-    {
-        var buildDocument = DocumentBuilder.BuildDocument(sources);
-        buildDocument.WriteByteArray(outStream);
+        return File(doc, file.ContentType);
     }
 }
 
-public class SubscriptionStateViewModel
-{
-    public int Year { get; set; }
-    public int Count { get; set; }
-    public List<SubscriptionStateLine> Lines { get; set; }
-}
+public record SubscriptionStateViewModel(int Year, int Count, List<SubscriptionStateLine> Lines);
 
-public class SubscriptionStateLine
+public record SubscriptionStateLine
 {
     private SubscriptionStateMember? _m1;
     private SubscriptionStateMember? _m2;
-    public string Name { get; set; } = string.Empty;
+    public string Name { get; init; } = string.Empty;
 
     public SubscriptionStateMember? M1
     {
-        get => _m1 ?? new SubscriptionStateMember();
+        get => _m1 ?? new SubscriptionStateMember(string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty ,string.Empty, string.Empty, string.Empty, string.Empty);
         set => _m1 = value;
     }
 
     public SubscriptionStateMember? M2
     {
-        get => _m2 ?? new SubscriptionStateMember();
+        get => _m2 ?? new SubscriptionStateMember(string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty ,string.Empty, string.Empty, string.Empty, string.Empty);
         set => _m2 = value;
     }
 }
 
-public class SubscriptionStateMember
-{
-    public string Jan { get; set; } = string.Empty;
-    public string Feb { get; set; } = string.Empty;
-    public string Mar { get; set; } = string.Empty;
-    public string Apr { get; set; } = string.Empty;
-    public string May { get; set; } = string.Empty;
-    public string Jun { get; set; } = string.Empty;
-    public string Jul { get; set; } = string.Empty;
-    public string Aug { get; set; } = string.Empty;
-    public string Sep { get; set; } = string.Empty;
-    public string Oct { get; set; } = string.Empty;
-    public string Nov { get; set; } = string.Empty;
-    public string Dec { get; set; } = string.Empty;
-}
+public record SubscriptionStateMember(string Jan, string Feb, string Mar, string Apr, string May, string Jun, string Jul, string Aug, string Sep, string Oct, string Nov, string Dec);

@@ -17,9 +17,9 @@ public class Member : IdentityUser<Guid>, IAuditableEntity, ITenantEntity
     [MaxLength(100)]
     public string LastName { get; set; } = string.Empty;
 
-    public DateOnly BirthDate { get; set; }
+    public DateTime BirthDate { get; set; }
 
-    public DateOnly MemberSince { get; set; }
+    public DateTime MemberSince { get; set; }
 
     [Required]
     [MinLength(3)]

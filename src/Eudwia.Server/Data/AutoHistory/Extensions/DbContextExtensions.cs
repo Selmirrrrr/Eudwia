@@ -3,6 +3,7 @@
 #nullable disable
 
 using System.Text.Json;
+using Eudwia.Server.Data.Contracts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 
@@ -78,7 +79,7 @@ namespace Eudwia.Server.Data.AutoHistory.Extensions
         /// <param name="addedEntries"></param>
         public static void EnsureAddedHistory(
             this DbContext context,
-            EntityEntry[] addedEntries)
+            EntityEntry<IAuditableEntity>[] addedEntries)
         {
             EnsureAddedHistory<AutoHistory>(
                 context,

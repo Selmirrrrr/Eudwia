@@ -32,11 +32,9 @@ public class DatabaseFixture : WebApplicationFactory<Startup>, IAsyncLifetime
     public DatabaseFixture()
     {
         var testcontainersBuilder = new TestcontainersBuilder<PostgreSqlTestcontainer>()
-            .WithDatabase(new PostgreSqlTestcontainerConfiguration("postgres:bullseye")
+            .WithDatabase(new MsSqlTestcontainerConfiguration()
             {
-                Database = "db",
-                Username = "postgres",
-                Password = "postgres"
+                Password = "Sup3r.Str0ng.P4ss"
             });
 
         ContainerFixture = testcontainersBuilder.Build();
@@ -136,8 +134,8 @@ public class DatabaseFixture : WebApplicationFactory<Startup>, IAsyncLifetime
             LastName = faker.Name.LastName(),
             Email = faker.Person.Email,
             PhoneNumber = faker.Person.Phone,
-            BirthDate = faker.Date.PastDateOnly(50, new DateOnly(2000, 1, 1)),
-            MemberSince = faker.Date.PastDateOnly(10),
+            BirthDate = faker.Date.Past(50, new DateTime(2000, 1, 1)),
+            MemberSince = faker.Date.Past(10),
             StreetLine1 = faker.Address.StreetAddress(),
             StreetLine2 = faker.Address.SecondaryAddress(),
             HouseNumber = faker.Address.BuildingNumber(),

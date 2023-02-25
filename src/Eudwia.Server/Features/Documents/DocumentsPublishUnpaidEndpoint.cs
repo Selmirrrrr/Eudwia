@@ -1,12 +1,8 @@
 ﻿using System.Net.Mime;
-using Eudwia.Server.Data;
 using Microsoft.AspNetCore.Mvc;
 using Eudwia.Server.Data.Contexts;
 using Eudwia.Shared.Authorization;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.EntityFrameworkCore;
-using OpenXmlPowerTools;
-using SharpDocx;
 
 namespace Eudwia.Server.Features.Documents;
 
@@ -17,25 +13,12 @@ namespace Eudwia.Server.Features.Documents;
 public class DocumentsPublishUnpaidEndpoint : ControllerBase
 {
     private readonly ApplicationDbContext _applicationDbContext;
+    private readonly DocumentService _documentService;
 
-    public DocumentsPublishUnpaidEndpoint(ApplicationDbContext applicationDbContext)
+    public DocumentsPublishUnpaidEndpoint(ApplicationDbContext applicationDbContext, DocumentService documentService)
     {
         _applicationDbContext = applicationDbContext;
-    }
-
-    public record Member
-    {
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string StreetLine1 { get; set; }
-        public string HouseNumber { get; set; }
-        public string City { get; set; }
-        public string ZipCode { get; set; }
-        public string Country { get; set; }
-        public string State { get; set; }
-        public SubscriptionPaid SubscriptionPaid { get; set; }
-        public DateOnly MemberSince { get; set; }
-        public int MemberSinceMonth { get; set; }
+        _documentService = documentService;
     }
 
     [HttpPost("documents/publish-unpaid")]
@@ -59,7 +42,7 @@ public class DocumentsPublishUnpaidEndpoint : ControllerBase
                                               a.October &&
                                               a.November &&
                                               a.December))
-            .Select(m => new Member
+            .Select(m => new
             {
                 FirstName = m.FirstName, LastName = m.LastName, StreetLine1 = m.StreetLine1,
                 HouseNumber = m.HouseNumber,
@@ -69,12 +52,10 @@ public class DocumentsPublishUnpaidEndpoint : ControllerBase
                 State = m.State,
                 SubscriptionPaid = m.SubscriptionsPaid.FirstOrDefault(sp => sp.Year == unpayedYear),
                 MemberSince = m.MemberSince,
-                MemberSinceMonth = 0
+                MemberSinceMonth = m.MemberSince.Year < unpayedYear ? 1 : m.MemberSince.Month
             }).ToList();
         
-        members.ForEach(m => m.MemberSinceMonth = m.MemberSince.Year < unpayedYear ? 1 : m.MemberSince.Month);
-
-        var lol = members.Where(m => m.MemberSince.Year <= unpayedYear).Select(m => new DocumentViewModel
+        var subscriptions = members.Where(m => m.MemberSince.Year <= unpayedYear).Select(m => new MemberViewModel
         {
             FirstName = m.FirstName,
             LastName = m.LastName,
@@ -102,49 +83,14 @@ public class DocumentsPublishUnpaidEndpoint : ControllerBase
             },
         });
 
-
-        var path = Path.GetTempFileName();
-        await using (var fileStream = new FileStream(path, FileMode.Create))
-        {
-            await file.CopyToAsync(fileStream);
-        }
-
-        var documents = lol
+        var lines = subscriptions
             .Where(l => !l.SubscriptionsPaid.Jan || !l.SubscriptionsPaid.Feb || !l.SubscriptionsPaid.Mar ||
                         !l.SubscriptionsPaid.Apr || !l.SubscriptionsPaid.May || !l.SubscriptionsPaid.Jun ||
                         !l.SubscriptionsPaid.Jul || !l.SubscriptionsPaid.Aug || !l.SubscriptionsPaid.Sep ||
-                        !l.SubscriptionsPaid.Oct || !l.SubscriptionsPaid.Nov || !l.SubscriptionsPaid.Dec)
-            .Select(member => DocumentFactory.Create(path, member, forceCompile: false))
-            .Select(document => document.Generate()).ToList();
-
-        System.IO.File.Delete(path);
-
-        var ms = MergeDocuments(documents);
-        ms.Position = 0;
-        return File(ms, file.ContentType);
-    }
-
-    private static Stream MergeDocuments(List<MemoryStream> files)
-    {
-        var outputFileStream = new MemoryStream();
-        var sources = new List<Source>();
-
-        foreach (var file in files)
-        {
-            var openXmlPowerToolsDocument = new OpenXmlPowerToolsDocument(Guid.NewGuid().ToString(), file);
-            var document = new WmlDocument(openXmlPowerToolsDocument);
-            var source = new Source(document, true);
-            sources.Add(source);
-        }
-
-        MergeXmlDocuments(outputFileStream, sources);
-        return outputFileStream;
-    }
-
-    private static void MergeXmlDocuments(Stream outStream, List<Source> sources)
-    {
-        var buildDocument = DocumentBuilder.BuildDocument(sources);
-        buildDocument.WriteByteArray(outStream);
+                        !l.SubscriptionsPaid.Oct || !l.SubscriptionsPaid.Nov || !l.SubscriptionsPaid.Dec);
+        var doc = await _documentService.GenerateMergedDocument(file, lines);
+        
+        return File(doc, file.ContentType);
     }
 }
 

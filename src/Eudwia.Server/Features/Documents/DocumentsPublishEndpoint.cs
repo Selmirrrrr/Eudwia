@@ -1,12 +1,9 @@
 ﻿using System.Net.Mime;
-using Eudwia.Server.Data;
 using Microsoft.AspNetCore.Mvc;
 using Eudwia.Server.Data.Contexts;
 using Eudwia.Shared.Authorization;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
-using OpenXmlPowerTools;
-using SharpDocx;
 
 namespace Eudwia.Server.Features.Documents;
 
@@ -17,21 +14,23 @@ namespace Eudwia.Server.Features.Documents;
 public class DocumentsPublishEndpoint : ControllerBase
 {
     private readonly ApplicationDbContext _applicationDbContext;
+    private readonly DocumentService _documentService;
 
-    public DocumentsPublishEndpoint(ApplicationDbContext applicationDbContext)
+    public DocumentsPublishEndpoint(ApplicationDbContext applicationDbContext, DocumentService documentService)
     {
         _applicationDbContext = applicationDbContext;
+        _documentService = documentService;
     }
 
     [HttpPost("documents/publish")]
     public async Task<ActionResult> Handle(IFormFile file)
     {
-        var members = _applicationDbContext.Members.Where(m =>
+        var members = await _applicationDbContext.Members.Where(m =>
                 !string.IsNullOrWhiteSpace(m.StreetLine1) &&
                 !string.IsNullOrWhiteSpace(m.City) &&
                 !string.IsNullOrWhiteSpace(m.ZipCode) &&
                 !string.IsNullOrWhiteSpace(m.HouseNumber) && !m.City.Contains("Inconnu"))
-            .Select(m => new DocumentViewModel
+            .Select(m => new MemberViewModel
             {
                 FirstName = m.FirstName,
                 LastName = m.LastName,
@@ -41,50 +40,12 @@ public class DocumentsPublishEndpoint : ControllerBase
                 ZipCode = m.ZipCode,
                 Country = m.Country.Name,
                 State = m.State
-            }).AsAsyncEnumerable();
+            }).ToListAsync();
+        
+        var doc = await _documentService.GenerateMergedDocument(file, members);
 
-        var path = Path.GetTempFileName();
-        await using (var fileStream = new FileStream(path, FileMode.Create))
-        {
-            await file.CopyToAsync(fileStream);
-        }
-
-        var documents = new List<MemoryStream>();
-        await foreach (var member in members)
-        {
-            var document = DocumentFactory.Create(path, member, forceCompile: false);
-            var doc = document.Generate();
-
-            documents.Add(doc);
-        }
-
-        System.IO.File.Delete(path);
-
-        var ms = MergeDocuments(documents);
-        ms.Position = 0;
-        return File(ms, file.ContentType);
+        return File(doc, file.ContentType);
     }
 
-    private static Stream MergeDocuments(List<MemoryStream> files)
-    {
-        var outputFileStream = new MemoryStream();
-        var sources = new List<Source>();
 
-        foreach (var file in files)
-        {
-            var openXmlPowerToolsDocument = new OpenXmlPowerToolsDocument(Guid.NewGuid().ToString(), file);
-            var document = new WmlDocument(openXmlPowerToolsDocument);
-            var source = new Source(document, true);
-            sources.Add(source);
-        }
-
-        MergeXmlDocuments(outputFileStream, sources);
-        return outputFileStream;
-    }
-
-    private static void MergeXmlDocuments(Stream outStream, List<Source> sources)
-    {
-        var buildDocument = DocumentBuilder.BuildDocument(sources);
-        buildDocument.WriteByteArray(outStream);
-    }
 }

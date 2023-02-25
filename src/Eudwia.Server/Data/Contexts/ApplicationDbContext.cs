@@ -7,9 +7,9 @@ using Eudwia.Server.Data.Contexts.Extensions;
 using Eudwia.Server.Data.Contracts;
 using Eudwia.Server.Providers;
 using Eudwia.Server.Settings;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Microsoft.Extensions.Options;
-using Npgsql.EntityFrameworkCore.PostgreSQL.Infrastructure;
 
 namespace Eudwia.Server.Data.Contexts;
 
@@ -45,6 +45,27 @@ public class ApplicationDbContext : IdentityDbContext<Member, IdentityRole<Guid>
 
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
         modelBuilder.Seed();
+        
+        if (Database.ProviderName == "Microsoft.EntityFrameworkCore.Sqlite")
+        {
+            foreach (var entityType in modelBuilder.Model.GetEntityTypes())
+            {
+                var properties = entityType.ClrType.GetProperties().Where(p => p.PropertyType == typeof(decimal));
+                var dateTimeProperties = entityType.ClrType.GetProperties()
+                    .Where(p => p.PropertyType == typeof(DateTimeOffset));
+
+                foreach (var property in properties)
+                {
+                    modelBuilder.Entity(entityType.Name).Property(property.Name).HasConversion<double>();
+                }
+
+                foreach (var property in dateTimeProperties)
+                {
+                    modelBuilder.Entity(entityType.Name).Property(property.Name)
+                        .HasConversion(new DateTimeOffsetToBinaryConverter());
+                }
+            }
+        }
 
         // enable auto history functionality.
         modelBuilder.EnableAutoHistory();
@@ -67,13 +88,15 @@ public class ApplicationDbContext : IdentityDbContext<Member, IdentityRole<Guid>
         optionsBuilder
             .EnableDetailedErrors()
             .EnableSensitiveDataLogging()
-            .UseNpgsql(_config.ConnectionString, SqlServerOptionsAction)
+            .UseSqlite(_config.ConnectionString, SqlServerOptionsAction)
             .UseLoggerFactory(_loggerFactory);
     }
-
-    private void SqlServerOptionsAction(NpgsqlDbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.GetName().Name);
     
+    private static void SqlServerOptionsAction(SqliteDbContextOptionsBuilder optionsBuilder)
+    {
+        optionsBuilder.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.GetName().Name);
+    }
+
     public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
     {
         EnsureSoftDelete();
@@ -129,7 +152,7 @@ public class ApplicationDbContext : IdentityDbContext<Member, IdentityRole<Guid>
         var result = await base.SaveChangesAsync(cancellationToken);
 
         this.EnsureAddedHistory(addedEntries.ToArray());
-        
+
         await base.SaveChangesAsync(cancellationToken);
 
         return result;

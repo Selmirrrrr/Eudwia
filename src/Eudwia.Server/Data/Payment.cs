@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Eudwia.Server.Data.Contracts;
 using Eudwia.Shared.Enums;
+using Microsoft.EntityFrameworkCore;
 
 namespace Eudwia.Server.Data;
 
@@ -11,6 +12,7 @@ public class Payment : IAuditableEntity, ITenantEntity
     [MaxLength(200)]
     public string Note { get; set; } = string.Empty;
 
+    [Precision(18, 2)]
     public decimal Amount { get; set; }
 
     public Guid MemberId { get; set; }

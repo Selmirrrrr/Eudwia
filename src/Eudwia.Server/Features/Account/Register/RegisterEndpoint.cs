@@ -46,7 +46,7 @@ public class RegisterEndpoint : ControllerBase
             Email = model.Email,
             FirstName = model.FirstName,
             LastName = model.LastName,
-            MemberSince = DateOnly.FromDateTime(DateTime.UtcNow),
+            MemberSince = DateTime.UtcNow,
             TenantId = tenantId
         };
 

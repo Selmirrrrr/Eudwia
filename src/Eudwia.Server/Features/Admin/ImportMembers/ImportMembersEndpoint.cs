@@ -33,7 +33,7 @@ public class ImportMembersEndpoint : ControllerBase
         {
             FirstName = m.Firstname,
             LastName = m.Lastname,
-            BirthDate = m.Naissance is null ? DateOnly.MinValue : DateOnly.FromDateTime(m.Naissance.Value),
+            BirthDate = m.Naissance ?? DateTime.MinValue,
             Email = m.Email,
             PhoneNumber = m.Phone,
             StreetLine1 = m.StreetLine1,
@@ -43,7 +43,7 @@ public class ImportMembersEndpoint : ControllerBase
             City = m.City,
             State = m.State,
             CountryId = countries.Keys.Any(a => a == m.Country) ? countries[m.Country].Id : swissGuid,
-            MemberSince = m.MemberSince is null ? DateOnly.MinValue : DateOnly.FromDateTime(m.MemberSince.Value),
+            MemberSince = m.MemberSince ?? DateTime.MinValue,
             TenantId = tenantId,
             SecurityStamp = Guid.NewGuid().ToString(),
             UserName = m.Email,

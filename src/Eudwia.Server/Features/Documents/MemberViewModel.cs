@@ -1,6 +1,6 @@
 ﻿namespace Eudwia.Server.Features.Documents;
 
-public class DocumentViewModel
+public class MemberViewModel
 {
     public string FirstName { get; set; } = string.Empty;
     public string LastName { get; set; } = string.Empty;

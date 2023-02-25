@@ -47,8 +47,8 @@ public class MembersCreateEndpoint : ControllerBase
             UserName = command.Email,
             Email = command.Email,
             PhoneNumber = command.PhoneNumber,
-            BirthDate = new DateOnly(birthDate.Year, birthDate.Month, birthDate.Day),
-            MemberSince = new DateOnly(memberSince.Year, memberSince.Month, memberSince.Day),
+            BirthDate = new DateTime(birthDate.Year, birthDate.Month, birthDate.Day),
+            MemberSince = new DateTime(memberSince.Year, memberSince.Month, memberSince.Day),
             Language = command.Language,
             SecurityStamp = Guid.NewGuid().ToString(),
             SubscriptionsPaid = {new SubscriptionPaid {Year = DateTime.Now.Year}}

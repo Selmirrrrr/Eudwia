@@ -4,7 +4,7 @@ public class DataContextConfiguration : IContextConfiguration
 {
     public DataContextConfiguration(IConfiguration config)
     {
-        ConnectionString = config.GetConnectionString("PostgreSQL");
+        ConnectionString = config.GetConnectionString("DefaultConnection");
     }
 
     public string ConnectionString { get; }
