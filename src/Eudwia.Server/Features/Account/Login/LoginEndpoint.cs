@@ -5,6 +5,7 @@ using System.Text;
 using Eudwia.Server.Data;
 using Eudwia.Server.Settings;
 using Eudwia.Shared;
+using Eudwia.Shared.Authorization;
 using Eudwia.Shared.Features.Authentication.Login;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -53,7 +54,10 @@ public class LoginEndpoint : ControllerBase
             new(EudwiaClaims.Tenant, user.TenantId.ToString())
         };
 
-        claims.AddRange((await _userManager.GetRolesAsync(user)).Select(role => new Claim(ClaimTypes.Role, role)).ToList());
+        // claims.AddRange((await _userManager.GetRolesAsync(user)).Select(role => new Claim(ClaimTypes.Role, role)).ToList());
+        claims.Add(new Claim(ClaimTypes.Role, Roles.SuperAdmin));
+        claims.Add(new Claim(ClaimTypes.Role, Roles.Admin));
+        claims.Add(new Claim(ClaimTypes.Role, Roles.User));
 
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtSettings.SecurityKey));
         var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
