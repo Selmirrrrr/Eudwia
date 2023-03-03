@@ -32,11 +32,13 @@ public class MembersCreateEndpoint : ControllerBase
         var birthDate = command.BirthDate ?? new DateTime(1900, 1, 1);
         var memberSince = command.MemberSince ?? new DateTime(1900, 1, 1);
 
+        
         var member = new Member
         {
             Id = new Guid(),
             FirstName = command.FirstName,
             LastName = command.LastName,
+            GivenName = command.GivenName,
             StreetLine1 = command.StreetLine1,
             StreetLine2 = command.StreetLine2,
             HouseNumber = command.HouseNumber,
@@ -44,18 +46,25 @@ public class MembersCreateEndpoint : ControllerBase
             ZipCode = command.ZipCode,
             State = command.State,
             CountryId = command.CountryId,
-            UserName = command.Email,
+            UserName =  string.IsNullOrWhiteSpace(command.Email) ? "EMPTY" : command.Email,
             Email = command.Email,
             PhoneNumber = command.PhoneNumber,
             BirthDate = new DateTime(birthDate.Year, birthDate.Month, birthDate.Day),
             MemberSince = new DateTime(memberSince.Year, memberSince.Month, memberSince.Day),
             Language = command.Language,
             SecurityStamp = Guid.NewGuid().ToString(),
-            SubscriptionsPaid = {new SubscriptionPaid {Year = DateTime.Now.Year}}
+            SubscriptionsPaid = {new SubscriptionPaid {Year = DateTime.Now.Year}},
+            ContactByMail = command.ContactByMail,
+            ContactByPhone = command.ContactByPhone,
+            ContactByEMail = command.ContactByEMail,
+            Note = command.Note
         };
 
-        await _userManager.CreateAsync(member, Guid.NewGuid().ToString());
-
-        return Ok(member.Id);
+        var result = await _userManager.CreateAsync(member, Guid.NewGuid().ToString());
+        if (result.Succeeded)
+            return Ok(member.Id);
+        
+        var errors = result.Errors.Select(x => x.Description);
+        return BadRequest(errors);
     }
 }
