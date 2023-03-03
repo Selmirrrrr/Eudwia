@@ -9,6 +9,10 @@ public record MembersDetailsViewModel
     public string FirstName { get; set; } = string.Empty;
 
     public string LastName { get; set; } = string.Empty;
+    
+    public string? GivenName { get; set; }
+    
+    public string? Note { get; set; }
 
     public DateTime? BirthDate { get; set; }
 
@@ -38,6 +42,10 @@ public record MembersDetailsViewModel
     public virtual PaymentOverview[] Payments { get; set; } = Array.Empty<PaymentOverview>();
 
     public virtual MonthsPaidByYear[] MonthsPaidByYears { get; set; } = Array.Empty<MonthsPaidByYear>();
+    
+    public bool ContactByEMail { get; set; }
+    public bool ContactByPhone { get; set; }
+    public bool ContactByMail { get; set; }
 
     public record MonthsPaidByYear
     {

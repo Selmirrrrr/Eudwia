@@ -28,7 +28,7 @@ public class MembersSecurityRemove : ControllerBase
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult> Handle([FromRoute] Guid memberId, CancellationToken cancellationToken)
     {
-        var user = await _dbContext.Users.IgnoreQueryFilters()
+        var user = await _dbContext.Members.IgnoreQueryFilters()
             .FirstAsync(u => u.Id == memberId, cancellationToken);
 
         if (user.IsDeleted)

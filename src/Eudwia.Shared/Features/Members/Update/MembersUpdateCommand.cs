@@ -8,6 +8,10 @@ public record MembersUpdateCommand
     public string FirstName { get; set; } = string.Empty;
 
     public string LastName { get; set; } = string.Empty;
+    
+    public string? GivenName { get; set; }
+    
+    public string? Note { get; set; }
 
     public DateTime? BirthDate { get; set; }
 
@@ -32,6 +36,10 @@ public record MembersUpdateCommand
     public string? Email { get; set; }
 
     public Language Language { get; set; }
+    
+    public bool ContactByEMail { get; set; }
+    public bool ContactByPhone { get; set; }
+    public bool ContactByMail { get; set; }
 }
 
 public class MembersUpdateCommandValidator : AbstractValidator<MembersUpdateCommand>

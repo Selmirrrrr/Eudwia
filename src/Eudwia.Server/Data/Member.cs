@@ -16,6 +16,12 @@ public class Member : IdentityUser<Guid>, IAuditableEntity, ITenantEntity
     [MinLength(2)]
     [MaxLength(100)]
     public string LastName { get; set; } = string.Empty;
+    
+    [MaxLength(200)]
+    public string? GivenName { get; set; }
+    
+    [MaxLength(2000)]
+    public string? Note { get; set; }
 
     public DateTime BirthDate { get; set; }
 
@@ -70,6 +76,9 @@ public class Member : IdentityUser<Guid>, IAuditableEntity, ITenantEntity
     public Guid TenantId { get; set; }
     
     public bool IsDeleted { get; set; }
+    public bool ContactByEMail { get; set; } = true;
+    public bool ContactByPhone { get; set; } = true;
+    public bool ContactByMail { get; set; } = true;
 
     public Member(ICollection<Payment> payments, ICollection<SubscriptionPaid> subscriptionsPaid)
     {

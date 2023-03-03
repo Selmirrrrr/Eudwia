@@ -38,6 +38,7 @@ public class MembersUpdateEndpoint : ControllerBase
 
         member.FirstName = command.FirstName;
         member.LastName = command.LastName;
+        member.GivenName = command.GivenName;
         member.StreetLine1 = command.StreetLine1;
         member.StreetLine2 = command.StreetLine2;
         member.HouseNumber = command.HouseNumber;
@@ -51,6 +52,10 @@ public class MembersUpdateEndpoint : ControllerBase
         member.MemberSince = new DateTime(memberSince.Year, memberSince.Month, memberSince.Day);
         member.Language = command.Language;
         member.UserName = command.Email;
+        member.ContactByMail = command.ContactByMail;
+        member.ContactByPhone = command.ContactByPhone;
+        member.ContactByEMail = command.ContactByEMail;
+        member.Note = command.Note;
 
         _applicationDbContext.Members.Update(member);
         await _applicationDbContext.SaveChangesAsync();

@@ -44,6 +44,7 @@ public class MembersDetailsEndpoint : ControllerBase
             Id = m.Id,
             FirstName = m.FirstName,
             LastName = m.LastName,
+            GivenName = m.GivenName,
             StreetLine1 = m.StreetLine1,
             StreetLine2 = m.StreetLine2,
             HouseNumber = m.HouseNumber,
@@ -78,7 +79,11 @@ public class MembersDetailsEndpoint : ControllerBase
                 Id = p.Id,
                 Amount = p.Amount,
                 PaymentDate = p.PaymentDate
-            }).ToArray()
+            }).ToArray(),
+            ContactByMail = m.ContactByMail,
+            ContactByPhone = m.ContactByPhone,
+            ContactByEMail = m.ContactByEMail,
+            Note = m.Note,
         }).AsSplitQuery().FirstAsync(m => m.Id == memberId);
 
         return Ok(member);

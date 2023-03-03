@@ -70,15 +70,12 @@ public class ApplicationDbContext : IdentityDbContext<Member, IdentityRole<Guid>
         // enable auto history functionality.
         modelBuilder.EnableAutoHistory();
         
-        modelBuilder.Entity<Member>().HasQueryFilter(p => !p.IsDeleted);
-        modelBuilder.Entity<Member>().HasQueryFilter(b => EF.Property<Guid>(b, "TenantId") == _currentUserProvider.TenantId);
+        modelBuilder.Entity<Member>().HasQueryFilter(p => !p.IsDeleted && EF.Property<Guid>(p, "TenantId") == _currentUserProvider.TenantId);
         
-        modelBuilder.Entity<Payment>().HasQueryFilter(p => !p.IsDeleted);
-        modelBuilder.Entity<Payment>().HasQueryFilter(b => EF.Property<Guid>(b, "TenantId") == _currentUserProvider.TenantId);
+        modelBuilder.Entity<Payment>().HasQueryFilter(p => !p.IsDeleted && EF.Property<Guid>(p, "TenantId") == _currentUserProvider.TenantId);
         
         modelBuilder.Entity<SubscriptionPaid>().HasKey(o => new {o.MemberId, o.Year});
-        modelBuilder.Entity<SubscriptionPaid>().HasQueryFilter(p => !p.IsDeleted);
-        modelBuilder.Entity<SubscriptionPaid>().HasQueryFilter(b => EF.Property<Guid>(b, "TenantId") == _currentUserProvider.TenantId);
+        modelBuilder.Entity<SubscriptionPaid>().HasQueryFilter(p => !p.IsDeleted && EF.Property<Guid>(p, "TenantId") == _currentUserProvider.TenantId);
     }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

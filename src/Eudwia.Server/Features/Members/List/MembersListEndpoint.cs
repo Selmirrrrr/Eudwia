@@ -46,7 +46,7 @@ public class MembersListEndpoint : ControllerBase
             September = m.SubscriptionsPaid.First(sp => sp.Year == DateTime.Now.Year).September == true,
             October = m.SubscriptionsPaid.First(sp => sp.Year == DateTime.Now.Year).October == true,
             November = m.SubscriptionsPaid.First(sp => sp.Year == DateTime.Now.Year).November == true,
-            December = m.SubscriptionsPaid.First(sp => sp.Year == DateTime.Now.Year).December == true
+            December = m.SubscriptionsPaid.First(sp => sp.Year == DateTime.Now.Year).December == true,
         }).OrderByDescending(m => m.MemberSince).ToListAsync();
 
         return Ok(members);

@@ -18,11 +18,14 @@
                 </MudCardHeader>
                 <MudCardContent>
                     <MudGrid>
-                        <MudItem xs="12" md="6">
+                        <MudItem xs="12" md="4">
                             <MudTextField Variant="Variant.Outlined" @bind-Value="_model.FirstName" Validation="@(_validator.ValidateValue)" For="@(() => _model.FirstName)" Immediate="true" Label="Prénom"/>
                         </MudItem>
-                        <MudItem xs="12" md="6">
+                        <MudItem xs="12" md="4">
                             <MudTextField Variant="Variant.Outlined" @bind-Value="_model.LastName" Validation="@(_validator.ValidateValue)" For="@(() => _model.LastName)" Immediate="true" Label="Nom"/>
+                        </MudItem>
+                        <MudItem xs="12" md="4">
+                            <MudTextField Variant="Variant.Outlined" @bind-Value="_model.GivenName" Validation="@(_validator.ValidateValue)" For="@(() => _model.GivenName)" Immediate="true" Label="Surnom"/>
                         </MudItem>
                         <MudItem xs="12" md="6">
                             <MudDatePicker Variant="Variant.Outlined" Label="Date de naissance" @bind-Date="_model.BirthDate" Validation="@(_validator.ValidateValue)" For="@(() => _model.BirthDate)"/>
@@ -82,13 +85,13 @@
                 </MudCardHeader>
                 <MudCardContent>
                     <MudGrid>
-                        <MudItem xs="12" md="5">
+                        <MudItem xs="12" md="3">
                             <MudTextField Variant="Variant.Outlined" @bind-Value="_model.Email" Validation="@(_validator.ValidateValue)" For="@(() => _model.Email)" Immediate="true" Label="Email" Adornment="Adornment.End" AdornmentIcon="@Icons.Filled.Email"/>
                         </MudItem>
-                        <MudItem xs="12" md="5">
+                        <MudItem xs="12" md="3">
                             <MudTextField Variant="Variant.Outlined" @bind-Value="_model.PhoneNumber" Validation="@(_validator.ValidateValue)" For="@(() => _model.PhoneNumber)" Immediate="true" Label="Téléphone" Adornment="Adornment.End" AdornmentIcon="@Icons.Filled.Phone"/>
                         </MudItem>
-                        <MudItem xs="12" md="2">
+                        <MudItem xs="12" md="3">
                             <MudSelect Variant="Variant.Outlined" T="Language" @bind-Value="@_model.Language" Validation="@(_validator.ValidateValue)" For="@(() => _model.Language)" Immediate="true" Label="Langue" AnchorOrigin="Origin.BottomCenter">
                                 @foreach (var language in Enum.GetValues<Language>())
                                 {
@@ -96,7 +99,32 @@
                                 }
                             </MudSelect>
                         </MudItem>
+                        <MudItem xs="12" md="3">
+                            <MudGrid>
+                                <MudItem xs="3" md="3">
+                                    <MudCheckBox @bind-Checked="@_model.ContactByEMail" Size="Size.Medium">E-Mail</MudCheckBox>
+                                </MudItem>
+                                <MudItem xs="3" md="3">
+                                    <MudCheckBox @bind-Checked="@_model.ContactByMail" Size="Size.Medium">Courrier</MudCheckBox>
+                                </MudItem>
+                                <MudItem xs="3" md="3">
+                                    <MudCheckBox @bind-Checked="@_model.ContactByPhone" Size="Size.Medium">Téléphone</MudCheckBox>
+                                </MudItem>
+                            </MudGrid>
+                        </MudItem>
                     </MudGrid>
+                </MudCardContent>
+            </MudCard>
+        </MudItem>
+        <MudItem xs="12" sm="12" md="12">
+            <MudCard>
+                <MudCardHeader>
+                    <CardHeaderContent>
+                        <MudText>Notes</MudText>
+                    </CardHeaderContent>
+                </MudCardHeader>
+                <MudCardContent>
+                    <MudTextField Variant="Variant.Outlined" @bind-Value="_model.Note" Validation="@(_validator.ValidateValue)" For="@(() => _model.Note)" Immediate="true" Label="Note" Lines="5"/>
                 </MudCardContent>
             </MudCard>
         </MudItem>
@@ -156,6 +184,7 @@
         {
             FirstName = ViewModel.FirstName,
             LastName = ViewModel.LastName,
+            GivenName = ViewModel.GivenName,
             StreetLine1 = ViewModel.StreetLine1,
             StreetLine2 = ViewModel.StreetLine2,
             HouseNumber = ViewModel.HouseNumber,
@@ -167,7 +196,11 @@
             PhoneNumber = ViewModel.PhoneNumber,
             BirthDate = ViewModel.BirthDate,
             MemberSince = ViewModel.MemberSince,
-            Language = ViewModel.Language
+            Language = ViewModel.Language,
+            ContactByEMail = ViewModel.ContactByEMail,
+            ContactByMail = ViewModel.ContactByMail,
+            ContactByPhone = ViewModel.ContactByPhone,
+            Note = ViewModel.Note
         };
         Form.ResetValidation();
         return Task.CompletedTask;
