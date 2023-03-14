@@ -29,7 +29,9 @@ public class DocumentsPublishEndpoint : ControllerBase
                 !string.IsNullOrWhiteSpace(m.StreetLine1) &&
                 !string.IsNullOrWhiteSpace(m.City) &&
                 !string.IsNullOrWhiteSpace(m.ZipCode) &&
-                !string.IsNullOrWhiteSpace(m.HouseNumber) && !m.City.Contains("Inconnu"))
+                !string.IsNullOrWhiteSpace(m.HouseNumber) && 
+                !m.City.Contains("Inconnu") &&
+                m.ContactByMail)
             .Select(m => new MemberViewModel
             {
                 FirstName = m.FirstName,
