@@ -52,7 +52,7 @@ public class DocumentService
         return merged;
     }
     
-    private static Stream MergeDocuments(List<MemoryStream> files)
+    public static Stream MergeDocuments(List<MemoryStream> files)
     {
         var outputFileStream = new MemoryStream();
         var sources = new List<Source>();

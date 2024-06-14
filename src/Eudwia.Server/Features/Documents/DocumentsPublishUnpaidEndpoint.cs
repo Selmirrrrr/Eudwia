@@ -55,7 +55,7 @@ public class DocumentsPublishUnpaidEndpoint : ControllerBase
                 MemberSinceMonth = m.MemberSince.Year < unpayedYear ? 1 : m.MemberSince.Month
             }).ToList();
         
-        var subscriptions = members.Where(m => m.MemberSince.Year <= unpayedYear).Select(m => new MemberViewModel
+        var subscriptions = members.Where(m => m.MemberSince.Year <= unpayedYear).Select(m => new 
         {
             FirstName = m.FirstName,
             LastName = m.LastName,

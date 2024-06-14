@@ -2,14 +2,14 @@
 
 public class MemberViewModel
 {
-    public string FirstName { get; set; } = string.Empty;
-    public string LastName { get; set; } = string.Empty;
-    public string StreetLine1 { get; set; } = string.Empty;
-    public string HouseNumber { get; set; } = string.Empty;
-    public string City { get; set; } = string.Empty;
-    public string ZipCode { get; set; } = string.Empty;
-    public string Country { get; set; } = string.Empty;
-    public string? State { get; set; } = string.Empty;
+    public string Prenom { get; set; } = string.Empty;
+    public string Nom { get; set; } = string.Empty;
+    public string Rue { get; set; } = string.Empty;
+    public string Numero { get; set; } = string.Empty;
+    public string Ville { get; set; } = string.Empty;
+    public string Npa { get; set; } = string.Empty;
+    public string Pays { get; set; } = string.Empty;
+    public string? Canton { get; set; } = string.Empty;
 
     public SubscriptionsPaidViewModel SubscriptionsPaid { get; set; } = new SubscriptionsPaidViewModel
     {

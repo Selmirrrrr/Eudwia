@@ -17,6 +17,7 @@
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
+        <PackageReference Include="MiniWord" Version="0.8.0" />
         <PackageReference Include="OpenXmlPowerTools-NetStandard" Version="4.6.23-alpha4" />
         <PackageReference Include="SharpDocx" Version="2.4.0" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />

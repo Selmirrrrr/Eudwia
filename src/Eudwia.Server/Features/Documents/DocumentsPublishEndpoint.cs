@@ -1,9 +1,11 @@
-﻿using System.Net.Mime;
+﻿using System.IO.Compression;
+using System.Net.Mime;
 using Microsoft.AspNetCore.Mvc;
 using Eudwia.Server.Data.Contexts;
 using Eudwia.Shared.Authorization;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
+using MiniSoftware;
 
 namespace Eudwia.Server.Features.Documents;
 
@@ -25,6 +27,11 @@ public class DocumentsPublishEndpoint : ControllerBase
     [HttpPost("documents/publish")]
     public async Task<ActionResult> Handle(IFormFile file)
     {
+        var stream = new MemoryStream((int)file.Length);
+        await file.CopyToAsync(stream);
+        var bytes=stream.ToArray();
+        var memoryStream = new MemoryStream();
+        
         var members = await _applicationDbContext.Members.Where(m =>
                 !string.IsNullOrWhiteSpace(m.StreetLine1) &&
                 !string.IsNullOrWhiteSpace(m.City) &&
@@ -34,19 +41,35 @@ public class DocumentsPublishEndpoint : ControllerBase
                 m.ContactByMail)
             .Select(m => new MemberViewModel
             {
-                FirstName = m.FirstName,
-                LastName = m.LastName,
-                StreetLine1 = m.StreetLine1,
-                HouseNumber = m.HouseNumber,
-                City = m.City,
-                ZipCode = m.ZipCode,
-                Country = m.Country.Name,
-                State = m.State
+                Prenom = m.FirstName,
+                Nom = m.LastName,
+                Rue = m.StreetLine1,
+                Numero = m.HouseNumber,
+                Ville = m.City,
+                Npa = m.ZipCode,
+                Pays = m.Country.Name,
+                Canton = m.State
             }).ToListAsync();
         
-        var doc = await _documentService.GenerateMergedDocument(file, members);
+        var value = members.FirstOrDefault();
 
-        return File(doc, file.ContentType);
+        using var compressedFileStream = new MemoryStream();
+        using (var zipArchive = new ZipArchive(compressedFileStream, ZipArchiveMode.Create, leaveOpen: true)) {
+            foreach (var member in members) {
+                // Create the instance of the file.
+                var zipEntry = zipArchive.CreateEntry($"{member.Nom}-{member.Prenom}.docx");
+
+                // Get the stream of the file.
+                using var entryStream = new MemoryStream();
+                entryStream.SaveAsByTemplate(bytes, member);
+                entryStream.Position = 0;
+                await using var zipEntryStream = zipEntry.Open();
+                // Adding the file to the zip file.
+                await entryStream.CopyToAsync(zipEntryStream);
+            }            
+        }
+        var zipBytes = compressedFileStream.ToArray();
+        return File(zipBytes , System.Net.Mime.MediaTypeNames.Application.Octet, "test.zip");
     }
 
 
